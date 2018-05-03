@@ -1,0 +1,12 @@
+build
+bin
+.gradle
+.gradletasknamecache
+.nb-gradle
+.project
+.classpath
+.settings/
+nbproject/
+server/assets
+cert/
+server/file-uploads

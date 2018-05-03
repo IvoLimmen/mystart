@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xbel PUBLIC "+//IDN python.org//DTD XML Bookmark Exchange Language 1.0//EN//XML" "http://www.python.org/topics/xml/dtds/xbel-1.0.dtd">
+<xbel version="1.0" added="2002-03-25T23:54:11-05:00" title="Bookmarks for guest">
+  <info>
+    <metadata owner="linkaGoGo" generated_by="linkaGoGo" href="http://www.linkagogo.com/" />
+  </info>
+  <folder>
+    <title>Internet</title>
+    <folder>
+      <title>Search</title>
+      <bookmark href="http://www.altavista.com/" added="2001-05-07T20:35:44-05:00" visited="2002-03-05T19:17:46-05:00">
+        <title>AltaVista</title>
+      </bookmark>
+      <bookmark href="http://www.google.com/" added="2001-05-07T22:29:48-05:00" visited="2002-03-05T19:17:32-05:00">
+        <title>Google</title>
+      </bookmark>
+      <bookmark href="http://www.looksmart.com/" added="2001-05-07T20:43:57-05:00" visited="2001-11-02T07:51:28-05:00">
+        <title>LookSmart</title>
+      </bookmark>
+    </folder>
+    <folder>
+      <title>Portals</title>
+      <bookmark href="http://www.about.com/" added="2001-12-17T08:28:14-05:00" visited="2002-02-13T16:54:39-05:00">
+        <title>About.com</title>
+      </bookmark>
+      <bookmark href="http://www.yahoo.com/" added="2001-05-07T22:29:02-05:00" visited="2002-03-11T10:30:36-05:00">
+        <title>Yahoo!</title>
+      </bookmark>
+      <bookmark href="http://www.msn.com/" added="2001-12-17T08:26:22-05:00" visited="2001-12-17T08:26:22-05:00">
+        <title>MSN.com</title>
+      </bookmark>
+      <bookmark href="http://www.aol.com/" added="2001-05-07T22:29:55-05:00" visited="2002-03-04T07:53:59-05:00">
+        <title>AOL</title>
+      </bookmark>
+      <bookmark href="http://www.go.com/" added="2001-05-07T20:34:44-05:00" visited="2002-03-10T17:00:39-05:00">
+        <title>GO.com</title>
+      </bookmark>
+      <bookmark href="http://www.lycos.com/" added="2001-05-07T20:33:54-05:00" visited="2001-05-07T20:33:54-05:00">
+        <title>Lycos</title>
+      </bookmark>
+      <bookmark href="http://www.excite.com/" added="2001-05-07T21:00:34-05:00" visited="2001-05-07T20:36:08-05:00">
+        <title>Excite</title>
+      </bookmark>
+      <bookmark href="http://www.snowball.com/" added="2001-05-07T20:53:24-05:00" visited="2002-01-02T05:55:50-05:00">
+        <title>Snowball.com</title>
+      </bookmark>
+    </folder>
+    <folder>
+      <title>Web tools</title>
+      <bookmark href="http://www.top10links.com/cgi-bin/rankings/in.cgi?id=hbroek" added="2001-08-21T09:52:44-05:00" visited="2002-03-10T06:13:15-05:00">
+        <title>Top10Links</title>
+      </bookmark>
+      <bookmark href="http://www.linkagogo.com/go/Home" added="2001-05-07T22:31:09-05:00" visited="2002-03-12T12:24:59-05:00">
+        <title>LinkaGoGo</title>
+      </bookmark>
+      <bookmark href="http://www.webhancer.com/" added="2002-01-28T08:03:37-05:00" visited="2002-01-28T08:03:37-05:00">
+        <title>webHancer</title>
+      </bookmark>
+      <bookmark href="http://www.everyone.net/" added="2001-05-07T20:41:23-05:00" visited="2001-09-29T06:14:04-05:00">
+        <title>Everyone.net</title>
+      </bookmark>
+      <bookmark href="http://www.fortunecity.com/" added="2001-05-07T20:39:21-05:00" visited="2001-05-07T20:39:21-05:00">
+        <title>FortuneCity</title>
+      </bookmark>
+      <bookmark href="http://www.adbutler.com/" added="2001-05-07T20:47:02-05:00" visited="2002-01-09T18:35:13-05:00">
+        <title>AdButler.com</title>
+      </bookmark>
+      <bookmark href="http://www.usa.net/" added="2001-05-07T21:00:49-05:00" visited="2001-05-25T02:08:51-05:00">
+        <title>USA.NET</title>
+      </bookmark>
+      <bookmark href="http://www.homestead.com/" added="2001-05-07T20:54:00-05:00" visited="2002-02-22T20:28:50-05:00">
+        <title>Homestead</title>
+      </bookmark>
+      <bookmark href="http://www.gator.com/" added="2001-05-07T20:51:34-05:00" visited="2002-02-09T13:41:10-05:00">
+        <title>Gator</title>
+      </bookmark>
+      <bookmark href="http://www.mail.com/" added="2001-05-07T20:58:16-05:00" visited="2002-02-22T20:26:31-05:00">
+        <title>Mail.com</title>
+      </bookmark>
+      <bookmark href="http://www.passport.com/" added="2001-05-07T20:56:45-05:00" visited="2002-02-22T20:29:59-05:00">
+        <title>Passport</title>
+      </bookmark>
+      <bookmark href="http://www.addme.com/" added="2001-05-08T07:58:48-05:00" visited="2002-03-25T17:58:08-05:00">
+        <title>Add Me</title>
+      </bookmark>
+    </folder>
+  </folder>
+  <folder>
+    <title>Fun</title>
+    <bookmark href="http://www.disney.com/" added="2002-01-14T08:15:13-05:00" visited="2002-03-25T17:59:06-05:00">
+      <title>Disney.com</title>
+    </bookmark>
+    <bookmark href="http://www.blackplanet.com/" added="2001-11-07T20:55:06-05:00" visited="2002-03-12T00:42:32-05:00">
+      <title>BlackPlanet</title>
+    </bookmark>
+    <bookmark href="http://www.iwon.com/" added="2001-11-07T21:00:56-05:00" visited="2002-01-12T14:06:45-05:00">
+      <title>iWon</title>
+    </bookmark>
+    <bookmark href="http://www.freeimages.co.uk/" added="2001-11-06T23:27:58-05:00" visited="2002-03-06T22:09:15-05:00">
+      <title>Free Images</title>
+    </bookmark>
+    <bookmark href="http://zone.msn.com/" added="2002-01-28T08:05:15-05:00" visited="2002-01-28T08:05:15-05:00">
+      <title>MSN Gaming Zone</title>
+    </bookmark>
+    <bookmark href="http://www.igl.net/" added="2002-01-28T07:57:30-05:00" visited="2002-02-17T16:31:53-05:00">
+      <title>Case&apos;s Ladder</title>
+    </bookmark>
+    <bookmark href="http://www.neopets.com/" added="2001-08-13T08:15:31-05:00" visited="2002-01-10T16:19:47-05:00">
+      <title>Neopets</title>
+    </bookmark>
+    <bookmark href="http://www.bingo.com/" added="2001-08-13T08:18:10-05:00" visited="2002-02-22T20:26:53-05:00">
+      <title>Bingo.com</title>
+    </bookmark>
+    <bookmark href="http://www.pogo.com/" added="2001-08-13T08:19:27-05:00" visited="2001-11-07T20:55:39-05:00">
+      <title>Pogo.com</title>
+    </bookmark>
+    <bookmark href="http://www.fanfiction.net/" added="2001-08-13T08:20:11-05:00" visited="2002-02-22T20:29:07-05:00">
+      <title>FanFiction.Net</title>
+    </bookmark>
+  </folder>
+  <folder>
+    <title>Shopping</title>
+    <bookmark href="http://webcenter.shop.aol.com/main.adp" added="2002-02-04T08:35:28-05:00" visited="2002-02-04T08:35:28-05:00">
+      <title>Shop@AOL</title>
+    </bookmark>
+    <bookmark href="http://shopping.yahoo.com/" added="2002-02-04T08:32:52-05:00" visited="2002-02-04T08:32:52-05:00">
+      <title>Yahoo! Shopping</title>
+    </bookmark>
+    <bookmark href="http://www.dell.com/us/en/gen/default.htm" added="2001-12-24T10:51:05-05:00" visited="2001-12-24T10:51:05-05:00">
+      <title>Dell</title>
+    </bookmark>
+    <bookmark href="http://www.half.com/" added="2001-08-20T08:14:43-05:00" visited="2001-09-08T14:38:56-05:00">
+      <title>Half.com</title>
+    </bookmark>
+    <bookmark href="http://www.columbiahouse.com/" added="2001-11-12T07:08:11-05:00" visited="2001-11-12T07:08:11-05:00">
+      <title>Columbia House</title>
+    </bookmark>
+    <bookmark href="http://www.bizrate.com/" added="2001-05-28T09:12:08-05:00" visited="2002-02-06T14:34:56-05:00">
+      <title>BizRate.com</title>
+    </bookmark>
+    <bookmark href="http://www.mypoints.com/" added="2001-05-28T09:11:35-05:00" visited="2002-03-12T10:24:27-05:00">
+      <title>MyPoints</title>
+    </bookmark>
+    <bookmark href="http://www.americangreetings.com/" added="2001-05-28T09:10:56-05:00" visited="2002-02-04T08:33:30-05:00">
+      <title>AmericanGreetings</title>
+    </bookmark>
+    <bookmark href="http://www.amazon.com/" added="2001-05-07T20:50:08-05:00" visited="2001-09-12T05:53:35-05:00">
+      <title>Amazon.com</title>
+    </bookmark>
+    <bookmark href="https://www.youravon.com" added="2002-01-28T08:00:22-05:00" visited="2002-02-16T18:44:06-05:00">
+      <title>yourAVON.com</title>
+    </bookmark>
+    <bookmark href="http://www.x10.com/home/offer.cgi?!TTAB2,../techtoysab2.htm" added="2001-05-28T09:10:00-05:00" visited="2002-01-26T13:27:12-05:00">
+      <title>X10.com</title>
+    </bookmark>
+  </folder>
+  <folder>
+    <title>Finance</title>
+    <folder>
+      <title>Tax</title>
+      <bookmark href="http://www.irs.gov/" added="2002-03-25T08:01:03-05:00" visited="2002-03-25T08:01:03-05:00">
+        <title>IRS</title>
+        <desc>IRS.gov Home            </desc>
+      </bookmark>
+      <bookmark href="http://www.hrblock.com/" added="2002-03-25T08:04:08-05:00" visited="2002-03-25T08:09:01-05:00">
+        <title>H&amp;R Block</title>
+        <desc>H&amp;R Block - Tax Preparation, Tax Software, Tax Forms, Investment Advice, and Financial Tools            </desc>
+      </bookmark>
+      <bookmark href="http://www.quicken.com/" added="2002-03-25T08:03:33-05:00" visited="2002-03-25T08:03:33-05:00">
+        <title>Quicken.com</title>
+        <desc>File your taxes with their Turbotax product            </desc>
+      </bookmark>
+    </folder>
+    <bookmark href="http://finance.yahoo.com/" added="2002-01-07T08:11:03-05:00" visited="2002-03-06T22:10:22-05:00">
+      <title>Yahoo! Finance</title>
+    </bookmark>
+    <bookmark href="http://www.citigroup.com/" added="2002-01-07T08:10:03-05:00" visited="2002-01-09T18:33:57-05:00">
+      <title>Citigroup</title>
+    </bookmark>
+    <bookmark href="http://money.cnn.com/" added="2001-11-26T07:51:14-05:00" visited="2002-02-09T13:41:27-05:00">
+      <title>CNN Money</title>
+    </bookmark>
+    <bookmark href="http://www.actionsplash.com/" added="2001-09-03T08:16:22-05:00" visited="2002-03-06T22:12:16-05:00">
+      <title>ActionSplash</title>
+    </bookmark>
+    <bookmark href="http://www.datek.com/" added="2001-08-13T08:20:31-05:00" visited="2002-03-06T22:11:51-05:00">
+      <title>Datek</title>
+    </bookmark>
+    <bookmark href="http://www.getsmart.com/" added="2001-11-26T07:49:09-05:00" visited="2002-01-01T21:25:47-05:00">
+      <title>GetSmart</title>
+    </bookmark>
+    <bookmark href="http://www.consumerinfo.com/" added="2001-09-03T08:17:42-05:00" visited="2001-09-03T08:17:42-05:00">
+      <title>ConsumerInfo</title>
+    </bookmark>
+    <bookmark href="http://www.moneycentral.com" added="2001-05-07T20:13:31-05:00" visited="2002-01-07T16:21:46-05:00">
+      <title>MoneyCentral</title>
+    </bookmark>
+    <bookmark href="http://www.etrade.com" added="2001-05-06T21:53:43-05:00" visited="2002-02-20T00:29:28-05:00">
+      <title>E*Trade</title>
+    </bookmark>
+    <bookmark href="http://www.americanexpress.com/" added="2001-05-07T20:12:38-05:00" visited="2002-02-22T20:29:38-05:00">
+      <title>American Express</title>
+    </bookmark>
+    <bookmark href="http://www.capitalone.com/" added="2001-05-07T20:15:13-05:00" visited="2001-05-07T20:15:13-05:00">
+      <title>Capital One</title>
+    </bookmark>
+    <bookmark href="http://www.paypal.com/" added="2001-05-07T20:13:53-05:00" visited="2001-05-07T20:13:53-05:00">
+      <title>PayPal</title>
+    </bookmark>
+    <bookmark href="http://www.fool.com/" added="2001-05-07T20:18:11-05:00" visited="2002-02-28T11:47:04-05:00">
+      <title>Motley Fool</title>
+    </bookmark>
+    <bookmark href="http://www.nextcard.com/" added="2001-05-07T20:14:39-05:00" visited="2001-05-07T20:14:39-05:00">
+      <title>NextCard</title>
+    </bookmark>
+    <bookmark href="http://www.marketwatch.com/" added="2001-05-07T20:20:56-05:00" visited="2002-02-22T20:27:42-05:00">
+      <title>MarketWatch.com</title>
+    </bookmark>
+    <bookmark href="http://www.homeadvisor.com/" added="2001-05-07T21:02:07-05:00" visited="2002-02-20T00:29:45-05:00">
+      <title>HomeAdvisor</title>
+    </bookmark>
+    <bookmark href="http://www.quote.com/" added="2001-05-07T21:02:07-05:00" visited="2002-02-16T18:43:18-05:00">
+      <title>Quote.com</title>
+    </bookmark>
+  </folder>
+  <folder>
+    <title>Software</title>
+    <bookmark href="http://www.cosmi.com/catalog/productivity/print_perfect_suite.htm" added="2001-08-13T08:27:49-05:00" visited="2002-02-15T15:20:35-05:00">
+      <title>Cosmi Print Perfect</title>
+    </bookmark>
+    <bookmark href="http://www.mgi.com/" added="2001-08-13T08:26:18-05:00" visited="2001-10-31T05:10:59-05:00">
+      <title>MGI Photosuite</title>
+    </bookmark>
+    <bookmark href="http://www.microsoft.com/" added="2001-05-07T22:29:17-05:00" visited="2002-02-03T12:09:31-05:00">
+      <title>Microsoft</title>
+    </bookmark>
+    <bookmark href="http://www.roxio.com/en/products/ecdc/index.jhtml" added="2001-08-13T08:24:39-05:00" visited="2002-01-19T18:35:40-05:00">
+      <title>Easy CD Creator</title>
+    </bookmark>
+    <bookmark href="http://www.zdnet.com/downloads/" added="2001-05-07T20:47:56-05:00" visited="2001-06-06T01:03:51-05:00">
+      <title>ZDNet Downloads</title>
+    </bookmark>
+  </folder>
+  <folder>
+    <title>News</title>
+    <bookmark href="http://www.thetimes.co.uk/" added="2001-08-29T20:54:13-05:00" visited="2002-03-10T12:00:00-05:00">
+      <title>The Times</title>
+    </bookmark>
+    <bookmark href="http://www.economist.com/" added="2001-08-29T20:54:10-05:00" visited="2002-03-10T12:00:00-05:00">
+      <title>Economist.com</title>
+    </bookmark>
+    <bookmark href="http://robots.cnn.com/" added="2001-08-29T20:54:10-05:00" visited="2002-03-10T12:00:00-05:00">
+      <title>CNN.com</title>
+    </bookmark>
+    <bookmark href="http://www.nbci.com/" added="2001-05-07T20:44:49-05:00" visited="2002-01-09T02:19:05-05:00">
+      <title>NBCi</title>
+    </bookmark>
+    <bookmark href="http://www.cnn.com/" added="2001-05-07T20:40:06-05:00" visited="2002-03-12T00:43:44-05:00">
+      <title>CNN.com</title>
+    </bookmark>
+    <bookmark href="http://www.msnbc.com/news/default.asp" added="2002-03-04T07:56:09-05:00" visited="2002-03-04T07:56:09-05:00">
+      <title>MSNBC</title>
+    </bookmark>
+  </folder>
+  <folder>
+    <title>Auctions</title>
+    <bookmark href="http://www.ebay.com/" added="2001-05-07T20:40:33-05:00" visited="2002-02-11T19:34:24-05:00">
+      <title>eBay</title>
+    </bookmark>
+  </folder>
+  <folder>
+    <title>Sports</title>
+    <bookmark href="http://www.sportsline.com/" added="2001-05-07T20:52:14-05:00" visited="2001-06-20T17:26:28-05:00">
+      <title>SportsLine.com</title>
+    </bookmark>
+    <bookmark href="http://www.wwf.com/" added="2001-05-07T20:52:36-05:00" visited="2001-05-07T20:52:36-05:00">
+      <title>WWF.com</title>
+    </bookmark>
+  </folder>
+  <bookmark href="http://www.thebluebroiler.com/" added="2001-08-29T20:54:58-05:00" visited="2002-03-10T12:00:00-05:00">
+    <title>Blue Broiler</title>
+  </bookmark>
+  <bookmark href="http://www.weather.com/" added="2001-11-06T23:22:48-05:00" visited="2002-02-19T21:05:46-05:00">
+    <title>weather.com</title>
+  </bookmark>
+  <bookmark href="http://www.linkagogo.com/go/SiteSee?i=6725&amp;i=6726&amp;i=6729&amp;i=6730&amp;i=6731&amp;i=6733&amp;i=65917&amp;i=6734&amp;t=1)LinkaGoGo%20Home&amp;t=2)Links%20by%20index&amp;t=3)Search%20your%20links&amp;t=4)Organize%20by%20fold..&amp;t=5)Order%20by%20any%20Col..&amp;t=6)Email%20links&amp;t=7)%20Link%20verifier&amp;t=8)Toolbar%20Setup" added="2001-06-30T10:44:14-05:00" visited="2002-03-25T08:04:25-05:00">
+    <title>Quick Tour</title>
+  </bookmark>
+</xbel>

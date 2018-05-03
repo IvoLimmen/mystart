@@ -1,0 +1,47 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = "org.limmen.mystart.Main"
+
+ext {
+  weldVersion = "3.0.3.Final"
+  jettyVersion = "9.4.9.v20180320"
+  wicketVersion = "8.0.0-M9"
+}
+
+dependencies {
+	compile project(':model')
+	compile project(':bookmarkimporter-api')  
+	compile project(':bookmarkimporter-chrome')  
+	compile project(':bookmarkimporter-google')  
+	compile project(':bookmarkimporter-netscape')  
+	compile project(':bookmarkimporter-github')  
+	compile project(':bookmarkimporter-firefox')  
+	compile project(':bookmarkimporter-xbel')  
+	compile project(':storage-api')
+	compile project(':storage-serialize')  
+	compile project(':storage-speedment')  
+  
+  compile 'javax.enterprise:cdi-api:2.0'
+  
+  compile "org.jboss.weld:weld-core-bom:${weldVersion}"
+  compile "org.jboss.weld.se:weld-se-core:${weldVersion}"
+  compile "org.jboss.weld:weld-api:3.0.SP2"  
+  compile "org.jboss.weld:weld-core-impl:${weldVersion}"
+  compile "org.jboss.weld.servlet:weld-servlet-core:${weldVersion}"
+  
+  compile "org.apache.wicket:wicket-core:${wicketVersion}" 
+  compile "org.apache.wicket:wicket-cdi:${wicketVersion}"
+  compile "org.apache.wicket:wicket-auth-roles:${wicketVersion}"
+  
+  compile 'de.agilecoders.wicket:wicket-bootstrap-core:0.10.6'
+  
+  compile "org.eclipse.jetty:jetty-webapp:${jettyVersion}" 
+  compile "org.eclipse.jetty:jetty-annotations:${jettyVersion}" 
+  compile "org.eclipse.jetty.cdi:cdi-servlet:${jettyVersion}"
+  
+	compile 'ch.qos.logback:logback-core:1.1.7'
+	compile 'ch.qos.logback:logback-classic:1.1.7'
+   
+	testCompile 'junit:junit:4.12'
+}

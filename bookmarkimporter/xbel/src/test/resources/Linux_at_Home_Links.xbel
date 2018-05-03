@@ -1,0 +1,929 @@
+<?xml version="1.0" encoding="iso-8859-15"?>
+<!DOCTYPE xbel PUBLIC "+//IDN python.org//DTD XML Bookmark Exchange Language 1.0//EN//XML" "http://www.python.org/topics/xml/dtds/xbel-1.0.dtd">
+<xbel xmlns:h="http://www.w3.org/1999/xhtml">
+  <folder>
+    <title>Linux at Home Links</title>
+    <folder>
+      <title>Algemeen</title>
+      <desc></desc>
+      <bookmark href="http://www.linux.org/">
+        <title>www.linux.org</title>
+        <desc>De homepage van de Linux community.</desc>
+      </bookmark>
+      <bookmark href="http://www.linux.com/">
+        <title>www.linux.com</title>
+        <desc>Deze pagina wordt door VA Software en talloze vrijwilligers onderhouden.</desc>
+      </bookmark>
+      <bookmark href="http://www.tldp.org/">
+        <title>The Linux Documentation Project</title>
+        <desc>Home van de HOWTO's, man pages en vele complete vrij te downloaden boeken, zoals de Linux Network Administration Guide, etc.</desc>
+      </bookmark>
+      <bookmark href="http://www.li.org/">
+        <title>www.li.org</title>
+        <desc>het huis van Linux International, een belangrijke non-profit steunorganisatie achter Linux.</desc>
+      </bookmark>
+      <bookmark href="http://www.linuxnewbie.org/">
+        <title>Linuxnewbie.org</title>
+        <desc>veel praktische info en een druk forum over Linux. Zie ook de speciale NHF Library (NHF = Newbieized Help Files)</desc>
+      </bookmark>
+      <bookmark href="http://www.linuxnewbie.org/nhf/">
+        <title>NHF Library</title>
+      </bookmark>
+      <bookmark href="http://www.linux-mag.com/">
+        <title>Linux Magazine</title>
+        <desc>heeft een Top 100 van Linux Sites gemaakt. Stop deze in je bookmarks! Tip: gebruik de printer versie, dan heb je alles in een file.</desc>
+      </bookmark>
+      <bookmark href="http://www.linux-mag.com/2000-06/websites_01.html">
+        <title>Top 100 van Linux Sites</title>
+      </bookmark>
+      <bookmark href="http://www.linux-mag.com/cgi-bin/printer.pl?issue=2000-06&amp;article=websites">
+        <title>printer versie</title>
+      </bookmark>
+      <bookmark href="http://www.linuxlinks.com/">
+        <title>LinuxLinks.com</title>
+        <desc>Een uitgebreide links collectie.</desc>
+      </bookmark>
+      <bookmark href="http://www.control-escape.com/">
+        <title>Control-Escape.com</title>
+        <desc>Heel goede informatiesite met een veelzeggende naam(!) voor beginners (Engelstalig): Control-Escape.com.</desc>
+      </bookmark>
+      <bookmark href="http://linuxartist.org/">
+        <title>LinuxArtist.org</title>
+        <desc>Deze schitterende site laat zien wat er met Linux allemaal kan. Zelfs de special effects voor de film Titanic zijn met behulp van Linux gemaakt.</desc>
+      </bookmark>
+      <bookmark href="http://www2.linuxjournal.com/cgi-bin/frames.pl/lj-issues/issue46/2494.html">
+        <title>Titanic</title>
+      </bookmark>
+      <bookmark href="http://jgo.local.net/LinuxGuide/">
+        <title>Josh's GNU/Linux Guide</title>
+        <desc>Een prachtige site met veel documentatie, opgezet om nieuwe Linux gebruikers van dienst te zijn. Op dezelfde site ook een mooie Gimp Guide.</desc>
+      </bookmark>
+      <bookmark href="http://jgo.local.net/GimpGuide/">
+        <title>Gimp Guide</title>
+      </bookmark>
+      <bookmark href="http://linux.about.com/">
+        <title>linux.about.com</title>
+        <desc>De Linux portalsite van about.com</desc>
+      </bookmark>
+      <bookmark href="http://www.ratedpc.com/article.asp?id=59">
+        <title>RatedPC.com: Linux on the Desktop</title>
+        <desc>Een heel uitgebreid introducerend artikel.</desc>
+      </bookmark>
+      <bookmark href="http://www.kernel.org/">
+        <title>www.kernel.org</title>
+        <desc>Linux zelf is gratis te downloaden van www.kernel.org, maar je kan beter een Linux distributie aanschaffen of downloaden, dan heb je niet alleen Linux, maar ook de GNU basisprogramma's, en een heleboel andere programma's erbij.</desc>
+      </bookmark>
+      <bookmark href="http://www.linux.org/dist/index.html">
+        <title>Linux Distributions</title>
+        <desc>Een heel uitgebreid overzicht van alle mogelijke Linux distributies, van een floppy tot vele CD's.</desc>
+      </bookmark>
+      <bookmark href="http://www.suse.com/">
+        <title>SuSE Linux</title>
+        <desc>Traditionele distributies (d.w.z. met enorm veel bijgevoegde software) zijn onder andere: SuSE Linux, Linux Mandrake, Red Hat Linux, Debian (wordt door vrijwilligers onderhouden), Slackware.</desc>
+      </bookmark>
+      <bookmark href="http://www.linux-mandrake.com/nl/">
+        <title>Linux Mandrake</title>
+      </bookmark>
+      <bookmark href="http://www.redhat.com/">
+        <title>Red Hat Linux</title>
+      </bookmark>
+      <bookmark href="http://www.debian.org/">
+        <title>Debian</title>
+      </bookmark>
+      <bookmark href="http://www.slackware.com/">
+        <title>Slackware</title>
+      </bookmark>
+      <bookmark href="http://www.lycoris.com/">
+        <title>Lycoris</title>
+        <desc>Een nieuwere trend (ooit ingezet door Corel) zijn Linux distributies die een uitgewogen basis-setup bieden, waar natuurlijk achteraf andere software kan worden bijgeïnstalleerd. Voorbeelden: Lycoris, een extreem vriendelijke desktop distributie, en Xandros, de voortzetting van Corel Linux.</desc>
+      </bookmark>
+      <bookmark href="http://www.xandros.net/">
+        <title>Xandros</title>
+      </bookmark>
+      <bookmark href="http://www.linuxiso.org/">
+        <title>www.linuxiso.org</title>
+        <desc>Download hier volledige CD-images met Linux erop, brand ze zelf, reboot je computer en installeer Linux voor nop!</desc>
+      </bookmark>
+      <bookmark href="http://www.distrowatch.com/">
+        <title>DistroWatch.com</title>
+        <desc>Een uitputtend distributie-overzicht.</desc>
+      </bookmark>
+      <bookmark href="http://linuxtoday.com/">
+        <title>LinuxToday.com</title>
+        <desc>Dagelijks nieuws (op werkdagen). Onderdeel van Internet.com.</desc>
+      </bookmark>
+      <bookmark href="http://www.lwn.net/">
+        <title>LWN.net (Linux Weekly News)</title>
+        <desc>Wekelijkse beschouwingen en nieuws, met dagelijkse updates. Zeer goede kwaliteit.</desc>
+      </bookmark>
+      <bookmark href="http://www.lxer.com/">
+        <title>LXer.com</title>
+        <desc>Prima nieuwssite, ontstaan als reactie op andere, overgecommercialiseerde, nieuwssites zoals met name Linux Today.</desc>
+      </bookmark>
+      <bookmark href="http://www.newsforge.com/">
+        <title>NewsForge.com</title>
+        <desc>Ook een prima nieuwssite, met veel achtergronden.</desc>
+      </bookmark>
+      <bookmark href="http://www.linuxfocus.org/">
+        <title>LinuxFocus.org</title>
+        <desc>Een veeltalig tijdschrift met maandelijks nieuwe artikelen.</desc>
+      </bookmark>
+      <bookmark href="http://www.linuxgazette.com/">
+        <title>Linux Gazette</title>
+        <desc>Een maandelijks tijdschrift in het Engels met goede artikelen!</desc>
+      </bookmark>
+      <bookmark href="http://www.troubleshooters.com/lpm/archive.htm">
+        <title>Linux Productivity Magazine</title>
+        <desc>van Troubleshooters.Com.</desc>
+      </bookmark>
+      <bookmark href="http://www.troubleshooters.com/">
+        <title>Troubleshooters.Com</title>
+      </bookmark>
+      <bookmark href="http://www.sjbaker.org/tux/">
+        <title>A Complete History of Tux. (So Far)</title>
+        <desc>Alles wat je ooit weten wilde over Tux.</desc>
+      </bookmark>
+      <bookmark href="http://lwn.net/Gallery/">
+        <title>The Linux Weekly News Penguin Gallery</title>
+        <desc>Soms zegt een beeld meer dan 1000 woorden. . .</desc>
+      </bookmark>
+    </folder>
+    <folder>
+      <title>Nederland</title>
+      <desc></desc>
+      <bookmark href="http://nl.linux.org/">
+        <title>NL.linux.org</title>
+        <desc>ofwel NLO. Dé Nederlandse Linux homepage. Veel vertaalde documentatie.</desc>
+      </bookmark>
+      <bookmark href="http://www.nllgg.nl/">
+        <title>NLLGG.nl</title>
+        <desc>De homepage van de Nederlandse Linux Gebruikers Groep.</desc>
+      </bookmark>
+      <bookmark href="http://www.nedlinux.nl/">
+        <title>NedLinux.nl</title>
+        <desc>Prima Nederlandstalige portalsite met heel veel eigen inhoud, en een prachtige Wiki!</desc>
+      </bookmark>
+      <bookmark href="http://wiki.nedlinux.nl/">
+        <title>Wiki</title>
+      </bookmark>
+      <bookmark href="http://www.linuxmag.nl/">
+        <title>Linux Magazine</title>
+        <desc>Een prima Nederlandstalig blad. Een must voor iedereen die Linux gebruikt en veel wil leren.</desc>
+      </bookmark>
+      <bookmark href="http://www.linux.nl/">
+        <title>Linux.NL</title>
+        <desc>Ongelooflijk maar waar, maar dit domein viel in handen van een bedrijf i.p.v. de Nederlandse Linuxgemeenschap. Toch staat er sinds febr. 2002 redelijk wat informatie op.</desc>
+      </bookmark>
+      <bookmark href="http://www.penguinpower.nl/">
+        <title>PenguinPower.nl</title>
+        <desc>"Making Linux More Fun!" Heel goede GAMES site!</desc>
+      </bookmark>
+      <bookmark href="http://www.mandrakeclub.nl/">
+        <title>MandrakeClub.nl</title>
+        <desc>Leuke portal speciaal voor Mandrake fans.</desc>
+      </bookmark>
+      <bookmark href="http://www.bartendavid.be/">
+        <title>Bart en David.be</title>
+        <desc>Een zeer goede site met veel informatie, tutorials etc. Een aanrader!</desc>
+      </bookmark>
+      <bookmark href="http://huijts.student.utwente.nl/~jarkko/">
+        <title>homepage van Jarkko Huijts</title>
+        <desc>Op de homepage van Jarkko Huijts staat een uitgebreide Linux Gebruikers Handleiding. Bekijk hem online!</desc>
+      </bookmark>
+      <bookmark href="http://huijts.student.utwente.nl/~jarkko/linux/lgh13/html/index.html">
+        <title>online</title>
+      </bookmark>
+      <bookmark href="http://users.skynet.be/bluedigit/cursus/">
+        <title>zeer complete cursus Linux door Alain Wenmaekers</title>
+        <desc>Een zeer complete cursus Linux door Alain Wenmaekers.</desc>
+      </bookmark>
+      <bookmark href="http://users.skynet.be/pinda/linux/">
+        <title>Nog een leuke Linux-cursus in Flash</title>
+      </bookmark>
+      <bookmark href="http://www.linux-adept.nl/">
+        <title>Linux-Adept.nl</title>
+        <desc>Een nog jonge site die opvalt door de leesbaarheid en de oorspronkelijke bijdragen. Ook is hier het befaamde Happy Hacking keyboard te koop!</desc>
+      </bookmark>
+      <bookmark href="http://www.linux-adept.nl/hhk.php4">
+        <title>Happy Hacking keyboard</title>
+      </bookmark>
+      <bookmark href="http://www.linux-box.nl/">
+        <title>Linux-Box.nl</title>
+        <desc>Een nog héél jonge site, maar heel veelbelovend. Deze site richt zich op, en wordt gemaakt door, jongeren van 14 tot 18 jaar.</desc>
+      </bookmark>
+      <bookmark href="http://www.l4l.be/">
+        <title>Linux 4 Life</title>
+        <desc>leuke site van een SuSE-gebruikersgroep.</desc>
+      </bookmark>
+      <bookmark href="http://susehelp.l4l.be">
+        <title>susehelp.l4l.be</title>
+        <desc>Frederik Vos heeft samen met anderen op susehelp.l4l.be een mooie site neergezet met bruikbare info.</desc>
+      </bookmark>
+      <bookmark href="http://www.linux4you.be/">
+        <title>Linux4You.be</title>
+        <desc>een leuke up-to-date site door Pieter Van Houtte.</desc>
+      </bookmark>
+      <bookmark href="http://www.nedlinux.nl/~bart/">
+        <title>Bart Geverts</title>
+        <desc>heeft op zijn homepage veel leuke, goed doorwrochte en prima leesbare artikelen staan over firewalls (belangrijk als je kabelinternet of ADSL hebt), LILO, en bijvoorbeeld Python-programmering.</desc>
+      </bookmark>
+      <bookmark href="http://www.ariejan.net/tutorials.php">
+        <title>Ariejan.net</title>
+        <desc>Leuke site van Ariejan de Vroom met ondermeer een aantal handige Gentoo Linux-tutorials.</desc>
+      </bookmark>
+      <bookmark href="http://forum.computertotaal.nl/">
+        <title>Forum.ComputerTotaal.NL</title>
+        <desc>dit vrij Windows-minded blad heeft wel een leuk Linux forum; kijk onder OS Linux. Let ook op de goede Linux FAQ die er wordt bijgehouden.</desc>
+      </bookmark>
+      <bookmark href="http://forum.computertotaal.nl/phpBB/viewforum.php?forum=8">
+        <title>OS Linux</title>
+      </bookmark>
+      <bookmark href="http://forum.computertotaal.nl/phpBB/viewtopic.php?t=64018">
+        <title>Linux FAQ</title>
+      </bookmark>
+      <bookmark href="http://forum.nedlinux.nl/">
+        <title>NedLinux.NL Forum</title>
+        <desc>Prima, druk bezocht forum geheel gewijd aan Linux.</desc>
+      </bookmark>
+      <bookmark href="http://gathering.tweakers.net/">
+        <title>Gathering.Tweakers.Net</title>
+        <desc>kijk onder het topic "Non-Windows Operating Systems.</desc>
+      </bookmark>
+      <bookmark href="http://gathering.tweakers.net/listtopics.php/23">
+        <title>Non-Windows Operating Systems</title>
+      </bookmark>
+      <bookmark href="http://www.mandrakeclub.nl/phpBB2/index.php">
+        <title>Mandrake Club Forum</title>
+        <desc>Speciaal voor Mandrake enthousiasten.</desc>
+      </bookmark>
+      <bookmark href="http://nl.linux.org/forum/index.php">
+        <title>Linux Forum</title>
+        <desc>Het Linux Forum van nl.linux.org.</desc>
+      </bookmark>
+      <bookmark href="http://www.dddi.nl">
+        <title>Dutch Debian Distribution Initiative</title>
+        <desc>Koop hier Debian CD's.</desc>
+      </bookmark>
+      <bookmark href="http://www.munnikes.nl/cd/">
+        <title>Alfred Munnikes</title>
+        <desc>verkoopt Linux CD's voor 3.75 ( 1 verzendkosten) en brandt ze indien gewenst zelfs volledig op maat!</desc>
+      </bookmark>
+      <bookmark href="http://www.kooplinux.nl/">
+        <title>KoopLinux.NL</title>
+        <desc>Maarten Steenbergen (bekend geworden met www.tienpiek.net) verkoopt ook veel CD's.</desc>
+      </bookmark>
+      <bookmark href="http://www.delinuxspecialist.nl/">
+        <title>delinuxspecialist.nl</title>
+      </bookmark>
+      <bookmark href="http://www.rse.nl/linuxshop">
+        <title>RSE Linuxshop</title>
+        <desc>van RSE Multimedia. Onder andere de Yopy is hier te krijgen. Gebruik deze link als u iets koopt, dan steunt u Linux at Home!</desc>
+      </bookmark>
+      <bookmark href="http://www.fastdating.nl/cgi-bin/rse/click.pl?id=wbsoft">
+        <title>deze link</title>
+      </bookmark>
+      <bookmark href="http://www.linuxland.nl/">
+        <title>www.linuxland.nl</title>
+        <desc>Veel software.</desc>
+      </bookmark>
+      <bookmark href="http://linux.mensys.nl/">
+        <title>Linux.Mensys.nl</title>
+        <desc>Ook veel software, o.a. flink wat Linux spellen.</desc>
+      </bookmark>
+      <bookmark href="http://www.lunix.nl/">
+        <title>www.lunix.nl</title>
+      </bookmark>
+      <bookmark href="http://linux.pagina.nl/">
+        <title>linux.pagina.nl</title>
+      </bookmark>
+      <bookmark href="http://linux.boogolinks.nl/">
+        <title>linux.boogolinks.nl</title>
+      </bookmark>
+      <bookmark href="http://dmoz.org/World/Nederlands/Computers/Software/Besturingssystemen/Linux/">
+        <title>De Nederlandse Linux directory</title>
+        <desc>van het Open Directory Project.</desc>
+      </bookmark>
+    </folder>
+    <folder>
+      <title>Personen</title>
+      <desc></desc>
+      <bookmark href="http://www.cs.Helsinki.FI/u/torvalds/">
+        <title>homepage</title>
+        <desc>Als geestelijk vader van de Linux Kernel en Europeaan van het jaar 1999 komt hij uiteraard boven aan de lijst `Linux People'. Hij heeft zowaar een leuke homepage.</desc>
+      </bookmark>
+      <bookmark href="http://www.stallman.org/">
+        <title>www.stallman.org</title>
+        <desc>Zijn homepage is www.stallman.org.</desc>
+      </bookmark>
+      <bookmark href="http://www.gnu.org">
+        <title>de site van het GNU project</title>
+        <desc>Veel informatie over GNU is te vinden op de site van het GNU project.</desc>
+      </bookmark>
+      <bookmark href="http://www.tuxedo.org/~esr/">
+        <title>http://www.tuxedo.org/~esr/</title>
+        <desc>Homepage van Eric Raymond: http://www.tuxedo.org/~esr/.</desc>
+      </bookmark>
+      <bookmark href="http://lwn.net/2000/features/ESR/">
+        <title>Interview met Eric S. Raymond</title>
+        <desc>op Linux Weekly News.</desc>
+      </bookmark>
+      <bookmark href="http://www.opensource.org/">
+        <title>www.opensource.org</title>
+        <desc>Eric S. Raymond is de grondlegger van www.opensource.org.</desc>
+      </bookmark>
+      <bookmark href="http://www.google.com/">
+        <title>Google</title>
+        <desc>Er zijn natuurlijk nog talloze andere belangrijke namen te bedenken, zoals Larry Wall voor patch, diff en Perl, John Ousterhout voor Tcl/Tk, Guido van Rossum voor Python, Alan Cox, John "madddog" Hall, John Gillmore die later de Electronic Frontier Foundation oprichtte enz. Maar de lezer vinde zelf zijn weg, en als de nood aan de man is, is daar altijd Google :-)</desc>
+      </bookmark>
+    </folder>
+    <folder>
+      <title>Software</title>
+      <desc></desc>
+      <bookmark href="http://www.xs4all.nl/~wbsoft/linux/links/../kapps.html">
+        <title>Overzicht applicaties onder Linux</title>
+        <desc>Artikelen en sites over Linux software. Voor exacte titels en homepages van software zie: Overzicht applicaties onder Linux, elders op deze site.</desc>
+      </bookmark>
+      <bookmark href="http://freshmeat.net/">
+        <title>Freshmeat.Net</title>
+        <desc>Dé webindex van (voornamelijk vrije) software. Gebruik de browse link om gericht te bladeren.</desc>
+      </bookmark>
+      <bookmark href="http://freshmeat.net/browse/">
+        <title>browse</title>
+      </bookmark>
+      <bookmark href="http://www.osdir.com/">
+        <title>Open Source Directory</title>
+        <desc>Open Source Software is vaak al beschikbaar nog voordat het een beetje af is. OSDir.org probeert een index te bieden van de volwassen software.</desc>
+      </bookmark>
+      <bookmark href="http://www.linuxapps.com/">
+        <title>LinuxApps.com</title>
+      </bookmark>
+      <bookmark href="http://apps.kde.com/">
+        <title>Apps.KDE.com</title>
+        <desc>Een speciale index voor KDE applicaties.</desc>
+      </bookmark>
+      <bookmark href="http://linux.tucows.com/">
+        <title>Tucows Linux</title>
+      </bookmark>
+      <bookmark href="http://www.xwinman.org/">
+        <title>Window Managers For X</title>
+        <desc>In plaats van een volledige desktopomgeving zoals KDE of GNOME kun je ook gewoon alleen een window manager kiezen. Er zijn er heel wat!</desc>
+      </bookmark>
+      <bookmark href="http://www.linuxgazette.com/issue66/suresh.html">
+        <title>Stopping Spam on Your Linux Box</title>
+        <desc>"Stopping Spam on Your Linux Box", een grondig artikel. Tip: Een beetje ISP biedt shell-toegang via ssh of telnet, daar kun je dan ook al een procmail-filter plaatsen, zodat spam je pop-box niet eens bereikt.</desc>
+      </bookmark>
+      <bookmark href="http://www.multimedia4linux.de/">
+        <title>Multimedia4Linux.de</title>
+        <desc>Een heel goede index om te beginnen.</desc>
+      </bookmark>
+      <bookmark href="http://linuxartist.org/">
+        <title>LinuxArtist.org</title>
+        <desc>De portal voor 2D, 3D, audio, video etc. artiesten die Linux (willen) gebruiken.</desc>
+      </bookmark>
+      <bookmark href="http://www.xs4all.nl/~wbsoft/linux/links/../../gimp/index.html">
+        <title>Mijn GIMP pagina</title>
+        <desc>Hier staat de rest van mijn GIMP links.</desc>
+      </bookmark>
+      <bookmark href="http://gimp-savvy.com/">
+        <title>Gimp-Savvy.com</title>
+        <desc>Op Gimp-Savvy.com kun je online het boek "Grokking the GIMP" lezen. Een geweldige handleiding voor wie The GIMP wil doorgronden. Trouwens op manual.gimp.org vind je de officiële gebruiksaanwijzing.</desc>
+      </bookmark>
+      <bookmark href="http://manual.gimp.org">
+        <title>manual.gimp.org</title>
+      </bookmark>
+      <bookmark href="http://jgo.local.net/GimpGuide/">
+        <title>Josh's Gimp Guide</title>
+      </bookmark>
+      <bookmark href="http://www.osopinion.com">
+        <title>opOpinion.com</title>
+        <desc>Kelly McNeill, maker van opOpinion.com en graphics guru geeft The Gimp een kritische analyse. "I admit my skepticism levels were extremely high, but after only an hour of experimentation with the software, I came away extremely impressed"!</desc>
+      </bookmark>
+      <bookmark href="http://www.osopinion.com/perl/story/12934.html">
+        <title>een kritische analyse</title>
+      </bookmark>
+      <bookmark href="http://www.linuxsound.at/">
+        <title>Sound &amp; MIDI Software For Linux</title>
+        <desc>Dé portal voor audio, gemaakt door Dave Philips. Alles over drivers, MIDI, sampling, muzieknotatie software, spraakherkenning e.d.</desc>
+      </bookmark>
+      <bookmark href="http://lwn.net/Reviews/LinuxMusicAndSound.php3">
+        <title>The Book of Linux Music &amp; Sound</title>
+        <desc>Prima review van dit prima boek van Dave Philips.</desc>
+      </bookmark>
+      <bookmark href="http://freshmeat.net/articles/view/354/">
+        <title>Sound and Music Software</title>
+        <desc>Een uitgebreid introducerend artikel op Freshmeat.net van dezelfde Dave Philips.</desc>
+      </bookmark>
+      <bookmark href="http://burnallgifs.org/">
+        <title>GIF</title>
+        <desc>Net zoals boven het GIF formaat hangt ook boven het MP3 formaat een zwaard van Damocles: er hangen maar liefst 12 patenten aan. Elk moment kan de eigenaar licentiegelden op de codecs gaan opeisen. Ogg Vorbis is een open standaard die deze bezwaren niet heeft. Het bestandsformaat is veel flexibeler dan MP3. De audiokwaliteit is momenteel vergelijkbaar met MP3, en wordt nog elke dag beter. Ogg Vorbis-Open, Free Audio-Set Your Media Free!</desc>
+      </bookmark>
+      <bookmark href="http://www.vorbis.com/">
+        <title>Ogg Vorbis</title>
+      </bookmark>
+      <bookmark href="http://www.linuxjournal.com/article.php?sid=4416">
+        <title>Ogg Vorbis-Open, Free Audio-Set Your Media Free</title>
+      </bookmark>
+      <bookmark href="http://www.xs4all.nl/~wbsoft/linux/links/../wordprocessing.html">
+        <title>Tekstverwerking onder Linux</title>
+        <desc>Zie ook mijn verhaal Tekstverwerking onder Linux.</desc>
+      </bookmark>
+      <bookmark href="http://www.northernjourney.com/opensource/newbies/newb020.html">
+        <title>Linux for Newbies: Document Processing</title>
+        <desc>Nieuwsgierig over wat die LaTeX document processor nu eigenlijk is? Lees deze introductie van Gene Wilburn: Linux for Newbies: Document Processing.</desc>
+      </bookmark>
+      <bookmark href="http://www.ecn.wfu.edu/~cottrell/wp.html">
+        <title>Word Processors: Stupid and Inefficient</title>
+        <desc>waarom de nu gangbare tekstverwerkers niet meer dan tiepmachines die tekst kunnen verplaatsen zijn.</desc>
+      </bookmark>
+      <bookmark href="http://www.troubleshooters.com/lpm/200210/200210.htm">
+        <title>LyX Quickstart</title>
+        <desc>zeer goed artikel uit het Linux Productivity Magazine.</desc>
+      </bookmark>
+      <bookmark href="http://www.linuxprinting.org">
+        <title>LinuxPrinting.org</title>
+        <desc>Alles maar dan ook alles over printen onder Linux. Complete printer- en driver database.</desc>
+      </bookmark>
+      <bookmark href="http://www.penguinpower.nl/">
+        <title>PenguinPower.nl</title>
+        <desc>"Making Linux More Fun!" Heel goede GAME site!</desc>
+      </bookmark>
+      <bookmark href="http://www.linuxgames.com/">
+        <title>LinuxGames.com</title>
+        <desc>Deze site richt zich vooral op de grote games.</desc>
+      </bookmark>
+      <bookmark href="http://www.happypenguin.org/">
+        <title>HappyPenguin.org</title>
+        <desc>The Linux Game Tome. Een goed bijgehouden site waar je veel spellen en spelletjes kan vinden.</desc>
+      </bookmark>
+      <bookmark href="http://freshmeat.net/browse/80/?topic_id=80">
+        <title>Freshmeat.net</title>
+        <desc>heeft een grote afdeling Games/Entertainment.</desc>
+      </bookmark>
+      <bookmark href="http://www.ofset.org/">
+        <title>OFSET</title>
+        <desc>Organisation for Free Software in Education and Teaching. Veel projecten op basis van GNOME voor in het onderwijs.</desc>
+      </bookmark>
+      <bookmark href="http://www.seul.org/">
+        <title>Simple End-User Linux</title>
+        <desc>Een project dat als doel heeft hoogwaardige applicaties voor eindgebruikers te verzamelen/ontwikkelen, voor zowel ontspanning, onderwijs als productiviteit.</desc>
+      </bookmark>
+    </folder>
+    <folder>
+      <title>Hardware</title>
+      <desc></desc>
+      <bookmark href="http://www.linuxdevices.com/">
+        <title>LinuxDevices.com</title>
+        <desc>Hét portaal voor en over PDA's, internet tablets, horloges en wat dan ook met Linux. Nieuws en in-depth artikelen.</desc>
+      </bookmark>
+      <bookmark href="http://lhd.datapower.com/">
+        <title>Linux Hardware Database</title>
+        <desc>Een grote database van computers en vooral randapparatuur zoals modems, printers, scanners, videokaarten die door Linux worden ondersteund.</desc>
+      </bookmark>
+      <bookmark href="http://www.linuxhardware.net/">
+        <title>LinuxHardware.net</title>
+        <desc>Een site waar meer dan 1200 gebruikerservaringen met allerlei hardware te vinden zijn. Makkelijk doorzoekbaar. Ook informatie over Linux-vriendelijke hardware verkopers!</desc>
+      </bookmark>
+      <bookmark href="http://www.tldp.org/HOWTO/Hardware-HOWTO/">
+        <title>Linux Hardware Compatibility HOWTO</title>
+        <desc>Deze HOWTO, bijgehouden door Steven Pritchard, probeert alle hardware op te sommen waarvan bekend is dat die wel of juist niet met Linux werkt.</desc>
+      </bookmark>
+      <bookmark href="http://www.linux.org/">
+        <title>Linux Online</title>
+        <desc>heeft een uitgebreide hardware afdeling.</desc>
+      </bookmark>
+      <bookmark href="http://www.linux.org/hardware/">
+        <title>uitgebreide hardware afdeling</title>
+      </bookmark>
+      <bookmark href="http://www.redhat.com/support/hardware/">
+        <title>Red Hat Linux Hardware Compatibility Lists</title>
+      </bookmark>
+      <bookmark href="http://hardwaredb.suse.de/">
+        <title>SuSE Linux Hardware DB</title>
+      </bookmark>
+      <bookmark href="http://www.linux-mandrake.com/nl/hardware.php3">
+        <title>Mandrake Linux Hardware Database</title>
+        <desc>Nederlandstalig!</desc>
+      </bookmark>
+      <bookmark href="http://www.linuxhardware.org/">
+        <title>LinuxHardware.org</title>
+        <desc>met onder andere een uitgebreide verzameling van (links naar) recensies van hardware voor Linux.</desc>
+      </bookmark>
+      <bookmark href="http://www.xs4all.nl/~wbsoft/linux/links/../../agenda/review-1.html">
+        <title>Agenda VR3</title>
+        <desc>Mijn eerste indrukken van de Agenda VR3 zakcomputer.</desc>
+      </bookmark>
+      <bookmark href="http://www.linux-adept.nl/">
+        <title>Linux-Adept.nl</title>
+        <desc>Op Linux-Adept.nl is het befaamde Happy Hacking keyboard te koop!</desc>
+      </bookmark>
+      <bookmark href="http://www.linux-adept.nl/hhk.php4">
+        <title>Happy Hacking keyboard</title>
+      </bookmark>
+    </folder>
+    <folder>
+      <title>Advocacy</title>
+      <desc></desc>
+      <bookmark href="http://www.osopinion.com/Opinions/GaneshCPrasad/GaneshCPrasad2.html">
+        <title>The Practical Manager's Guide to Linux</title>
+        <desc>Stuff for Suits! Linux, bekeken vanuit een corporate point of view.</desc>
+      </bookmark>
+      <bookmark href="http://www.linuxworld.com/linuxworld/lw-1999-04/lw-04-penguin4.html">
+        <title>Realize the true potential of Linux</title>
+        <desc>Een excellent artikel (april 1999) van Nicolas Petreley. "I recommend you deploy Linux according to the following principle: Don't use Linux as if it were Windows"</desc>
+      </bookmark>
+      <bookmark href="http://www.computerbits.com/archive/1999/0700/linux9907.html">
+        <title>The three stages of Linux acceptance in business</title>
+        <desc>Een kort maar helder artikel over de manier waarop Linux in zakelijke omgevingen opgang maakt.</desc>
+      </bookmark>
+      <bookmark href="http://www.cio.com/archive/010102/shop_content.html">
+        <title>How to Run a Microsoft-Free Shop</title>
+        <desc>Een afslank-cursus in 12 stappen op CIO.com. Geweldig om te lezen!</desc>
+      </bookmark>
+      <bookmark href="http://newsforge.com/newsforge/02/09/20/1543210.shtml?tid=23">
+        <title>Linux is an experience, not an operating system</title>
+        <desc>Interessant commentaar van een nieuwe gebruiker van Linux.</desc>
+      </bookmark>
+      <bookmark href="http://www.dwheeler.com/oss_fs_why.html">
+        <title>Why Open Source Software/Free Software? Look at the Numbers!</title>
+        <desc>Een zeer goed artikel voor mensen die zich op vrije software willen oriënteren.</desc>
+      </bookmark>
+      <bookmark href="http://www.netaction.org/articles/freesoft.html">
+        <title>Information wants to be valuable</title>
+        <desc>Wat er van het Internet over blijft als er geen vrije software zou zijn.</desc>
+      </bookmark>
+      <bookmark href="http://danny.oz.au/free-software/">
+        <title>Free Software Politics and Advocacy</title>
+        <desc>Danny Yee's Free Software Politics and Advocacy. Informatie over (meer dan...) vrije software. Een leuke analogie, maar heel goed onderbouwd, vind je in het artikel Free Software as Appropriate Technology.</desc>
+      </bookmark>
+      <bookmark href="http://danny.oz.au/free-software/advocacy/appropriate.html">
+        <title>Free Software as Appropriate Technology</title>
+      </bookmark>
+      <bookmark href="http://www.osopinion.com/Opinions/AlanCox/AlanCox1.html">
+        <title>The Risks of Closed Source Computing</title>
+        <desc>Alan Cox schrijft zeer inzichtelijk: The Risks of Closed Source Computing. (Closed source: programma's waarvan de broncode niet beschikbaar is.)</desc>
+      </bookmark>
+      <bookmark href="http://www.gnu.org/events/rms-nyu-2001-transcript.txt">
+        <title>Free Software: Freedom and Cooperation</title>
+        <desc>1 juni 2001: De oprichter van het GNU Project, Richard Stallman, hield op 29 mei 2001 een toespraak aan de Universiteit van New York: Free Software: Freedom and Cooperation. Hier is een audio weergave.</desc>
+      </bookmark>
+      <bookmark href="http://www.fsf.org/philosophy/audio/audio.html#NYU2001">
+        <title>audio weergave</title>
+      </bookmark>
+      <bookmark href="http://www.mech.kuleuven.ac.be/~bruyninc/ictvisie.html">
+        <title>De democratisering van de ICT. Een onafhankelijke visie op Informatie- en Communicatie-Technologie in het onderwijs</title>
+        <desc>Dit artikel van Herman Bruyninckx is belangrijk denkvoer voor iedere beleidsmaker in het (IT) onderwijs!</desc>
+      </bookmark>
+      <bookmark href="http://www.mech.kuleuven.ac.be/~bruyninc/etos/">
+        <title>ETOS: Educatieve Toepassingen van Open Software</title>
+        <desc>Lees alles over de maatschappelijke voordelen van de promotie van vrije software in het onderwijs.</desc>
+      </bookmark>
+      <bookmark href="http://www.xs4all.nl/~irmen/mozilla/">
+        <title>MozFront -- Promoot Mozilla en Web Standaards</title>
+        <desc>Pleit voor een toegankelijk Internet! Ook is er een blacklist mèt conversaties met webmasters, etc.</desc>
+      </bookmark>
+      <bookmark href="http://www.xs4all.nl/~irmen/mozilla/blacklist.html">
+        <title>blacklist</title>
+      </bookmark>
+      <bookmark href="http://www.kijk.nl/artikel.jsp?art=6429">
+        <title>heel artikel over Linux en Open Source</title>
+        <desc>1 februari 2003: Het populair-wetenschappelijk maandblad Kijk heeft een heel artikel over Linux en Open Source!</desc>
+      </bookmark>
+      <bookmark href="http://www.ososs.nl/">
+        <title>www.ososs.nl</title>
+        <desc>mei 2003: De Nederlandse overheid heeft het programma Open Standaarden en Open Source Software voor de overheid (OSOSS) gestart. Een zeer informatieve website is te vinden op www.ososs.nl.</desc>
+      </bookmark>
+      <bookmark href="http://www.linuxworld.com/site-stories/2001/1018.tco.html">
+        <title>A strategic comparison of Windows vs. Unix</title>
+        <desc>In twee scenario's wordt gekeken welk operating system wanneer de beste keuze is.</desc>
+      </bookmark>
+      <bookmark href="http://www.kirch.net/unix-nt/">
+        <title>Microsoft Windows NT Server 4.0 versus UNIX</title>
+        <desc>(1999. Bekend als "The Kirch Paper") door John Kirch.</desc>
+      </bookmark>
+      <bookmark href="http://www.fsfeurope.org/">
+        <title>Free Software Foundation Europa</title>
+        <desc>maart 2003: De Free Software Foundation Europa is met de UNESCO in gesprek over het plaatsen van Free Software op de Werelderfgoedlijst. Zie ook de speciale afdeling over digitaal erfgoed op de UNESCO site, en de speciale Free Software Portal van de hoofdsite van UNESCO (grappig genoeg met een Linux Logo).</desc>
+      </bookmark>
+      <bookmark href="http://www.unesco.nl/">
+        <title>UNESCO</title>
+      </bookmark>
+      <bookmark href="http://www.fsfeurope.org/projects/mankind/">
+        <title>plaatsen van Free Software op de Werelderfgoedlijst</title>
+      </bookmark>
+      <bookmark href="http://www.unesco.nl/main_2-6-3.php">
+        <title>digitaal erfgoed op de UNESCO site</title>
+      </bookmark>
+      <bookmark href="http://www.unesco.org/webworld/portal_freesoft/">
+        <title>Free Software Portal</title>
+      </bookmark>
+    </folder>
+    <folder>
+      <title>Boeken</title>
+      <desc></desc>
+      <bookmark href="http://www.zoekboeken.nl/linux/">
+        <title>ZoekBoeken.nl - Linux boeken</title>
+        <desc>Zoek tegelijkertijd in 25 verschillende boekenwinkels naar boeken over Linux.</desc>
+      </bookmark>
+      <bookmark href="http://nl.linux.org/boeken/overzicht.php">
+        <title>Overzicht van boekrecensies op NL.Linux.org</title>
+        <desc>Uitgebreid Overzicht van boekrecensies op NL.Linux.org.</desc>
+      </bookmark>
+      <bookmark href="http://nl.linux.org/boeken/lees.php?recensie_id=131">
+        <title>GIMP in 24 uur</title>
+      </bookmark>
+      <bookmark href="http://nl.linux.org/boeken/lees.php?recensie_id=101">
+        <title>Professional PHP Programming</title>
+      </bookmark>
+      <bookmark href="http://nl.linux.org/boeken/lees.php?recensie_id=100">
+        <title>Linux Music and Sound</title>
+      </bookmark>
+      <bookmark href="http://nl.linux.org/boeken/lees.php?recensie_id=40">
+        <title>The Cathedral &amp; The Bazaar</title>
+        <desc>*</desc>
+      </bookmark>
+      <bookmark href="http://nl.linux.org/boeken/lees.php?recensie_id=98">
+        <title>Linux in het bedrijf</title>
+      </bookmark>
+      <bookmark href="http://nl.linux.org/boeken/lees.php?recensie_id=41">
+        <title>Practical Programming in Tcl and Tk, Third Edition</title>
+      </bookmark>
+      <bookmark href="http://nl.linux.org/boeken/lees.php?recensie_id=78">
+        <title>Applicaties ontwikkelen in Linux</title>
+        <desc>*</desc>
+      </bookmark>
+      <bookmark href="http://nl.linux.org/boeken/lees.php?recensie_id=151">
+        <title>XSLT Programmer's Reference, 2nd Edition</title>
+      </bookmark>
+      <bookmark href="http://www.oreilly.com/openbook/freedom/">
+        <title>online te lezen</title>
+        <desc>Free as in Freedom: Richard Stallman's crusade for Free Software, door Sam Williams. ISBN 0-596-00287-4. Uitg. O'Reilly. Een aanrader. Ook online te lezen. Recensie door Danny Yee</desc>
+      </bookmark>
+      <bookmark href="http://dannyreviews.com/h/Free_Freedom.html">
+        <title>Recensie door Danny Yee</title>
+      </bookmark>
+      <bookmark href="http://www.tldp.org/">
+        <title>Alle boeken van The Linux Documentation Project</title>
+      </bookmark>
+      <bookmark href="http://www.oreilly.com/openbook/">
+        <title>Imposante boekenlijst van het Open Books Project</title>
+        <desc>van uitgever O'Reilly</desc>
+      </bookmark>
+      <bookmark href="http://www.dsl.org/cookbook/">
+        <title>The Linux Cookbook</title>
+        <desc>Meer dan 1500 tijdsbesparende recepten en tips voor veeleisende computergebruikers</desc>
+      </bookmark>
+      <bookmark href="http://www.linuxmag.nl/">
+        <title>Linux Magazine</title>
+        <desc>Jawel! Nederlandstalig! Een must voor iedereen die Linux gebruikt en veel wil leren.</desc>
+      </bookmark>
+      <bookmark href="http://www.linuxformat.co.uk/">
+        <title>Linux Format (Groot-Brittannië)</title>
+        <desc>Een duur maar erg goed blad.</desc>
+      </bookmark>
+      <bookmark href="http://www.linux-user.de/">
+        <title>Linux User</title>
+        <desc>Een prima Duits blad.</desc>
+      </bookmark>
+      <bookmark href="http://www.linux-mag.com/">
+        <title>Linux Magazine (Engels)</title>
+        <desc>Het eerste Linux blad?</desc>
+      </bookmark>
+      <bookmark href="http://www.linuxjournal.com/">
+        <title>Linux Journal</title>
+      </bookmark>
+    </folder>
+    <folder>
+      <title>Value Your Freedom</title>
+      <desc></desc>
+      <bookmark href="http://www.w3.org/">
+        <title>World Wide Web Consortium (W3C)</title>
+        <desc>Het World Wide Web Consortium (W3C). Opgericht door de bedenker van het World-wide Web, Tim Berners-Lee, maakt het W3C zich sterk voor een Internet dat met elk apparaat, elke browser, overal en altijd toegankelijk is.</desc>
+      </bookmark>
+      <bookmark href="http://www.anybrowser.org/campaign">
+        <title>Campaign for a Non Browser-specific WWW</title>
+        <desc>Ook in het Nederlands!</desc>
+      </bookmark>
+      <bookmark href="http://www.anybrowser.org/campaign/anybrowser_nl.html">
+        <title>Nederlands</title>
+      </bookmark>
+      <bookmark href="http://www.freedesktop.org/">
+        <title>FreeDesktop.org</title>
+        <desc>zet zich in voor compatibiliteit tussen verschillende desktop environments.</desc>
+      </bookmark>
+      <bookmark href="http://www.eff.org">
+        <title>www.eff.org</title>
+        <desc>John Gilmore, oprichter van de Electronic Frontier Foundation (EFF, www.eff.org), legt in zijn artikel What's wrong with copy protection uit wat hier mis is. Een Nederlandse vertaling (april 2001) is beschikbaar dankzij het blad c't!</desc>
+      </bookmark>
+      <bookmark href="http://www.toad.com/gnu/whatswrong.html">
+        <title>What's wrong with copy protection</title>
+      </bookmark>
+      <bookmark href="http://www.fnl.nl/ct/archief2001/ct2001-04/ct_online_0104-044047.htm">
+        <title>Nederlandse vertaling (april 2001)</title>
+      </bookmark>
+      <bookmark href="http://www.google.com/search?q=What's+wrong+with+copy+protection">
+        <title>talrijke mirrors</title>
+        <desc>Als de toad.com site down is, zijn hier talrijke mirrors te vinden van het originele artikel.</desc>
+      </bookmark>
+      <bookmark href="http://www.wewantlinux.org/">
+        <title>"We Want Linux"</title>
+        <desc>Vind je ook dat je te weinig keus hebt bij computerwinkels om computers met Linux te zien en/of kopen? Ga dan naar "We Want Linux" en doe mee aan de enquête/petitie!</desc>
+      </bookmark>
+      <bookmark href="http://petition.eurolinux.org">
+        <title></title>
+        <desc>Software patenten kunnen vrije uitwisseling van informatie schaden, innovatie belemmeren, en de keuzevrijheid van iedere computergebruiker drastisch gaan inperken.</desc>
+      </bookmark>
+      <bookmark href="http://petition.eurolinux.org/index_html">
+        <title>Teken een petitie</title>
+        <desc>Om grote software bedrijven te "beschermen" denkt de Europese Commissie aan wetswijzigingen inzake software patenten (deze zijn tot nu toe verboden). Teken een petitie om hiertegen in actie te komen! Lees over de gevaren die ontstaan als alleen grote (Amerikaanse) multinationals nog "vrij" kunnen programmeren. En lees Software patents: will Europe roll over for the multinationals?</desc>
+      </bookmark>
+      <bookmark href="http://petition.eurolinux.org/reference/">
+        <title>Lees</title>
+      </bookmark>
+      <bookmark href="http://www.theregister.co.uk/content/1/13942.html">
+        <title>Software patents: will Europe roll over for the multinationals?</title>
+      </bookmark>
+      <bookmark href="http://lpf.ai.mit.edu/">
+        <title>League for Programming Freedom</title>
+        <desc>De League for Programming Freedom heeft ook een goed artikel over het gevaar van software patenten: Software Patents: An Industry At Risk.</desc>
+      </bookmark>
+      <bookmark href="http://lpf.ai.mit.edu/Patents/industry-at-risk.html">
+        <title>Software Patents: An Industry At Risk</title>
+      </bookmark>
+      <bookmark href="http://www.petitiononline.com/msiepng/">
+        <title>Petitie voor goede PNG ondersteuning in Microsoft Internet Explorer voor Windows</title>
+        <desc>Hoewel de ondersteuning in Internet Explorer voor Microsoft-specifieke toeters en bellen drastisch toeneemt, blijft de ondersteuning van een W3C-Recommendation als PNG hopeloos achter. Zo werken doorschijnende PNG's niet in Explorer.</desc>
+      </bookmark>
+      <bookmark href="http://www.opensource.org/halloween/">
+        <title>Halloween Documents</title>
+        <desc>De Halloween Documents, een Microsoft-interne memo lekte uit in het najaar van 1998, waarin een analyse van het Open-Source fenomeen, en mogelijke strategieën om hiermee te concurreren. Open-Source software wordt door allerlei mensen samen gemaakt, dus het traditionele opkopen kan niet...maar:</desc>
+      </bookmark>
+      <bookmark href="http://www.zdnet.com/intweek/stories/news/0%2C4164%2C2449668%2C00.html">
+        <title>Inter@ctive Week: Kerberos Made To Heel To Windows 2000</title>
+        <desc>(LinuxToday)</desc>
+      </bookmark>
+      <bookmark href="http://linuxtoday.com/news_story.php3?ltsn=2000-02-28-016-06-SC">
+        <title>LinuxToday</title>
+      </bookmark>
+      <bookmark href="http://www.linuxworld.com/linuxworld/lw-2000-04/lw-04-vcontrol_3.html">
+        <title>LinuxWorld: The Gates of Hades - Microsoft attempts to co-opt Kerberos</title>
+        <desc>(LinuxToday)</desc>
+      </bookmark>
+      <bookmark href="http://linuxtoday.com/news_story.php3?ltsn=2000-04-20-005-04-NW">
+        <title>LinuxToday</title>
+      </bookmark>
+      <bookmark href="http://linuxtoday.com/news_story.php3?ltsn=2000-04-04-029-06-SC">
+        <title>LinuxToday: The Economist: Microsoft: Deadly Embrace [&amp; Extend of Kerberos]</title>
+      </bookmark>
+      <bookmark href="http://linuxtoday.com/news_story.php3?ltsn=2000-05-01-005-04-NW">
+        <title>Jeremy Allison: Microsoft document kerberos PAC format - with a catch.</title>
+      </bookmark>
+      <bookmark href="http://slashdot.org/article.pl?sid=00/05/02/158204&amp;mode=thread">
+        <title>Slashdot: Kerberos, PACs And Microsoft's Dirty Tricks</title>
+      </bookmark>
+      <bookmark href="http://slashdot.org/article.pl?sid=00/05/11/0153247&amp;mode=nocomment">
+        <title>Microsoft Asks Slashdot To Remove Readers' Posts</title>
+      </bookmark>
+      <bookmark href="http://www.salon.com/tech/log/2000/05/11/slashdot_censor/index.html">
+        <title>Salon: Embrace, extend, censor</title>
+        <desc>(LinuxToday)</desc>
+      </bookmark>
+      <bookmark href="http://linuxtoday.com/news_story.php3?ltsn=2000-05-12-002-20-OS-MS">
+        <title>LinuxToday</title>
+      </bookmark>
+      <bookmark href="http://www.osopinion.com/Opinions/EskoWoudenberg/EskoWoudenberg7.html">
+        <title>osOpinion: How to publish a trade secret</title>
+        <desc>(LinuxToday)</desc>
+      </bookmark>
+      <bookmark href="http://linuxtoday.com/news_story.php3?ltsn=2000-05-15-010-04-OP-OO">
+        <title>LinuxToday</title>
+      </bookmark>
+      <bookmark href="http://www2.linuxjournal.com/cgi-bin/frames.pl/articles/currents/020.html">
+        <title>Yes, Microsoft, This Really IS About Free Speech</title>
+        <desc>(LinuxToday)</desc>
+      </bookmark>
+      <bookmark href="http://linuxtoday.com/news_story.php3?ltsn=2000-05-12-016-04-OP-MS">
+        <title>LinuxToday</title>
+      </bookmark>
+      <bookmark href="http://www.linuxworld.com/linuxworld/lw-2000-05/lw-05-shovel.html">
+        <title>Linuxworld: Put down the shovel - The making of a PR disaster</title>
+        <desc>(LinuxToday)</desc>
+      </bookmark>
+      <bookmark href="http://linuxtoday.com/news_story.php3?ltsn=2000-05-16-002-20-OP-CY-MS">
+        <title>LinuxToday</title>
+      </bookmark>
+      <bookmark href="http://slashdot.org/features/00/05/18/2015251.shtml">
+        <title>Our Attorney's Response To Microsoft</title>
+        <desc>(LinuxToday)</desc>
+      </bookmark>
+      <bookmark href="http://linuxtoday.com/news_story.php3?ltsn=2000-05-19-002-06-NW-CY">
+        <title>LinuxToday</title>
+      </bookmark>
+      <bookmark href="http://slashdot.org/article.pl?sid=00/05/20/1523229">
+        <title>Slashdot.org</title>
+        <desc>20 mei 2000: De open plek in de Kerberos-specificatie, die door Microsoft's proprietaire uitbreiding in Windows2000 Kerberos werd gebruikt om een niet-compatibele versie te creëren, wordt wellicht spoedig gedicht door de nieuwe IETF (Internet Engineering Task Force) Kerberos standaard. Informatie op Slashdot.org.</desc>
+      </bookmark>
+      <bookmark href="http://www.zdnet.com/zdnn/stories/news/0%2C4586%2C2561671%2C00.html">
+        <title>ILOVEYOU</title>
+        <desc>Het ILOVEYOU virus laat weer eens zien hoe kwetsbaar de informatiemaatschappij is door de dominantie van slecht beveiligde besturings- en email systemen, zelfs al draaien die slechts op de uiteinden van het www (bij thuisgebruikers of op client-pc's in bedrijven). De emailworm is alleen gevaarlijk voor Windows gebruikers. Wie een (sendmail) mailserver gebruikt, kan met wat eenvoudige sendmail rules de gewraakte mail onderscheppen.</desc>
+      </bookmark>
+      <bookmark href="http://freshmeat.net/news/2000/05/04/957464489.html">
+        <title>sendmail rules</title>
+      </bookmark>
+      <bookmark href="http://linuxtoday.com/story.php3?sn=20251">
+        <title>Eric S. Raymond: Designed for Insecurity - reprised</title>
+        <desc>Echte backdoor of niet, ESR blijft bij zijn standpunt. "The bottom line is very simple: Closed source can't be trusted, because you can't see what it's doing."</desc>
+      </bookmark>
+      <bookmark href="http://linuxtoday.com/story.php3?sn=20234">
+        <title>Eric S. Raymond: Microsoft - Designed for Insecurity</title>
+        <desc>Eric Raymond legt uit waarom je met open source software als Apache nooit een "backdoor" zult hebben zoals die onlangs is ontdekt in Microsoft software. (Hoewel later bleek dat deze ontdekking zèlf een fout was, die Microsoft echter geloofde...)</desc>
+      </bookmark>
+      <bookmark href="http://news.cnet.com/news/0-1003-200-1696137.html?tag=st.ne.1002.tgif.1003-200-1696137?st.ne.fd.gif.c">
+        <title>onlangs is ontdekt</title>
+      </bookmark>
+      <bookmark href="http://www.theregister.co.uk/content/4/11234.html">
+        <title>The Register</title>
+        <desc>(LinuxToday talkbacks)</desc>
+      </bookmark>
+      <bookmark href="http://linuxtoday.com/news_story.php3?ltsn=2000-06-08-015-06-NW-CY-MS&amp;tbovrmode=1#talkback_area">
+        <title>LinuxToday talkbacks</title>
+      </bookmark>
+      <bookmark href="http://www.advogato.org/article/101.html">
+        <title>Advogato.org</title>
+        <desc>(LinuxToday talkbacks).</desc>
+      </bookmark>
+      <bookmark href="http://linuxtoday.com/news_story.php3?ltsn=2000-06-07-002-20-OS-MS-SW&amp;tbovrmode=1#talkback_area">
+        <title>LinuxToday talkbacks</title>
+      </bookmark>
+      <bookmark href="http://www.microsoft.com/presspass/exec/craig/05-03sharedsource.asp">
+        <title>recente uitlatingen van topman Graig Mundie</title>
+        <desc>In recente uitlatingen van topman Graig Mundie is te merken dat geprobeerd wordt het zelf ontwikkelen en aan de wereldgemeenschap bijdragen van open software in een ongunstig daglicht te stellen (namelijk als zijnde slecht voor de economie en innovatie; geheel in de traditie van de beruchte Open Letter to Hobbyists van B. Gates uit 1976). De GPL wordt niet goed begrepen (als een bedreiging voor intellectueel eigendom, terwijl de GPL dat juist beschermt!), een verdraaiing die al eerder bij Microsoft mensen kon worden gehoord.</desc>
+      </bookmark>
+      <bookmark href="http://www.blinkenlights.com/classiccmp/gateswhine.html">
+        <title>Open Letter to Hobbyists</title>
+      </bookmark>
+      <bookmark href="http://www2.usermagnet.com/cox/index.html">
+        <title>This is How Free Software Works</title>
+        <desc>Alan Cox (This is How Free Software Works), Linus Torvalds ("I wonder if Mundie has ever heard of Sir Isaac Newton?") en de Free Software Foundation ("taking advice on what the GPL means from Microsoft is like taking Stalin's word on the meaning of the US Constitution") laten geen spaan heel van de argumenten van Mundie.</desc>
+      </bookmark>
+      <bookmark href="http://www.interesting-people.org/archives/interesting-people/200105/msg00031.html">
+        <title>I wonder if Mundie has ever heard of Sir Isaac Newton?</title>
+      </bookmark>
+      <bookmark href="http://linuxtoday.com/news_story.php3?ltsn=2001-05-04-013-20-PR-CY-MS">
+        <title>taking advice on what the GPL means from Microsoft is like taking Stalin's word on the meaning of the US Constitution</title>
+      </bookmark>
+      <bookmark href="http://www.salon.com/tech/col/leon/2001/05/03/microsoft_gpl/index.html">
+        <title>Microsoft: Free-software licenses are the devil's work!</title>
+        <desc>En een zeer scherpzinnige analyse van Mundie's toespraak van Andrew Leonard staat te lezen op Salon.com: Microsoft: Free-software licenses are the devil's work!</desc>
+      </bookmark>
+      <bookmark href="http://freedevelopers.net">
+        <title>FreeDevelopers.Net</title>
+        <desc>Ook Tony Stanco van FreeDevelopers.Net schrijft een inzichtvol stukje.</desc>
+      </bookmark>
+      <bookmark href="http://linuxtoday.com/news_story.php3?ltsn=2001-05-09-009-20-OP-MS">
+        <title>inzichtvol stukje</title>
+      </bookmark>
+      <bookmark href="http://economist.com/">
+        <title>The Economist</title>
+        <desc>Het vooraanstaande blad The Economist geeft ook een goed commentaar waarin de bloei van Open Source software als netto effect van het Internet zèlf wordt geschetst, "which means it is here to stay."</desc>
+      </bookmark>
+      <bookmark href="http://economist.com/business/displayStory.cfm?Story_ID=620445">
+        <title>goed commentaar</title>
+      </bookmark>
+    </folder>
+    <folder>
+      <title>/etc</title>
+      <desc></desc>
+      <bookmark href="http://www.foldoc.org/">
+        <title>The Free Online Dictionary of Computing</title>
+        <desc>Een prachtig computer-woordenboek, al heel lang bijgehouden.</desc>
+      </bookmark>
+      <bookmark href="http://srom.zgp.org/">
+        <title>Operating System Sucks-Rules-O-Meter</title>
+        <desc>De Operating System Sucks-Rules-O-Meter. Welke besturingssystemen zijn populair en welke niet?</desc>
+      </bookmark>
+      <bookmark href="http://dmoz.org/">
+        <title>The Open Directory Project</title>
+        <desc>De grootste Internet index die er is. Open en vrij toegankelijk.</desc>
+      </bookmark>
+      <bookmark href="http://tweakers.net/">
+        <title>Tweakers.Net</title>
+        <desc>ICT-nieuws met gekruid commentaar :-)</desc>
+      </bookmark>
+      <bookmark href="http://www.userfriendly.org/">
+        <title>UserFriendly.org</title>
+        <desc>Dagelijkse cartoons!</desc>
+      </bookmark>
+      <bookmark href="http://www.gnu.org/fun/humor.html">
+        <title>Laugh along with GNU</title>
+        <desc>Een verzameling werkelijk ontzettend leuke humor, voor een deel al uit zeer oude computer-tijden! Waarschuwing: veel inside-grappen!</desc>
+      </bookmark>
+      <bookmark href="http://www.xs4all.nl/~marcone/bsdversuslinux.html">
+        <title>Why BSD is superior to Linux</title>
+        <desc>Waarom BSD beter is dan Linux :-)</desc>
+      </bookmark>
+      <bookmark href="http://www.computerflaters.nl/">
+        <title>ComputerFlaters.NL</title>
+      </bookmark>
+    </folder>
+  </folder>
+</xbel>

@@ -1,0 +1,27 @@
+rootProject.name = 'mystart'
+include ':model'
+include ':webapp'
+include ':bookmarkimporter-api'
+include ':bookmarkimporter-chrome'
+include ':bookmarkimporter-google'
+include ':bookmarkimporter-netscape'
+include ':bookmarkimporter-github'
+include ':bookmarkimporter-firefox'
+include ':bookmarkimporter-xbel'
+include ':storage-api'
+include ':storage-serialize'
+include ':storage-speedment'
+
+project(':model').projectDir = "$rootDir/model" as File
+project(':webapp').projectDir = "$rootDir/webapp" as File
+project(':bookmarkimporter-api').projectDir = "$rootDir/bookmarkimporter/api" as File
+project(':bookmarkimporter-chrome').projectDir = "$rootDir/bookmarkimporter/googlechrome" as File
+project(':bookmarkimporter-google').projectDir = "$rootDir/bookmarkimporter/googlebookmarks" as File
+project(':bookmarkimporter-firefox').projectDir = "$rootDir/bookmarkimporter/firefox" as File
+project(':bookmarkimporter-netscape').projectDir = "$rootDir/bookmarkimporter/netscape" as File
+project(':bookmarkimporter-github').projectDir = "$rootDir/bookmarkimporter/github" as File
+project(':bookmarkimporter-xbel').projectDir = "$rootDir/bookmarkimporter/xbel" as File
+project(':storage-api').projectDir = "$rootDir/storage/api" as File
+project(':storage-serialize').projectDir = "$rootDir/storage/serialize" as File
+project(':storage-speedment').projectDir = "$rootDir/storage/speedment" as File
+

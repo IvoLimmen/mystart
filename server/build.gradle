@@ -1,0 +1,29 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = "org.limmen.mystart.Main"
+
+dependencies {
+	compile project(':model')
+	compile project(':bookmarkimporter-api')  
+	compile project(':bookmarkimporter-chrome')  
+	compile project(':bookmarkimporter-google')  
+	compile project(':bookmarkimporter-netscape')  
+	compile project(':bookmarkimporter-github')  
+	compile project(':bookmarkimporter-firefox')  
+	compile project(':bookmarkimporter-xbel')  
+	compile project(':storage-api')
+	compile project(':storage-serialize')  
+	compile project(':storage-speedment')  
+	compile 'io.vertx:vertx-core:3.4.2'
+	compile 'io.vertx:vertx-web:3.4.2'
+	compile 'com.fasterxml.jackson.core:jackson-core:2.8.10'
+	compile 'com.fasterxml.jackson.core:jackson-annotations:2.8.10'
+	compile 'com.fasterxml.jackson.core:jackson-databind:2.8.10'
+	compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.8.10'
+	compile 'ch.qos.logback:logback-core:1.1.7'
+	compile 'ch.qos.logback:logback-classic:1.1.7'
+	compile 'com.typesafe:config:1.3.1'
+
+	testCompile 'junit:junit:4.12'
+}

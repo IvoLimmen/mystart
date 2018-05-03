@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<xml_api_reply version="1">
+    <bookmarks>
+        <bookmark>
+            <title>Some title</title>
+            <url>http://example.org/</url>
+            <timestamp>1462085441182641</timestamp>
+            <id>11082654837254806955</id>
+            <labels>
+                <label>Label1</label>
+            </labels>
+        </bookmark>
+        <bookmark>
+            <title>Some title 2</title>
+            <url>http://someotherexample.org/</url>
+            <timestamp>1461822889042093</timestamp>
+            <id>11085897471985868101</id>
+            <labels>
+                <label>Label1</label>
+                <label>Label2</label>
+            </labels>
+        </bookmark>
+    </bookmarks>
+</xml_api_reply>
