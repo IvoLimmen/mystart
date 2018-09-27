@@ -1,15 +1,15 @@
 package org.limmen.mystart.mystart.public_.ms_link.generated;
 
-import com.speedment.common.injector.annotation.ExecuteBefore;
+import com.speedment.common.annotation.GeneratedCode;
 import com.speedment.runtime.config.identifier.TableIdentifier;
-import com.speedment.runtime.core.component.sql.SqlPersistenceComponent;
-import com.speedment.runtime.core.component.sql.SqlStreamSupplierComponent;
-import com.speedment.runtime.core.exception.SpeedmentException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import javax.annotation.Generated;
+import com.speedment.runtime.core.component.SqlAdapter;
+import com.speedment.runtime.core.db.SqlFunction;
 import org.limmen.mystart.mystart.public_.ms_link.MsLink;
 import org.limmen.mystart.mystart.public_.ms_link.MsLinkImpl;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import static com.speedment.common.injector.State.RESOLVED;
 import static com.speedment.runtime.core.internal.util.sql.ResultSetUtil.*;
 
@@ -22,8 +22,8 @@ import static com.speedment.runtime.core.internal.util.sql.ResultSetUtil.*;
  * 
  * @author Speedment
  */
-@Generated("Speedment")
-public abstract class GeneratedMsLinkSqlAdapter {
+@GeneratedCode("Speedment")
+public abstract class GeneratedMsLinkSqlAdapter implements SqlAdapter<MsLink> {
     
     private final TableIdentifier<MsLink> tableIdentifier;
     
@@ -31,33 +31,38 @@ public abstract class GeneratedMsLinkSqlAdapter {
         this.tableIdentifier = TableIdentifier.of("mystart", "public", "ms_link");
     }
     
-    @ExecuteBefore(RESOLVED)
-    void installMethodName(SqlStreamSupplierComponent streamSupplierComponent, SqlPersistenceComponent persistenceComponent) {
-        streamSupplierComponent.install(tableIdentifier, this::apply);
-        persistenceComponent.install(tableIdentifier);
-    }
-    
-    protected MsLink apply(ResultSet resultSet) throws SpeedmentException {
-        final MsLink entity = createEntity();
-        try {
-            entity.setId(             resultSet.getInt(1)         );
-            entity.setUserId(         getInt(resultSet, 2)        );
-            entity.setDescription(    getString(resultSet, 3)     );
-            entity.setSource(         getString(resultSet, 4)     );
-            entity.setTitle(          getString(resultSet, 5)     );
-            entity.setUrl(            getString(resultSet, 6)     );
-            entity.setHost(           getString(resultSet, 7)     );
-            entity.setLabels(         getString(resultSet, 8)     );
-            entity.setPrivateNetwork( getBoolean(resultSet, 9)    );
-            entity.setLastVisit(      getTimestamp(resultSet, 10) );
-            entity.setCreationDate(   getTimestamp(resultSet, 11) );
-        } catch (final SQLException sqle) {
-            throw new SpeedmentException(sqle);
-        }
-        return entity;
+    protected MsLink apply(ResultSet resultSet, int offset) throws SQLException {
+        return createEntity()
+            .setId(             resultSet.getInt(1 + offset))
+            .setUserId(         getInt(resultSet, 2 + offset))
+            .setDescription(    resultSet.getString(3 + offset))
+            .setSource(         resultSet.getString(4 + offset))
+            .setTitle(          resultSet.getString(5 + offset))
+            .setUrl(            resultSet.getString(6 + offset))
+            .setHost(           resultSet.getString(7 + offset))
+            .setLabels(         resultSet.getString(8 + offset))
+            .setPrivateNetwork( getBoolean(resultSet, 9 + offset))
+            .setLastVisit(      resultSet.getTimestamp(10 + offset))
+            .setCreationDate(   resultSet.getTimestamp(11 + offset))
+            ;
     }
     
     protected MsLinkImpl createEntity() {
         return new MsLinkImpl();
+    }
+    
+    @Override
+    public TableIdentifier<MsLink> identifier() {
+        return tableIdentifier;
+    }
+    
+    @Override
+    public SqlFunction<ResultSet, MsLink> entityMapper() {
+        return entityMapper(0);
+    }
+    
+    @Override
+    public SqlFunction<ResultSet, MsLink> entityMapper(int offset) {
+        return rs -> apply(rs, offset);
     }
 }

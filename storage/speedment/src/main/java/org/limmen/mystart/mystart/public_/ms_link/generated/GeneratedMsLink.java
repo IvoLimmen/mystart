@@ -1,5 +1,6 @@
 package org.limmen.mystart.mystart.public_.ms_link.generated;
 
+import com.speedment.common.annotation.GeneratedCode;
 import com.speedment.common.function.OptionalBoolean;
 import com.speedment.runtime.config.identifier.ColumnIdentifier;
 import com.speedment.runtime.config.identifier.TableIdentifier;
@@ -10,12 +11,12 @@ import com.speedment.runtime.field.ComparableForeignKeyField;
 import com.speedment.runtime.field.IntField;
 import com.speedment.runtime.field.StringField;
 import com.speedment.runtime.typemapper.TypeMapper;
+import org.limmen.mystart.mystart.public_.ms_link.MsLink;
+import org.limmen.mystart.mystart.public_.ms_user.MsUser;
+
 import java.sql.Timestamp;
 import java.util.Optional;
 import java.util.OptionalInt;
-import javax.annotation.Generated;
-import org.limmen.mystart.mystart.public_.ms_link.MsLink;
-import org.limmen.mystart.mystart.public_.ms_user.MsUser;
 
 /**
  * The generated base for the {@link
@@ -27,129 +28,129 @@ import org.limmen.mystart.mystart.public_.ms_user.MsUser;
  * 
  * @author Speedment
  */
-@Generated("Speedment")
+@GeneratedCode("Speedment")
 public interface GeneratedMsLink {
     
     /**
      * This Field corresponds to the {@link MsLink} field that can be obtained
      * using the {@link MsLink#getId()} method.
      */
-    final IntField<MsLink, Integer> ID = IntField.create(
+    IntField<MsLink, Integer> ID = IntField.create(
         Identifier.ID,
         MsLink::getId,
         MsLink::setId,
-        TypeMapper.primitive(), 
+        TypeMapper.primitive(),
         true
     );
     /**
      * This Field corresponds to the {@link MsLink} field that can be obtained
      * using the {@link MsLink#getUserId()} method.
      */
-    final ComparableForeignKeyField<MsLink, Integer, Integer, MsUser> USER_ID = ComparableForeignKeyField.create(
+    ComparableForeignKeyField<MsLink, Integer, Integer, MsUser> USER_ID = ComparableForeignKeyField.create(
         Identifier.USER_ID,
         o -> OptionalUtil.unwrap(o.getUserId()),
         MsLink::setUserId,
         MsUser.ID,
-        TypeMapper.identity(), 
+        TypeMapper.identity(),
         false
     );
     /**
      * This Field corresponds to the {@link MsLink} field that can be obtained
      * using the {@link MsLink#getDescription()} method.
      */
-    final StringField<MsLink, String> DESCRIPTION = StringField.create(
+    StringField<MsLink, String> DESCRIPTION = StringField.create(
         Identifier.DESCRIPTION,
         o -> OptionalUtil.unwrap(o.getDescription()),
         MsLink::setDescription,
-        TypeMapper.identity(), 
+        TypeMapper.identity(),
         false
     );
     /**
      * This Field corresponds to the {@link MsLink} field that can be obtained
      * using the {@link MsLink#getSource()} method.
      */
-    final StringField<MsLink, String> SOURCE = StringField.create(
+    StringField<MsLink, String> SOURCE = StringField.create(
         Identifier.SOURCE,
         o -> OptionalUtil.unwrap(o.getSource()),
         MsLink::setSource,
-        TypeMapper.identity(), 
+        TypeMapper.identity(),
         false
     );
     /**
      * This Field corresponds to the {@link MsLink} field that can be obtained
      * using the {@link MsLink#getTitle()} method.
      */
-    final StringField<MsLink, String> TITLE = StringField.create(
+    StringField<MsLink, String> TITLE = StringField.create(
         Identifier.TITLE,
         o -> OptionalUtil.unwrap(o.getTitle()),
         MsLink::setTitle,
-        TypeMapper.identity(), 
+        TypeMapper.identity(),
         false
     );
     /**
      * This Field corresponds to the {@link MsLink} field that can be obtained
      * using the {@link MsLink#getUrl()} method.
      */
-    final StringField<MsLink, String> URL = StringField.create(
+    StringField<MsLink, String> URL = StringField.create(
         Identifier.URL,
         o -> OptionalUtil.unwrap(o.getUrl()),
         MsLink::setUrl,
-        TypeMapper.identity(), 
+        TypeMapper.identity(),
         false
     );
     /**
      * This Field corresponds to the {@link MsLink} field that can be obtained
      * using the {@link MsLink#getHost()} method.
      */
-    final StringField<MsLink, String> HOST = StringField.create(
+    StringField<MsLink, String> HOST = StringField.create(
         Identifier.HOST,
         o -> OptionalUtil.unwrap(o.getHost()),
         MsLink::setHost,
-        TypeMapper.identity(), 
+        TypeMapper.identity(),
         false
     );
     /**
      * This Field corresponds to the {@link MsLink} field that can be obtained
      * using the {@link MsLink#getLabels()} method.
      */
-    final StringField<MsLink, String> LABELS = StringField.create(
+    StringField<MsLink, String> LABELS = StringField.create(
         Identifier.LABELS,
         o -> OptionalUtil.unwrap(o.getLabels()),
         MsLink::setLabels,
-        TypeMapper.identity(), 
+        TypeMapper.identity(),
         false
     );
     /**
      * This Field corresponds to the {@link MsLink} field that can be obtained
      * using the {@link MsLink#getPrivateNetwork()} method.
      */
-    final ComparableField<MsLink, Boolean, Boolean> PRIVATE_NETWORK = ComparableField.create(
+    ComparableField<MsLink, Boolean, Boolean> PRIVATE_NETWORK = ComparableField.create(
         Identifier.PRIVATE_NETWORK,
         o -> OptionalUtil.unwrap(o.getPrivateNetwork()),
         MsLink::setPrivateNetwork,
-        TypeMapper.identity(), 
+        TypeMapper.identity(),
         false
     );
     /**
      * This Field corresponds to the {@link MsLink} field that can be obtained
      * using the {@link MsLink#getLastVisit()} method.
      */
-    final ComparableField<MsLink, Timestamp, Timestamp> LAST_VISIT = ComparableField.create(
+    ComparableField<MsLink, Timestamp, Timestamp> LAST_VISIT = ComparableField.create(
         Identifier.LAST_VISIT,
         o -> OptionalUtil.unwrap(o.getLastVisit()),
         MsLink::setLastVisit,
-        TypeMapper.identity(), 
+        TypeMapper.identity(),
         false
     );
     /**
      * This Field corresponds to the {@link MsLink} field that can be obtained
      * using the {@link MsLink#getCreationDate()} method.
      */
-    final ComparableField<MsLink, Timestamp, Timestamp> CREATION_DATE = ComparableField.create(
+    ComparableField<MsLink, Timestamp, Timestamp> CREATION_DATE = ComparableField.create(
         Identifier.CREATION_DATE,
         o -> OptionalUtil.unwrap(o.getCreationDate()),
         MsLink::setCreationDate,
-        TypeMapper.identity(), 
+        TypeMapper.identity(),
         false
     );
     
@@ -365,34 +366,34 @@ public interface GeneratedMsLink {
         LAST_VISIT      ("last_visit"),
         CREATION_DATE   ("creation_date");
         
-        private final String columnName;
+        private final String columnId;
         private final TableIdentifier<MsLink> tableIdentifier;
         
-        Identifier(String columnName) {
-            this.columnName      = columnName;
-            this.tableIdentifier = TableIdentifier.of(    getDbmsName(), 
-                getSchemaName(), 
-                getTableName());
+        Identifier(String columnId) {
+            this.columnId        = columnId;
+            this.tableIdentifier = TableIdentifier.of(    getDbmsId(), 
+                getSchemaId(), 
+                getTableId());
         }
         
         @Override
-        public String getDbmsName() {
+        public String getDbmsId() {
             return "mystart";
         }
         
         @Override
-        public String getSchemaName() {
+        public String getSchemaId() {
             return "public";
         }
         
         @Override
-        public String getTableName() {
+        public String getTableId() {
             return "ms_link";
         }
         
         @Override
-        public String getColumnName() {
-            return this.columnName;
+        public String getColumnId() {
+            return this.columnId;
         }
         
         @Override

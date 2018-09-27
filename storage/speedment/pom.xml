@@ -22,6 +22,7 @@
     <dependency>
       <groupId>com.speedment</groupId>
       <artifactId>runtime</artifactId>
+      <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.postgresql</groupId>
@@ -36,4 +37,36 @@
     </dependency>       
            
   </dependencies>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.speedment</groupId>
+        <artifactId>speedment-maven-plugin</artifactId>
+        <configuration>
+          <configuration>
+            <appName>mystart</appName>
+            <packageName>${project.groupId}</packageName>
+          </configuration>
+        </configuration>
+        <dependencies>     
+          <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>11</version>
+          </dependency>   
+          <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>11</version>
+          </dependency>   
+          <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgresql.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>  
 </project>

@@ -1,16 +1,17 @@
 package org.limmen.mystart.mystart.public_.ms_link.generated;
 
+import com.speedment.common.annotation.GeneratedCode;
 import com.speedment.common.function.OptionalBoolean;
 import com.speedment.runtime.core.manager.Manager;
 import com.speedment.runtime.core.util.OptionalUtil;
+import org.limmen.mystart.mystart.public_.ms_link.MsLink;
+import org.limmen.mystart.mystart.public_.ms_user.MsUser;
+
 import java.sql.Timestamp;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.StringJoiner;
-import javax.annotation.Generated;
-import org.limmen.mystart.mystart.public_.ms_link.MsLink;
-import org.limmen.mystart.mystart.public_.ms_user.MsUser;
 
 /**
  * The generated base implementation of the {@link
@@ -21,7 +22,7 @@ import org.limmen.mystart.mystart.public_.ms_user.MsUser;
  * 
  * @author Speedment
  */
-@Generated("Speedment")
+@GeneratedCode("Speedment")
 public abstract class GeneratedMsLinkImpl implements MsLink {
     
     private int id;
@@ -36,9 +37,7 @@ public abstract class GeneratedMsLinkImpl implements MsLink {
     private Timestamp lastVisit;
     private Timestamp creationDate;
     
-    protected GeneratedMsLinkImpl() {
-        
-    }
+    protected GeneratedMsLinkImpl() {}
     
     @Override
     public int getId() {
@@ -192,17 +191,17 @@ public abstract class GeneratedMsLinkImpl implements MsLink {
         if (this == that) { return true; }
         if (!(that instanceof MsLink)) { return false; }
         final MsLink thatMsLink = (MsLink)that;
-        if (this.getId() != thatMsLink.getId()) {return false; }
-        if (!Objects.equals(this.getUserId(), thatMsLink.getUserId())) {return false; }
-        if (!Objects.equals(this.getDescription(), thatMsLink.getDescription())) {return false; }
-        if (!Objects.equals(this.getSource(), thatMsLink.getSource())) {return false; }
-        if (!Objects.equals(this.getTitle(), thatMsLink.getTitle())) {return false; }
-        if (!Objects.equals(this.getUrl(), thatMsLink.getUrl())) {return false; }
-        if (!Objects.equals(this.getHost(), thatMsLink.getHost())) {return false; }
-        if (!Objects.equals(this.getLabels(), thatMsLink.getLabels())) {return false; }
-        if (!Objects.equals(this.getPrivateNetwork(), thatMsLink.getPrivateNetwork())) {return false; }
-        if (!Objects.equals(this.getLastVisit(), thatMsLink.getLastVisit())) {return false; }
-        if (!Objects.equals(this.getCreationDate(), thatMsLink.getCreationDate())) {return false; }
+        if (this.getId() != thatMsLink.getId()) { return false; }
+        if (!Objects.equals(this.getUserId(), thatMsLink.getUserId())) { return false; }
+        if (!Objects.equals(this.getDescription(), thatMsLink.getDescription())) { return false; }
+        if (!Objects.equals(this.getSource(), thatMsLink.getSource())) { return false; }
+        if (!Objects.equals(this.getTitle(), thatMsLink.getTitle())) { return false; }
+        if (!Objects.equals(this.getUrl(), thatMsLink.getUrl())) { return false; }
+        if (!Objects.equals(this.getHost(), thatMsLink.getHost())) { return false; }
+        if (!Objects.equals(this.getLabels(), thatMsLink.getLabels())) { return false; }
+        if (!Objects.equals(this.getPrivateNetwork(), thatMsLink.getPrivateNetwork())) { return false; }
+        if (!Objects.equals(this.getLastVisit(), thatMsLink.getLastVisit())) { return false; }
+        if (!Objects.equals(this.getCreationDate(), thatMsLink.getCreationDate())) { return false; }
         return true;
     }
     
@@ -210,16 +209,16 @@ public abstract class GeneratedMsLinkImpl implements MsLink {
     public int hashCode() {
         int hash = 7;
         hash = 31 * hash + Integer.hashCode(getId());
-        hash = 31 * hash + Objects.hashCode(getUserId());
-        hash = 31 * hash + Objects.hashCode(getDescription());
-        hash = 31 * hash + Objects.hashCode(getSource());
-        hash = 31 * hash + Objects.hashCode(getTitle());
-        hash = 31 * hash + Objects.hashCode(getUrl());
-        hash = 31 * hash + Objects.hashCode(getHost());
-        hash = 31 * hash + Objects.hashCode(getLabels());
-        hash = 31 * hash + Objects.hashCode(getPrivateNetwork());
-        hash = 31 * hash + Objects.hashCode(getLastVisit());
-        hash = 31 * hash + Objects.hashCode(getCreationDate());
+        hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getUserId()));
+        hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getDescription()));
+        hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getSource()));
+        hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getTitle()));
+        hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getUrl()));
+        hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getHost()));
+        hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getLabels()));
+        hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getPrivateNetwork()));
+        hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getLastVisit()));
+        hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getCreationDate()));
         return hash;
     }
 }

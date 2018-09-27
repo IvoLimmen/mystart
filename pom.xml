@@ -13,12 +13,16 @@
     <module>model</module>
     <module>bookmarkimporter</module>
     <module>storage</module>
+    <module>server</module>
   </modules> 
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.source>10</maven.compiler.source>
+    <maven.compiler.target>10</maven.compiler.target>
+    
+    <postgresql.version>42.2.5</postgresql.version>
+    <speedment.version>3.1.6</speedment.version>
   </properties>
 
   <dependencyManagement>    
@@ -67,12 +71,13 @@
       <dependency>
         <groupId>com.speedment</groupId>
         <artifactId>runtime</artifactId>
-        <version>3.0.2</version>
+        <version>${speedment.version}</version>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.postgresql</groupId>
         <artifactId>postgresql</artifactId>
-        <version>42.2.5</version>
+        <version>${postgresql.version}</version>
         <scope>runtime</scope>
       </dependency>
       
@@ -86,6 +91,15 @@
   </dependencyManagement>
     
   <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+        <groupId>com.speedment</groupId>
+        <artifactId>speedment-maven-plugin</artifactId>
+        <version>${speedment.version}</version>                
+        </plugin>
+      </plugins>
+    </pluginManagement>
     <plugins>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>

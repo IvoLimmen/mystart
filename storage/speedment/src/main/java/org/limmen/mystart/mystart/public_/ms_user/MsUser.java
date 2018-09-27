@@ -9,7 +9,4 @@ import org.limmen.mystart.mystart.public_.ms_user.generated.GeneratedMsUser;
  * 
  * @author limmen
  */
-public interface MsUser extends GeneratedMsUser {
-    
-    
-}
+public interface MsUser extends GeneratedMsUser {}

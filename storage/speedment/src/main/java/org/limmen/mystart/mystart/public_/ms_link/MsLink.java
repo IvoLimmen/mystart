@@ -9,7 +9,4 @@ import org.limmen.mystart.mystart.public_.ms_link.generated.GeneratedMsLink;
  * 
  * @author limmen
  */
-public interface MsLink extends GeneratedMsLink {
-    
-    
-}
+public interface MsLink extends GeneratedMsLink {}

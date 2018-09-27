@@ -10,7 +10,4 @@ import org.limmen.mystart.mystart.public_.ms_link.generated.GeneratedMsLinkSqlAd
  * 
  * @author limmen
  */
-public class MsLinkSqlAdapter extends GeneratedMsLinkSqlAdapter {
-    
-    
-}
+public class MsLinkSqlAdapter extends GeneratedMsLinkSqlAdapter {}

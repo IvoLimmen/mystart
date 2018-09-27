@@ -10,7 +10,4 @@ import org.limmen.mystart.mystart.public_.ms_user.generated.GeneratedMsUserSqlAd
  * 
  * @author limmen
  */
-public class MsUserSqlAdapter extends GeneratedMsUserSqlAdapter {
-    
-    
-}
+public class MsUserSqlAdapter extends GeneratedMsUserSqlAdapter {}

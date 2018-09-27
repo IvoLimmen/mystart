@@ -1,8 +1,15 @@
 package org.limmen.mystart.mystart.public_.ms_link.generated;
 
+import com.speedment.common.annotation.GeneratedCode;
+import com.speedment.runtime.config.identifier.TableIdentifier;
 import com.speedment.runtime.core.manager.Manager;
-import javax.annotation.Generated;
+import com.speedment.runtime.field.Field;
 import org.limmen.mystart.mystart.public_.ms_link.MsLink;
+
+import java.util.List;
+
+import static java.util.Arrays.asList;
+import static java.util.Collections.unmodifiableList;
 
 /**
  * The generated base interface for the manager of every {@link
@@ -13,8 +20,23 @@ import org.limmen.mystart.mystart.public_.ms_link.MsLink;
  * 
  * @author Speedment
  */
-@Generated("Speedment")
+@GeneratedCode("Speedment")
 public interface GeneratedMsLinkManager extends Manager<MsLink> {
+    
+    TableIdentifier<MsLink> IDENTIFIER = TableIdentifier.of("mystart", "public", "ms_link");
+    List<Field<MsLink>> FIELDS = unmodifiableList(asList(
+        MsLink.ID,
+        MsLink.USER_ID,
+        MsLink.DESCRIPTION,
+        MsLink.SOURCE,
+        MsLink.TITLE,
+        MsLink.URL,
+        MsLink.HOST,
+        MsLink.LABELS,
+        MsLink.PRIVATE_NETWORK,
+        MsLink.LAST_VISIT,
+        MsLink.CREATION_DATE
+    ));
     
     @Override
     default Class<MsLink> getEntityClass() {

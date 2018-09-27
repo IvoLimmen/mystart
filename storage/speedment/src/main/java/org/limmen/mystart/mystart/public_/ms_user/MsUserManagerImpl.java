@@ -10,7 +10,6 @@ import org.limmen.mystart.mystart.public_.ms_user.generated.GeneratedMsUserManag
  * 
  * @author limmen
  */
-public final class MsUserManagerImpl extends GeneratedMsUserManagerImpl implements MsUserManager {
-    
-    
-}
+public final class MsUserManagerImpl 
+extends GeneratedMsUserManagerImpl 
+implements MsUserManager {}

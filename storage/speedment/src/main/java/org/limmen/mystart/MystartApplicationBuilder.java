@@ -11,7 +11,4 @@ import org.limmen.mystart.generated.GeneratedMystartApplicationBuilder;
  * 
  * @author limmen
  */
-public final class MystartApplicationBuilder extends GeneratedMystartApplicationBuilder {
-    
-    
-}
+public final class MystartApplicationBuilder extends GeneratedMystartApplicationBuilder {}

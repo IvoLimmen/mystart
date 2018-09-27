@@ -1,17 +1,16 @@
 package org.limmen.mystart.mystart.public_.ms_user.generated;
 
-import com.speedment.common.injector.annotation.ExecuteBefore;
+import com.speedment.common.annotation.GeneratedCode;
 import com.speedment.runtime.config.identifier.TableIdentifier;
-import com.speedment.runtime.core.component.sql.SqlPersistenceComponent;
-import com.speedment.runtime.core.component.sql.SqlStreamSupplierComponent;
-import com.speedment.runtime.core.exception.SpeedmentException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import javax.annotation.Generated;
+import com.speedment.runtime.core.component.SqlAdapter;
+import com.speedment.runtime.core.db.SqlFunction;
 import org.limmen.mystart.mystart.public_.ms_user.MsUser;
 import org.limmen.mystart.mystart.public_.ms_user.MsUserImpl;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import static com.speedment.common.injector.State.RESOLVED;
-import static com.speedment.runtime.core.internal.util.sql.ResultSetUtil.*;
 
 /**
  * The generated Sql Adapter for a {@link
@@ -22,8 +21,8 @@ import static com.speedment.runtime.core.internal.util.sql.ResultSetUtil.*;
  * 
  * @author Speedment
  */
-@Generated("Speedment")
-public abstract class GeneratedMsUserSqlAdapter {
+@GeneratedCode("Speedment")
+public abstract class GeneratedMsUserSqlAdapter implements SqlAdapter<MsUser> {
     
     private final TableIdentifier<MsUser> tableIdentifier;
     
@@ -31,25 +30,30 @@ public abstract class GeneratedMsUserSqlAdapter {
         this.tableIdentifier = TableIdentifier.of("mystart", "public", "ms_user");
     }
     
-    @ExecuteBefore(RESOLVED)
-    void installMethodName(SqlStreamSupplierComponent streamSupplierComponent, SqlPersistenceComponent persistenceComponent) {
-        streamSupplierComponent.install(tableIdentifier, this::apply);
-        persistenceComponent.install(tableIdentifier);
-    }
-    
-    protected MsUser apply(ResultSet resultSet) throws SpeedmentException {
-        final MsUser entity = createEntity();
-        try {
-            entity.setId(       resultSet.getInt(1)     );
-            entity.setEmail(    getString(resultSet, 2) );
-            entity.setPassword( getString(resultSet, 3) );
-        } catch (final SQLException sqle) {
-            throw new SpeedmentException(sqle);
-        }
-        return entity;
+    protected MsUser apply(ResultSet resultSet, int offset) throws SQLException {
+        return createEntity()
+            .setId(       resultSet.getInt(1 + offset))
+            .setEmail(    resultSet.getString(2 + offset))
+            .setPassword( resultSet.getString(3 + offset))
+            ;
     }
     
     protected MsUserImpl createEntity() {
         return new MsUserImpl();
+    }
+    
+    @Override
+    public TableIdentifier<MsUser> identifier() {
+        return tableIdentifier;
+    }
+    
+    @Override
+    public SqlFunction<ResultSet, MsUser> entityMapper() {
+        return entityMapper(0);
+    }
+    
+    @Override
+    public SqlFunction<ResultSet, MsUser> entityMapper(int offset) {
+        return rs -> apply(rs, offset);
     }
 }

@@ -1,11 +1,13 @@
 package org.limmen.mystart.mystart.public_.ms_link.generated;
 
+import com.speedment.common.annotation.GeneratedCode;
 import com.speedment.runtime.config.identifier.TableIdentifier;
 import com.speedment.runtime.core.manager.AbstractManager;
 import com.speedment.runtime.field.Field;
-import java.util.stream.Stream;
-import javax.annotation.Generated;
 import org.limmen.mystart.mystart.public_.ms_link.MsLink;
+import org.limmen.mystart.mystart.public_.ms_link.MsLinkManager;
+
+import java.util.stream.Stream;
 
 /**
  * The generated base implementation for the manager of every {@link
@@ -16,8 +18,10 @@ import org.limmen.mystart.mystart.public_.ms_link.MsLink;
  * 
  * @author Speedment
  */
-@Generated("Speedment")
-public abstract class GeneratedMsLinkManagerImpl extends AbstractManager<MsLink> implements GeneratedMsLinkManager {
+@GeneratedCode("Speedment")
+public abstract class GeneratedMsLinkManagerImpl 
+extends AbstractManager<MsLink> 
+implements GeneratedMsLinkManager {
     
     private final TableIdentifier<MsLink> tableIdentifier;
     
@@ -32,19 +36,7 @@ public abstract class GeneratedMsLinkManagerImpl extends AbstractManager<MsLink>
     
     @Override
     public Stream<Field<MsLink>> fields() {
-        return Stream.of(
-            MsLink.ID,
-            MsLink.USER_ID,
-            MsLink.DESCRIPTION,
-            MsLink.SOURCE,
-            MsLink.TITLE,
-            MsLink.URL,
-            MsLink.HOST,
-            MsLink.LABELS,
-            MsLink.PRIVATE_NETWORK,
-            MsLink.LAST_VISIT,
-            MsLink.CREATION_DATE
-        );
+        return MsLinkManager.FIELDS.stream();
     }
     
     @Override

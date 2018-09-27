@@ -1,11 +1,13 @@
 package org.limmen.mystart.mystart.public_.ms_user.generated;
 
+import com.speedment.common.annotation.GeneratedCode;
 import com.speedment.runtime.config.identifier.TableIdentifier;
 import com.speedment.runtime.core.manager.AbstractManager;
 import com.speedment.runtime.field.Field;
-import java.util.stream.Stream;
-import javax.annotation.Generated;
 import org.limmen.mystart.mystart.public_.ms_user.MsUser;
+import org.limmen.mystart.mystart.public_.ms_user.MsUserManager;
+
+import java.util.stream.Stream;
 
 /**
  * The generated base implementation for the manager of every {@link
@@ -16,8 +18,10 @@ import org.limmen.mystart.mystart.public_.ms_user.MsUser;
  * 
  * @author Speedment
  */
-@Generated("Speedment")
-public abstract class GeneratedMsUserManagerImpl extends AbstractManager<MsUser> implements GeneratedMsUserManager {
+@GeneratedCode("Speedment")
+public abstract class GeneratedMsUserManagerImpl 
+extends AbstractManager<MsUser> 
+implements GeneratedMsUserManager {
     
     private final TableIdentifier<MsUser> tableIdentifier;
     
@@ -32,11 +36,7 @@ public abstract class GeneratedMsUserManagerImpl extends AbstractManager<MsUser>
     
     @Override
     public Stream<Field<MsUser>> fields() {
-        return Stream.of(
-            MsUser.ID,
-            MsUser.EMAIL,
-            MsUser.PASSWORD
-        );
+        return MsUserManager.FIELDS.stream();
     }
     
     @Override

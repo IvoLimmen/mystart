@@ -10,7 +10,4 @@ import org.limmen.mystart.generated.GeneratedMystartApplication;
  * 
  * @author limmen
  */
-public interface MystartApplication extends GeneratedMystartApplication {
-    
-    
-}
+public interface MystartApplication extends GeneratedMystartApplication {}

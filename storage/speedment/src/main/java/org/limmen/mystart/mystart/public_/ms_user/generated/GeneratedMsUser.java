@@ -1,14 +1,15 @@
 package org.limmen.mystart.mystart.public_.ms_user.generated;
 
+import com.speedment.common.annotation.GeneratedCode;
 import com.speedment.runtime.config.identifier.ColumnIdentifier;
 import com.speedment.runtime.config.identifier.TableIdentifier;
 import com.speedment.runtime.core.util.OptionalUtil;
 import com.speedment.runtime.field.IntField;
 import com.speedment.runtime.field.StringField;
 import com.speedment.runtime.typemapper.TypeMapper;
-import java.util.Optional;
-import javax.annotation.Generated;
 import org.limmen.mystart.mystart.public_.ms_user.MsUser;
+
+import java.util.Optional;
 
 /**
  * The generated base for the {@link
@@ -20,40 +21,40 @@ import org.limmen.mystart.mystart.public_.ms_user.MsUser;
  * 
  * @author Speedment
  */
-@Generated("Speedment")
+@GeneratedCode("Speedment")
 public interface GeneratedMsUser {
     
     /**
      * This Field corresponds to the {@link MsUser} field that can be obtained
      * using the {@link MsUser#getId()} method.
      */
-    final IntField<MsUser, Integer> ID = IntField.create(
+    IntField<MsUser, Integer> ID = IntField.create(
         Identifier.ID,
         MsUser::getId,
         MsUser::setId,
-        TypeMapper.primitive(), 
+        TypeMapper.primitive(),
         true
     );
     /**
      * This Field corresponds to the {@link MsUser} field that can be obtained
      * using the {@link MsUser#getEmail()} method.
      */
-    final StringField<MsUser, String> EMAIL = StringField.create(
+    StringField<MsUser, String> EMAIL = StringField.create(
         Identifier.EMAIL,
         o -> OptionalUtil.unwrap(o.getEmail()),
         MsUser::setEmail,
-        TypeMapper.identity(), 
+        TypeMapper.identity(),
         false
     );
     /**
      * This Field corresponds to the {@link MsUser} field that can be obtained
      * using the {@link MsUser#getPassword()} method.
      */
-    final StringField<MsUser, String> PASSWORD = StringField.create(
+    StringField<MsUser, String> PASSWORD = StringField.create(
         Identifier.PASSWORD,
         o -> OptionalUtil.unwrap(o.getPassword()),
         MsUser::setPassword,
-        TypeMapper.identity(), 
+        TypeMapper.identity(),
         false
     );
     
@@ -114,34 +115,34 @@ public interface GeneratedMsUser {
         EMAIL    ("email"),
         PASSWORD ("password");
         
-        private final String columnName;
+        private final String columnId;
         private final TableIdentifier<MsUser> tableIdentifier;
         
-        Identifier(String columnName) {
-            this.columnName      = columnName;
-            this.tableIdentifier = TableIdentifier.of(    getDbmsName(), 
-                getSchemaName(), 
-                getTableName());
+        Identifier(String columnId) {
+            this.columnId        = columnId;
+            this.tableIdentifier = TableIdentifier.of(    getDbmsId(), 
+                getSchemaId(), 
+                getTableId());
         }
         
         @Override
-        public String getDbmsName() {
+        public String getDbmsId() {
             return "mystart";
         }
         
         @Override
-        public String getSchemaName() {
+        public String getSchemaId() {
             return "public";
         }
         
         @Override
-        public String getTableName() {
+        public String getTableId() {
             return "ms_user";
         }
         
         @Override
-        public String getColumnName() {
-            return this.columnName;
+        public String getColumnId() {
+            return this.columnId;
         }
         
         @Override

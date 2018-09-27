@@ -10,7 +10,6 @@ import org.limmen.mystart.generated.GeneratedMystartApplicationImpl;
  * 
  * @author limmen
  */
-public final class MystartApplicationImpl extends GeneratedMystartApplicationImpl implements MystartApplication {
-    
-    
-}
+public final class MystartApplicationImpl 
+extends GeneratedMystartApplicationImpl 
+implements MystartApplication {}

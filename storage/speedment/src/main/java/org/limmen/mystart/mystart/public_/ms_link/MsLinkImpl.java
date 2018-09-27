@@ -10,7 +10,6 @@ import org.limmen.mystart.mystart.public_.ms_link.generated.GeneratedMsLinkImpl;
  * 
  * @author limmen
  */
-public final class MsLinkImpl extends GeneratedMsLinkImpl implements MsLink {
-    
-    
-}
+public final class MsLinkImpl 
+extends GeneratedMsLinkImpl 
+implements MsLink {}

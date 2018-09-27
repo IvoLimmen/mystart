@@ -1,11 +1,12 @@
 package org.limmen.mystart.mystart.public_.ms_user.generated;
 
+import com.speedment.common.annotation.GeneratedCode;
 import com.speedment.runtime.core.util.OptionalUtil;
+import org.limmen.mystart.mystart.public_.ms_user.MsUser;
+
 import java.util.Objects;
 import java.util.Optional;
 import java.util.StringJoiner;
-import javax.annotation.Generated;
-import org.limmen.mystart.mystart.public_.ms_user.MsUser;
 
 /**
  * The generated base implementation of the {@link
@@ -16,16 +17,14 @@ import org.limmen.mystart.mystart.public_.ms_user.MsUser;
  * 
  * @author Speedment
  */
-@Generated("Speedment")
+@GeneratedCode("Speedment")
 public abstract class GeneratedMsUserImpl implements MsUser {
     
     private int id;
     private String email;
     private String password;
     
-    protected GeneratedMsUserImpl() {
-        
-    }
+    protected GeneratedMsUserImpl() {}
     
     @Override
     public int getId() {
@@ -74,9 +73,9 @@ public abstract class GeneratedMsUserImpl implements MsUser {
         if (this == that) { return true; }
         if (!(that instanceof MsUser)) { return false; }
         final MsUser thatMsUser = (MsUser)that;
-        if (this.getId() != thatMsUser.getId()) {return false; }
-        if (!Objects.equals(this.getEmail(), thatMsUser.getEmail())) {return false; }
-        if (!Objects.equals(this.getPassword(), thatMsUser.getPassword())) {return false; }
+        if (this.getId() != thatMsUser.getId()) { return false; }
+        if (!Objects.equals(this.getEmail(), thatMsUser.getEmail())) { return false; }
+        if (!Objects.equals(this.getPassword(), thatMsUser.getPassword())) { return false; }
         return true;
     }
     
@@ -84,8 +83,8 @@ public abstract class GeneratedMsUserImpl implements MsUser {
     public int hashCode() {
         int hash = 7;
         hash = 31 * hash + Integer.hashCode(getId());
-        hash = 31 * hash + Objects.hashCode(getEmail());
-        hash = 31 * hash + Objects.hashCode(getPassword());
+        hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getEmail()));
+        hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getPassword()));
         return hash;
     }
 }

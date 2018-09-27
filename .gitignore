@@ -19,3 +19,6 @@ server/file-uploads
 /bookmarkimporter/netscape/target/
 /bookmarkimporter/xbel/target/
 /storage/api/target/
+/storage/serialize/target/
+/storage/speedment/target/
+/server/target/
