@@ -10,3 +10,12 @@ nbproject/
 server/assets
 cert/
 server/file-uploads
+/model/target/
+/bookmarkimporter/api/target/
+/bookmarkimporter/firefox/target/
+/bookmarkimporter/github/target/
+/bookmarkimporter/googlebookmarks/target/
+/bookmarkimporter/googlechrome/target/
+/bookmarkimporter/netscape/target/
+/bookmarkimporter/xbel/target/
+/storage/api/target/

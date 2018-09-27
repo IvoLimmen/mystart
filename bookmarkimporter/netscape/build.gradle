@@ -1,9 +1,0 @@
-apply plugin: 'java'
-
-dependencies {
-  compile project(':bookmarkimporter-api')
-  compile 'org.jsoup:jsoup:1.9.2'
-  compile 'org.json:json:20160212'
-
-  testCompile 'junit:junit:4.12'
-}
