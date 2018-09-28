@@ -20,7 +20,7 @@ public class ParseContext {
       this.temporaryFileName = null;
    }
 
-   public ParseContext(final ByteArrayInputStream inputStream, final String temporaryFileName, final String fileName) {
+  public ParseContext(final ByteArrayInputStream inputStream, final String temporaryFileName, final String fileName) {
       this.url = null;
       this.inputStream = inputStream;
       this.temporaryFileName = temporaryFileName;
