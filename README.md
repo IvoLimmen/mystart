@@ -17,13 +17,23 @@ Yes looks like crap but that I will remedy in the future.
 
 # Storage
 
- * Serialize (per user) to file
- * Storage in PostgreSQL (table creation script is included)
+ Storage in PostgreSQL (table creation script is included)
+
+# Importing bookmarks
+
+This application can import from the following sources:
+
+ * FireFox (upload your places.sqlite from your profile directory)
+ * GitHub (send the link to your starred REST link)
+ * Google Bookmarks (export the XML: https://www.google.com/bookmarks/?output=xml and upload it)
+ * Google Chrome/Chromium (upload your Bookmarks file from your profile directory)
+ * Netscape (It is an XML file if your still got one)
+ * XBEL (It's a XML standard for bookmarks)
 
 # What for features will come in the future?
  
  * Properties user/password for database.
- * Settings in general (serialize? database?)
+ * Settings in general
  * Import of Delicious bookmarks (?).
  * Exports (?)
  * Configure browser.

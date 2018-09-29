@@ -14,8 +14,7 @@
   <packaging>pom</packaging>    
   
   <modules>
-    <module>api</module>      
-    <module>serialize</module>           
+    <module>api</module>           
     <module>speedment</module>      
   </modules>
 </project>

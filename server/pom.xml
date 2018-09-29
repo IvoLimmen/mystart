@@ -46,11 +46,6 @@
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>storage-serialize</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
       <artifactId>storage-speedment</artifactId>
       <version>${project.version}</version>
     </dependency>

@@ -98,40 +98,37 @@ public class DbLinkStorage implements LinkStorage {
 
   @Override
   public void store(Long userId, Link link) throws StorageException {
-    Optional<Link> current = links.stream()
-        .filter(MsLink.URL.equal(link.getUrl()))
-        .filter(MsLink.USER_ID.equal(userId.intValue()))
-        .map(this::fromDb)
-        .findFirst();
-
-    if (current.isPresent()) {
-      LOGGER.info("Updating link {} as we allready have it.", link.getUrl());
-
-      current.get().setLabels(link.getLabels());
-      current.get().setDescription(link.getDescription());
-      current.get().setHost(link.getHost());
-      current.get().setTitle(link.getTitle());
-      current.get().setSource(link.getSource());
-      current.get().setLastVisit(link.getLastVisit());
-      current.get().setPrivateNetwork(link.isPrivateNetwork());
-    } else {
-      current = Optional.of(link);
-    }
 
     MsLink msLink = new MsLinkImpl();
     msLink.setUserId(userId.intValue());
-    msLink.setId(current.get().getId().intValue());
-    msLink.setDescription(current.get().getDescription());
-    msLink.setHost(current.get().getHost());
-    msLink.setLabels(current.get().getLabels().stream().reduce((acc, item) -> acc + ";" + item).get());
-    msLink.setPrivateNetwork(current.get().isPrivateNetwork());
-    msLink.setTitle(current.get().getTitle());
-    msLink.setUrl(current.get().getUrl());
-    msLink.setSource(current.get().getSource());
-    msLink.setCreationDate(ts(current.get().getCreationDate()));
-    msLink.setLastVisit(ts(current.get().getLastVisit()));
+    msLink.setId(link.getId().intValue());
+    msLink.setDescription(link.getDescription());
+    msLink.setHost(link.getHost());
+    msLink.setLabels(link.getLabels().stream().reduce((acc, item) -> acc + ";" + item).get());
+    msLink.setPrivateNetwork(link.isPrivateNetwork());
+    msLink.setTitle(link.getTitle());
+    msLink.setUrl(link.getUrl());
+    msLink.setSource(link.getSource());
+    msLink.setCreationDate(ts(link.getCreationDate()));
+    msLink.setLastVisit(ts(link.getLastVisit()));
 
     links.persist(msLink);
+  }
+
+  @Override
+  public void update(Long userId, Link link) throws StorageException {
+    links.stream()
+        .filter(MsLink.ID.equal(link.getId().intValue()))
+        .filter(MsLink.USER_ID.equal(userId.intValue()))
+        .map(MsLink.DESCRIPTION.setTo(link.getDescription()))
+        .map(MsLink.HOST.setTo(link.getHost()))
+        .map(MsLink.SOURCE.setTo(link.getSource()))
+        .map(MsLink.LABELS.setTo(link.getLabels().stream().reduce((acc, item) -> acc + ";" + item).get()))
+        .map(MsLink.LAST_VISIT.setTo(ts(link.getLastVisit())))
+        .map(MsLink.PRIVATE_NETWORK.setTo(link.isPrivateNetwork()))
+        .map(MsLink.TITLE.setTo(link.getTitle()))
+        .map(MsLink.URL.setTo(link.getUrl()))
+        .forEach(links.updater());
   }
 
   private Timestamp ts(LocalDateTime date) {
