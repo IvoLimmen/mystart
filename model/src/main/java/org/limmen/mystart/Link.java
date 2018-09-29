@@ -2,7 +2,10 @@ package org.limmen.mystart;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -60,6 +63,40 @@ public class Link extends BaseObject implements Comparable<Link> {
     return description;
   }
 
+  public String getFormattedCreationDate() {
+    return DateTimeFormatter
+        .ofPattern("yyyy-MM-dd")
+        .format(this.getCreationDate());
+  }
+
+  public String getFormattedLastVisit() {
+    if (this.getLastVisit() == null) {
+      return "Never";
+    } else {
+      Period visit = Period.between(getLastVisit().toLocalDate(), LocalDate.now());
+
+      if (visit.getYears() > 1) {
+        return visit.getYears() + " years ago";
+      } else if (visit.getYears() == 1 && visit.getMonths() > 0) {
+        return (visit.getMonths() + 12) + " months ago";
+      } else if (visit.getYears() == 0 && visit.getMonths() > 0) {
+        return visit.getMonths() + " months ago";
+      } else if (visit.getYears() == 0 && visit.getMonths() == 1) {
+        return "last month";
+      } else if (visit.getYears() == 0 && visit.getMonths() == 0 && visit.getDays() > 14) {
+        return "more than 2 weeks ago";
+      } else if (visit.getYears() == 0 && visit.getMonths() == 0 && visit.getDays() > 7) {
+        return "more than a week ago";
+      } else if (visit.getYears() == 0 && visit.getMonths() == 0 && visit.getDays() > 2) {
+        return "last week";
+      } else if (visit.getYears() == 0 && visit.getMonths() == 0 && visit.getDays() > 0) {
+        return "yesterday";
+      } else {
+        return "today";
+      }
+    }
+  }
+
   public String getHost() {
     return host;
   }
@@ -71,6 +108,7 @@ public class Link extends BaseObject implements Comparable<Link> {
   public LocalDateTime getLastVisit() {
     return lastVisit;
   }
+
   public String getRedirectUrl() {
     if (url.startsWith("http:") || url.startsWith("https:")) {
       return getUrl();

@@ -18,7 +18,7 @@
             <c:url value="/home" var="url">
               <c:param name="label" value="${label}" />
             </c:url>
-            <a href="${url}"><c:out value="${label}"/></a>
+            <a href="${url}"><c:out value="${label}"/></a><br/>
           </c:forEach>
         </div>
       </c:if>
@@ -29,8 +29,8 @@
             <section class="bookmark">
               <a href="/link?reg=<c:out value="${link.id}"/>"><h3><c:out value="${link.title}"/></h3></a>
               <p><c:out value="${link.description}"/></p>
-              <p class="created">Created: <c:out value="${link.creationDate}"/></p>
-              <p class="visited">Visited: <c:out value="${link.lastVisit}"/></p>     
+              <p class="created">Created: <c:out value="${link.formattedCreationDate}"/></p>
+              <p class="visited">Visited: <c:out value="${link.formattedLastVisit}"/></p>     
               <p class="labels">
                 <c:forEach items="${link.labels}" var="label" varStatus="status">
                   <c:url value="/home" var="url">
