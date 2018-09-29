@@ -11,23 +11,23 @@ public class Link extends BaseObject implements Comparable<Link> {
 
   private static final long serialVersionUID = -1267285018252976552L;
 
+  private LocalDateTime creationDate;
+
   private String description;
+
+  private String host;
+
+  private final List<String> labels = new ArrayList<>();
+
+  private LocalDateTime lastVisit;
+
+  private boolean privateNetwork;
+
+  private String source;
 
   private String title;
 
   private String url;
-
-  private String host;
-
-  private LocalDateTime creationDate;
-
-  private LocalDateTime lastVisit;
-
-  private final List<String> labels = new ArrayList<>();
-
-  private String source;
-
-  private boolean privateNetwork;
 
   public Link() {
     this.creationDate = LocalDateTime.now();
@@ -36,36 +36,59 @@ public class Link extends BaseObject implements Comparable<Link> {
   public Link(String url) {
     this();
     this.url = url;
+    analyzeHost(url);
+  }
 
-    try {
-      this.host = new URI(url).getHost();
-    } catch (URISyntaxException ex) {
-      // ignore
+  public void addLabel(String label) {
+    this.labels.add(label);
+  }
+
+  @Override
+  public int compareTo(Link o) {
+    if (o == null) {
+      return -1;
     }
+
+    return this.url.compareTo(o.url);
+  }
+
+  public LocalDateTime getCreationDate() {
+    return creationDate;
+  }
+
+  public String getDescription() {
+    return description;
   }
 
   public String getHost() {
     return host;
   }
 
-  public void setHost(String host) {
-    this.host = host;
+  public Collection<String> getLabels() {
+    return labels;
   }
 
   public LocalDateTime getLastVisit() {
     return lastVisit;
   }
-
-  public void setLastVisit(LocalDateTime lastVisit) {
-    this.lastVisit = lastVisit;
+  public String getRedirectUrl() {
+    if (url.startsWith("http:") || url.startsWith("https:")) {
+      return getUrl();
+    } else {
+      return "https://" + getUrl();
+    }
   }
 
-  public boolean isPrivateNetwork() {
-    return privateNetwork;
+  public String getSource() {
+    return source;
   }
 
-  public void setPrivateNetwork(boolean privateNetwork) {
-    this.privateNetwork = privateNetwork;
+  public String getTitle() {
+    return title;
+  }
+
+  public String getUrl() {
+    return url;
   }
 
   /**
@@ -98,24 +121,20 @@ public class Link extends BaseObject implements Comparable<Link> {
     return this.labels.stream().map(l -> l.toLowerCase()).filter(f -> f.contains(keyword)).count() > 0;
   }
 
-  public String getTitle() {
-    return title;
+  public boolean isPrivateNetwork() {
+    return privateNetwork;
   }
 
-  public void setTitle(String title) {
-    this.title = title;
+  public void setCreationDate(LocalDateTime creationDate) {
+    this.creationDate = creationDate;
   }
 
-  public String getSource() {
-    return source;
+  public void setDescription(String description) {
+    this.description = description;
   }
 
-  public void setSource(String source) {
-    this.source = source;
-  }
-
-  public Collection<String> getLabels() {
-    return labels;
+  public void setHost(String host) {
+    this.host = host;
   }
 
   public void setLabels(Collection<String> labels) {
@@ -123,32 +142,27 @@ public class Link extends BaseObject implements Comparable<Link> {
     this.labels.addAll(labels);
   }
 
-  public void addLabel(String label) {
-    this.labels.add(label);
+  public void setLastVisit(LocalDateTime lastVisit) {
+    this.lastVisit = lastVisit;
   }
 
-  public String getDescription() {
-    return description;
+  public void setPrivateNetwork(boolean privateNetwork) {
+    this.privateNetwork = privateNetwork;
   }
 
-  public void setDescription(String description) {
-    this.description = description;
+  public void setSource(String source) {
+    this.source = source;
   }
 
-  public String getUrl() {
-    return url;
+  public void setTitle(String title) {
+    this.title = title;
   }
 
   public void setUrl(String url) {
+    if (this.url == null && url != null) {
+      analyzeHost(url);
+    }
     this.url = url;
-  }
-
-  public LocalDateTime getCreationDate() {
-    return creationDate;
-  }
-
-  public void setCreationDate(LocalDateTime creationDate) {
-    this.creationDate = creationDate;
   }
 
   @Override
@@ -158,16 +172,15 @@ public class Link extends BaseObject implements Comparable<Link> {
         + ", privateNetwork=" + privateNetwork + '}';
   }
 
-  @Override
-  public int compareTo(Link o) {
-    if (o == null) {
-      return -1;
-    }
-
-    return this.url.compareTo(o.url);
-  }
-
   public void visited() {
     this.lastVisit = LocalDateTime.now();
+  }
+
+  private void analyzeHost(String url) {
+    try {
+      this.host = new URI(url).getHost();
+    } catch (URISyntaxException ex) {
+      // ignore
+    }
   }
 }

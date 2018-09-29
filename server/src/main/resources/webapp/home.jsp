@@ -6,20 +6,21 @@
   <body>
     <h1>MyStart</h1>
     <a href="import.jsp">Import new links</a>
+    <a href="/link?edit">Add a new link</a>
     <form name="search">
       <input type="text" name="search"/>
       <button type="submit" name="search">Search</button>
     </form>
     <section>
       <c:if test="${!empty labels && empty links}">
-        <c:forEach items="${labels}" var="label">
-          <ul>
+        <div class="container">
+          <c:forEach items="${labels}" var="label">
             <c:url value="/home" var="url">
               <c:param name="label" value="${label}" />
             </c:url>
-            <li><a href="${url}"><c:out value="${label}"/></a></li>
-          </ul>
-        </c:forEach>
+            <a href="${url}"><c:out value="${label}"/></a>
+          </c:forEach>
+        </div>
       </c:if>
       <c:if test="${!empty links}">
         <a href="/home">Back</a>

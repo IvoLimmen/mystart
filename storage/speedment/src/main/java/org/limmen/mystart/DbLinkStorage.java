@@ -101,7 +101,6 @@ public class DbLinkStorage implements LinkStorage {
 
     MsLink msLink = new MsLinkImpl();
     msLink.setUserId(userId.intValue());
-    msLink.setId(link.getId().intValue());
     msLink.setDescription(link.getDescription());
     msLink.setHost(link.getHost());
     msLink.setLabels(link.getLabels().stream().reduce((acc, item) -> acc + ";" + item).get());
@@ -121,13 +120,10 @@ public class DbLinkStorage implements LinkStorage {
         .filter(MsLink.ID.equal(link.getId().intValue()))
         .filter(MsLink.USER_ID.equal(userId.intValue()))
         .map(MsLink.DESCRIPTION.setTo(link.getDescription()))
-        .map(MsLink.HOST.setTo(link.getHost()))
-        .map(MsLink.SOURCE.setTo(link.getSource()))
         .map(MsLink.LABELS.setTo(link.getLabels().stream().reduce((acc, item) -> acc + ";" + item).get()))
         .map(MsLink.LAST_VISIT.setTo(ts(link.getLastVisit())))
         .map(MsLink.PRIVATE_NETWORK.setTo(link.isPrivateNetwork()))
         .map(MsLink.TITLE.setTo(link.getTitle()))
-        .map(MsLink.URL.setTo(link.getUrl()))
         .forEach(links.updater());
   }
 

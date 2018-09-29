@@ -82,13 +82,20 @@ public class LinkServlet extends AbstractServlet {
       Link link = getLinkStorage().get(userId, id);
       link.visited();
       getLinkStorage().update(userId, link);
-      res.sendRedirect(link.getUrl());
+      res.sendRedirect(link.getRedirectUrl());
 
     } else if (exists(req, "edit")) {
 
-      Long id = Long.parseLong(req.getParameter("edit"));
-      Link link = getLinkStorage().get(userId, id);
+      Link link = null;
+      if (req.getParameter("edit") != null && req.getParameter("edit").length() > 0) {
 
+        Long id = Long.parseLong(req.getParameter("edit"));
+        link = getLinkStorage().get(userId, id);
+      } else {
+        link = new Link();
+      }
+
+      req.setAttribute("disabledUrl", link.getId() != null ? "disabled" : "");
       req.setAttribute("link", link);
       req.setAttribute("labels", DomainUtil.formatLabels(link));
       req.getRequestDispatcher("/edit.jsp").include(req, res);
