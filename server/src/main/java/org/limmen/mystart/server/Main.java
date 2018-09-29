@@ -27,6 +27,7 @@ import org.limmen.mystart.StorageProvider;
 import org.limmen.mystart.UserStorage;
 import org.limmen.mystart.server.servlet.ImportServlet;
 import org.limmen.mystart.server.servlet.IndexServlet;
+import org.limmen.mystart.server.servlet.LinkServlet;
 import org.limmen.mystart.server.servlet.UserServlet;
 
 @Slf4j
@@ -79,6 +80,8 @@ public class Main {
         new UserServlet(parser, linkStorage, userStorage, multipartConfigElement, scratchDir.toPath()));
     addServlet(server, servletContextHandler, "importServlet", "/importServlet",
         new ImportServlet(parser, linkStorage, userStorage, multipartConfigElement, scratchDir.toPath()));
+    addServlet(server, servletContextHandler, "linkServlet", "/link",
+        new LinkServlet(parser, linkStorage, userStorage, multipartConfigElement, scratchDir.toPath()));
 
     server.start();
     server.join();

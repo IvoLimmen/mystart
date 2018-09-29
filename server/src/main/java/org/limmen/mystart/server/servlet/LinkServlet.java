@@ -2,7 +2,6 @@ package org.limmen.mystart.server.servlet;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Collection;
 import java.util.stream.Collectors;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletException;
@@ -15,11 +14,11 @@ import org.limmen.mystart.Parser;
 import org.limmen.mystart.UserStorage;
 
 @Slf4j
-public class IndexServlet extends AbstractServlet {
+public class LinkServlet extends AbstractServlet {
 
   private static final long serialVersionUID = 1L;
 
-  public IndexServlet(
+  public LinkServlet(
       Parser parser,
       LinkStorage linkStorage,
       UserStorage userStorage,
@@ -31,6 +30,17 @@ public class IndexServlet extends AbstractServlet {
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
     super.doPost(req, res);
+    Long userId = (Long) req.getSession().getAttribute(USER);
+
+    if (userId == null) {
+      return;
+    }
+
+    if (req.getParameter("save") != null) {
+
+    } else if (req.getParameter("cancel") != null) {
+      res.sendRedirect("/home");
+    }
   }
 
   @Override
@@ -42,25 +52,17 @@ public class IndexServlet extends AbstractServlet {
       return;
     }
 
-    if (req.getParameter("reg") != null) {
-      Long id = Long.parseLong(req.getParameter("reg"));
+    if (req.getParameter("edit") != null) {
+      Long id = Long.parseLong(req.getParameter("edit"));
       Link link = getLinkStorage().get(userId, id);
-      link.visited();
-      getLinkStorage().store(userId, link);
-      res.sendRedirect(link.getUrl());
-    } else {
-      if (req.getParameter("search") != null) {
-        String search = req.getParameter("search");
-        Collection<Link> links = getLinkStorage().getAll(userId).stream()
-            .filter(link -> link.hasKeyword(search))
-            .collect(Collectors.toList());
-        req.setAttribute("links", links);
-      } else if (req.getParameter("label") != null) {
-        Collection<Link> links = getLinkStorage().getAllByLabel(userId, req.getParameter("label"));
-        req.setAttribute("links", links);
-      }
 
-      req.getRequestDispatcher("/home.jsp").include(req, res);
+      req.setAttribute("link", link);
+      req.setAttribute("labels", link.getLabels().stream().collect(Collectors.joining(", ")));
+      req.getRequestDispatcher("/edit.jsp").include(req, res);
+    } else if (req.getParameter("delete") != null) {
+      Long id = Long.parseLong(req.getParameter("delete"));
+      getLinkStorage().remove(userId, id);
+      res.sendRedirect("/home");
     }
   }
 }
