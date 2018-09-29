@@ -19,15 +19,13 @@ public class AbstractServlet extends HttpServlet {
 
   private static final long serialVersionUID = 1L;
 
-  private final Parser parser;
-
   private final LinkStorage linkStorage;
 
-  private final UserStorage userStorage;
-
   private final MultipartConfigElement multipartConfigElement;
+  private final Parser parser;
 
   private final Path temporaryDirectory;
+  private final UserStorage userStorage;
 
   public AbstractServlet(
       Parser parser,
@@ -42,11 +40,20 @@ public class AbstractServlet extends HttpServlet {
     this.temporaryDirectory = temporaryDirectory;
   }
 
-  @Override
-  protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-    if (req.getContentType() != null && req.getContentType().startsWith("multipart/form-data")) {
-      req.setAttribute(Request.__MULTIPART_CONFIG_ELEMENT, multipartConfigElement);
-    }
+  public LinkStorage getLinkStorage() {
+    return linkStorage;
+  }
+
+  public Parser getParser() {
+    return parser;
+  }
+
+  public Path getTemporaryDirectory() {
+    return temporaryDirectory;
+  }
+
+  public UserStorage getUserStorage() {
+    return userStorage;
   }
 
   @Override
@@ -62,19 +69,18 @@ public class AbstractServlet extends HttpServlet {
     }
   }
 
-  public UserStorage getUserStorage() {
-    return userStorage;
+  @Override
+  protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    if (req.getContentType() != null && req.getContentType().startsWith("multipart/form-data")) {
+      req.setAttribute(Request.__MULTIPART_CONFIG_ELEMENT, multipartConfigElement);
+    }
   }
 
-  public LinkStorage getLinkStorage() {
-    return linkStorage;
+  protected boolean exists(HttpServletRequest req, String parameter) {
+    return req.getParameter(parameter) != null;
   }
 
-  public Parser getParser() {
-    return parser;
-  }
-
-  public Path getTemporaryDirectory() {
-    return temporaryDirectory;
+  protected boolean hasValue(HttpServletRequest req, String parameter) {
+    return req.getParameter(parameter) != null && req.getParameter(parameter).length() > 0;
   }
 }

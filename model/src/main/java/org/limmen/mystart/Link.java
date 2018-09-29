@@ -29,19 +29,18 @@ public class Link extends BaseObject implements Comparable<Link> {
 
   private boolean privateNetwork;
 
-  public Link(String url) {
-    this.url = url;
+  public Link() {
     this.creationDate = LocalDateTime.now();
+  }
+
+  public Link(String url) {
+    this();
+    this.url = url;
 
     try {
       this.host = new URI(url).getHost();
     } catch (URISyntaxException ex) {
       // ignore
-    }
-
-    // generate an ID
-    if (this.url != null) {
-      this.id = Long.valueOf(this.url.hashCode());
     }
   }
 

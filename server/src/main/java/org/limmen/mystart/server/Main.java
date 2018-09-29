@@ -25,8 +25,8 @@ import org.limmen.mystart.Parser;
 import org.limmen.mystart.Storage;
 import org.limmen.mystart.StorageProvider;
 import org.limmen.mystart.UserStorage;
+import org.limmen.mystart.server.servlet.HomeServlet;
 import org.limmen.mystart.server.servlet.ImportServlet;
-import org.limmen.mystart.server.servlet.IndexServlet;
 import org.limmen.mystart.server.servlet.LinkServlet;
 import org.limmen.mystart.server.servlet.UserServlet;
 
@@ -74,8 +74,8 @@ public class Main {
     servletContextHandler.addServlet(holderDefault, "/");
     server.setHandler(servletContextHandler);
 
-    addServlet(server, servletContextHandler, "indexServlet", "/home",
-        new IndexServlet(parser, linkStorage, userStorage, multipartConfigElement, scratchDir.toPath()));
+    addServlet(server, servletContextHandler, "homeServlet", "/home",
+        new HomeServlet(parser, linkStorage, userStorage, multipartConfigElement, scratchDir.toPath()));
     addServlet(server, servletContextHandler, "userServlet", "/userServlet",
         new UserServlet(parser, linkStorage, userStorage, multipartConfigElement, scratchDir.toPath()));
     addServlet(server, servletContextHandler, "importServlet", "/importServlet",

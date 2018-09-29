@@ -2,12 +2,12 @@ package org.limmen.mystart.server.servlet;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.stream.Collectors;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.limmen.mystart.DomainUtil;
 import org.limmen.mystart.Link;
 import org.limmen.mystart.LinkStorage;
 import org.limmen.mystart.Parser;
@@ -36,9 +36,33 @@ public class LinkServlet extends AbstractServlet {
       return;
     }
 
-    if (req.getParameter("save") != null) {
+    if (exists(req, "save")) {
 
-    } else if (req.getParameter("cancel") != null) {
+      Link link = new Link();
+      if (hasValue(req, "id")) {
+        Long id = Long.parseLong(req.getParameter("id"));
+        link = getLinkStorage().get(userId, id);
+      }
+
+      link.setDescription(req.getParameter("description"));
+      link.setTitle(req.getParameter("title"));
+      link.setUrl(req.getParameter("url"));
+
+      if (hasValue(req, "labels")) {
+        String label = req.getParameter("labels");
+        link.setLabels(DomainUtil.parseLabels(label));
+      }
+
+      if (link.getId() == null) {
+        link.setSource("MyStart");
+        getLinkStorage().create(userId, link);
+      } else {
+        getLinkStorage().update(userId, link);
+      }
+      res.sendRedirect("/home");
+
+    } else if (exists(req, "cancel")) {
+
       res.sendRedirect("/home");
     }
   }
@@ -52,14 +76,25 @@ public class LinkServlet extends AbstractServlet {
       return;
     }
 
-    if (req.getParameter("edit") != null) {
+    if (exists(req, "reg")) {
+
+      Long id = Long.parseLong(req.getParameter("reg"));
+      Link link = getLinkStorage().get(userId, id);
+      link.visited();
+      getLinkStorage().update(userId, link);
+      res.sendRedirect(link.getUrl());
+
+    } else if (exists(req, "edit")) {
+
       Long id = Long.parseLong(req.getParameter("edit"));
       Link link = getLinkStorage().get(userId, id);
 
       req.setAttribute("link", link);
-      req.setAttribute("labels", link.getLabels().stream().collect(Collectors.joining(", ")));
+      req.setAttribute("labels", DomainUtil.formatLabels(link));
       req.getRequestDispatcher("/edit.jsp").include(req, res);
-    } else if (req.getParameter("delete") != null) {
+
+    } else if (exists(req, "delete")) {
+
       Long id = Long.parseLong(req.getParameter("delete"));
       getLinkStorage().remove(userId, id);
       res.sendRedirect("/home");

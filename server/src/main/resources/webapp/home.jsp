@@ -26,7 +26,7 @@
         <div class="container">
           <c:forEach items="${links}" var="link">
             <section class="bookmark">
-              <a href="/home?reg=<c:out value="${link.id}"/>"><h3><c:out value="${link.title}"/></h3></a>
+              <a href="/link?reg=<c:out value="${link.id}"/>"><h3><c:out value="${link.title}"/></h3></a>
               <p><c:out value="${link.description}"/></p>
               <p class="created">Created: <c:out value="${link.creationDate}"/></p>
               <p class="visited">Visited: <c:out value="${link.lastVisit}"/></p>     

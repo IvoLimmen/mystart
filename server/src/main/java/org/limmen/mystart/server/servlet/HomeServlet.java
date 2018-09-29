@@ -15,11 +15,11 @@ import org.limmen.mystart.Parser;
 import org.limmen.mystart.UserStorage;
 
 @Slf4j
-public class IndexServlet extends AbstractServlet {
+public class HomeServlet extends AbstractServlet {
 
   private static final long serialVersionUID = 1L;
 
-  public IndexServlet(
+  public HomeServlet(
       Parser parser,
       LinkStorage linkStorage,
       UserStorage userStorage,
