@@ -11,7 +11,7 @@
         </div>
         <div>
           <label for="password">Password</label><br/>
-          <input type="password" name="password"/>
+          <input type="password" name="password" placeholder="Please enter password"/>
         </div>
         <div>
           <button type="submit" name="login">Login</button>
@@ -26,7 +26,7 @@
         </div>
         <div>
           <label for="password">Password</label><br/>
-          <input type="password" name="password"/>
+          <input type="password" name="password" placeholder="Please enter password"/>
         </div>
         <div>
           <button type="submit" name="register">Register</button>
