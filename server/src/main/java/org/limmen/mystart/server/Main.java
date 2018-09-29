@@ -26,6 +26,8 @@ import org.limmen.mystart.Storage;
 import org.limmen.mystart.StorageProvider;
 import org.limmen.mystart.UserStorage;
 import org.limmen.mystart.server.servlet.ImportServlet;
+import org.limmen.mystart.server.servlet.IndexServlet;
+import org.limmen.mystart.server.servlet.UserServlet;
 
 @Slf4j
 public class Main {
@@ -42,7 +44,7 @@ public class Main {
 
     File scratchDir = createScratchDirectory();
 
-    MultipartConfigElement multipartConfigElement = new MultipartConfigElement(scratchDir.getAbsolutePath(), 20971520, 20971520, 4096);
+    MultipartConfigElement multipartConfigElement = new MultipartConfigElement(scratchDir.getAbsolutePath(), 41943040, 41943040, 4096);
 
     Server server = new Server(conf.getInt("server.port"));
     URI baseUri = getWebRootResourceUri();
@@ -71,7 +73,12 @@ public class Main {
     servletContextHandler.addServlet(holderDefault, "/");
     server.setHandler(servletContextHandler);
 
-    addServlet(server, servletContextHandler, "importServlet", new ImportServlet(parser, linkStorage, multipartConfigElement));
+    addServlet(server, servletContextHandler, "indexServlet", "/home",
+        new IndexServlet(parser, linkStorage, userStorage, multipartConfigElement, scratchDir.toPath()));
+    addServlet(server, servletContextHandler, "userServlet", "/userServlet",
+        new UserServlet(parser, linkStorage, userStorage, multipartConfigElement, scratchDir.toPath()));
+    addServlet(server, servletContextHandler, "importServlet", "/importServlet",
+        new ImportServlet(parser, linkStorage, userStorage, multipartConfigElement, scratchDir.toPath()));
 
     server.start();
     server.join();
@@ -88,9 +95,9 @@ public class Main {
     return scratchDir;
   }
 
-  private static void addServlet(Server server, ServletContextHandler servletContextHandler, String name, HttpServlet servlet) {
+  private static void addServlet(Server server, ServletContextHandler servletContextHandler, String name, String url, HttpServlet servlet) {
     ServletHolder holderDefault = new ServletHolder(name, servlet);
-    servletContextHandler.addServlet(holderDefault, "/" + name);
+    servletContextHandler.addServlet(holderDefault, url);
     server.setHandler(servletContextHandler);
   }
 

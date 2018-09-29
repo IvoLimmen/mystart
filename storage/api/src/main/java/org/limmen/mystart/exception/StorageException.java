@@ -1,6 +1,6 @@
 package org.limmen.mystart.exception;
 
-public class StorageException extends Exception {
+public class StorageException extends RuntimeException {
 
    private static final long serialVersionUID = -2697129203968210878L;
 

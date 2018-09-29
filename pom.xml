@@ -92,7 +92,12 @@
         <artifactId>apache-jsp</artifactId>
         <version>${jetty.version}</version>
       </dependency>      
-      
+      <dependency>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>apache-jstl</artifactId>
+        <version>${jetty.version}</version>
+      </dependency>
+          
       <dependency>
         <groupId>org.projectlombok</groupId>
         <artifactId>lombok</artifactId>
@@ -113,14 +118,12 @@
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>1.18.2</version>
       <scope>provided</scope>
     </dependency>      
 
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.12</version>
       <scope>test</scope>          
     </dependency>        
   </dependencies>
