@@ -79,14 +79,14 @@ public class DbLinkStorage implements LinkStorage {
   }
 
   @Override
-  public void storeCollection(Long userId, Collection<Link> link) throws StorageException {
+  public void createCollection(Long userId, Collection<Link> link) throws StorageException {
     link.forEach(l -> {
       try {
         if (l.getUrl() == null) {
           LOGGER.info("Not adding link {} with title {} as it is empty.", l.getUrl(), l.getTitle());
         }
         if (getByUrl(userId, l.getUrl()) == null) {
-          store(userId, l);
+          create(userId, l);
         } else {
           LOGGER.info("Not adding link {} as we allready have it.", l.getUrl());
         }
@@ -97,7 +97,7 @@ public class DbLinkStorage implements LinkStorage {
   }
 
   @Override
-  public void store(Long userId, Link link) throws StorageException {
+  public void create(Long userId, Link link) throws StorageException {
 
     MsLink msLink = new MsLinkImpl();
     msLink.setUserId(userId.intValue());

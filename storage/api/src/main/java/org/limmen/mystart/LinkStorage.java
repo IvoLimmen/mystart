@@ -9,9 +9,9 @@ public interface LinkStorage {
 
   Collection<String> getAllLabels(Long userId) throws StorageException;
 
-  void storeCollection(Long userId, Collection<Link> link) throws StorageException;
+  void createCollection(Long userId, Collection<Link> link) throws StorageException;
 
-  void store(Long userId, Link item) throws StorageException;
+  void create(Long userId, Link item) throws StorageException;
 
   void update(Long userId, Link item) throws StorageException;
 

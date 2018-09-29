@@ -46,7 +46,7 @@ public class IndexServlet extends AbstractServlet {
       Long id = Long.parseLong(req.getParameter("reg"));
       Link link = getLinkStorage().get(userId, id);
       link.visited();
-      getLinkStorage().store(userId, link);
+      getLinkStorage().create(userId, link);
       res.sendRedirect(link.getUrl());
     } else {
       if (req.getParameter("search") != null) {

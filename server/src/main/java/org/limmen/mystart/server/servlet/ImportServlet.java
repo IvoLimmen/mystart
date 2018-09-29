@@ -51,7 +51,7 @@ public class ImportServlet extends AbstractServlet {
     List<Link> links = getParser().parse(parseContext);
     log.info("Parsed {} links from {}", links.size(), getParser().getName());
 
-    getLinkStorage().storeCollection(1L, links);
+    getLinkStorage().createCollection(1L, links);
 
     res.sendRedirect("/home");
   }
