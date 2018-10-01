@@ -4,6 +4,7 @@
   border-width: 1px;
   margin: 5px;
   padding: 5px 10px 5px 10px;
+  max-width: 300px;
 }
 
 .footer {
