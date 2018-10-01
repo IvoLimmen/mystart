@@ -112,13 +112,17 @@ public class DbLinkStorage implements LinkStorage {
     links.stream()
         .filter(MsLink.ID.equal(link.getId().intValue()))
         .filter(MsLink.USER_ID.equal(userId.intValue()))
-        .map(MsLink.DESCRIPTION.setTo(link.getDescription()))
-        .map(MsLink.URL.setTo(link.getUrl()))
-        .map(MsLink.LABELS.setTo(link.getLabels().stream().reduce((acc, item) -> acc + ";" + item).get()))
-        .map(MsLink.LAST_VISIT.setTo(ts(link.getLastVisit())))
-        .map(MsLink.PRIVATE_NETWORK.setTo(link.isPrivateNetwork()))
-        .map(MsLink.TITLE.setTo(link.getTitle()))
-        .forEach(links.updater());
+        .findFirst()
+        .ifPresent(msLink -> {
+
+          msLink.setTitle(link.getTitle());
+          msLink.setUrl(link.getUrl());
+          msLink.setPrivateNetwork(link.isPrivateNetwork());
+          msLink.setLabels(link.getLabels().stream().reduce((acc, item) -> acc + ";" + item).get());
+          msLink.setDescription(link.getDescription());
+          msLink.setLastVisit(ts(link.getLastVisit()));
+          links.persist(msLink);
+        });
   }
 
   private Timestamp ts(LocalDateTime date) {

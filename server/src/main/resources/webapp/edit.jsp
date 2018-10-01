@@ -9,19 +9,19 @@
       <input type="hidden" name="id" value="${link.id}"/>             
       <div>      
         <label for="title">Title</label><br/>
-        <input type="text" name="title" value="${link.title}"/>
+        <input type="text" name="title" size="50" value="${link.title}"/>
       </div>
       <div>      
         <label for="url">URL</label><br/>
-        <input type="text" name="url" value="${link.url}"/>
+        <input type="text" name="url" size="80" value="${link.url}"/>
       </div>
       <div>      
         <label for="description">Description</label><br/>
-        <input type="text" name="description" value="${link.description}"/>
+        <textarea rows="10" cols="40" name="description">${link.description}</textarea>        
       </div>
       <div>      
         <label for="labels">Labels</label><br/>
-        <input type="text" name="labels" value="${labels}"/>
+        <input type="text" name="labels" size="50" value="${labels}"/>
       </div>
       <div>      
         <button type="submit" name="cancel">Cancel</button>
