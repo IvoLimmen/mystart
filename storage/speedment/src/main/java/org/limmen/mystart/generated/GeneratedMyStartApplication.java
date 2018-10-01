@@ -14,4 +14,4 @@ import com.speedment.runtime.core.Speedment;
  * @author Speedment
  */
 @GeneratedCode("Speedment")
-public interface GeneratedMystartApplication extends Speedment {}
+public interface GeneratedMyStartApplication extends Speedment {}

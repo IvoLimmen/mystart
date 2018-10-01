@@ -1,7 +1,5 @@
 package org.limmen.mystart;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
@@ -17,8 +15,6 @@ public class Link extends BaseObject implements Comparable<Link> {
   private LocalDateTime creationDate;
 
   private String description;
-
-  private String host;
 
   private final List<String> labels = new ArrayList<>();
 
@@ -39,7 +35,6 @@ public class Link extends BaseObject implements Comparable<Link> {
   public Link(String url) {
     this();
     this.url = url;
-    analyzeHost(url);
   }
 
   public void addLabel(String label) {
@@ -95,10 +90,6 @@ public class Link extends BaseObject implements Comparable<Link> {
         return "today";
       }
     }
-  }
-
-  public String getHost() {
-    return host;
   }
 
   public Collection<String> getLabels() {
@@ -171,10 +162,6 @@ public class Link extends BaseObject implements Comparable<Link> {
     this.description = description;
   }
 
-  public void setHost(String host) {
-    this.host = host;
-  }
-
   public void setLabels(Collection<String> labels) {
     this.labels.clear();
     this.labels.addAll(labels);
@@ -197,9 +184,6 @@ public class Link extends BaseObject implements Comparable<Link> {
   }
 
   public void setUrl(String url) {
-    if (this.url == null && url != null) {
-      analyzeHost(url);
-    }
     this.url = url;
   }
 
@@ -212,13 +196,5 @@ public class Link extends BaseObject implements Comparable<Link> {
 
   public void visited() {
     this.lastVisit = LocalDateTime.now();
-  }
-
-  private void analyzeHost(String url) {
-    try {
-      this.host = new URI(url).getHost();
-    } catch (URISyntaxException ex) {
-      // ignore
-    }
   }
 }

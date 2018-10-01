@@ -100,17 +100,6 @@ public interface GeneratedMsLink {
     );
     /**
      * This Field corresponds to the {@link MsLink} field that can be obtained
-     * using the {@link MsLink#getHost()} method.
-     */
-    StringField<MsLink, String> HOST = StringField.create(
-        Identifier.HOST,
-        o -> OptionalUtil.unwrap(o.getHost()),
-        MsLink::setHost,
-        TypeMapper.identity(),
-        false
-    );
-    /**
-     * This Field corresponds to the {@link MsLink} field that can be obtained
      * using the {@link MsLink#getLabels()} method.
      */
     StringField<MsLink, String> LABELS = StringField.create(
@@ -203,14 +192,6 @@ public interface GeneratedMsLink {
     Optional<String> getUrl();
     
     /**
-     * Returns the host of this MsLink. The host field corresponds to the
-     * database column mystart.public.ms_link.host.
-     * 
-     * @return the host of this MsLink
-     */
-    Optional<String> getHost();
-    
-    /**
      * Returns the labels of this MsLink. The labels field corresponds to the
      * database column mystart.public.ms_link.labels.
      * 
@@ -298,15 +279,6 @@ public interface GeneratedMsLink {
     MsLink setUrl(String url);
     
     /**
-     * Sets the host of this MsLink. The host field corresponds to the database
-     * column mystart.public.ms_link.host.
-     * 
-     * @param host to set of this MsLink
-     * @return     this MsLink instance
-     */
-    MsLink setHost(String host);
-    
-    /**
      * Sets the labels of this MsLink. The labels field corresponds to the
      * database column mystart.public.ms_link.labels.
      * 
@@ -360,7 +332,6 @@ public interface GeneratedMsLink {
         SOURCE          ("source"),
         TITLE           ("title"),
         URL             ("url"),
-        HOST            ("host"),
         LABELS          ("labels"),
         PRIVATE_NETWORK ("private_network"),
         LAST_VISIT      ("last_visit"),

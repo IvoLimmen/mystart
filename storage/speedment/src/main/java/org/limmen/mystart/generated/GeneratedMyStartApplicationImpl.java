@@ -14,6 +14,6 @@ import com.speedment.runtime.application.AbstractSpeedment;
  * @author Speedment
  */
 @GeneratedCode("Speedment")
-public class GeneratedMystartApplicationImpl 
+public class GeneratedMyStartApplicationImpl 
 extends AbstractSpeedment 
-implements GeneratedMystartApplication {}
+implements GeneratedMyStartApplication {}

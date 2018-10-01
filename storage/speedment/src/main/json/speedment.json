@@ -5,7 +5,7 @@
     "expanded" : true,
     "companyName" : "limmen",
     "appId" : "8daf6252-00a1-40b8-82dc-7341c7b35e97",
-    "name" : "mystart",
+    "name" : "MyStart",
     "packageLocation" : "src/main/java/",
     "packageName" : "org.limmen.mystart",
     "id" : "mystart",
@@ -133,15 +133,6 @@
                   },
                   {
                     "databaseType" : "java.lang.String",
-                    "expanded" : false,
-                    "nullable" : true,
-                    "name" : "host",
-                    "id" : "host",
-                    "ordinalPosition" : 7,
-                    "enabled" : true
-                  },
-                  {
-                    "databaseType" : "java.lang.String",
                     "nameProtected" : true,
                     "expanded" : false,
                     "nullable" : true,
@@ -149,7 +140,7 @@
                     "name" : "labels",
                     "nullableImplementation" : "OPTIONAL",
                     "id" : "labels",
-                    "ordinalPosition" : 8,
+                    "ordinalPosition" : 7,
                     "enabled" : true
                   },
                   {
@@ -158,7 +149,7 @@
                     "nullable" : true,
                     "name" : "private_network",
                     "id" : "private_network",
-                    "ordinalPosition" : 9,
+                    "ordinalPosition" : 8,
                     "enabled" : true
                   },
                   {
@@ -167,7 +158,7 @@
                     "nullable" : true,
                     "name" : "last_visit",
                     "id" : "last_visit",
-                    "ordinalPosition" : 10,
+                    "ordinalPosition" : 9,
                     "enabled" : true
                   },
                   {
@@ -176,7 +167,7 @@
                     "nullable" : true,
                     "name" : "creation_date",
                     "id" : "creation_date",
-                    "ordinalPosition" : 11,
+                    "ordinalPosition" : 10,
                     "enabled" : true
                   }
                 ],
@@ -185,7 +176,7 @@
                 "enabled" : true
               },
               {
-                "expanded" : false,
+                "expanded" : true,
                 "primaryKeyColumns" : [
                   {
                     "expanded" : true,
@@ -230,9 +221,18 @@
                     "databaseType" : "java.lang.String",
                     "expanded" : true,
                     "nullable" : true,
+                    "name" : "name",
+                    "id" : "name",
+                    "ordinalPosition" : 2,
+                    "enabled" : true
+                  },
+                  {
+                    "databaseType" : "java.lang.String",
+                    "expanded" : true,
+                    "nullable" : true,
                     "name" : "email",
                     "id" : "email",
-                    "ordinalPosition" : 2,
+                    "ordinalPosition" : 3,
                     "enabled" : true
                   },
                   {
@@ -241,7 +241,7 @@
                     "nullable" : true,
                     "name" : "password",
                     "id" : "password",
-                    "ordinalPosition" : 3,
+                    "ordinalPosition" : 4,
                     "enabled" : true
                   }
                 ],

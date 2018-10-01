@@ -33,8 +33,9 @@ public abstract class GeneratedMsUserSqlAdapter implements SqlAdapter<MsUser> {
     protected MsUser apply(ResultSet resultSet, int offset) throws SQLException {
         return createEntity()
             .setId(       resultSet.getInt(1 + offset))
-            .setEmail(    resultSet.getString(2 + offset))
-            .setPassword( resultSet.getString(3 + offset))
+            .setName(     resultSet.getString(2 + offset))
+            .setEmail(    resultSet.getString(3 + offset))
+            .setPassword( resultSet.getString(4 + offset))
             ;
     }
     

@@ -13,7 +13,7 @@
       </div>
       <div>      
         <label for="url">URL</label><br/>
-        <input ${disabledUrl} type="text" name="url" value="${link.url}"/>
+        <input type="text" name="url" value="${link.url}"/>
       </div>
       <div>      
         <label for="description">Description</label><br/>

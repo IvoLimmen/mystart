@@ -3,6 +3,7 @@ drop table if exists ms_user;
 
 create table ms_user (
   id serial primary key,
+  name text,
   email text,
   password text
 );
@@ -15,7 +16,6 @@ create table ms_link (
   source text,
   title text,
   url text,
-  host text,
   labels text,
   private_network bool,
   last_visit timestamp,

@@ -26,6 +26,7 @@ public interface GeneratedMsUserManager extends Manager<MsUser> {
     TableIdentifier<MsUser> IDENTIFIER = TableIdentifier.of("mystart", "public", "ms_user");
     List<Field<MsUser>> FIELDS = unmodifiableList(asList(
         MsUser.ID,
+        MsUser.NAME,
         MsUser.EMAIL,
         MsUser.PASSWORD
     ));

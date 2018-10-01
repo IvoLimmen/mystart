@@ -1,6 +1,6 @@
 package org.limmen.mystart;
 
-import org.limmen.mystart.generated.GeneratedMystartApplicationBuilder;
+import org.limmen.mystart.generated.GeneratedMyStartApplicationBuilder;
 
 /**
  * The default {@link com.speedment.runtime.core.ApplicationBuilder}
@@ -11,4 +11,4 @@ import org.limmen.mystart.generated.GeneratedMystartApplicationBuilder;
  * 
  * @author limmen
  */
-public final class MystartApplicationBuilder extends GeneratedMystartApplicationBuilder {}
+public final class MyStartApplicationBuilder extends GeneratedMyStartApplicationBuilder {}

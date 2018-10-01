@@ -31,7 +31,6 @@ public interface GeneratedMsLinkManager extends Manager<MsLink> {
         MsLink.SOURCE,
         MsLink.TITLE,
         MsLink.URL,
-        MsLink.HOST,
         MsLink.LABELS,
         MsLink.PRIVATE_NETWORK,
         MsLink.LAST_VISIT,

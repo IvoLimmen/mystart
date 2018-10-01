@@ -1,6 +1,6 @@
 package org.limmen.mystart;
 
-import org.limmen.mystart.generated.GeneratedMystartApplication;
+import org.limmen.mystart.generated.GeneratedMyStartApplication;
 
 /**
  * An {@link com.speedment.runtime.core.ApplicationBuilder} interface for the
@@ -10,4 +10,4 @@ import org.limmen.mystart.generated.GeneratedMystartApplication;
  * 
  * @author limmen
  */
-public interface MystartApplication extends GeneratedMystartApplication {}
+public interface MyStartApplication extends GeneratedMyStartApplication {}

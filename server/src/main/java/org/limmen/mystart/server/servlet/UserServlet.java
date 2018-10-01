@@ -29,20 +29,22 @@ public class UserServlet extends AbstractServlet {
     super.doPost(req, res);
 
     String email = req.getParameter("email");
+    String name = req.getParameter("name");
     String password = req.getParameter("password");
 
-    if (req.getParameter("register") != null) {
-      User user = new User(email, password);
+    if (exists(req, "register")) {
+      User user = new User(name, email, password);
       getUserStorage().store(user);
 
-      user = getUserStorage().getByEmail(email);
+      user = getUserStorage().getByNameOrEmail(email);
       req.getSession().setAttribute(USER, user.getId());
-    }
 
-    if (req.getParameter("login") != null) {
-      User user = getUserStorage().getByEmail(email);
+    } else if (exists(req, "login")) {
+
+      User user = getUserStorage().getByNameOrEmail(name);
+
       if (!user.check(password)) {
-        res.sendRedirect("/signup.jsp?error=1");
+        res.sendRedirect("/login.jsp?error=1");
       } else {
         req.getSession().setAttribute(USER, user.getId());
       }

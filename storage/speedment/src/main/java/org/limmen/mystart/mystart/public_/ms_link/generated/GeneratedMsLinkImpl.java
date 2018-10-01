@@ -31,7 +31,6 @@ public abstract class GeneratedMsLinkImpl implements MsLink {
     private String source;
     private String title;
     private String url;
-    private String host;
     private String labels;
     private Boolean privateNetwork;
     private Timestamp lastVisit;
@@ -67,11 +66,6 @@ public abstract class GeneratedMsLinkImpl implements MsLink {
     @Override
     public Optional<String> getUrl() {
         return Optional.ofNullable(url);
-    }
-    
-    @Override
-    public Optional<String> getHost() {
-        return Optional.ofNullable(host);
     }
     
     @Override
@@ -131,12 +125,6 @@ public abstract class GeneratedMsLinkImpl implements MsLink {
     }
     
     @Override
-    public MsLink setHost(String host) {
-        this.host = host;
-        return this;
-    }
-    
-    @Override
     public MsLink setLabels(String labels) {
         this.labels = labels;
         return this;
@@ -178,7 +166,6 @@ public abstract class GeneratedMsLinkImpl implements MsLink {
         sj.add("source = "         + Objects.toString(OptionalUtil.unwrap(getSource())));
         sj.add("title = "          + Objects.toString(OptionalUtil.unwrap(getTitle())));
         sj.add("url = "            + Objects.toString(OptionalUtil.unwrap(getUrl())));
-        sj.add("host = "           + Objects.toString(OptionalUtil.unwrap(getHost())));
         sj.add("labels = "         + Objects.toString(OptionalUtil.unwrap(getLabels())));
         sj.add("privateNetwork = " + Objects.toString(OptionalUtil.unwrap(getPrivateNetwork())));
         sj.add("lastVisit = "      + Objects.toString(OptionalUtil.unwrap(getLastVisit())));
@@ -197,7 +184,6 @@ public abstract class GeneratedMsLinkImpl implements MsLink {
         if (!Objects.equals(this.getSource(), thatMsLink.getSource())) { return false; }
         if (!Objects.equals(this.getTitle(), thatMsLink.getTitle())) { return false; }
         if (!Objects.equals(this.getUrl(), thatMsLink.getUrl())) { return false; }
-        if (!Objects.equals(this.getHost(), thatMsLink.getHost())) { return false; }
         if (!Objects.equals(this.getLabels(), thatMsLink.getLabels())) { return false; }
         if (!Objects.equals(this.getPrivateNetwork(), thatMsLink.getPrivateNetwork())) { return false; }
         if (!Objects.equals(this.getLastVisit(), thatMsLink.getLastVisit())) { return false; }
@@ -214,7 +200,6 @@ public abstract class GeneratedMsLinkImpl implements MsLink {
         hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getSource()));
         hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getTitle()));
         hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getUrl()));
-        hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getHost()));
         hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getLabels()));
         hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getPrivateNetwork()));
         hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getLastVisit()));

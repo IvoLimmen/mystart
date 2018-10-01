@@ -1,6 +1,6 @@
 package org.limmen.mystart;
 
-import org.limmen.mystart.generated.GeneratedMystartApplicationImpl;
+import org.limmen.mystart.generated.GeneratedMyStartApplicationImpl;
 
 /**
  * The default {@link com.speedment.runtime.core.Speedment} implementation class
@@ -10,6 +10,6 @@ import org.limmen.mystart.generated.GeneratedMystartApplicationImpl;
  * 
  * @author limmen
  */
-public final class MystartApplicationImpl 
-extends GeneratedMystartApplicationImpl 
-implements MystartApplication {}
+public final class MyStartApplicationImpl 
+extends GeneratedMyStartApplicationImpl 
+implements MyStartApplication {}

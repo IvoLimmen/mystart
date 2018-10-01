@@ -11,59 +11,70 @@ import org.slf4j.LoggerFactory;
 
 public class DbUserStorage implements UserStorage {
 
-   protected static final Logger LOGGER = LoggerFactory.getLogger(DbUserStorage.class);
+  protected static final Logger LOGGER = LoggerFactory.getLogger(DbUserStorage.class);
 
-   private final MsUserManager users;
+  private final MsUserManager users;
 
-   public DbUserStorage(MsUserManager users) {
-      this.users = users;
-   }
+  public DbUserStorage(MsUserManager users) {
+    this.users = users;
+  }
 
-   @Override
-   public void store(User item) throws StorageException {
-      User u = getByEmail(item.getEmail());
-      if (u == null) {
-         MsUser user = new MsUserImpl();
-         user.setEmail(item.getEmail());
-         user.setPassword(item.getPassword());
+  @Override
+  public User get(Long id) throws StorageException {
+    return fromDb(users.stream()
+        .filter(MsUser.ID.equal(id.intValue()))
+        .findFirst().get());
+  }
 
-         users.persist(user);
-      }
-   }
+  @Override
+  public Collection<User> getAll() throws StorageException {
+    return users.stream().map(this::fromDb).collect(Collectors.toList());
+  }
 
-   @Override
-   public void remove(Long id) throws StorageException {
-      users.stream()
-          .filter(MsUser.ID.equal(id.intValue()))
-          .forEach(users.remover());
-   }
+  @Override
+  public User getByEmail(String email) throws StorageException {
+    return fromDb(users.stream()
+        .filter(MsUser.EMAIL.equal(email))
+        .findFirst()
+        .orElse(null));
+  }
 
-   @Override
-   public User getByEmail(String email) throws StorageException {
-      return fromDb(users.stream()
-          .filter(MsUser.EMAIL.equal(email))
-          .findFirst().orElse(null));
-   }
+  @Override
+  public User getByNameOrEmail(String nameOrEmail) throws StorageException {
+    return fromDb(users.stream()
+        .filter(MsUser.NAME.equalIgnoreCase(nameOrEmail).or(MsUser.EMAIL.equal(nameOrEmail)))
+        .findFirst()
+        .orElse(null));
+  }
 
-   private User fromDb(MsUser user) {
-      if (user == null) {
-         return null;
-      }
-      User u = new User(user.getEmail().get(), user.getPassword().get());
-      u.setId((long) user.getId());
-      u.setPassword(user.getPassword().get());
-      return u;
-   }
+  @Override
+  public void remove(Long id) throws StorageException {
+    users.stream()
+        .filter(MsUser.ID.equal(id.intValue()))
+        .forEach(users.remover());
+  }
 
-   @Override
-   public User get(Long id) throws StorageException {
-      return fromDb(users.stream()
-          .filter(MsUser.ID.equal(id.intValue()))
-          .findFirst().get());
-   }
+  @Override
+  public void store(User item) throws StorageException {
+    User u = getByEmail(item.getEmail());
+    if (u == null) {
+      MsUser user = new MsUserImpl();
+      user.setName(item.getName());
+      user.setEmail(item.getEmail());
+      user.setPassword(item.getPassword());
 
-   @Override
-   public Collection<User> getAll() throws StorageException {
-      return users.stream().map(this::fromDb).collect(Collectors.toList());
-   }
+      users.persist(user);
+    }
+  }
+
+  private User fromDb(MsUser user) {
+    if (user == null) {
+      return null;
+    }
+    User u = new User(user.getName().get(), user.getEmail().get(), user.getPassword().get());
+    u.setId((long) user.getId());
+    u.setPassword(user.getPassword().get());
+    return u;
+  }
+
 }

@@ -95,7 +95,6 @@ public class LinkServlet extends AbstractServlet {
         link = new Link();
       }
 
-      req.setAttribute("disabledUrl", link.getId() != null ? "disabled" : "");
       req.setAttribute("link", link);
       req.setAttribute("labels", DomainUtil.formatLabels(link));
       req.getRequestDispatcher("/edit.jsp").include(req, res);

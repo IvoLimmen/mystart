@@ -37,6 +37,17 @@ public interface GeneratedMsUser {
     );
     /**
      * This Field corresponds to the {@link MsUser} field that can be obtained
+     * using the {@link MsUser#getName()} method.
+     */
+    StringField<MsUser, String> NAME = StringField.create(
+        Identifier.NAME,
+        o -> OptionalUtil.unwrap(o.getName()),
+        MsUser::setName,
+        TypeMapper.identity(),
+        false
+    );
+    /**
+     * This Field corresponds to the {@link MsUser} field that can be obtained
      * using the {@link MsUser#getEmail()} method.
      */
     StringField<MsUser, String> EMAIL = StringField.create(
@@ -67,6 +78,14 @@ public interface GeneratedMsUser {
     int getId();
     
     /**
+     * Returns the name of this MsUser. The name field corresponds to the
+     * database column mystart.public.ms_user.name.
+     * 
+     * @return the name of this MsUser
+     */
+    Optional<String> getName();
+    
+    /**
      * Returns the email of this MsUser. The email field corresponds to the
      * database column mystart.public.ms_user.email.
      * 
@@ -92,6 +111,15 @@ public interface GeneratedMsUser {
     MsUser setId(int id);
     
     /**
+     * Sets the name of this MsUser. The name field corresponds to the database
+     * column mystart.public.ms_user.name.
+     * 
+     * @param name to set of this MsUser
+     * @return     this MsUser instance
+     */
+    MsUser setName(String name);
+    
+    /**
      * Sets the email of this MsUser. The email field corresponds to the
      * database column mystart.public.ms_user.email.
      * 
@@ -112,6 +140,7 @@ public interface GeneratedMsUser {
     enum Identifier implements ColumnIdentifier<MsUser> {
         
         ID       ("id"),
+        NAME     ("name"),
         EMAIL    ("email"),
         PASSWORD ("password");
         

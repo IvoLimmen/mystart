@@ -21,6 +21,7 @@ import java.util.StringJoiner;
 public abstract class GeneratedMsUserImpl implements MsUser {
     
     private int id;
+    private String name;
     private String email;
     private String password;
     
@@ -29,6 +30,11 @@ public abstract class GeneratedMsUserImpl implements MsUser {
     @Override
     public int getId() {
         return id;
+    }
+    
+    @Override
+    public Optional<String> getName() {
+        return Optional.ofNullable(name);
     }
     
     @Override
@@ -48,6 +54,12 @@ public abstract class GeneratedMsUserImpl implements MsUser {
     }
     
     @Override
+    public MsUser setName(String name) {
+        this.name = name;
+        return this;
+    }
+    
+    @Override
     public MsUser setEmail(String email) {
         this.email = email;
         return this;
@@ -63,6 +75,7 @@ public abstract class GeneratedMsUserImpl implements MsUser {
     public String toString() {
         final StringJoiner sj = new StringJoiner(", ", "{ ", " }");
         sj.add("id = "       + Objects.toString(getId()));
+        sj.add("name = "     + Objects.toString(OptionalUtil.unwrap(getName())));
         sj.add("email = "    + Objects.toString(OptionalUtil.unwrap(getEmail())));
         sj.add("password = " + Objects.toString(OptionalUtil.unwrap(getPassword())));
         return "MsUserImpl " + sj.toString();
@@ -74,6 +87,7 @@ public abstract class GeneratedMsUserImpl implements MsUser {
         if (!(that instanceof MsUser)) { return false; }
         final MsUser thatMsUser = (MsUser)that;
         if (this.getId() != thatMsUser.getId()) { return false; }
+        if (!Objects.equals(this.getName(), thatMsUser.getName())) { return false; }
         if (!Objects.equals(this.getEmail(), thatMsUser.getEmail())) { return false; }
         if (!Objects.equals(this.getPassword(), thatMsUser.getPassword())) { return false; }
         return true;
@@ -83,6 +97,7 @@ public abstract class GeneratedMsUserImpl implements MsUser {
     public int hashCode() {
         int hash = 7;
         hash = 31 * hash + Integer.hashCode(getId());
+        hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getName()));
         hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getEmail()));
         hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getPassword()));
         return hash;

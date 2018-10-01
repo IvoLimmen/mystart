@@ -39,11 +39,10 @@ public abstract class GeneratedMsLinkSqlAdapter implements SqlAdapter<MsLink> {
             .setSource(         resultSet.getString(4 + offset))
             .setTitle(          resultSet.getString(5 + offset))
             .setUrl(            resultSet.getString(6 + offset))
-            .setHost(           resultSet.getString(7 + offset))
-            .setLabels(         resultSet.getString(8 + offset))
-            .setPrivateNetwork( getBoolean(resultSet, 9 + offset))
-            .setLastVisit(      resultSet.getTimestamp(10 + offset))
-            .setCreationDate(   resultSet.getTimestamp(11 + offset))
+            .setLabels(         resultSet.getString(7 + offset))
+            .setPrivateNetwork( getBoolean(resultSet, 8 + offset))
+            .setLastVisit(      resultSet.getTimestamp(9 + offset))
+            .setCreationDate(   resultSet.getTimestamp(10 + offset))
             ;
     }
     

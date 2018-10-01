@@ -17,7 +17,7 @@ import java.util.stream.Stream;
  * @author Speedment
  */
 @GeneratedCode("Speedment")
-public class GeneratedMystartMetadata extends AbstractApplicationMetadata {
+public class GeneratedMyStartMetadata extends AbstractApplicationMetadata {
     
     private final static String METADATA = init();
     
@@ -119,15 +119,6 @@ public class GeneratedMystartMetadata extends AbstractApplicationMetadata {
             "                    \"ordinalPosition\" : 6",
             "                  },",
             "                  {",
-            "                    \"databaseType\" : \"java.lang.String\",",
-            "                    \"enabled\" : true,",
-            "                    \"expanded\" : false,",
-            "                    \"id\" : \"host\",",
-            "                    \"name\" : \"host\",",
-            "                    \"nullable\" : true,",
-            "                    \"ordinalPosition\" : 7",
-            "                  },",
-            "                  {",
             "                    \"autoIncrement\" : false,",
             "                    \"databaseType\" : \"java.lang.String\",",
             "                    \"enabled\" : true,",
@@ -136,7 +127,16 @@ public class GeneratedMystartMetadata extends AbstractApplicationMetadata {
             "                    \"name\" : \"labels\",",
             "                    \"nameProtected\" : true,",
             "                    \"nullable\" : true,",
-            "                    \"nullableImplementation\" : \"OPTIONAL\","
+            "                    \"nullableImplementation\" : \"OPTIONAL\",",
+            "                    \"ordinalPosition\" : 7",
+            "                  },",
+            "                  {",
+            "                    \"databaseType\" : \"java.lang.Boolean\",",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : false,",
+            "                    \"id\" : \"private_network\",",
+            "                    \"name\" : \"private_network\",",
+            "                    \"nullable\" : true,"
         ).forEachOrdered(sb::append);
     }
     
@@ -145,22 +145,13 @@ public class GeneratedMystartMetadata extends AbstractApplicationMetadata {
             "                    \"ordinalPosition\" : 8",
             "                  },",
             "                  {",
-            "                    \"databaseType\" : \"java.lang.Boolean\",",
-            "                    \"enabled\" : true,",
-            "                    \"expanded\" : false,",
-            "                    \"id\" : \"private_network\",",
-            "                    \"name\" : \"private_network\",",
-            "                    \"nullable\" : true,",
-            "                    \"ordinalPosition\" : 9",
-            "                  },",
-            "                  {",
             "                    \"databaseType\" : \"java.sql.Timestamp\",",
             "                    \"enabled\" : true,",
             "                    \"expanded\" : true,",
             "                    \"id\" : \"last_visit\",",
             "                    \"name\" : \"last_visit\",",
             "                    \"nullable\" : true,",
-            "                    \"ordinalPosition\" : 10",
+            "                    \"ordinalPosition\" : 9",
             "                  },",
             "                  {",
             "                    \"databaseType\" : \"java.sql.Timestamp\",",
@@ -169,7 +160,7 @@ public class GeneratedMystartMetadata extends AbstractApplicationMetadata {
             "                    \"id\" : \"creation_date\",",
             "                    \"name\" : \"creation_date\",",
             "                    \"nullable\" : true,",
-            "                    \"ordinalPosition\" : 11",
+            "                    \"ordinalPosition\" : 10",
             "                  }",
             "                ],",
             "                \"enabled\" : true,",
@@ -242,6 +233,15 @@ public class GeneratedMystartMetadata extends AbstractApplicationMetadata {
             "                  },",
             "                  {",
             "                    \"databaseType\" : \"java.lang.String\",",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : true,",
+            "                    \"id\" : \"name\",",
+            "                    \"name\" : \"name\",",
+            "                    \"nullable\" : true,",
+            "                    \"ordinalPosition\" : 2",
+            "                  },",
+            "                  {",
+            "                    \"databaseType\" : \"java.lang.String\",",
             "                    \"enabled\" : true,"
         ).forEachOrdered(sb::append);
     }
@@ -252,7 +252,7 @@ public class GeneratedMystartMetadata extends AbstractApplicationMetadata {
             "                    \"id\" : \"email\",",
             "                    \"name\" : \"email\",",
             "                    \"nullable\" : true,",
-            "                    \"ordinalPosition\" : 2",
+            "                    \"ordinalPosition\" : 3",
             "                  },",
             "                  {",
             "                    \"databaseType\" : \"java.lang.String\",",
@@ -261,11 +261,11 @@ public class GeneratedMystartMetadata extends AbstractApplicationMetadata {
             "                    \"id\" : \"password\",",
             "                    \"name\" : \"password\",",
             "                    \"nullable\" : true,",
-            "                    \"ordinalPosition\" : 3",
+            "                    \"ordinalPosition\" : 4",
             "                  }",
             "                ],",
             "                \"enabled\" : true,",
-            "                \"expanded\" : false,",
+            "                \"expanded\" : true,",
             "                \"id\" : \"ms_user\",",
             "                \"indexes\" : [",
             "                  {",
@@ -307,7 +307,7 @@ public class GeneratedMystartMetadata extends AbstractApplicationMetadata {
             "    \"enabled\" : true,",
             "    \"expanded\" : true,",
             "    \"id\" : \"mystart\",",
-            "    \"name\" : \"mystart\",",
+            "    \"name\" : \"MyStart\",",
             "    \"nameProtected\" : false,",
             "    \"packageLocation\" : \"src/main/java/\",",
             "    \"packageName\" : \"org.limmen.mystart\",",

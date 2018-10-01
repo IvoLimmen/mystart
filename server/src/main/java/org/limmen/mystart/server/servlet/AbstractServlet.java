@@ -59,12 +59,13 @@ public class AbstractServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
     if (req.getSession().getAttribute(USER) == null) {
-      req.getRequestDispatcher("/signup.jsp").include(req, res);
+      req.getRequestDispatcher("/login.jsp").include(req, res);
     } else {
       Long userId = (Long) req.getSession().getAttribute(USER);
       User user = getUserStorage().get(userId);
       req.setAttribute("userId", userId);
       req.setAttribute("email", user.getEmail());
+      req.setAttribute("name", user.getName());
       req.setAttribute("labels", getLinkStorage().getAllLabels(userId));
     }
   }

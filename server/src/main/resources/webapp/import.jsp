@@ -4,11 +4,17 @@
   <body>
     <h1>MyStart</h1>
     <form name="import" action="/importServlet" method="post" enctype="multipart/form-data">
-      <label for="file">Upload a file for parsing</label>
-      <input type="file" name="file"/>
-      <label for="url">Enter a URL to read from</label>
-      <input type="text" name="url"/>
-      <button type="submit" name="import">Import</button>
+      <div>
+        <label for="file">Upload a file for parsing</label><br/>
+        <input type="file" name="file"/>
+      </div>
+      <div>
+        <label for="url">Enter a URL to read from</label><br/>
+        <input type="text" name="url"/>
+      </div>
+      <div>
+        <button type="submit" name="import">Import</button>
+      </div>
     </form>      
   </body>
 </html>

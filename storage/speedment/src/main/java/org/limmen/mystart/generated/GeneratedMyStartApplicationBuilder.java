@@ -3,9 +3,9 @@ package org.limmen.mystart.generated;
 import com.speedment.common.annotation.GeneratedCode;
 import com.speedment.common.injector.Injector;
 import com.speedment.runtime.application.AbstractApplicationBuilder;
-import org.limmen.mystart.MystartApplication;
-import org.limmen.mystart.MystartApplicationBuilder;
-import org.limmen.mystart.MystartApplicationImpl;
+import org.limmen.mystart.MyStartApplication;
+import org.limmen.mystart.MyStartApplicationBuilder;
+import org.limmen.mystart.MyStartApplicationImpl;
 import org.limmen.mystart.mystart.public_.ms_link.MsLinkManagerImpl;
 import org.limmen.mystart.mystart.public_.ms_link.MsLinkSqlAdapter;
 import org.limmen.mystart.mystart.public_.ms_user.MsUserManagerImpl;
@@ -22,10 +22,10 @@ import org.limmen.mystart.mystart.public_.ms_user.MsUserSqlAdapter;
  * @author Speedment
  */
 @GeneratedCode("Speedment")
-public abstract class GeneratedMystartApplicationBuilder extends AbstractApplicationBuilder<MystartApplication, MystartApplicationBuilder> {
+public abstract class GeneratedMyStartApplicationBuilder extends AbstractApplicationBuilder<MyStartApplication, MyStartApplicationBuilder> {
     
-    protected GeneratedMystartApplicationBuilder() {
-        super(MystartApplicationImpl.class, GeneratedMystartMetadata.class);
+    protected GeneratedMyStartApplicationBuilder() {
+        super(MyStartApplicationImpl.class, GeneratedMyStartMetadata.class);
         withManager(MsLinkManagerImpl.class);
         withManager(MsUserManagerImpl.class);
         withComponent(MsLinkSqlAdapter.class);
@@ -33,7 +33,7 @@ public abstract class GeneratedMystartApplicationBuilder extends AbstractApplica
     }
     
     @Override
-    public MystartApplication build(Injector injector) {
-        return injector.getOrThrow(MystartApplication.class);
+    public MyStartApplication build(Injector injector) {
+        return injector.getOrThrow(MyStartApplication.class);
     }
 }
