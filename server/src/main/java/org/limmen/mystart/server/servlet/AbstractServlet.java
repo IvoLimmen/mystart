@@ -22,9 +22,11 @@ public class AbstractServlet extends HttpServlet {
   private final LinkStorage linkStorage;
 
   private final MultipartConfigElement multipartConfigElement;
+
   private final Parser parser;
 
   private final Path temporaryDirectory;
+
   private final UserStorage userStorage;
 
   public AbstractServlet(
@@ -79,6 +81,17 @@ public class AbstractServlet extends HttpServlet {
 
   protected boolean exists(HttpServletRequest req, String parameter) {
     return req.getParameter(parameter) != null;
+  }
+
+  protected String getOrignalView(HttpServletRequest req) {
+    String referer = req.getHeader("Referer");
+
+    if (referer.contains("?")) {
+      int index = referer.indexOf("?");
+      return referer.substring(1 + index);
+    }
+
+    return referer;
   }
 
   protected boolean hasValue(HttpServletRequest req, String parameter) {
