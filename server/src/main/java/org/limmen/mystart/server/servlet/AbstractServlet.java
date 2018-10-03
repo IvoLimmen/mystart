@@ -83,7 +83,7 @@ public class AbstractServlet extends HttpServlet {
     return req.getParameter(parameter) != null;
   }
 
-  protected String getOrignalView(HttpServletRequest req) {
+  protected String getOrignalParameters(HttpServletRequest req) {
     String referer = req.getHeader("Referer");
 
     if (referer.contains("?")) {
