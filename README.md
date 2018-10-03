@@ -24,7 +24,7 @@ Yes looks like crap but that I will remedy in the future.
 This application can import from the following sources:
 
  * FireFox (upload your places.sqlite from your profile directory)
- * GitHub (send the link to your starred REST link)
+ * GitHub (enter a link: https://api.github.com/users/ivolimmen/starred)
  * Google Bookmarks (export the XML: https://www.google.com/bookmarks/?output=xml and upload it)
  * Google Chrome/Chromium (upload your Bookmarks file from your profile directory)
  * Netscape (It is an XML file if your still got one)
