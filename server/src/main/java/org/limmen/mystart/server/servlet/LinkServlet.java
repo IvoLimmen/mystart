@@ -2,6 +2,8 @@ package org.limmen.mystart.server.servlet;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -12,11 +14,15 @@ import org.limmen.mystart.Link;
 import org.limmen.mystart.LinkStorage;
 import org.limmen.mystart.Parser;
 import org.limmen.mystart.UserStorage;
+import org.limmen.mystart.server.cleanup.CleanupContext;
+import org.limmen.mystart.server.cleanup.CleanupTask;
 
 @Slf4j
 public class LinkServlet extends AbstractServlet {
 
   private static final long serialVersionUID = 1L;
+
+  private final ExecutorService executorService = Executors.newFixedThreadPool(5);
 
   public LinkServlet(
       Parser parser,
@@ -36,7 +42,18 @@ public class LinkServlet extends AbstractServlet {
       return;
     }
 
-    if (exists(req, "save")) {
+    if (exists(req, "check")) {
+
+      executorService.submit(
+          new CleanupTask(getLinkStorage(), CleanupContext.builder()
+              .assumeHttps(getBool(req, "assumeHttps"))
+              .markAsPrivateNetworkOnDomainError(getBool(req, "markAsPrivateNetworkOnDomainError"))
+              .userId(userId)
+              .build()));
+
+      res.sendRedirect("/home");
+
+    } else if (exists(req, "save")) {
 
       Link link = new Link();
       if (hasValue(req, "id")) {

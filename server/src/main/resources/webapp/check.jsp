@@ -4,28 +4,19 @@
 <html lang="en">
   <jsp:include page="parts/header.jsp"/>
   <body>
-    <h1>MyStart</h1>    
-    <form name="link" action="link" method="post">
-      <input type="hidden" name="id" value="${link.id}"/>             
+    <h1>Check links</h1>    
+    <form name="check" action="link" method="post">
       <div>      
-        <label for="title">Title</label><br/>
-        <input type="text" name="title" size="50" value="${link.title}"/>
+        <label for="assumeHttps">Assume HTTPS</label><br/>
+        <input type="checkbox" name="assumeHttps" checked/>
       </div>
       <div>      
-        <label for="url">URL</label><br/>
-        <input type="text" name="url" size="80" value="${link.url}"/>
-      </div>
-      <div>      
-        <label for="description">Description</label><br/>
-        <textarea rows="10" cols="40" name="description">${link.description}</textarea>        
-      </div>
-      <div>      
-        <label for="labels">Labels</label><br/>
-        <input type="text" name="labels" size="50" value="${labels}"/>
+        <label for="markAsPrivateNetworkOnDomainError">Mark as private network on domain error</label><br/>
+        <input type="checkbox" name="markAsPrivateNetworkOnDomainError" checked/>
       </div>
       <div>      
         <button type="submit" name="cancel">Cancel</button>
-        <button type="submit" name="save">Save</button>
+        <button type="submit" name="check">Check</button>
       </div>
     </form>
   </body>

@@ -43,7 +43,9 @@ public class UserServlet extends AbstractServlet {
 
       User user = getUserStorage().getByNameOrEmail(name);
 
-      if (!user.check(password)) {
+      if (user == null) {
+        res.sendRedirect("/login.jsp?error=1");
+      } else if (!user.check(password)) {
         res.sendRedirect("/login.jsp?error=1");
       } else {
         req.getSession().setAttribute(USER, user.getId());

@@ -83,6 +83,10 @@ public class AbstractServlet extends HttpServlet {
     return req.getParameter(parameter) != null;
   }
 
+  protected boolean getBool(HttpServletRequest req, String parameter) {
+    return req.getParameter(parameter) != null;
+  }
+
   protected String getOrignalParameters(HttpServletRequest req) {
     String referer = req.getHeader("Referer");
 
