@@ -4,7 +4,7 @@ import com.speedment.common.annotation.GeneratedCode;
 import com.speedment.runtime.config.identifier.ColumnIdentifier;
 import com.speedment.runtime.config.identifier.TableIdentifier;
 import com.speedment.runtime.core.util.OptionalUtil;
-import com.speedment.runtime.field.IntField;
+import com.speedment.runtime.field.LongField;
 import com.speedment.runtime.field.StringField;
 import com.speedment.runtime.typemapper.TypeMapper;
 import org.limmen.mystart.mystart.public_.ms_user.MsUser;
@@ -28,7 +28,7 @@ public interface GeneratedMsUser {
      * This Field corresponds to the {@link MsUser} field that can be obtained
      * using the {@link MsUser#getId()} method.
      */
-    IntField<MsUser, Integer> ID = IntField.create(
+    LongField<MsUser, Long> ID = LongField.create(
         Identifier.ID,
         MsUser::getId,
         MsUser::setId,
@@ -75,7 +75,7 @@ public interface GeneratedMsUser {
      * 
      * @return the id of this MsUser
      */
-    int getId();
+    long getId();
     
     /**
      * Returns the name of this MsUser. The name field corresponds to the
@@ -108,7 +108,7 @@ public interface GeneratedMsUser {
      * @param id to set of this MsUser
      * @return   this MsUser instance
      */
-    MsUser setId(int id);
+    MsUser setId(long id);
     
     /**
      * Sets the name of this MsUser. The name field corresponds to the database

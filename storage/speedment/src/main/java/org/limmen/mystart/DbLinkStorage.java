@@ -1,7 +1,5 @@
 package org.limmen.mystart;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -15,7 +13,7 @@ import org.limmen.mystart.mystart.public_.ms_link.MsLinkManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DbLinkStorage implements LinkStorage {
+public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
 
   protected static final Logger LOGGER = LoggerFactory.getLogger(DbLinkStorage.class);
 
@@ -28,7 +26,7 @@ public class DbLinkStorage implements LinkStorage {
   private Link fromDb(MsLink link) {
     Link l = new Link(link.getUrl().get());
 
-    l.setId((long) link.getId());
+    l.setId(link.getId());
     l.setDescription(link.getDescription().orElse(null));
     if (link.getLabels().isPresent()) {
       l.setLabels(DomainUtil.parseLabels(link.getLabels().get()));
@@ -40,14 +38,6 @@ public class DbLinkStorage implements LinkStorage {
     l.setLastVisit(date(link.getLastVisit()));
 
     return l;
-  }
-
-  private LocalDateTime date(Optional<Timestamp> ts) {
-    if (!ts.isPresent()) {
-      return null;
-    } else {
-      return ts.get().toLocalDateTime();
-    }
   }
 
   @Override
@@ -94,7 +84,7 @@ public class DbLinkStorage implements LinkStorage {
   public void create(Long userId, Link link) throws StorageException {
 
     MsLink msLink = new MsLinkImpl();
-    msLink.setUserId(userId.intValue());
+    msLink.setUserId(userId);
     msLink.setDescription(link.getDescription());
     msLink.setLabels(link.getLabels().stream().reduce((acc, item) -> acc + ";" + item).get());
     msLink.setPrivateNetwork(link.isPrivateNetwork());
@@ -110,8 +100,8 @@ public class DbLinkStorage implements LinkStorage {
   @Override
   public void update(Long userId, Link link) throws StorageException {
     links.stream()
-        .filter(MsLink.ID.equal(link.getId().intValue()))
-        .filter(MsLink.USER_ID.equal(userId.intValue()))
+        .filter(MsLink.ID.equal(link.getId()))
+        .filter(MsLink.USER_ID.equal(userId))
         .findFirst()
         .ifPresent(msLink -> {
 
@@ -125,19 +115,11 @@ public class DbLinkStorage implements LinkStorage {
         });
   }
 
-  private Timestamp ts(LocalDateTime date) {
-    if (date == null) {
-      return null;
-    } else {
-      return Timestamp.valueOf(date);
-    }
-  }
-
   @Override
   public void remove(Long userId, Long id) throws StorageException {
     Optional<MsLink> current = links.stream()
-        .filter(MsLink.ID.equal(id.intValue()))
-        .filter(MsLink.USER_ID.equal(userId.intValue()))
+        .filter(MsLink.ID.equal(id))
+        .filter(MsLink.USER_ID.equal(userId))
         .findFirst();
 
     current.ifPresent(l -> links.remove(l));
@@ -146,7 +128,7 @@ public class DbLinkStorage implements LinkStorage {
   public Link getByUrl(Long userId, String url) throws StorageException {
     return links.stream()
         .filter(MsLink.URL.equal(url))
-        .filter(MsLink.USER_ID.equal(userId.intValue()))
+        .filter(MsLink.USER_ID.equal(userId))
         .map(this::fromDb)
         .findFirst()
         .orElse(null);
@@ -155,8 +137,8 @@ public class DbLinkStorage implements LinkStorage {
   @Override
   public Link get(Long userId, Long id) throws StorageException {
     return links.stream()
-        .filter(MsLink.ID.equal(id.intValue()))
-        .filter(MsLink.USER_ID.equal(userId.intValue()))
+        .filter(MsLink.ID.equal(id))
+        .filter(MsLink.USER_ID.equal(userId))
         .map(this::fromDb)
         .findFirst()
         .orElse(null);

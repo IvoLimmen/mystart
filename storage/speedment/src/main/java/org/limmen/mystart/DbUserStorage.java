@@ -9,7 +9,7 @@ import org.limmen.mystart.mystart.public_.ms_user.MsUserManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DbUserStorage implements UserStorage {
+public class DbUserStorage extends DbAbstractStorage implements UserStorage {
 
   protected static final Logger LOGGER = LoggerFactory.getLogger(DbUserStorage.class);
 
@@ -22,7 +22,7 @@ public class DbUserStorage implements UserStorage {
   @Override
   public User get(Long id) throws StorageException {
     return fromDb(users.stream()
-        .filter(MsUser.ID.equal(id.intValue()))
+        .filter(MsUser.ID.equal(id))
         .findFirst().get());
   }
 
@@ -50,7 +50,7 @@ public class DbUserStorage implements UserStorage {
   @Override
   public void remove(Long id) throws StorageException {
     users.stream()
-        .filter(MsUser.ID.equal(id.intValue()))
+        .filter(MsUser.ID.equal(id))
         .forEach(users.remover());
   }
 
@@ -72,7 +72,7 @@ public class DbUserStorage implements UserStorage {
       return null;
     }
     User u = new User(user.getName().get(), user.getEmail().get(), user.getPassword().get());
-    u.setId((long) user.getId());
+    u.setId(user.getId());
     u.setPassword(user.getPassword().get());
     return u;
   }

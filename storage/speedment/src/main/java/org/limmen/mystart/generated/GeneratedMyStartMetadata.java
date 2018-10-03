@@ -26,6 +26,7 @@ public class GeneratedMyStartMetadata extends AbstractApplicationMetadata {
         initPart0(sb);
         initPart1(sb);
         initPart2(sb);
+        initPart3(sb);
         return sb.toString();
     }
     
@@ -61,7 +62,106 @@ public class GeneratedMyStartMetadata extends AbstractApplicationMetadata {
             "                \"columns\" : [",
             "                  {",
             "                    \"autoIncrement\" : true,",
-            "                    \"databaseType\" : \"java.lang.Integer\",",
+            "                    \"databaseType\" : \"java.lang.Long\",",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : true,",
+            "                    \"id\" : \"id\",",
+            "                    \"name\" : \"id\",",
+            "                    \"nullable\" : false,",
+            "                    \"ordinalPosition\" : 1,",
+            "                    \"typeMapper\" : \"com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper\"",
+            "                  },",
+            "                  {",
+            "                    \"databaseType\" : \"java.lang.Long\",",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : true,",
+            "                    \"id\" : \"user_id\",",
+            "                    \"name\" : \"user_id\",",
+            "                    \"nullable\" : true,",
+            "                    \"ordinalPosition\" : 2",
+            "                  },",
+            "                  {",
+            "                    \"databaseType\" : \"java.sql.Timestamp\",",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : true,",
+            "                    \"id\" : \"creation_date\",",
+            "                    \"name\" : \"creation_date\",",
+            "                    \"nullable\" : true,",
+            "                    \"ordinalPosition\" : 3",
+            "                  },",
+            "                  {",
+            "                    \"databaseType\" : \"java.lang.String\",",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : true,",
+            "                    \"id\" : \"message\",",
+            "                    \"name\" : \"message\",",
+            "                    \"nullable\" : true,",
+            "                    \"ordinalPosition\" : 4",
+            "                  }",
+            "                ],",
+            "                \"enabled\" : true,",
+            "                \"expanded\" : true,",
+            "                \"foreignKeys\" : [",
+            "                  {",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : false,",
+            "                    \"foreignKeyColumns\" : [",
+            "                      {",
+            "                        \"expanded\" : true,",
+            "                        \"foreignColumnName\" : \"id\",",
+            "                        \"foreignDatabaseName\" : \"mystart\",",
+            "                        \"foreignSchemaName\" : \"public\",",
+            "                        \"foreignTableName\" : \"ms_user\",",
+            "                        \"id\" : \"user_id\",",
+            "                        \"name\" : \"user_id\",",
+            "                        \"ordinalPosition\" : 1",
+            "                      }",
+            "                    ],",
+            "                    \"id\" : \"ms_log_user_id_fkey\",",
+            "                    \"name\" : \"ms_log_user_id_fkey\"",
+            "                  }",
+            "                ],",
+            "                \"id\" : \"ms_log\",",
+            "                \"indexes\" : [",
+            "                  {",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : false,",
+            "                    \"id\" : \"ms_log_pkey\",",
+            "                    \"indexColumns\" : [",
+            "                      {",
+            "                        \"expanded\" : true,",
+            "                        \"id\" : \"id\",",
+            "                        \"name\" : \"id\",",
+            "                        \"orderType\" : \"ASC\",",
+            "                        \"ordinalPosition\" : 1",
+            "                      }",
+            "                    ],",
+            "                    \"name\" : \"ms_log_pkey\",",
+            "                    \"unique\" : true"
+        ).forEachOrdered(sb::append);
+    }
+    
+    private static void initPart1(StringBuilder sb) {
+        Stream.of(
+            "                  }",
+            "                ],",
+            "                \"isView\" : false,",
+            "                \"name\" : \"ms_log\",",
+            "                \"primaryKeyColumns\" : [",
+            "                  {",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : true,",
+            "                    \"id\" : \"id\",",
+            "                    \"name\" : \"id\",",
+            "                    \"ordinalPosition\" : 1",
+            "                  }",
+            "                ]",
+            "              },",
+            "              {",
+            "                \"columns\" : [",
+            "                  {",
+            "                    \"autoIncrement\" : true,",
+            "                    \"databaseType\" : \"java.lang.Long\",",
             "                    \"enabled\" : true,",
             "                    \"expanded\" : false,",
             "                    \"id\" : \"id\",",
@@ -71,7 +171,7 @@ public class GeneratedMyStartMetadata extends AbstractApplicationMetadata {
             "                    \"typeMapper\" : \"com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper\"",
             "                  },",
             "                  {",
-            "                    \"databaseType\" : \"java.lang.Integer\",",
+            "                    \"databaseType\" : \"java.lang.Long\",",
             "                    \"enabled\" : true,",
             "                    \"expanded\" : false,",
             "                    \"id\" : \"user_id\",",
@@ -136,19 +236,19 @@ public class GeneratedMyStartMetadata extends AbstractApplicationMetadata {
             "                    \"expanded\" : false,",
             "                    \"id\" : \"private_network\",",
             "                    \"name\" : \"private_network\",",
-            "                    \"nullable\" : true,"
-        ).forEachOrdered(sb::append);
-    }
-    
-    private static void initPart1(StringBuilder sb) {
-        Stream.of(
+            "                    \"nullable\" : true,",
             "                    \"ordinalPosition\" : 8",
             "                  },",
             "                  {",
             "                    \"databaseType\" : \"java.sql.Timestamp\",",
             "                    \"enabled\" : true,",
             "                    \"expanded\" : true,",
-            "                    \"id\" : \"last_visit\",",
+            "                    \"id\" : \"last_visit\","
+        ).forEachOrdered(sb::append);
+    }
+    
+    private static void initPart2(StringBuilder sb) {
+        Stream.of(
             "                    \"name\" : \"last_visit\",",
             "                    \"nullable\" : true,",
             "                    \"ordinalPosition\" : 9",
@@ -222,7 +322,7 @@ public class GeneratedMyStartMetadata extends AbstractApplicationMetadata {
             "                \"columns\" : [",
             "                  {",
             "                    \"autoIncrement\" : true,",
-            "                    \"databaseType\" : \"java.lang.Integer\",",
+            "                    \"databaseType\" : \"java.lang.Long\",",
             "                    \"enabled\" : true,",
             "                    \"expanded\" : true,",
             "                    \"id\" : \"id\",",
@@ -242,19 +342,19 @@ public class GeneratedMyStartMetadata extends AbstractApplicationMetadata {
             "                  },",
             "                  {",
             "                    \"databaseType\" : \"java.lang.String\",",
-            "                    \"enabled\" : true,"
-        ).forEachOrdered(sb::append);
-    }
-    
-    private static void initPart2(StringBuilder sb) {
-        Stream.of(
+            "                    \"enabled\" : true,",
             "                    \"expanded\" : true,",
             "                    \"id\" : \"email\",",
             "                    \"name\" : \"email\",",
             "                    \"nullable\" : true,",
             "                    \"ordinalPosition\" : 3",
             "                  },",
-            "                  {",
+            "                  {"
+        ).forEachOrdered(sb::append);
+    }
+    
+    private static void initPart3(StringBuilder sb) {
+        Stream.of(
             "                    \"databaseType\" : \"java.lang.String\",",
             "                    \"enabled\" : true,",
             "                    \"expanded\" : true,",

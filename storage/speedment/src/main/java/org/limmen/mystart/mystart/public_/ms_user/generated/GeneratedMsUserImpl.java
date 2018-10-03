@@ -20,7 +20,7 @@ import java.util.StringJoiner;
 @GeneratedCode("Speedment")
 public abstract class GeneratedMsUserImpl implements MsUser {
     
-    private int id;
+    private long id;
     private String name;
     private String email;
     private String password;
@@ -28,7 +28,7 @@ public abstract class GeneratedMsUserImpl implements MsUser {
     protected GeneratedMsUserImpl() {}
     
     @Override
-    public int getId() {
+    public long getId() {
         return id;
     }
     
@@ -48,7 +48,7 @@ public abstract class GeneratedMsUserImpl implements MsUser {
     }
     
     @Override
-    public MsUser setId(int id) {
+    public MsUser setId(long id) {
         this.id = id;
         return this;
     }
@@ -96,7 +96,7 @@ public abstract class GeneratedMsUserImpl implements MsUser {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 31 * hash + Integer.hashCode(getId());
+        hash = 31 * hash + Long.hashCode(getId());
         hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getName()));
         hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getEmail()));
         hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getPassword()));

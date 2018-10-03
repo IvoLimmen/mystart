@@ -14,20 +14,17 @@ public class DbStorage implements Storage {
   }
 
   @Override
-  public String getName() {
-    return "speedment";
-  }
-
-  @Override
   public LinkStorage getLinkStorage() {
     return new DbLinkStorage(links);
   }
 
   @Override
+  public String getName() {
+    return "speedment";
+  }
+
+  @Override
   public UserStorage getUserStorage() {
-    if (users == null) {
-      throw new IllegalStateException();
-    }
     return new DbUserStorage(users);
   }
 

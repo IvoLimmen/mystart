@@ -2,15 +2,16 @@ drop table if exists ms_link;
 drop table if exists ms_user;
 
 create table ms_user (
-  id serial primary key,
+  id bigserial primary key,
+
   name text,
   email text,
   password text
 );
 
 create table ms_link (
-  id serial primary key,
-  user_id integer references ms_user,
+  id bigserial primary key,
+  user_id bigint references ms_user,
 
   description text,
   source text,

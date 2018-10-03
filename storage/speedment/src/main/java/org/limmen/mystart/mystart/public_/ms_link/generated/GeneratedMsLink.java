@@ -8,7 +8,7 @@ import com.speedment.runtime.core.manager.Manager;
 import com.speedment.runtime.core.util.OptionalUtil;
 import com.speedment.runtime.field.ComparableField;
 import com.speedment.runtime.field.ComparableForeignKeyField;
-import com.speedment.runtime.field.IntField;
+import com.speedment.runtime.field.LongField;
 import com.speedment.runtime.field.StringField;
 import com.speedment.runtime.typemapper.TypeMapper;
 import org.limmen.mystart.mystart.public_.ms_link.MsLink;
@@ -16,7 +16,7 @@ import org.limmen.mystart.mystart.public_.ms_user.MsUser;
 
 import java.sql.Timestamp;
 import java.util.Optional;
-import java.util.OptionalInt;
+import java.util.OptionalLong;
 
 /**
  * The generated base for the {@link
@@ -35,7 +35,7 @@ public interface GeneratedMsLink {
      * This Field corresponds to the {@link MsLink} field that can be obtained
      * using the {@link MsLink#getId()} method.
      */
-    IntField<MsLink, Integer> ID = IntField.create(
+    LongField<MsLink, Long> ID = LongField.create(
         Identifier.ID,
         MsLink::getId,
         MsLink::setId,
@@ -46,7 +46,7 @@ public interface GeneratedMsLink {
      * This Field corresponds to the {@link MsLink} field that can be obtained
      * using the {@link MsLink#getUserId()} method.
      */
-    ComparableForeignKeyField<MsLink, Integer, Integer, MsUser> USER_ID = ComparableForeignKeyField.create(
+    ComparableForeignKeyField<MsLink, Long, Long, MsUser> USER_ID = ComparableForeignKeyField.create(
         Identifier.USER_ID,
         o -> OptionalUtil.unwrap(o.getUserId()),
         MsLink::setUserId,
@@ -149,7 +149,7 @@ public interface GeneratedMsLink {
      * 
      * @return the id of this MsLink
      */
-    int getId();
+    long getId();
     
     /**
      * Returns the userId of this MsLink. The userId field corresponds to the
@@ -157,7 +157,7 @@ public interface GeneratedMsLink {
      * 
      * @return the userId of this MsLink
      */
-    OptionalInt getUserId();
+    OptionalLong getUserId();
     
     /**
      * Returns the description of this MsLink. The description field corresponds
@@ -231,7 +231,7 @@ public interface GeneratedMsLink {
      * @param id to set of this MsLink
      * @return   this MsLink instance
      */
-    MsLink setId(int id);
+    MsLink setId(long id);
     
     /**
      * Sets the userId of this MsLink. The userId field corresponds to the
@@ -240,7 +240,7 @@ public interface GeneratedMsLink {
      * @param userId to set of this MsLink
      * @return       this MsLink instance
      */
-    MsLink setUserId(Integer userId);
+    MsLink setUserId(Long userId);
     
     /**
      * Sets the description of this MsLink. The description field corresponds to

@@ -33,8 +33,8 @@ public abstract class GeneratedMsLinkSqlAdapter implements SqlAdapter<MsLink> {
     
     protected MsLink apply(ResultSet resultSet, int offset) throws SQLException {
         return createEntity()
-            .setId(             resultSet.getInt(1 + offset))
-            .setUserId(         getInt(resultSet, 2 + offset))
+            .setId(             resultSet.getLong(1 + offset))
+            .setUserId(         getLong(resultSet, 2 + offset))
             .setDescription(    resultSet.getString(3 + offset))
             .setSource(         resultSet.getString(4 + offset))
             .setTitle(          resultSet.getString(5 + offset))

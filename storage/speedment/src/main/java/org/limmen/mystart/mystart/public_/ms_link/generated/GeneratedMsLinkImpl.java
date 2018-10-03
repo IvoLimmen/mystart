@@ -10,7 +10,7 @@ import org.limmen.mystart.mystart.public_.ms_user.MsUser;
 import java.sql.Timestamp;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.OptionalInt;
+import java.util.OptionalLong;
 import java.util.StringJoiner;
 
 /**
@@ -25,8 +25,8 @@ import java.util.StringJoiner;
 @GeneratedCode("Speedment")
 public abstract class GeneratedMsLinkImpl implements MsLink {
     
-    private int id;
-    private Integer userId;
+    private long id;
+    private Long userId;
     private String description;
     private String source;
     private String title;
@@ -39,12 +39,12 @@ public abstract class GeneratedMsLinkImpl implements MsLink {
     protected GeneratedMsLinkImpl() {}
     
     @Override
-    public int getId() {
+    public long getId() {
         return id;
     }
     
     @Override
-    public OptionalInt getUserId() {
+    public OptionalLong getUserId() {
         return OptionalUtil.ofNullable(userId);
     }
     
@@ -89,13 +89,13 @@ public abstract class GeneratedMsLinkImpl implements MsLink {
     }
     
     @Override
-    public MsLink setId(int id) {
+    public MsLink setId(long id) {
         this.id = id;
         return this;
     }
     
     @Override
-    public MsLink setUserId(Integer userId) {
+    public MsLink setUserId(Long userId) {
         this.userId = userId;
         return this;
     }
@@ -151,7 +151,7 @@ public abstract class GeneratedMsLinkImpl implements MsLink {
     @Override
     public Optional<MsUser> findUserId(Manager<MsUser> foreignManager) {
         if (getUserId().isPresent()) {
-            return foreignManager.stream().filter(MsUser.ID.equal(getUserId().getAsInt())).findAny();
+            return foreignManager.stream().filter(MsUser.ID.equal(getUserId().getAsLong())).findAny();
         } else {
             return Optional.empty();
         }
@@ -194,7 +194,7 @@ public abstract class GeneratedMsLinkImpl implements MsLink {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 31 * hash + Integer.hashCode(getId());
+        hash = 31 * hash + Long.hashCode(getId());
         hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getUserId()));
         hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getDescription()));
         hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getSource()));

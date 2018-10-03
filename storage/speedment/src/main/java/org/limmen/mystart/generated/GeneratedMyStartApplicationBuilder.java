@@ -8,6 +8,8 @@ import org.limmen.mystart.MyStartApplicationBuilder;
 import org.limmen.mystart.MyStartApplicationImpl;
 import org.limmen.mystart.mystart.public_.ms_link.MsLinkManagerImpl;
 import org.limmen.mystart.mystart.public_.ms_link.MsLinkSqlAdapter;
+import org.limmen.mystart.mystart.public_.ms_log.MsLogManagerImpl;
+import org.limmen.mystart.mystart.public_.ms_log.MsLogSqlAdapter;
 import org.limmen.mystart.mystart.public_.ms_user.MsUserManagerImpl;
 import org.limmen.mystart.mystart.public_.ms_user.MsUserSqlAdapter;
 
@@ -26,8 +28,10 @@ public abstract class GeneratedMyStartApplicationBuilder extends AbstractApplica
     
     protected GeneratedMyStartApplicationBuilder() {
         super(MyStartApplicationImpl.class, GeneratedMyStartMetadata.class);
+        withManager(MsLogManagerImpl.class);
         withManager(MsLinkManagerImpl.class);
         withManager(MsUserManagerImpl.class);
+        withComponent(MsLogSqlAdapter.class);
         withComponent(MsLinkSqlAdapter.class);
         withComponent(MsUserSqlAdapter.class);
     }
