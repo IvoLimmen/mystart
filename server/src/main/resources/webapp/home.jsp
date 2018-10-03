@@ -7,6 +7,7 @@
     <h1>MyStart</h1>
     <a href="import.jsp">Import new links</a>
     <a href="check.jsp">Check links</a>
+    <a href="stats.jsp">Statistics</a>
     <a href="/link?edit">Add a new link</a>
     <form name="search">
       <input type="text" name="search"/>

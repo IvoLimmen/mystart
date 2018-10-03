@@ -16,8 +16,6 @@ public class DomainUtil {
       labels = label.split(",");
     } else if (label.contains(";")) {
       labels = label.split(";");
-    } else if (label.contains(" ")) {
-      labels = label.split(" ");
     } else {
       labels = new String[1];
       labels[0] = label;

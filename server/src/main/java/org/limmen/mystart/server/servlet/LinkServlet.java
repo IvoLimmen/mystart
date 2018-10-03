@@ -1,9 +1,15 @@
 package org.limmen.mystart.server.servlet;
 
 import java.io.IOException;
+import static java.lang.String.CASE_INSENSITIVE_ORDER;
 import java.nio.file.Path;
+import java.util.Collection;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.groupingBy;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -121,6 +127,39 @@ public class LinkServlet extends AbstractServlet {
       Long id = Long.parseLong(req.getParameter("delete"));
       getLinkStorage().remove(userId, id);
       res.sendRedirect("/home?" + getOrignalParameters(req));
+
+    } else if (exists(req, "stats")) {
+
+      String key = req.getParameter("stats");
+      Collection<Link> links = getLinkStorage().getAll(userId);
+      Collection<String> labels = getLinkStorage().getAllLabels(userId);
+
+      switch (key) {
+        case "source":
+          req.setAttribute("map",
+              links.stream()
+                  .collect(groupingBy(g -> g.getSource(), counting())));
+          break;
+        case "create_year":
+          req.setAttribute("map",
+              links.stream()
+                  .collect(groupingBy(g -> g.getCreationDate().getYear(), counting())));
+          break;
+        case "visit_year":
+          req.setAttribute("map",
+              links.stream()
+                  .collect(groupingBy(g -> g.getLastVisit() == null ? "Never" : g.getLastVisit().getYear(), counting())));
+          break;
+        case "labels":
+          Map<String, Long> stats = new TreeMap<>(CASE_INSENSITIVE_ORDER);
+          labels.forEach(l -> {
+            stats.put(l, links.stream().filter(f -> f.getLabels().contains(l)).count());
+          });
+          req.setAttribute("map", stats);
+          break;
+      }
+
+      req.getRequestDispatcher("/stats.jsp").include(req, res);
     }
   }
 }
