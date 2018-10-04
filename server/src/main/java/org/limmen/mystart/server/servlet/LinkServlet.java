@@ -6,8 +6,6 @@ import java.nio.file.Path;
 import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
 import javax.servlet.MultipartConfigElement;
@@ -21,14 +19,12 @@ import org.limmen.mystart.LinkStorage;
 import org.limmen.mystart.Parser;
 import org.limmen.mystart.UserStorage;
 import org.limmen.mystart.server.cleanup.CleanupContext;
-import org.limmen.mystart.server.cleanup.CleanupTask;
+import org.limmen.mystart.server.cleanup.CleanupTaskManager;
 
 @Slf4j
 public class LinkServlet extends AbstractServlet {
 
   private static final long serialVersionUID = 1L;
-
-  private final ExecutorService executorService = Executors.newFixedThreadPool(5);
 
   public LinkServlet(
       Parser parser,
@@ -39,55 +35,18 @@ public class LinkServlet extends AbstractServlet {
     super(parser, linkStorage, userStorage, multipartConfigElement, temporaryDirectory);
   }
 
-  @Override
-  protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-    super.doPost(req, res);
-    Long userId = (Long) req.getSession().getAttribute(USER);
+  private void scheduleCleanup(HttpServletRequest req, Long userId) {
 
-    if (userId == null) {
-      return;
-    }
-
-    if (exists(req, "check")) {
-
-      executorService.submit(
-          new CleanupTask(getLinkStorage(), CleanupContext.builder()
-              .assumeHttps(getBool(req, "assumeHttps"))
-              .markAsPrivateNetworkOnDomainError(getBool(req, "markAsPrivateNetworkOnDomainError"))
-              .userId(userId)
-              .build()));
-
-      res.sendRedirect("/home");
-
-    } else if (exists(req, "save")) {
-
-      Link link = new Link();
-      if (hasValue(req, "id")) {
-        Long id = Long.parseLong(req.getParameter("id"));
-        link = getLinkStorage().get(userId, id);
-      }
-
-      link.setDescription(req.getParameter("description"));
-      link.setTitle(req.getParameter("title"));
-      link.setUrl(req.getParameter("url"));
-
-      if (hasValue(req, "labels")) {
-        String label = req.getParameter("labels");
-        link.setLabels(DomainUtil.parseLabels(label));
-      }
-
-      if (link.getId() == null) {
-        link.setSource("MyStart");
-        getLinkStorage().create(userId, link);
-      } else {
-        getLinkStorage().update(userId, link);
-      }
-      res.sendRedirect("/home");
-
-    } else if (exists(req, "cancel")) {
-
-      res.sendRedirect("/home");
-    }
+    new Thread(new CleanupTaskManager(
+        getLinkStorage(),
+        userId,
+        CleanupContext.builder()
+            .assumeHttps(getBool(req, "assumeHttps"))
+            .markAsPrivateNetworkOnDomainError(getBool(req, "markAsPrivateNetworkOnDomainError"))
+            .maximumTimeoutInSeconds(getInt(req, "maximumTimeoutInSeconds"))
+            .userId(userId)
+            .build())
+    ).start();
   }
 
   @Override
@@ -160,6 +119,52 @@ public class LinkServlet extends AbstractServlet {
       }
 
       req.getRequestDispatcher("/stats.jsp").include(req, res);
+    }
+  }
+
+  @Override
+  protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    super.doPost(req, res);
+    Long userId = (Long) req.getSession().getAttribute(USER);
+
+    if (userId == null) {
+      return;
+    }
+
+    if (exists(req, "check")) {
+
+      scheduleCleanup(req, userId);
+
+      res.sendRedirect("/home");
+
+    } else if (exists(req, "save")) {
+
+      Link link = new Link();
+      if (hasValue(req, "id")) {
+        Long id = Long.parseLong(req.getParameter("id"));
+        link = getLinkStorage().get(userId, id);
+      }
+
+      link.setDescription(req.getParameter("description"));
+      link.setTitle(req.getParameter("title"));
+      link.setUrl(req.getParameter("url"));
+
+      if (hasValue(req, "labels")) {
+        String label = req.getParameter("labels");
+        link.setLabels(DomainUtil.parseLabels(label));
+      }
+
+      if (link.getId() == null) {
+        link.setSource("MyStart");
+        getLinkStorage().create(userId, link);
+      } else {
+        getLinkStorage().update(userId, link);
+      }
+      res.sendRedirect("/home");
+
+    } else if (exists(req, "cancel")) {
+
+      res.sendRedirect("/home");
     }
   }
 }

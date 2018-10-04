@@ -11,5 +11,7 @@ public class CleanupContext {
 
   private boolean markAsPrivateNetworkOnDomainError;
 
+  private int maximumTimeoutInSeconds;
+
   private long userId;
 }

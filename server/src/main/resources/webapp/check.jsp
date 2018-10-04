@@ -7,12 +7,16 @@
     <h1>Check links</h1>    
     <form name="check" action="link" method="post">
       <div>      
-        <label for="assumeHttps">Assume HTTPS</label><br/>
         <input type="checkbox" name="assumeHttps" checked/>
+        <label for="assumeHttps">Assume HTTPS if the URL has protocol</label>
       </div>
       <div>      
-        <label for="markAsPrivateNetworkOnDomainError">Mark as private network on domain error</label><br/>
         <input type="checkbox" name="markAsPrivateNetworkOnDomainError" checked/>
+        <label for="markAsPrivateNetworkOnDomainError">Mark as private network on failed connection</label>
+      </div>
+      <div>      
+        <label for="maximumTimeoutInSeconds">Maximum timeout in seconds</label><br/>
+        <input type="number" name="maximumTimeoutInSeconds" value="30"/>
       </div>
       <div>      
         <button type="submit" name="cancel">Cancel</button>

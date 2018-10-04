@@ -87,6 +87,10 @@ public class AbstractServlet extends HttpServlet {
     return req.getParameter(parameter) != null;
   }
 
+  protected int getInt(HttpServletRequest req, String parameter) {
+    return Integer.parseInt(req.getParameter(parameter));
+  }
+
   protected String getOrignalParameters(HttpServletRequest req) {
     String referer = req.getHeader("Referer");
 
