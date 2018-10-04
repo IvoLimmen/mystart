@@ -13,7 +13,7 @@
         <input type="text" name="url"/>
       </div>
       <div>
-        <button type="submit" name="import">Import</button>
+        <button type="submit" name="importButton">Import</button>
       </div>
     </form>      
   </body>

@@ -8,10 +8,11 @@
     <a href="import.jsp">Import new links</a>
     <a href="check.jsp">Check links</a>
     <a href="stats.jsp">Statistics</a>
+    <a href="/link?delall">Delete current selection</a>
     <a href="/link?edit">Add a new link</a>
     <form name="search">
       <input type="text" name="search"/>
-      <button type="submit" name="search">Search</button>
+      <button type="submit" name="searchButton">Search</button>
     </form>
     <section>
       <c:if test="${!empty labels && empty links}">

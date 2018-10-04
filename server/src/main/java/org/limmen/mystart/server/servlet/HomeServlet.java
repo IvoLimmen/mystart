@@ -37,20 +37,26 @@ public class HomeServlet extends AbstractServlet {
       return;
     }
 
-    if (req.getParameter("reg") != null) {
+    if (exists(req, "reg")) {
+
       Long id = Long.parseLong(req.getParameter("reg"));
       Link link = getLinkStorage().get(userId, id);
       link.visited();
       getLinkStorage().create(userId, link);
       res.sendRedirect(link.getUrl());
+
     } else {
-      if (req.getParameter("search") != null) {
+
+      if (exists(req, "searchButton")) {
+
         String search = req.getParameter("search");
         Collection<Link> links = getLinkStorage().getAll(userId).stream()
             .filter(link -> link.hasKeyword(search))
             .collect(Collectors.toList());
         req.setAttribute("links", links);
-      } else if (req.getParameter("label") != null) {
+
+      } else if (exists(req, "label")) {
+
         Collection<Link> links = getLinkStorage().getAllByLabel(userId, req.getParameter("label"));
         req.setAttribute("links", links);
       }

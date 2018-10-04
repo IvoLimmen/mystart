@@ -17,7 +17,7 @@
           <input type="password" name="password" placeholder="Please enter password"/>
         </div>
         <div>
-          <button type="submit" name="login">Login</button>
+          <button type="submit" name="loginButton">Login</button>
         </div>
       </form>
     </section>     

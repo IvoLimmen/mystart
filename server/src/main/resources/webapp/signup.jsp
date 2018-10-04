@@ -18,7 +18,7 @@
           <input type="password" name="password" placeholder="Please enter password"/>
         </div>
         <div>
-          <button type="submit" name="register">Register</button>
+          <button type="submit" name="registerButton">Register</button>
         </div>
       </form>
     </section>          

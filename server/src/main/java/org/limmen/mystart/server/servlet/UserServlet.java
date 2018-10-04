@@ -32,14 +32,14 @@ public class UserServlet extends AbstractServlet {
     String name = req.getParameter("name");
     String password = req.getParameter("password");
 
-    if (exists(req, "register")) {
+    if (exists(req, "registerButton")) {
       User user = new User(name, email, password);
       getUserStorage().store(user);
 
       user = getUserStorage().getByNameOrEmail(email);
       req.getSession().setAttribute(USER, user.getId());
 
-    } else if (exists(req, "login")) {
+    } else if (exists(req, "loginButton")) {
 
       User user = getUserStorage().getByNameOrEmail(name);
 

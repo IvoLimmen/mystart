@@ -111,7 +111,7 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
           msLink.setLabels(link.getLabels().stream().reduce((acc, item) -> acc + ";" + item).get());
           msLink.setDescription(link.getDescription());
           msLink.setLastVisit(ts(link.getLastVisit()));
-          links.persist(msLink);
+      links.update(msLink);
         });
   }
 

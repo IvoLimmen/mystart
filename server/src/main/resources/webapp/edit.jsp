@@ -24,8 +24,8 @@
         <input type="text" name="labels" size="50" value="${labels}"/>
       </div>
       <div>      
-        <button type="submit" name="cancel">Cancel</button>
-        <button type="submit" name="save">Save</button>
+        <button type="submit" name="cancelButton">Cancel</button>
+        <button type="submit" name="saveButton">Save</button>
       </div>
     </form>
   </body>

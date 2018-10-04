@@ -87,6 +87,32 @@ public class LinkServlet extends AbstractServlet {
       getLinkStorage().remove(userId, id);
       res.sendRedirect("/home?" + getOrignalParameters(req));
 
+    } else if (exists(req, "delall")) {
+
+      String selection = getOrignalParameters(req);
+      if (selection.contains("searchButton=")) {
+        selection = selection.substring(0, selection.indexOf("searchButton=") - 1);
+      }
+      String key = selection.split("=")[0];
+      String value = selection.split("=")[1];
+
+      if (key.equals("search")) {
+        log.debug(value);
+        getLinkStorage().getAll(userId).stream()
+            .filter(link -> link.hasKeyword(value))
+            .forEach(link -> {
+              getLinkStorage().remove(userId, link.getId());
+            });
+      } else if (key.equals("label")) {
+        log.debug(value);
+        getLinkStorage().getAllByLabel(userId, value)
+            .forEach(link -> {
+              getLinkStorage().remove(userId, link.getId());
+            });
+      }
+
+      res.sendRedirect("/home");
+
     } else if (exists(req, "stats")) {
 
       String key = req.getParameter("stats");
@@ -131,13 +157,13 @@ public class LinkServlet extends AbstractServlet {
       return;
     }
 
-    if (exists(req, "check")) {
+    if (exists(req, "checkButton")) {
 
       scheduleCleanup(req, userId);
 
       res.sendRedirect("/home");
 
-    } else if (exists(req, "save")) {
+    } else if (exists(req, "saveButton")) {
 
       Link link = new Link();
       if (hasValue(req, "id")) {
@@ -162,7 +188,7 @@ public class LinkServlet extends AbstractServlet {
       }
       res.sendRedirect("/home");
 
-    } else if (exists(req, "cancel")) {
+    } else if (exists(req, "cancelButton")) {
 
       res.sendRedirect("/home");
     }

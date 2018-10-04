@@ -19,8 +19,8 @@
         <input type="number" name="maximumTimeoutInSeconds" value="30"/>
       </div>
       <div>      
-        <button type="submit" name="cancel">Cancel</button>
-        <button type="submit" name="check">Check</button>
+        <button type="submit" name="cancelButton">Cancel</button>
+        <button type="submit" name="checkButton">Check</button>
       </div>
     </form>
   </body>
