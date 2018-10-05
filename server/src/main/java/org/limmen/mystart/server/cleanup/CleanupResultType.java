@@ -4,6 +4,5 @@ public enum CleanupResultType {
 
   NOTHING,
   UPDATE,
-  DELETE,
-  OK
+  DELETE
 }

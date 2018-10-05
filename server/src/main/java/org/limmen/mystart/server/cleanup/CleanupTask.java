@@ -84,7 +84,7 @@ public class CleanupTask implements Callable<CleanupResult> {
           }
           break;
         case 403: // FORBIDDEN
-          return new CleanupResult(link, "Forbidden to access but exists", CleanupResultType.OK);
+          return new CleanupResult(link, "Forbidden to access but exists", CleanupResultType.NOTHING);
         case 404: // NOT FOUND
           return new CleanupResult(link, "Site no longer exists", CleanupResultType.DELETE);
         default:
