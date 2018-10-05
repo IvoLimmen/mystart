@@ -1,19 +1,28 @@
 package org.limmen.mystart.server.cleanup;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.NoRouteToHostException;
+import java.net.URI;
 import java.net.URL;
 import java.net.UnknownHostException;
+import java.net.http.HttpClient;
+import java.net.http.HttpClient.Version;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.time.Duration;
+import static java.time.temporal.ChronoUnit.SECONDS;
 import java.util.concurrent.Callable;
+import javax.net.ssl.SSLContext;
 import lombok.extern.slf4j.Slf4j;
 import org.limmen.mystart.Link;
 import org.limmen.mystart.exception.StorageException;
 
 @Slf4j
 public class CleanupTask implements Callable<CleanupResult> {
+
+  private final static SSLContext SSL_CONTEXT = SSLContextProvider.getSSLContext();
 
   private final Link link;
   private final CleanupContext context;
@@ -47,15 +56,28 @@ public class CleanupTask implements Callable<CleanupResult> {
     }
 
     try {
-      HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
-      connection.setConnectTimeout(context.getMaximumTimeoutInSeconds());
-      switch (connection.getResponseCode()) {
+      HttpClient client = HttpClient.newBuilder()
+          .version(Version.HTTP_1_1)
+          .followRedirects(HttpClient.Redirect.NEVER)
+          .sslContext(SSL_CONTEXT)
+          .connectTimeout(Duration.of(context.getMaximumTimeoutInSeconds(), SECONDS))
+          .build();
+      HttpRequest request = HttpRequest.newBuilder()
+          .uri(URI.create(url))
+          .GET()
+          .build();
+
+      HttpResponse<?> response = client.send(request, HttpResponse.BodyHandlers.discarding());
+
+      switch (response.statusCode()) {
         case 200: // OK
           // we do nothing; it's ok
           return new CleanupResult(link, "200", CleanupResultType.NOTHING);
         case 301: // MOVED PERMANENTLY
         case 302: // MOVED TEMPORARELY
-          String movedUrl = connection.getHeaderField("Location");
+          String movedUrl = response.headers()
+              .firstValue("Location")
+              .orElse(null);
           if (movedUrl != null && movedUrl.length() > 0) {
             link.setUrl(movedUrl);
             return new CleanupResult(link, "Site has moved", CleanupResultType.UPDATE);
@@ -66,7 +88,7 @@ public class CleanupTask implements Callable<CleanupResult> {
         case 404: // NOT FOUND
           return new CleanupResult(link, "Site no longer exists", CleanupResultType.DELETE);
         default:
-          return new CleanupResult(link, "URL gave error code " + connection.getResponseCode(), CleanupResultType.NOTHING);
+          return new CleanupResult(link, "URL gave error code " + response.statusCode(), CleanupResultType.NOTHING);
       }
     } catch (MalformedURLException | NoRouteToHostException ex) {
       if (context.isMarkAsPrivateNetworkOnDomainError()) {
@@ -76,7 +98,8 @@ public class CleanupTask implements Callable<CleanupResult> {
         return new CleanupResult(link, "URL is not valid", CleanupResultType.DELETE);
       }
     } catch (IOException ex) {
-      return new CleanupResult(link, "Connection to the URL/Domain failed", CleanupResultType.DELETE);
+      log.error(url, ex);
+      return new CleanupResult(link, "Connection to the URL/Domain failed", CleanupResultType.NOTHING);
     }
 
     return new CleanupResult(link, "?", CleanupResultType.NOTHING);
