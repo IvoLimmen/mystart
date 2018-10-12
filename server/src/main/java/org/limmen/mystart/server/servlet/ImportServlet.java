@@ -37,6 +37,12 @@ public class ImportServlet extends AbstractServlet {
   protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
     super.doPost(req, res);
 
+    Long userId = (Long) req.getSession().getAttribute(USER_ID);
+
+    if (userId == null) {
+      return;
+    }
+
     Part filePart = req.getPart("file");
     String url = req.getParameter("url");
     ParseContext parseContext = null;
@@ -48,10 +54,11 @@ public class ImportServlet extends AbstractServlet {
       parseContext = handleUrl(url);
     }
 
+    boolean skipDuplicates = getBool(req, "skipDuplicates");
     List<Link> links = getParser().parse(parseContext);
     log.info("Parsed {} links from {}", links.size(), getParser().getName());
 
-    getLinkStorage().createCollection(1L, links);
+    getLinkStorage().importCollection(userId, links, skipDuplicates);
 
     res.sendRedirect("/home");
   }

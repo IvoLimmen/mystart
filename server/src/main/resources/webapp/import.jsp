@@ -12,6 +12,10 @@
         <label for="url">Enter a URL to read from</label><br/>
         <input type="text" name="url"/>
       </div>
+      <div>      
+        <label for="skipDuplicates">Skip duplicates (or update labels)</label><br/>
+        <input type="checkbox" name="skipDuplicates"/>
+      </div>
       <div>
         <button type="submit" name="importButton">Import</button>
       </div>

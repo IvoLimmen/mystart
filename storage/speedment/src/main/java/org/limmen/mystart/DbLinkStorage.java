@@ -63,25 +63,29 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
   }
 
   @Override
-  public void createCollection(Long userId, Collection<Link> link) throws StorageException {
-    link.forEach(l -> {
-      try {
-        if (l.getUrl() == null) {
-          LOGGER.info("Not adding link {} with title {} as it is empty.", l.getUrl(), l.getTitle());
-        }
-        if (getByUrl(userId, l.getUrl()) == null) {
-          create(userId, l);
-        } else {
+  public void importCollection(Long userId, Collection<Link> links, boolean skipDuplicates) throws StorageException {
+    links.forEach(l -> {
+      if (l.getUrl() == null) {
+        LOGGER.info("Not adding link {} with title {} as it is empty.", l.getUrl(), l.getTitle());
+      }
+      Link link = getByUrl(userId, l.getUrl());
+      if (link == null) {
+        create(userId, l);
+      } else {
+        if (skipDuplicates) {
           LOGGER.info("Not adding link {} as we allready have it.", l.getUrl());
+        } else {
+          l.getLabels().removeAll(link.getLabels());
+          link.getLabels().addAll(l.getLabels());
+          update(userId, link);
+          LOGGER.info("Updating link {} by adding labels.", l.getUrl());
         }
-      } catch (StorageException ex) {
-        LOGGER.warn("Not adding link {} as we could not check the existance.", l.getUrl());
       }
     });
   }
 
   @Override
-  public void create(Long userId, Link link) throws StorageException {
+  public void create(Long userId, Link link) {
 
     MsLink msLink = new MsLinkImpl();
     msLink.setUserId(userId);
@@ -111,6 +115,7 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
           msLink.setLabels(link.getLabels().stream().reduce((acc, item) -> acc + ";" + item).get());
           msLink.setDescription(link.getDescription());
           msLink.setLastVisit(ts(link.getLastVisit()));
+
       links.update(msLink);
         });
   }
@@ -125,7 +130,7 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
     current.ifPresent(l -> links.remove(l));
   }
 
-  public Link getByUrl(Long userId, String url) throws StorageException {
+  public Link getByUrl(Long userId, String url) {
     return links.stream()
         .filter(MsLink.URL.equal(url))
         .filter(MsLink.USER_ID.equal(userId))
