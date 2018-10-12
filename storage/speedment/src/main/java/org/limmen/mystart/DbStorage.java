@@ -1,6 +1,7 @@
 package org.limmen.mystart;
 
 import com.typesafe.config.Config;
+import org.flywaydb.core.Flyway;
 import org.limmen.mystart.mystart.public_.ms_link.MsLinkManager;
 import org.limmen.mystart.mystart.public_.ms_user.MsUserManager;
 
@@ -30,10 +31,18 @@ public class DbStorage implements Storage {
 
   @Override
   public void initialize(Config conf) {
+
+    String url = conf.getString("server.db.jdbcUrl");
+    String user = conf.getString("server.db.username");
+    String password = conf.getString("server.db.password");
+
+    Flyway flyway = Flyway.configure().dataSource(url, user, password).load();
+    flyway.migrate();
+
     this.app = new MyStartApplicationBuilder()
-        .withConnectionUrl(conf.getString("server.db.jdbcUrl"))
-        .withUsername(conf.getString("server.db.username"))
-        .withPassword(conf.getString("server.db.password"))
+        .withConnectionUrl(url)
+        .withUsername(user)
+        .withPassword(password)
         .build();
 
     links = app.getOrThrow(MsLinkManager.class);

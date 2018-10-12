@@ -15,10 +15,6 @@ Screw it, I will make a JSP front end in a weekend. Check. After 3 years finally
 
 Yes looks like crap but that I will remedy in the future.
 
-# Storage
-
- Storage in PostgreSQL (table creation script is included)
-
 # Importing bookmarks
 
 This application can import from the following sources:
@@ -30,14 +26,27 @@ This application can import from the following sources:
  * Netscape (It is an XML file if your still got one)
  * XBEL (It's a XML standard for bookmarks)
 
-# What for features will come in the future?
- 
- * Properties user/password for database.
- * Settings in general
- * Import of Delicious bookmarks (?).
- * Exports (?)
- * Configure browser.
- * Searching on fields using 'sounds like'.
- * Import Microsoft Shortcuts (favorites).
- * Configuration file for HTTP/HTTPS and other settings.
- * Proper front end?
+# Building
+
+Do a checkout of this project. You need to following to build:
+
+* JDK 11
+* Maven 3.5.*
+
+Then execute the following command:
+
+    mvn clean install
+
+# Database
+
+Create a new database (postgres) by executing:
+
+    createdb mystart    
+
+(On start the application will create the tables)
+
+# Starting the application
+
+After a full build execute the following to start the server:
+
+    ./server/target/appassembler/bin/mystart

@@ -62,7 +62,7 @@
       <groupId>org.eclipse.jetty</groupId>
       <artifactId>apache-jstl</artifactId>
     </dependency>
-    
+              
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -79,6 +79,37 @@
           <mainClass>org.limmen.mystart.server.Main</mainClass>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>appassembler-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>script</id>
+            <phase>package</phase>
+            <goals>
+              <goal>assemble</goal>                     
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <repositoryLayout>flat</repositoryLayout>
+          <repositoryName>lib</repositoryName>
+          <configurationDirectory>config</configurationDirectory>
+          <configurationSourceDirectory>src/main/resources</configurationSourceDirectory>
+          <copyConfigurationDirectory>true</copyConfigurationDirectory>
+          <includeConfigurationDirectoryInClasspath>true</includeConfigurationDirectoryInClasspath>
+          <extraJvmArguments>-Xms128m</extraJvmArguments>
+          <platforms>
+            <platform>unix</platform>
+          </platforms>               
+          <programs>
+            <program>
+              <mainClass>org.limmen.mystart.server.Main</mainClass>
+              <id>mystart</id>
+            </program>
+          </programs>
+        </configuration>
+      </plugin>                     
     </plugins>
   </build>
 </project>
