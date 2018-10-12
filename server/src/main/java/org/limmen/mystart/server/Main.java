@@ -28,6 +28,7 @@ import org.limmen.mystart.UserStorage;
 import org.limmen.mystart.server.servlet.HomeServlet;
 import org.limmen.mystart.server.servlet.ImportServlet;
 import org.limmen.mystart.server.servlet.LinkServlet;
+import org.limmen.mystart.server.servlet.LoginServlet;
 import org.limmen.mystart.server.servlet.UserServlet;
 
 @Slf4j
@@ -76,9 +77,11 @@ public class Main {
 
     addServlet(server, servletContextHandler, "homeServlet", "/home",
         new HomeServlet(parser, linkStorage, userStorage, multipartConfigElement, scratchDir.toPath()));
-    addServlet(server, servletContextHandler, "userServlet", "/userServlet",
+    addServlet(server, servletContextHandler, "userServlet", "/user",
         new UserServlet(parser, linkStorage, userStorage, multipartConfigElement, scratchDir.toPath()));
-    addServlet(server, servletContextHandler, "importServlet", "/importServlet",
+    addServlet(server, servletContextHandler, "loginServlet", "/login",
+        new LoginServlet(parser, linkStorage, userStorage, multipartConfigElement, scratchDir.toPath()));
+    addServlet(server, servletContextHandler, "importServlet", "/import",
         new ImportServlet(parser, linkStorage, userStorage, multipartConfigElement, scratchDir.toPath()));
     addServlet(server, servletContextHandler, "linkServlet", "/link",
         new LinkServlet(parser, linkStorage, userStorage, multipartConfigElement, scratchDir.toPath()));

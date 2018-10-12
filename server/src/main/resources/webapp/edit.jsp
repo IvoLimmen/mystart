@@ -4,7 +4,7 @@
 <html lang="en">
   <jsp:include page="parts/header.jsp"/>
   <body>
-    <h1>MyStart</h1>    
+    <h1>Edit - ${link.title}</h1>    
     <form name="link" action="link" method="post">
       <input type="hidden" name="id" value="${link.id}"/>             
       <div>      

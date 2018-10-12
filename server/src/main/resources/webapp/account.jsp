@@ -4,24 +4,24 @@
 <html lang="en">
   <jsp:include page="parts/header.jsp"/>
   <body>
-    <h1>MyStart</h1>    
-    <form name="link" action="link" method="post">
-      <input type="hidden" name="id" value="${link.id}"/>             
+    <h1>Edit account settings</h1>    
+    <form name="account" action="user" method="post">
+      <input type="hidden" name="id" value="${user.id}"/>             
       <div>      
-        <label for="title">Title</label><br/>
-        <input type="text" name="title" size="50" value="${link.title}"/>
+        <label for="name">Name</label><br/>
+        <input type="text" name="name" size="50" value="${user.name}"/>
       </div>
       <div>      
-        <label for="url">URL</label><br/>
-        <input type="text" name="url" size="80" value="${link.url}"/>
+        <label for="email">Email</label><br/>
+        <input type="email" name="email" size="50" value="${user.email}"/>
       </div>
       <div>      
-        <label for="description">Description</label><br/>
-        <textarea rows="10" cols="40" name="description">${link.description}</textarea>        
+        <label for="password">Password</label><br/>
+        <input type="password" name="password"/>
       </div>
       <div>      
-        <label for="labels">Labels</label><br/>
-        <input type="text" name="labels" size="50" value="${labels}"/>
+        <label for="password2">Password confirmation</label><br/>
+        <input type="password" name="password2"/>
       </div>
       <div>      
         <button type="submit" name="cancelButton">Cancel</button>

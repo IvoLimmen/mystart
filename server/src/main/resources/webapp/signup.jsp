@@ -4,7 +4,7 @@
   <body>
     <h1>MyStart - Signup</h1>
     <section id="signup">
-      <form name="signup" method="post" action="/userServlet">
+      <form name="signup" method="post" action="/login">
         <div>
           <label for="name">Name</label><br/>
           <input type="text" name="name" placeholder="Please enter a name"/>

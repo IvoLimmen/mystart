@@ -7,7 +7,7 @@
       <div>
         <p>No account yet? <a href="signup.jsp">Sign up!</a></p>
       </div>
-      <form name="login" method="post" action="/userServlet">
+      <form name="login" method="post" action="/login">
         <div>
           <label for="email">Name</label><br/>
           <input type="text" name="name" placeholder="Please enter email adres or name"/>

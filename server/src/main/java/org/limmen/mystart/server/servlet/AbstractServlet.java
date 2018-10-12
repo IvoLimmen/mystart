@@ -74,6 +74,10 @@ public class AbstractServlet extends HttpServlet {
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    if (req.getSession().getAttribute(USER) == null) {
+      res.sendRedirect("/home");
+      return;
+    }
     if (req.getContentType() != null && req.getContentType().startsWith("multipart/form-data")) {
       req.setAttribute(Request.__MULTIPART_CONFIG_ELEMENT, multipartConfigElement);
     }
@@ -89,6 +93,10 @@ public class AbstractServlet extends HttpServlet {
 
   protected int getInt(HttpServletRequest req, String parameter) {
     return Integer.parseInt(req.getParameter(parameter));
+  }
+
+  protected long getLong(HttpServletRequest req, String parameter) {
+    return Long.parseLong(req.getParameter(parameter));
   }
 
   protected String getOrignalParameters(HttpServletRequest req) {

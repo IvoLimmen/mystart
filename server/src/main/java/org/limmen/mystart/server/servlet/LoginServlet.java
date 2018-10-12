@@ -11,11 +11,11 @@ import org.limmen.mystart.Parser;
 import org.limmen.mystart.User;
 import org.limmen.mystart.UserStorage;
 
-public class UserServlet extends AbstractServlet {
+public class LoginServlet extends AbstractServlet {
 
   private static final long serialVersionUID = 1L;
 
-  public UserServlet(
+  public LoginServlet(
       Parser parser,
       LinkStorage linkStorage,
       UserStorage userStorage,
@@ -25,42 +25,30 @@ public class UserServlet extends AbstractServlet {
   }
 
   @Override
-  protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-    super.doGet(req, res);
-
-    Long userId = (Long) req.getSession().getAttribute(USER);
-
-    if (userId == null) {
-      return;
-    }
-
-    User user = getUserStorage().get(userId);
-    req.setAttribute("user", user);
-    req.getRequestDispatcher("/account.jsp").include(req, res);
-  }
-
-  @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-    super.doPost(req, res);
-
     String email = req.getParameter("email");
     String name = req.getParameter("name");
     String password = req.getParameter("password");
 
-    if (exists(req, "saveButton")) {
-
-      Long id = getLong(req, "id");
-      User user = getUserStorage().get(id);
-      String password2 = req.getParameter("password2");
-
-      user.setEmail(email);
-      user.setName(name);
-      if (password != null && password2 != null && password.equals(password2)) {
-        user.updatePassword(password);
-      }
+    if (exists(req, "registerButton")) {
+      User user = new User(name, email, password);
       getUserStorage().store(user);
 
+      user = getUserStorage().getByNameOrEmail(email);
+      req.getSession().setAttribute(USER, user.getId());
+
       res.sendRedirect("/home");
+
+    } else if (exists(req, "loginButton")) {
+
+      User user = getUserStorage().getByNameOrEmail(name);
+
+      if (user == null || !user.check(password)) {
+        res.sendRedirect("/login.jsp?error=1");
+      } else {
+        req.getSession().setAttribute(USER, user.getId());
+        res.sendRedirect("/home");
+      }
 
     } else if (exists(req, "cancelButton")) {
 

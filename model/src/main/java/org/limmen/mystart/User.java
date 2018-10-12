@@ -44,12 +44,12 @@ public final class User extends BaseObject {
     this.name = name;
   }
 
-  public void setNewPassword(String password) {
-    this.password = encode(email, password);
-  }
-
   public void setPassword(String password) {
     this.password = password;
+  }
+
+  public void updatePassword(String password) {
+    this.password = encode(email, password);
   }
 
   private String encode(String email, String password) {

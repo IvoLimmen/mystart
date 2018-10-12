@@ -4,7 +4,7 @@
 <html lang="en">
   <jsp:include page="parts/header.jsp"/>
   <body>
-    <h1>Stats</h1>    
+    <h1>MyStart - Stats</h1>    
     <a href="/home">Back</a>
     <a href="/link?stats=create_year">Group by creation year</a>
     <a href="/link?stats=visit_year">Group by last visit year</a>
