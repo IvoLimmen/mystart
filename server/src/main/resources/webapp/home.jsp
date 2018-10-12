@@ -31,7 +31,7 @@
         <div class="container">
           <c:forEach items="${links}" var="link">
             <section class="bookmark">
-              <a href="/link?reg=<c:out value="${link.id}"/>"><h3><c:out value="${link.title}"/></h3></a>
+              <a href="/link?reg=<c:out value="${link.id}"/>" ${user.isOpenInNewTab() ? "target=\"_BLANK\"" : "" }><h3><c:out value="${link.title}"/></h3></a>
               <p><c:out value="${link.description}"/></p>
               <p class="created">Created: <c:out value="${link.formattedCreationDate}"/></p>
               <p class="visited">Visited: <c:out value="${link.formattedLastVisit}"/></p>     

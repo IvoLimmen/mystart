@@ -15,6 +15,8 @@ import org.limmen.mystart.UserStorage;
 
 public class AbstractServlet extends HttpServlet {
 
+  public static final String USER_ID = "userId";
+
   public static final String USER = "user";
 
   private static final long serialVersionUID = 1L;
@@ -60,21 +62,20 @@ public class AbstractServlet extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-    if (req.getSession().getAttribute(USER) == null) {
+    if (req.getSession().getAttribute(USER_ID) == null) {
       req.getRequestDispatcher("/login.jsp").include(req, res);
     } else {
-      Long userId = (Long) req.getSession().getAttribute(USER);
+      Long userId = (Long) req.getSession().getAttribute(USER_ID);
       User user = getUserStorage().get(userId);
-      req.setAttribute("userId", userId);
-      req.setAttribute("email", user.getEmail());
-      req.setAttribute("name", user.getName());
+      req.setAttribute(USER_ID, userId);
+      req.setAttribute(USER, user);
       req.setAttribute("labels", getLinkStorage().getAllLabels(userId));
     }
   }
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-    if (req.getSession().getAttribute(USER) == null) {
+    if (req.getSession().getAttribute(USER_ID) == null) {
       res.sendRedirect("/home");
       return;
     }

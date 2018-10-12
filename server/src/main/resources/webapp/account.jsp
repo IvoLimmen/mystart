@@ -16,6 +16,10 @@
         <input type="email" name="email" size="50" value="${user.email}"/>
       </div>
       <div>      
+        <label for="openinnewtab">Open links in new tab</label><br/>
+        <input type="checkbox" name="openinnewtab" ${user.isOpenInNewTab() ? "checked" : "" }/>
+      </div>
+      <div>      
         <label for="password">Password</label><br/>
         <input type="password" name="password"/>
       </div>

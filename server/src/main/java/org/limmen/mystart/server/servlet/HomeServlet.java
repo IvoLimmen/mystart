@@ -31,7 +31,7 @@ public class HomeServlet extends AbstractServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
     super.doGet(req, res);
-    Long userId = (Long) req.getSession().getAttribute(USER);
+    Long userId = (Long) req.getSession().getAttribute(USER_ID);
 
     if (userId == null) {
       return;

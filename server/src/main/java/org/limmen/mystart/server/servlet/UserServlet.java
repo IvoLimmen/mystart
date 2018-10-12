@@ -28,7 +28,7 @@ public class UserServlet extends AbstractServlet {
   protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
     super.doGet(req, res);
 
-    Long userId = (Long) req.getSession().getAttribute(USER);
+    Long userId = (Long) req.getSession().getAttribute(USER_ID);
 
     if (userId == null) {
       return;
@@ -53,6 +53,7 @@ public class UserServlet extends AbstractServlet {
       User user = getUserStorage().get(id);
       String password2 = req.getParameter("password2");
 
+      user.setOpenInNewTab(exists(req, "openinnewtab"));
       user.setEmail(email);
       user.setName(name);
       if (password != null && password2 != null && password.equals(password2)) {

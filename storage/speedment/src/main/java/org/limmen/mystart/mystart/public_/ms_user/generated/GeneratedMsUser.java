@@ -1,9 +1,11 @@
 package org.limmen.mystart.mystart.public_.ms_user.generated;
 
 import com.speedment.common.annotation.GeneratedCode;
+import com.speedment.common.function.OptionalBoolean;
 import com.speedment.runtime.config.identifier.ColumnIdentifier;
 import com.speedment.runtime.config.identifier.TableIdentifier;
 import com.speedment.runtime.core.util.OptionalUtil;
+import com.speedment.runtime.field.ComparableField;
 import com.speedment.runtime.field.LongField;
 import com.speedment.runtime.field.StringField;
 import com.speedment.runtime.typemapper.TypeMapper;
@@ -68,6 +70,17 @@ public interface GeneratedMsUser {
         TypeMapper.identity(),
         false
     );
+    /**
+     * This Field corresponds to the {@link MsUser} field that can be obtained
+     * using the {@link MsUser#getOpenInNewTab()} method.
+     */
+    ComparableField<MsUser, Boolean, Boolean> OPEN_IN_NEW_TAB = ComparableField.create(
+        Identifier.OPEN_IN_NEW_TAB,
+        o -> OptionalUtil.unwrap(o.getOpenInNewTab()),
+        MsUser::setOpenInNewTab,
+        TypeMapper.identity(),
+        false
+    );
     
     /**
      * Returns the id of this MsUser. The id field corresponds to the database
@@ -100,6 +113,15 @@ public interface GeneratedMsUser {
      * @return the password of this MsUser
      */
     Optional<String> getPassword();
+    
+    /**
+     * Returns the openInNewTab of this MsUser. The openInNewTab field
+     * corresponds to the database column
+     * mystart.public.ms_user.open_in_new_tab.
+     * 
+     * @return the openInNewTab of this MsUser
+     */
+    OptionalBoolean getOpenInNewTab();
     
     /**
      * Sets the id of this MsUser. The id field corresponds to the database
@@ -137,12 +159,22 @@ public interface GeneratedMsUser {
      */
     MsUser setPassword(String password);
     
+    /**
+     * Sets the openInNewTab of this MsUser. The openInNewTab field corresponds
+     * to the database column mystart.public.ms_user.open_in_new_tab.
+     * 
+     * @param openInNewTab to set of this MsUser
+     * @return             this MsUser instance
+     */
+    MsUser setOpenInNewTab(Boolean openInNewTab);
+    
     enum Identifier implements ColumnIdentifier<MsUser> {
         
-        ID       ("id"),
-        NAME     ("name"),
-        EMAIL    ("email"),
-        PASSWORD ("password");
+        ID              ("id"),
+        NAME            ("name"),
+        EMAIL           ("email"),
+        PASSWORD        ("password"),
+        OPEN_IN_NEW_TAB ("open_in_new_tab");
         
         private final String columnId;
         private final TableIdentifier<MsUser> tableIdentifier;

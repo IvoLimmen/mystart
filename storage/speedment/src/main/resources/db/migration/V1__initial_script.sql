@@ -6,7 +6,8 @@ create table ms_user (
 
   name text,
   email text,
-  password text
+  password text,
+  open_in_new_tab boolean
 );
 
 create table ms_link (

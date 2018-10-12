@@ -28,7 +28,8 @@ public interface GeneratedMsUserManager extends Manager<MsUser> {
         MsUser.ID,
         MsUser.NAME,
         MsUser.EMAIL,
-        MsUser.PASSWORD
+        MsUser.PASSWORD,
+        MsUser.OPEN_IN_NEW_TAB
     ));
     
     @Override

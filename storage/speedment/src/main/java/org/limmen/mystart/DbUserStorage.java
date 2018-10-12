@@ -64,6 +64,7 @@ public class DbUserStorage extends DbAbstractStorage implements UserStorage {
     user.setName(item.getName());
     user.setEmail(item.getEmail());
     user.setPassword(item.getPassword());
+    user.setOpenInNewTab(item.isOpenInNewTab());
 
     if (user.getId() == 0) {
       users.persist(user);
@@ -79,6 +80,7 @@ public class DbUserStorage extends DbAbstractStorage implements UserStorage {
     User u = new User(user.getName().get(), user.getEmail().get(), user.getPassword().get());
     u.setId(user.getId());
     u.setPassword(user.getPassword().get());
+    u.setOpenInNewTab(user.getOpenInNewTab().getAsBoolean());
     return u;
   }
 

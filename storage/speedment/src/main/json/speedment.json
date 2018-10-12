@@ -20,100 +20,6 @@
             "expanded" : true,
             "tables" : [
               {
-                "expanded" : true,
-                "foreignKeys" : [
-                  {
-                    "expanded" : false,
-                    "foreignKeyColumns" : [
-                      {
-                        "foreignDatabaseName" : "mystart",
-                        "foreignSchemaName" : "public",
-                        "expanded" : true,
-                        "name" : "user_id",
-                        "foreignColumnName" : "id",
-                        "id" : "user_id",
-                        "foreignTableName" : "ms_user",
-                        "ordinalPosition" : 1
-                      }
-                    ],
-                    "name" : "ms_log_user_id_fkey",
-                    "id" : "ms_log_user_id_fkey",
-                    "enabled" : true
-                  }
-                ],
-                "primaryKeyColumns" : [
-                  {
-                    "expanded" : true,
-                    "name" : "id",
-                    "id" : "id",
-                    "ordinalPosition" : 1,
-                    "enabled" : true
-                  }
-                ],
-                "indexes" : [
-                  {
-                    "expanded" : false,
-                    "unique" : true,
-                    "name" : "ms_log_pkey",
-                    "indexColumns" : [
-                      {
-                        "orderType" : "ASC",
-                        "expanded" : true,
-                        "name" : "id",
-                        "id" : "id",
-                        "ordinalPosition" : 1
-                      }
-                    ],
-                    "id" : "ms_log_pkey",
-                    "enabled" : true
-                  }
-                ],
-                "isView" : false,
-                "columns" : [
-                  {
-                    "databaseType" : "java.lang.Long",
-                    "expanded" : true,
-                    "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
-                    "nullable" : false,
-                    "autoIncrement" : true,
-                    "name" : "id",
-                    "id" : "id",
-                    "ordinalPosition" : 1,
-                    "enabled" : true
-                  },
-                  {
-                    "databaseType" : "java.lang.Long",
-                    "expanded" : true,
-                    "nullable" : true,
-                    "name" : "user_id",
-                    "id" : "user_id",
-                    "ordinalPosition" : 2,
-                    "enabled" : true
-                  },
-                  {
-                    "databaseType" : "java.sql.Timestamp",
-                    "expanded" : true,
-                    "nullable" : true,
-                    "name" : "creation_date",
-                    "id" : "creation_date",
-                    "ordinalPosition" : 3,
-                    "enabled" : true
-                  },
-                  {
-                    "databaseType" : "java.lang.String",
-                    "expanded" : true,
-                    "nullable" : true,
-                    "name" : "message",
-                    "id" : "message",
-                    "ordinalPosition" : 4,
-                    "enabled" : true
-                  }
-                ],
-                "name" : "ms_log",
-                "id" : "ms_log",
-                "enabled" : true
-              },
-              {
                 "nameProtected" : true,
                 "expanded" : true,
                 "foreignKeys" : [
@@ -336,6 +242,18 @@
                     "name" : "password",
                     "id" : "password",
                     "ordinalPosition" : 4,
+                    "enabled" : true
+                  },
+                  {
+                    "databaseType" : "java.lang.Boolean",
+                    "nameProtected" : true,
+                    "expanded" : true,
+                    "nullable" : true,
+                    "autoIncrement" : false,
+                    "name" : "open_in_new_tab",
+                    "nullableImplementation" : "OPTIONAL",
+                    "id" : "open_in_new_tab",
+                    "ordinalPosition" : 5,
                     "enabled" : true
                   }
                 ],

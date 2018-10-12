@@ -1,6 +1,7 @@
 package org.limmen.mystart.mystart.public_.ms_user.generated;
 
 import com.speedment.common.annotation.GeneratedCode;
+import com.speedment.common.function.OptionalBoolean;
 import com.speedment.runtime.core.util.OptionalUtil;
 import org.limmen.mystart.mystart.public_.ms_user.MsUser;
 
@@ -24,6 +25,7 @@ public abstract class GeneratedMsUserImpl implements MsUser {
     private String name;
     private String email;
     private String password;
+    private Boolean openInNewTab;
     
     protected GeneratedMsUserImpl() {}
     
@@ -45,6 +47,11 @@ public abstract class GeneratedMsUserImpl implements MsUser {
     @Override
     public Optional<String> getPassword() {
         return Optional.ofNullable(password);
+    }
+    
+    @Override
+    public OptionalBoolean getOpenInNewTab() {
+        return OptionalUtil.ofNullable(openInNewTab);
     }
     
     @Override
@@ -72,12 +79,19 @@ public abstract class GeneratedMsUserImpl implements MsUser {
     }
     
     @Override
+    public MsUser setOpenInNewTab(Boolean openInNewTab) {
+        this.openInNewTab = openInNewTab;
+        return this;
+    }
+    
+    @Override
     public String toString() {
         final StringJoiner sj = new StringJoiner(", ", "{ ", " }");
-        sj.add("id = "       + Objects.toString(getId()));
-        sj.add("name = "     + Objects.toString(OptionalUtil.unwrap(getName())));
-        sj.add("email = "    + Objects.toString(OptionalUtil.unwrap(getEmail())));
-        sj.add("password = " + Objects.toString(OptionalUtil.unwrap(getPassword())));
+        sj.add("id = "           + Objects.toString(getId()));
+        sj.add("name = "         + Objects.toString(OptionalUtil.unwrap(getName())));
+        sj.add("email = "        + Objects.toString(OptionalUtil.unwrap(getEmail())));
+        sj.add("password = "     + Objects.toString(OptionalUtil.unwrap(getPassword())));
+        sj.add("openInNewTab = " + Objects.toString(OptionalUtil.unwrap(getOpenInNewTab())));
         return "MsUserImpl " + sj.toString();
     }
     
@@ -90,6 +104,7 @@ public abstract class GeneratedMsUserImpl implements MsUser {
         if (!Objects.equals(this.getName(), thatMsUser.getName())) { return false; }
         if (!Objects.equals(this.getEmail(), thatMsUser.getEmail())) { return false; }
         if (!Objects.equals(this.getPassword(), thatMsUser.getPassword())) { return false; }
+        if (!Objects.equals(this.getOpenInNewTab(), thatMsUser.getOpenInNewTab())) { return false; }
         return true;
     }
     
@@ -100,6 +115,7 @@ public abstract class GeneratedMsUserImpl implements MsUser {
         hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getName()));
         hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getEmail()));
         hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getPassword()));
+        hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getOpenInNewTab()));
         return hash;
     }
 }

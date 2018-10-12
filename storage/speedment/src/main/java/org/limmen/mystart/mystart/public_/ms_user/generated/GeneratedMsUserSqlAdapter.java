@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static com.speedment.common.injector.State.RESOLVED;
+import static com.speedment.runtime.core.internal.util.sql.ResultSetUtil.*;
 
 /**
  * The generated Sql Adapter for a {@link
@@ -32,10 +33,11 @@ public abstract class GeneratedMsUserSqlAdapter implements SqlAdapter<MsUser> {
     
     protected MsUser apply(ResultSet resultSet, int offset) throws SQLException {
         return createEntity()
-            .setId(       resultSet.getLong(1 + offset))
-            .setName(     resultSet.getString(2 + offset))
-            .setEmail(    resultSet.getString(3 + offset))
-            .setPassword( resultSet.getString(4 + offset))
+            .setId(           resultSet.getLong(1 + offset))
+            .setName(         resultSet.getString(2 + offset))
+            .setEmail(        resultSet.getString(3 + offset))
+            .setPassword(     resultSet.getString(4 + offset))
+            .setOpenInNewTab( getBoolean(resultSet, 5 + offset))
             ;
     }
     

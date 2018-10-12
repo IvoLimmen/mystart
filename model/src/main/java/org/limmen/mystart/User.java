@@ -12,6 +12,8 @@ public final class User extends BaseObject {
 
   private String name;
 
+  private boolean openInNewTab;
+
   private String password;
 
   public User(String name, String email, String password) {
@@ -36,12 +38,20 @@ public final class User extends BaseObject {
     return password;
   }
 
+  public boolean isOpenInNewTab() {
+    return openInNewTab;
+  }
+
   public void setEmail(String email) {
     this.email = email;
   }
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public void setOpenInNewTab(boolean openInNewTab) {
+    this.openInNewTab = openInNewTab;
   }
 
   public void setPassword(String password) {
