@@ -77,6 +77,7 @@ public class LinkServlet extends AbstractServlet {
         link = new Link();
       }
 
+      req.setAttribute("referer", getOrignalParameters(req));
       req.setAttribute("link", link);
       req.setAttribute("labels", DomainUtil.formatLabels(link));
       req.getRequestDispatcher("/edit.jsp").include(req, res);
@@ -186,11 +187,11 @@ public class LinkServlet extends AbstractServlet {
       } else {
         getLinkStorage().update(userId, link);
       }
-      res.sendRedirect("/home");
+      res.sendRedirect("/home?" + req.getParameter("referer"));
 
     } else if (exists(req, "cancelButton")) {
 
-      res.sendRedirect("/home");
+      res.sendRedirect("/home?" + req.getParameter("referer"));
     }
   }
 }
