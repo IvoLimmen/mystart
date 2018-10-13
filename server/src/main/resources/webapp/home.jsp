@@ -17,12 +17,12 @@
     </form>
     <section>
       <c:if test="${!empty labels && empty links}">
-        <div class="container">
+        <div class="labelmenu">
           <c:forEach items="${labels}" var="label">
             <c:url value="/home" var="url">
               <c:param name="label" value="${label}" />
             </c:url>
-            <a href="${url}"><c:out value="${label}"/></a><br/>
+            <a href="${url}">${label}</a><br/>
           </c:forEach>
         </div>
       </c:if>
@@ -32,23 +32,28 @@
           <c:forEach items="${links}" var="link">
             <section class="bookmark">
               <div class="bookmark-content">
-                <a href="/link?reg=<c:out value="${link.id}"/>" ${user.isOpenInNewTab() ? "target=\"_BLANK\"" : "" }><h3>${link.title}</h3></a>
+                <a href="/link?reg=${link.id}" ${user.isOpenInNewTab() ? "target=\"_BLANK\"" : "" }><h3>${link.title}</h3></a>
                 <p class="description">${link.description}"</p>
-                <p class="created">Created: <c:out value="${link.formattedCreationDate}"/></p>
-                <p class="visited">Visited: <c:out value="${link.formattedLastVisit}"/></p>     
+                <p class="created">Created: ${link.formattedCreationDate}</p>
+                <p class="visited">Visited: ${link.formattedLastVisit}</p>     
                 <p class="labels">
                   <c:forEach items="${link.labels}" var="label" varStatus="status">
                     <c:url value="/home" var="url">
                       <c:param name="label" value="${label}"/>
                     </c:url>
-                    <a href="${url}"><c:out value="${label}"/></a>
+                    <a href="${url}">${label}</a>
                     <c:if test="${!status.last}">, </c:if>
                   </c:forEach>
                 </p>
               </div>
               <div class="bookmark-footer">
-                <a href="/link?edit=<c:out value="${link.id}"/>">Edit</a>
-                <a href="/link?delete=<c:out value="${link.id}"/>">Delete</a>
+                <div class="info">
+                  <p class="source">${link.source}</p>
+                </div>
+                <div class="actions">
+                  <a href="/link?edit=${link.id}">Edit</a>
+                  <a href="/link?delete=${link.id}">Delete</a>
+                </div>
               </div>
             </section>            
           </c:forEach>

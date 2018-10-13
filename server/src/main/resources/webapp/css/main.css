@@ -23,10 +23,19 @@
 }
 
 .bookmark-footer {    
-  float: right;
   height: 10%;
 }
 
-.footer > a {  
+.bookmark-footer .info {  
+  float: left;  
+  font-size: smaller;
+}
+
+.info > p {
+  margin: 0px;  
+}
+
+.bookmark-footer .actions {  
+  float: right;    
   font-size: smaller;
 }
