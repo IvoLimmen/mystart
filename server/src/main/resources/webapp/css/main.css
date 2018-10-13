@@ -27,11 +27,12 @@
 }
 
 .bookmark-footer .info {  
-  float: left;  
-  font-size: smaller;
+  float: left;    
 }
 
 .info > p {
+  color: #999;
+  font-size: smaller;
   margin: 0px;  
 }
 
