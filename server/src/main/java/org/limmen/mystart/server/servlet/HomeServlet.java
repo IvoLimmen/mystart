@@ -37,31 +37,27 @@ public class HomeServlet extends AbstractServlet {
       return;
     }
 
-    if (exists(req, "reg")) {
+    if (exists(req, "searchButton")) {
 
-      Long id = Long.parseLong(req.getParameter("reg"));
-      Link link = getLinkStorage().get(userId, id);
-      link.visited();
-      getLinkStorage().create(userId, link);
-      res.sendRedirect(link.getUrl());
+      String search = req.getParameter("search");
+      Collection<Link> links = getLinkStorage().getAll(userId).stream()
+          .filter(link -> link.hasKeyword(search))
+          .sorted((link1, link2) -> {
+            if (link1.getTitle() != null && link2.getTitle() != null) {
+              return link1.getTitle().compareTo(link2.getTitle());
+            }
+            return 0;
+          })
+          .collect(Collectors.toList());
 
-    } else {
+      req.setAttribute("links", links);
 
-      if (exists(req, "searchButton")) {
+    } else if (exists(req, "label")) {
 
-        String search = req.getParameter("search");
-        Collection<Link> links = getLinkStorage().getAll(userId).stream()
-            .filter(link -> link.hasKeyword(search))
-            .collect(Collectors.toList());
-        req.setAttribute("links", links);
-
-      } else if (exists(req, "label")) {
-
-        Collection<Link> links = getLinkStorage().getAllByLabel(userId, req.getParameter("label"));
-        req.setAttribute("links", links);
-      }
-
-      req.getRequestDispatcher("/home.jsp").include(req, res);
+      Collection<Link> links = getLinkStorage().getAllByLabel(userId, req.getParameter("label"));
+      req.setAttribute("links", links);
     }
+
+    req.getRequestDispatcher("/home.jsp").include(req, res);
   }
 }
