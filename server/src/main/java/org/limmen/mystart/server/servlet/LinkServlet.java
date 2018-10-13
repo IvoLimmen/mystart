@@ -120,31 +120,32 @@ public class LinkServlet extends AbstractServlet {
       Collection<Link> links = getLinkStorage().getAll(userId);
       Collection<String> labels = getLinkStorage().getAllLabels(userId);
 
+      Map<String, Long> stats = new TreeMap<>(CASE_INSENSITIVE_ORDER);
+
       switch (key) {
         case "source":
-          req.setAttribute("map",
+          stats.putAll(
               links.stream()
                   .collect(groupingBy(g -> g.getSource(), counting())));
           break;
         case "create_year":
-          req.setAttribute("map",
+          stats.putAll(
               links.stream()
-                  .collect(groupingBy(g -> g.getCreationDate().getYear(), counting())));
+                  .collect(groupingBy(g -> g.getCreationDate().getYear() + "", counting())));
           break;
         case "visit_year":
-          req.setAttribute("map",
+          stats.putAll(
               links.stream()
-                  .collect(groupingBy(g -> g.getLastVisit() == null ? "Never" : g.getLastVisit().getYear(), counting())));
+                  .collect(groupingBy(g -> g.getLastVisit() == null ? "Never" : g.getLastVisit().getYear() + "", counting())));
           break;
         case "labels":
-          Map<String, Long> stats = new TreeMap<>(CASE_INSENSITIVE_ORDER);
           labels.forEach(l -> {
             stats.put(l, links.stream().filter(f -> f.getLabels().contains(l)).count());
           });
-          req.setAttribute("map", stats);
           break;
       }
 
+      req.setAttribute("map", stats);
       req.getRequestDispatcher("/stats.jsp").include(req, res);
     }
   }
