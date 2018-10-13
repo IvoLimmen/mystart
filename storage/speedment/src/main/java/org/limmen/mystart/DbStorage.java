@@ -4,19 +4,21 @@ import com.typesafe.config.Config;
 import org.flywaydb.core.Flyway;
 import org.limmen.mystart.mystart.public_.ms_link.MsLinkManager;
 import org.limmen.mystart.mystart.public_.ms_user.MsUserManager;
+import org.limmen.mystart.mystart.public_.ms_visits.MsVisitsManager;
 
 public class DbStorage implements Storage {
 
   private MyStartApplication app;
   private MsLinkManager links;
   private MsUserManager users;
+  private MsVisitsManager visits;
 
   public DbStorage() {
   }
 
   @Override
   public LinkStorage getLinkStorage() {
-    return new DbLinkStorage(links);
+    return new DbLinkStorage(links, visits);
   }
 
   @Override
@@ -47,5 +49,6 @@ public class DbStorage implements Storage {
 
     links = app.getOrThrow(MsLinkManager.class);
     users = app.getOrThrow(MsUserManager.class);
+    visits = app.getOrThrow(MsVisitsManager.class);
   }
 }

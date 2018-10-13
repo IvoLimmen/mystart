@@ -1,5 +1,6 @@
 package org.limmen.mystart;
 
+import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -10,6 +11,8 @@ import org.limmen.mystart.exception.StorageException;
 import org.limmen.mystart.mystart.public_.ms_link.MsLink;
 import org.limmen.mystart.mystart.public_.ms_link.MsLinkImpl;
 import org.limmen.mystart.mystart.public_.ms_link.MsLinkManager;
+import org.limmen.mystart.mystart.public_.ms_visits.MsVisitsImpl;
+import org.limmen.mystart.mystart.public_.ms_visits.MsVisitsManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,8 +22,11 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
 
   private final MsLinkManager links;
 
-  public DbLinkStorage(MsLinkManager links) {
+  private final MsVisitsManager visits;
+
+  public DbLinkStorage(MsLinkManager links, MsVisitsManager visits) {
     this.links = links;
+    this.visits = visits;
   }
 
   private Link fromDb(MsLink link) {
@@ -112,9 +118,17 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
           msLink.setTitle(link.getTitle());
           msLink.setUrl(link.getUrl());
           msLink.setPrivateNetwork(link.isPrivateNetwork());
-          msLink.setLabels(link.getLabels().stream().reduce((acc, item) -> acc + ";" + item).get());
-          msLink.setDescription(link.getDescription());
-          msLink.setLastVisit(ts(link.getLastVisit()));
+      msLink.setLabels(link.getLabels().stream()
+          .reduce((acc, item) -> acc + ";" + item).get());
+      msLink.setDescription(link.getDescription());
+
+      if (link.getLastVisit() != null) {
+        Timestamp timestamp = ts(link.getLastVisit());
+        msLink.setLastVisit(timestamp);
+        visits.persist(new MsVisitsImpl()
+            .setLinkId(link.getId())
+            .setVisit(timestamp));
+      }
 
       links.update(msLink);
         });

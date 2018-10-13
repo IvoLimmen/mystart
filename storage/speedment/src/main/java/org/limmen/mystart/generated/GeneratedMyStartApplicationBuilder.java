@@ -10,6 +10,8 @@ import org.limmen.mystart.mystart.public_.ms_link.MsLinkManagerImpl;
 import org.limmen.mystart.mystart.public_.ms_link.MsLinkSqlAdapter;
 import org.limmen.mystart.mystart.public_.ms_user.MsUserManagerImpl;
 import org.limmen.mystart.mystart.public_.ms_user.MsUserSqlAdapter;
+import org.limmen.mystart.mystart.public_.ms_visits.MsVisitsManagerImpl;
+import org.limmen.mystart.mystart.public_.ms_visits.MsVisitsSqlAdapter;
 
 /**
  * A generated base {@link
@@ -28,8 +30,10 @@ public abstract class GeneratedMyStartApplicationBuilder extends AbstractApplica
         super(MyStartApplicationImpl.class, GeneratedMyStartMetadata.class);
         withManager(MsLinkManagerImpl.class);
         withManager(MsUserManagerImpl.class);
+        withManager(MsVisitsManagerImpl.class);
         withComponent(MsLinkSqlAdapter.class);
         withComponent(MsUserSqlAdapter.class);
+        withComponent(MsVisitsSqlAdapter.class);
     }
     
     @Override

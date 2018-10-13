@@ -1,3 +1,4 @@
+drop table if exists ms_visits;
 drop table if exists ms_link;
 drop table if exists ms_user;
 
@@ -22,4 +23,11 @@ create table ms_link (
   private_network bool,
   last_visit timestamp,
   creation_date timestamp
+);
+
+create table ms_visits (
+  id bigserial primary key,
+  link_id bigint references ms_link,
+  
+  visit timestamp
 );
