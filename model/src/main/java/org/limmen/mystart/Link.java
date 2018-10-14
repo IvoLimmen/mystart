@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 public class Link extends BaseObject implements Comparable<Link> {
 
@@ -48,6 +49,24 @@ public class Link extends BaseObject implements Comparable<Link> {
     }
 
     return this.url.compareTo(o.url);
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    final Link other = (Link) obj;
+    if (!Objects.equals(this.url, other.url)) {
+      return false;
+    }
+    return true;
   }
 
   public LocalDateTime getCreationDate() {
@@ -148,6 +167,13 @@ public class Link extends BaseObject implements Comparable<Link> {
    */
   public boolean hasKeywordInLabel(String keyword) {
     return this.labels.stream().map(l -> l.toLowerCase()).filter(f -> f.contains(keyword)).count() > 0;
+  }
+
+  @Override
+  public int hashCode() {
+    int hash = 3;
+    hash = 23 * hash + Objects.hashCode(this.url);
+    return hash;
   }
 
   public boolean isPrivateNetwork() {

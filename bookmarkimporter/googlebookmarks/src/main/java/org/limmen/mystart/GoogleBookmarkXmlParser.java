@@ -6,6 +6,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -32,7 +33,7 @@ public class GoogleBookmarkXmlParser extends AbstractParser {
    }
 
    @Override
-   public List<Link> parse(ParseContext context) throws IOException {
+  public Set<Link> parse(ParseContext context) throws IOException {
       DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
       try {
          DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();

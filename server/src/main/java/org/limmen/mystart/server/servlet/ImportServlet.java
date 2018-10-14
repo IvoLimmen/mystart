@@ -5,7 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletException;
@@ -55,7 +55,7 @@ public class ImportServlet extends AbstractServlet {
     }
 
     boolean skipDuplicates = getBool(req, "skipDuplicates");
-    List<Link> links = getParser().parse(parseContext);
+    Set<Link> links = getParser().parse(parseContext);
     log.info("Parsed {} links from {}", links.size(), getParser().getName());
 
     getLinkStorage().importCollection(userId, links, skipDuplicates);

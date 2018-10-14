@@ -8,83 +8,84 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class GitHubParser extends AbstractParser implements Parser {
 
-   public GitHubParser() {
-      setSource("GitHub Stars");
-   }
+  public GitHubParser() {
+    setSource("GitHub Stars");
+  }
 
-   @Override
-   public String getName() {
-      return "GitHub";
-   }
+  @Override
+  public String getName() {
+    return "GitHub";
+  }
 
-   @Override
-   public boolean canParse(ParseContext context) {
-      return context.getUrl() != null && context.getUrl().contains("github.com");
-   }
+  @Override
+  public boolean canParse(ParseContext context) {
+    return context.getUrl() != null && context.getUrl().contains("github.com");
+  }
 
-   @Override
-   public List<Link> parse(ParseContext context) throws IOException {
+  @Override
+  public Set<Link> parse(ParseContext context) throws IOException {
 
-      GitHubPageLoader loader = new GitHubPageLoader();
+    GitHubPageLoader loader = new GitHubPageLoader();
 
-      parseFile(loader.downloadFile(context.getUrl()));
+    parseFile(loader.downloadFile(context.getUrl()));
 
-      while (loader.hasMoreElements()) {
-         parseFile(loader.nextElement());
+    while (loader.hasMoreElements()) {
+      parseFile(loader.nextElement());
+    }
+
+    return getLinks();
+  }
+
+  private void parseFile(File file) throws IOException {
+    StringBuilder json = new StringBuilder(4096);
+    try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+      String line;
+      while ((line = reader.readLine()) != null) {
+        json.append(line);
       }
-      
-      return getLinks();
-   }
+    }
 
-   private void parseFile(File file) throws IOException {
-      StringBuilder json = new StringBuilder(4096);
-      try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-         String line;
-         while ((line = reader.readLine()) != null) {
-            json.append(line);
-         }
-      }
+    JSONArray array = new JSONArray(json.toString());
 
-      JSONArray array = new JSONArray(json.toString());
+    for (int i = 0; i < array.length(); i++) {
+      JSONObject object = array.getJSONObject(i);
+      parseProject(object);
+    }
+  }
 
-      for (int i = 0; i < array.length(); i++) {
-         JSONObject object = array.getJSONObject(i);
-         parseProject(object);
-      }
-   }
+  private void parseProject(JSONObject json) {
+    String name = json.getString("name");
+    String description = json.optString("description");
 
-   private void parseProject(JSONObject json) {
-      String name = json.getString("name");
-      String description = json.optString("description");
+    List<String> labels = new ArrayList<>();
+    if (json.has("language") && !json.isNull("language")) {
+      labels.add(json.getString("language"));
+    }
+    labels.add("GitHub");
 
-      List<String> labels = new ArrayList<>();
-      if (json.has("language") && !json.isNull("language")) {
-         labels.add(json.getString("language"));
-      }
-      labels.add("GitHub");
+    String href = json.getString("html_url");
 
-      String href = json.getString("html_url");
+    if (json.has("homepage") && !json.isNull("homepage")) {
+      href = json.getString("homepage");
+    }
 
-      if (json.has("homepage") && !json.isNull("homepage")) {
-         href = json.getString("homepage");
-      }
+    if (!StringUtils.isBlank(href)) {
+      addLink(name, href, labels, description, getTimestamp(json), null);
+    }
+  }
 
-      if (!StringUtils.isBlank(href)) {
-         addLink(name, href, labels, description, getTimestamp(json), null);
-      }
-   }
-
-   private LocalDateTime getTimestamp(JSONObject link) {
-      String timeStr = link.getString("created_at");
-      if (timeStr == null || timeStr.equals("")) {
-         return null;
-      }
-      return LocalDateTime.parse(timeStr, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'"));
-   }
+  private LocalDateTime getTimestamp(JSONObject link) {
+    String timeStr = link.getString("created_at");
+    if (timeStr == null || timeStr.equals("")) {
+      return null;
+    }
+    return LocalDateTime.parse(timeStr, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'"));
+  }
 }

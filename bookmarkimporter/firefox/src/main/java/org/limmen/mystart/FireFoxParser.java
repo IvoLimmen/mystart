@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 public class FireFoxParser extends AbstractParser implements Parser {
 
@@ -27,7 +28,7 @@ public class FireFoxParser extends AbstractParser implements Parser {
    }
 
    @Override
-   public List<Link> parse(ParseContext context) throws IOException {
+  public Set<Link> parse(ParseContext context) throws IOException {
 
       List<LinkDto> list = new ArrayList<>();
 
