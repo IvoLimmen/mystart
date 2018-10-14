@@ -33,7 +33,7 @@
             <section class="bookmark">
               <div class="bookmark-content">
                 <a href="/link?reg=${link.id}" ${user.isOpenInNewTab() ? "target=\"_BLANK\"" : "" }><h3>${link.title}</h3></a>
-                <p class="description">${link.description}"</p>
+                <p class="description">${link.description}</p>
                 <p class="created">Created: ${link.formattedCreationDate}</p>
                 <p class="visited">Visited: ${link.formattedLastVisit}</p>     
                 <p class="labels">
