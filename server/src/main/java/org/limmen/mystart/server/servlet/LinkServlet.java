@@ -2,6 +2,7 @@ package org.limmen.mystart.server.servlet;
 
 import java.io.IOException;
 import static java.lang.String.CASE_INSENSITIVE_ORDER;
+import java.net.URLDecoder;
 import java.nio.file.Path;
 import java.util.Collection;
 import java.util.Map;
@@ -95,17 +96,15 @@ public class LinkServlet extends AbstractServlet {
         selection = selection.substring(0, selection.indexOf("searchButton=") - 1);
       }
       String key = selection.split("=")[0];
-      String value = selection.split("=")[1];
+      String value = URLDecoder.decode(selection.split("=")[1], "UTF-8");
 
       if (key.equals("search")) {
-        log.debug(value);
         getLinkStorage().getAll(userId).stream()
             .filter(link -> link.hasKeyword(value))
             .forEach(link -> {
               getLinkStorage().remove(userId, link.getId());
             });
       } else if (key.equals("label")) {
-        log.debug(value);
         getLinkStorage().getAllByLabel(userId, value)
             .forEach(link -> {
               getLinkStorage().remove(userId, link.getId());
