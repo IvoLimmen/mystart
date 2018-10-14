@@ -4,10 +4,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class Link extends BaseObject implements Comparable<Link> {
 
@@ -17,7 +17,7 @@ public class Link extends BaseObject implements Comparable<Link> {
 
   private String description;
 
-  private final List<String> labels = new ArrayList<>();
+  private final Set<String> labels = new HashSet<>();
 
   private LocalDateTime lastVisit;
 
@@ -40,6 +40,10 @@ public class Link extends BaseObject implements Comparable<Link> {
 
   public void addLabel(String label) {
     this.labels.add(label);
+  }
+
+  public void addLabels(Collection<String> labels) {
+    this.labels.addAll(labels);
   }
 
   @Override

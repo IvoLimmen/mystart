@@ -81,8 +81,7 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
         if (skipDuplicates) {
           LOGGER.info("Not adding link {} as we allready have it.", l.getUrl());
         } else {
-          l.getLabels().removeAll(link.getLabels());
-          link.getLabels().addAll(l.getLabels());
+          link.addLabels(l.getLabels());
           update(userId, link);
           LOGGER.info("Updating link {} by adding labels.", l.getUrl());
         }

@@ -16,59 +16,67 @@ import org.slf4j.LoggerFactory;
 
 public abstract class AbstractParser implements Parser {
 
-   protected static final Logger LOGGER = LoggerFactory.getLogger(AbstractParser.class);
+  protected static final Logger LOGGER = LoggerFactory.getLogger(AbstractParser.class);
 
   private final Set<Link> links = new HashSet<>();
 
-   private String source;
+  private String source;
 
-   protected void addLink(String title, String href, String label, String description, LocalDateTime creationDateTime) {
-      addLink(title, href, Collections.singletonList(label), description, creationDateTime, null);
-   }
+  protected void addLink(String title, String href, String label, String description, LocalDateTime creationDateTime) {
+    addLink(title, href, Collections.singletonList(label), description, creationDateTime, null);
+  }
 
-   protected void addLink(String title, String href, Collection<String> labels, String description,
-       LocalDateTime creationDateTime, LocalDateTime lastVisitDate) {
+  protected void addLink(String title, String href, Collection<String> labels, String description,
+      LocalDateTime creationDateTime, LocalDateTime lastVisitDate) {
 
-      if (title == null) {
-         title = "No title";
-      }
+    if (title == null) {
+      title = "No title";
+    }
 
-      Link link = new Link(href);
-      link.setTitle(title);
-      link.setDescription(description);
-      link.setLastVisit(lastVisitDate);
-      link.setCreationDate(creationDateTime);
-      link.setSource(source);
-      link.setLabels(labels);
+    Link link = new Link(href);
+    link.setTitle(title);
+    link.setDescription(description);
+    link.setLastVisit(lastVisitDate);
+    link.setCreationDate(creationDateTime);
+    link.setSource(source);
+    link.setLabels(labels);
 
+    if (this.links.contains(link)) {
+      this.links.stream()
+          .filter(l -> l.equals(link))
+          .findFirst()
+          .ifPresent(l -> {
+            l.addLabels(link.getLabels());
+          });
+    } else {
       this.links.add(link);
-   }
+    }
+  }
 
-   final public void setSource(String source) {
-      this.source = source;
-   }
+  final public void setSource(String source) {
+    this.source = source;
+  }
 
   public Set<Link> getLinks() {
-      return links;
-   }
+    return links;
+  }
 
-   protected LocalDateTime convertEpochToTimestamp(final long dateTime) {
-      long time = (dateTime / 1000);
-      return LocalDateTime.ofInstant(new Date(time).toInstant(), ZoneId.systemDefault());
-   }
+  protected LocalDateTime convertEpochToTimestamp(final long dateTime) {
+    long time = (dateTime / 1000);
+    return LocalDateTime.ofInstant(new Date(time).toInstant(), ZoneId.systemDefault());
+  }
 
-   protected String getDataFromFile(ParseContext context) {
-      if (context.hasData()) {
-         try {
-            StringWriter writer = new StringWriter();
-            IOUtils.copy(new InputStreamReader(context.getInputStream()), writer);
-            return writer.toString();
-         }
-         catch (IOException ex) {
-            return null;
-         }
-      } else {
-         return null;
+  protected String getDataFromFile(ParseContext context) {
+    if (context.hasData()) {
+      try {
+        StringWriter writer = new StringWriter();
+        IOUtils.copy(new InputStreamReader(context.getInputStream()), writer);
+        return writer.toString();
+      } catch (IOException ex) {
+        return null;
       }
-   }
+    } else {
+      return null;
+    }
+  }
 }
