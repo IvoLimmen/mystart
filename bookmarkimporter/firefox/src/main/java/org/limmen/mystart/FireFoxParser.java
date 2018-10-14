@@ -39,7 +39,7 @@ public class FireFoxParser extends AbstractParser implements Parser {
              "select b.parent, b.title, p.url, b.dateAdded, p.last_visit_date, a.content from moz_bookmarks b "
              + "left join moz_places p on b.fk = p.id	"
              + "left join moz_items_annos a on b.id = a.item_id "
-             + "where b.type = 1")) {
+             + "where b.type = 1 and b.guid not in (\"menu________\",\"toolbar_____\",\"tags________\",\"unfiled_____\")")) {
 
             while (rs.next()) {
 
