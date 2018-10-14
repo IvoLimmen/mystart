@@ -122,6 +122,28 @@ public interface GeneratedMsLink {
     );
     /**
      * This Field corresponds to the {@link MsLink} field that can be obtained
+     * using the {@link MsLink#getCheckResult()} method.
+     */
+    StringField<MsLink, String> CHECK_RESULT = StringField.create(
+        Identifier.CHECK_RESULT,
+        o -> OptionalUtil.unwrap(o.getCheckResult()),
+        MsLink::setCheckResult,
+        TypeMapper.identity(),
+        false
+    );
+    /**
+     * This Field corresponds to the {@link MsLink} field that can be obtained
+     * using the {@link MsLink#getLastCheck()} method.
+     */
+    ComparableField<MsLink, Timestamp, Timestamp> LAST_CHECK = ComparableField.create(
+        Identifier.LAST_CHECK,
+        o -> OptionalUtil.unwrap(o.getLastCheck()),
+        MsLink::setLastCheck,
+        TypeMapper.identity(),
+        false
+    );
+    /**
+     * This Field corresponds to the {@link MsLink} field that can be obtained
      * using the {@link MsLink#getLastVisit()} method.
      */
     ComparableField<MsLink, Timestamp, Timestamp> LAST_VISIT = ComparableField.create(
@@ -207,6 +229,22 @@ public interface GeneratedMsLink {
      * @return the privateNetwork of this MsLink
      */
     OptionalBoolean getPrivateNetwork();
+    
+    /**
+     * Returns the checkResult of this MsLink. The checkResult field corresponds
+     * to the database column mystart.public.ms_link.check_result.
+     * 
+     * @return the checkResult of this MsLink
+     */
+    Optional<String> getCheckResult();
+    
+    /**
+     * Returns the lastCheck of this MsLink. The lastCheck field corresponds to
+     * the database column mystart.public.ms_link.last_check.
+     * 
+     * @return the lastCheck of this MsLink
+     */
+    Optional<Timestamp> getLastCheck();
     
     /**
      * Returns the lastVisit of this MsLink. The lastVisit field corresponds to
@@ -298,6 +336,24 @@ public interface GeneratedMsLink {
     MsLink setPrivateNetwork(Boolean privateNetwork);
     
     /**
+     * Sets the checkResult of this MsLink. The checkResult field corresponds to
+     * the database column mystart.public.ms_link.check_result.
+     * 
+     * @param checkResult to set of this MsLink
+     * @return            this MsLink instance
+     */
+    MsLink setCheckResult(String checkResult);
+    
+    /**
+     * Sets the lastCheck of this MsLink. The lastCheck field corresponds to the
+     * database column mystart.public.ms_link.last_check.
+     * 
+     * @param lastCheck to set of this MsLink
+     * @return          this MsLink instance
+     */
+    MsLink setLastCheck(Timestamp lastCheck);
+    
+    /**
      * Sets the lastVisit of this MsLink. The lastVisit field corresponds to the
      * database column mystart.public.ms_link.last_visit.
      * 
@@ -334,6 +390,8 @@ public interface GeneratedMsLink {
         URL             ("url"),
         LABELS          ("labels"),
         PRIVATE_NETWORK ("private_network"),
+        CHECK_RESULT    ("check_result"),
+        LAST_CHECK      ("last_check"),
         LAST_VISIT      ("last_visit"),
         CREATION_DATE   ("creation_date");
         

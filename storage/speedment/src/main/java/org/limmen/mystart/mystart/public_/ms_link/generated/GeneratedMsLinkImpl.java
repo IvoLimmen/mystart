@@ -33,6 +33,8 @@ public abstract class GeneratedMsLinkImpl implements MsLink {
     private String url;
     private String labels;
     private Boolean privateNetwork;
+    private String checkResult;
+    private Timestamp lastCheck;
     private Timestamp lastVisit;
     private Timestamp creationDate;
     
@@ -76,6 +78,16 @@ public abstract class GeneratedMsLinkImpl implements MsLink {
     @Override
     public OptionalBoolean getPrivateNetwork() {
         return OptionalUtil.ofNullable(privateNetwork);
+    }
+    
+    @Override
+    public Optional<String> getCheckResult() {
+        return Optional.ofNullable(checkResult);
+    }
+    
+    @Override
+    public Optional<Timestamp> getLastCheck() {
+        return Optional.ofNullable(lastCheck);
     }
     
     @Override
@@ -137,6 +149,18 @@ public abstract class GeneratedMsLinkImpl implements MsLink {
     }
     
     @Override
+    public MsLink setCheckResult(String checkResult) {
+        this.checkResult = checkResult;
+        return this;
+    }
+    
+    @Override
+    public MsLink setLastCheck(Timestamp lastCheck) {
+        this.lastCheck = lastCheck;
+        return this;
+    }
+    
+    @Override
     public MsLink setLastVisit(Timestamp lastVisit) {
         this.lastVisit = lastVisit;
         return this;
@@ -168,6 +192,8 @@ public abstract class GeneratedMsLinkImpl implements MsLink {
         sj.add("url = "            + Objects.toString(OptionalUtil.unwrap(getUrl())));
         sj.add("labels = "         + Objects.toString(OptionalUtil.unwrap(getLabels())));
         sj.add("privateNetwork = " + Objects.toString(OptionalUtil.unwrap(getPrivateNetwork())));
+        sj.add("checkResult = "    + Objects.toString(OptionalUtil.unwrap(getCheckResult())));
+        sj.add("lastCheck = "      + Objects.toString(OptionalUtil.unwrap(getLastCheck())));
         sj.add("lastVisit = "      + Objects.toString(OptionalUtil.unwrap(getLastVisit())));
         sj.add("creationDate = "   + Objects.toString(OptionalUtil.unwrap(getCreationDate())));
         return "MsLinkImpl " + sj.toString();
@@ -186,6 +212,8 @@ public abstract class GeneratedMsLinkImpl implements MsLink {
         if (!Objects.equals(this.getUrl(), thatMsLink.getUrl())) { return false; }
         if (!Objects.equals(this.getLabels(), thatMsLink.getLabels())) { return false; }
         if (!Objects.equals(this.getPrivateNetwork(), thatMsLink.getPrivateNetwork())) { return false; }
+        if (!Objects.equals(this.getCheckResult(), thatMsLink.getCheckResult())) { return false; }
+        if (!Objects.equals(this.getLastCheck(), thatMsLink.getLastCheck())) { return false; }
         if (!Objects.equals(this.getLastVisit(), thatMsLink.getLastVisit())) { return false; }
         if (!Objects.equals(this.getCreationDate(), thatMsLink.getCreationDate())) { return false; }
         return true;
@@ -202,6 +230,8 @@ public abstract class GeneratedMsLinkImpl implements MsLink {
         hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getUrl()));
         hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getLabels()));
         hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getPrivateNetwork()));
+        hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getCheckResult()));
+        hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getLastCheck()));
         hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getLastVisit()));
         hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getCreationDate()));
         return hash;

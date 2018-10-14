@@ -27,6 +27,8 @@ public class GeneratedMyStartMetadata extends AbstractApplicationMetadata {
         initPart1(sb);
         initPart2(sb);
         initPart3(sb);
+        initPart4(sb);
+        initPart5(sb);
         return sb.toString();
     }
     
@@ -61,6 +63,157 @@ public class GeneratedMyStartMetadata extends AbstractApplicationMetadata {
             "              {",
             "                \"columns\" : [",
             "                  {",
+            "                    \"databaseType\" : \"java.lang.Integer\",",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : true,",
+            "                    \"id\" : \"installed_rank\",",
+            "                    \"name\" : \"installed_rank\",",
+            "                    \"nullable\" : false,",
+            "                    \"ordinalPosition\" : 1,",
+            "                    \"typeMapper\" : \"com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper\"",
+            "                  },",
+            "                  {",
+            "                    \"databaseType\" : \"java.lang.String\",",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : true,",
+            "                    \"id\" : \"version\",",
+            "                    \"name\" : \"version\",",
+            "                    \"nullable\" : true,",
+            "                    \"ordinalPosition\" : 2",
+            "                  },",
+            "                  {",
+            "                    \"databaseType\" : \"java.lang.String\",",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : true,",
+            "                    \"id\" : \"description\",",
+            "                    \"name\" : \"description\",",
+            "                    \"nullable\" : false,",
+            "                    \"ordinalPosition\" : 3",
+            "                  },",
+            "                  {",
+            "                    \"databaseType\" : \"java.lang.String\",",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : true,",
+            "                    \"id\" : \"type\",",
+            "                    \"name\" : \"type\",",
+            "                    \"nullable\" : false,",
+            "                    \"ordinalPosition\" : 4",
+            "                  },",
+            "                  {",
+            "                    \"databaseType\" : \"java.lang.String\",",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : true,",
+            "                    \"id\" : \"script\",",
+            "                    \"name\" : \"script\",",
+            "                    \"nullable\" : false,",
+            "                    \"ordinalPosition\" : 5",
+            "                  },",
+            "                  {",
+            "                    \"databaseType\" : \"java.lang.Integer\",",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : true,",
+            "                    \"id\" : \"checksum\",",
+            "                    \"name\" : \"checksum\",",
+            "                    \"nullable\" : true,",
+            "                    \"ordinalPosition\" : 6",
+            "                  },",
+            "                  {",
+            "                    \"databaseType\" : \"java.lang.String\",",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : true,",
+            "                    \"id\" : \"installed_by\",",
+            "                    \"name\" : \"installed_by\",",
+            "                    \"nullable\" : false,",
+            "                    \"ordinalPosition\" : 7",
+            "                  },",
+            "                  {",
+            "                    \"databaseType\" : \"java.sql.Timestamp\",",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : true,",
+            "                    \"id\" : \"installed_on\",",
+            "                    \"name\" : \"installed_on\",",
+            "                    \"nullable\" : false,",
+            "                    \"ordinalPosition\" : 8",
+            "                  },",
+            "                  {",
+            "                    \"databaseType\" : \"java.lang.Integer\",",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : true,",
+            "                    \"id\" : \"execution_time\","
+        ).forEachOrdered(sb::append);
+    }
+    
+    private static void initPart1(StringBuilder sb) {
+        Stream.of(
+            "                    \"name\" : \"execution_time\",",
+            "                    \"nullable\" : false,",
+            "                    \"ordinalPosition\" : 9,",
+            "                    \"typeMapper\" : \"com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper\"",
+            "                  },",
+            "                  {",
+            "                    \"databaseType\" : \"java.lang.Boolean\",",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : true,",
+            "                    \"id\" : \"success\",",
+            "                    \"name\" : \"success\",",
+            "                    \"nullable\" : false,",
+            "                    \"ordinalPosition\" : 10,",
+            "                    \"typeMapper\" : \"com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper\"",
+            "                  }",
+            "                ],",
+            "                \"enabled\" : false,",
+            "                \"expanded\" : false,",
+            "                \"id\" : \"flyway_schema_history\",",
+            "                \"indexes\" : [",
+            "                  {",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : false,",
+            "                    \"id\" : \"flyway_schema_history_pk\",",
+            "                    \"indexColumns\" : [",
+            "                      {",
+            "                        \"expanded\" : true,",
+            "                        \"id\" : \"installed_rank\",",
+            "                        \"name\" : \"installed_rank\",",
+            "                        \"orderType\" : \"ASC\",",
+            "                        \"ordinalPosition\" : 1",
+            "                      }",
+            "                    ],",
+            "                    \"name\" : \"flyway_schema_history_pk\",",
+            "                    \"unique\" : true",
+            "                  },",
+            "                  {",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : false,",
+            "                    \"id\" : \"flyway_schema_history_s_idx\",",
+            "                    \"indexColumns\" : [",
+            "                      {",
+            "                        \"expanded\" : true,",
+            "                        \"id\" : \"success\",",
+            "                        \"name\" : \"success\",",
+            "                        \"orderType\" : \"ASC\",",
+            "                        \"ordinalPosition\" : 1",
+            "                      }",
+            "                    ],",
+            "                    \"name\" : \"flyway_schema_history_s_idx\",",
+            "                    \"unique\" : false",
+            "                  }",
+            "                ],",
+            "                \"isView\" : false,",
+            "                \"name\" : \"flyway_schema_history\",",
+            "                \"nameProtected\" : true,",
+            "                \"primaryKeyColumns\" : [",
+            "                  {",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : true,",
+            "                    \"id\" : \"installed_rank\",",
+            "                    \"name\" : \"installed_rank\",",
+            "                    \"ordinalPosition\" : 1",
+            "                  }",
+            "                ]",
+            "              },",
+            "              {",
+            "                \"columns\" : [",
+            "                  {",
             "                    \"autoIncrement\" : true,",
             "                    \"databaseType\" : \"java.lang.Long\",",
             "                    \"enabled\" : true,",
@@ -92,7 +245,12 @@ public class GeneratedMyStartMetadata extends AbstractApplicationMetadata {
             "                  {",
             "                    \"databaseType\" : \"java.lang.String\",",
             "                    \"enabled\" : true,",
-            "                    \"expanded\" : true,",
+            "                    \"expanded\" : true,"
+        ).forEachOrdered(sb::append);
+    }
+    
+    private static void initPart2(StringBuilder sb) {
+        Stream.of(
             "                    \"id\" : \"source\",",
             "                    \"name\" : \"source\",",
             "                    \"nullable\" : true,",
@@ -137,13 +295,26 @@ public class GeneratedMyStartMetadata extends AbstractApplicationMetadata {
             "                    \"expanded\" : false,",
             "                    \"id\" : \"private_network\",",
             "                    \"name\" : \"private_network\",",
-            "                    \"nullable\" : true,"
-        ).forEachOrdered(sb::append);
-    }
-    
-    private static void initPart1(StringBuilder sb) {
-        Stream.of(
+            "                    \"nullable\" : true,",
             "                    \"ordinalPosition\" : 8",
+            "                  },",
+            "                  {",
+            "                    \"databaseType\" : \"java.lang.String\",",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : true,",
+            "                    \"id\" : \"check_result\",",
+            "                    \"name\" : \"check_result\",",
+            "                    \"nullable\" : true,",
+            "                    \"ordinalPosition\" : 9",
+            "                  },",
+            "                  {",
+            "                    \"databaseType\" : \"java.sql.Timestamp\",",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : true,",
+            "                    \"id\" : \"last_check\",",
+            "                    \"name\" : \"last_check\",",
+            "                    \"nullable\" : true,",
+            "                    \"ordinalPosition\" : 10",
             "                  },",
             "                  {",
             "                    \"databaseType\" : \"java.sql.Timestamp\",",
@@ -152,7 +323,7 @@ public class GeneratedMyStartMetadata extends AbstractApplicationMetadata {
             "                    \"id\" : \"last_visit\",",
             "                    \"name\" : \"last_visit\",",
             "                    \"nullable\" : true,",
-            "                    \"ordinalPosition\" : 9",
+            "                    \"ordinalPosition\" : 11",
             "                  },",
             "                  {",
             "                    \"databaseType\" : \"java.sql.Timestamp\",",
@@ -161,11 +332,11 @@ public class GeneratedMyStartMetadata extends AbstractApplicationMetadata {
             "                    \"id\" : \"creation_date\",",
             "                    \"name\" : \"creation_date\",",
             "                    \"nullable\" : true,",
-            "                    \"ordinalPosition\" : 10",
+            "                    \"ordinalPosition\" : 12",
             "                  }",
             "                ],",
             "                \"enabled\" : true,",
-            "                \"expanded\" : true,",
+            "                \"expanded\" : false,",
             "                \"foreignKeys\" : [",
             "                  {",
             "                    \"enabled\" : true,",
@@ -180,7 +351,12 @@ public class GeneratedMyStartMetadata extends AbstractApplicationMetadata {
             "                        \"id\" : \"user_id\",",
             "                        \"name\" : \"user_id\",",
             "                        \"ordinalPosition\" : 1",
-            "                      }",
+            "                      }"
+        ).forEachOrdered(sb::append);
+    }
+    
+    private static void initPart3(StringBuilder sb) {
+        Stream.of(
             "                    ],",
             "                    \"id\" : \"ms_link_user_id_fkey\",",
             "                    \"name\" : \"ms_link_user_id_fkey\"",
@@ -243,12 +419,7 @@ public class GeneratedMyStartMetadata extends AbstractApplicationMetadata {
             "                  },",
             "                  {",
             "                    \"databaseType\" : \"java.lang.String\",",
-            "                    \"enabled\" : true,"
-        ).forEachOrdered(sb::append);
-    }
-    
-    private static void initPart2(StringBuilder sb) {
-        Stream.of(
+            "                    \"enabled\" : true,",
             "                    \"expanded\" : true,",
             "                    \"id\" : \"email\",",
             "                    \"name\" : \"email\",",
@@ -278,7 +449,7 @@ public class GeneratedMyStartMetadata extends AbstractApplicationMetadata {
             "                  }",
             "                ],",
             "                \"enabled\" : true,",
-            "                \"expanded\" : true,",
+            "                \"expanded\" : false,",
             "                \"id\" : \"ms_user\",",
             "                \"indexes\" : [",
             "                  {",
@@ -286,7 +457,12 @@ public class GeneratedMyStartMetadata extends AbstractApplicationMetadata {
             "                    \"expanded\" : false,",
             "                    \"id\" : \"ms_user_pkey\",",
             "                    \"indexColumns\" : [",
-            "                      {",
+            "                      {"
+        ).forEachOrdered(sb::append);
+    }
+    
+    private static void initPart4(StringBuilder sb) {
+        Stream.of(
             "                        \"expanded\" : true,",
             "                        \"id\" : \"id\",",
             "                        \"name\" : \"id\",",
@@ -343,18 +519,13 @@ public class GeneratedMyStartMetadata extends AbstractApplicationMetadata {
             "                  }",
             "                ],",
             "                \"enabled\" : true,",
-            "                \"expanded\" : true,",
+            "                \"expanded\" : false,",
             "                \"foreignKeys\" : [",
             "                  {",
             "                    \"enabled\" : true,",
             "                    \"expanded\" : false,",
             "                    \"foreignKeyColumns\" : [",
-            "                      {"
-        ).forEachOrdered(sb::append);
-    }
-    
-    private static void initPart3(StringBuilder sb) {
-        Stream.of(
+            "                      {",
             "                        \"expanded\" : true,",
             "                        \"foreignColumnName\" : \"id\",",
             "                        \"foreignDatabaseName\" : \"mystart\",",
@@ -392,7 +563,12 @@ public class GeneratedMyStartMetadata extends AbstractApplicationMetadata {
             "                \"name\" : \"ms_visits\",",
             "                \"primaryKeyColumns\" : [",
             "                  {",
-            "                    \"enabled\" : true,",
+            "                    \"enabled\" : true,"
+        ).forEachOrdered(sb::append);
+    }
+    
+    private static void initPart5(StringBuilder sb) {
+        Stream.of(
             "                    \"expanded\" : true,",
             "                    \"id\" : \"id\",",
             "                    \"name\" : \"id\",",

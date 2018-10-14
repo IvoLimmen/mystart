@@ -21,6 +21,8 @@ create table ms_link (
   url text,
   labels text,
   private_network bool,
+  check_result text,
+  last_check timestamp,
   last_visit timestamp,
   creation_date timestamp
 );

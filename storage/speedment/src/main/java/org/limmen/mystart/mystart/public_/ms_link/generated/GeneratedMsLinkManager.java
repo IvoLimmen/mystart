@@ -33,6 +33,8 @@ public interface GeneratedMsLinkManager extends Manager<MsLink> {
         MsLink.URL,
         MsLink.LABELS,
         MsLink.PRIVATE_NETWORK,
+        MsLink.CHECK_RESULT,
+        MsLink.LAST_CHECK,
         MsLink.LAST_VISIT,
         MsLink.CREATION_DATE
     ));

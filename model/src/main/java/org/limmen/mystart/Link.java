@@ -13,11 +13,15 @@ public class Link extends BaseObject implements Comparable<Link> {
 
   private static final long serialVersionUID = -1267285018252976552L;
 
+  private String checkResult;
+
   private LocalDateTime creationDate;
 
   private String description;
 
   private final Set<String> labels = new HashSet<>();
+
+  private LocalDateTime lastCheck;
 
   private LocalDateTime lastVisit;
 
@@ -73,6 +77,10 @@ public class Link extends BaseObject implements Comparable<Link> {
     return true;
   }
 
+  public String getCheckResult() {
+    return checkResult;
+  }
+
   public LocalDateTime getCreationDate() {
     return creationDate;
   }
@@ -117,6 +125,10 @@ public class Link extends BaseObject implements Comparable<Link> {
 
   public Collection<String> getLabels() {
     return labels;
+  }
+
+  public LocalDateTime getLastCheck() {
+    return lastCheck;
   }
 
   public LocalDateTime getLastVisit() {
@@ -184,6 +196,10 @@ public class Link extends BaseObject implements Comparable<Link> {
     return privateNetwork;
   }
 
+  public void setCheckResult(String checkResult) {
+    this.checkResult = checkResult;
+  }
+
   public void setCreationDate(LocalDateTime creationDate) {
     this.creationDate = creationDate;
   }
@@ -195,6 +211,10 @@ public class Link extends BaseObject implements Comparable<Link> {
   public void setLabels(Collection<String> labels) {
     this.labels.clear();
     this.labels.addAll(labels);
+  }
+
+  public void setLastCheck(LocalDateTime lastCheck) {
+    this.lastCheck = lastCheck;
   }
 
   public void setLastVisit(LocalDateTime lastVisit) {

@@ -4,13 +4,13 @@ import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.limmen.mystart.exception.StorageException;
 import org.limmen.mystart.mystart.public_.ms_link.MsLink;
 import org.limmen.mystart.mystart.public_.ms_link.MsLinkImpl;
 import org.limmen.mystart.mystart.public_.ms_link.MsLinkManager;
+import org.limmen.mystart.mystart.public_.ms_visits.MsVisits;
 import org.limmen.mystart.mystart.public_.ms_visits.MsVisitsImpl;
 import org.limmen.mystart.mystart.public_.ms_visits.MsVisitsManager;
 import org.slf4j.Logger;
@@ -40,8 +40,10 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
     l.setPrivateNetwork(link.getPrivateNetwork().getAsBoolean());
     l.setTitle(link.getTitle().orElse(null));
     l.setSource(link.getSource().orElse(null));
+    l.setCheckResult(link.getCheckResult().orElse(null));
     l.setCreationDate(date(link.getCreationDate()));
     l.setLastVisit(date(link.getLastVisit()));
+    l.setLastCheck(date(link.getLastCheck()));
 
     return l;
   }
@@ -100,8 +102,10 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
     msLink.setTitle(link.getTitle());
     msLink.setUrl(link.getUrl());
     msLink.setSource(link.getSource());
+    msLink.setCheckResult(link.getCheckResult());
     msLink.setCreationDate(ts(link.getCreationDate()));
     msLink.setLastVisit(ts(link.getLastVisit()));
+    msLink.setLastCheck(ts(link.getLastCheck()));
 
     links.persist(msLink);
   }
@@ -120,6 +124,8 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
       msLink.setLabels(link.getLabels().stream()
           .reduce((acc, item) -> acc + ";" + item).get());
       msLink.setDescription(link.getDescription());
+      msLink.setCheckResult(link.getCheckResult());
+      msLink.setLastCheck(ts(link.getLastCheck()));
 
       if (link.getLastVisit() != null) {
         Timestamp timestamp = ts(link.getLastVisit());
@@ -135,12 +141,14 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
 
   @Override
   public void remove(Long userId, Long id) throws StorageException {
-    Optional<MsLink> current = links.stream()
+    visits.stream()
+        .filter(MsVisits.LINK_ID.equal(id))
+        .forEach(visits.remover());
+
+    links.stream()
         .filter(MsLink.ID.equal(id))
         .filter(MsLink.USER_ID.equal(userId))
-        .findFirst();
-
-    current.ifPresent(l -> links.remove(l));
+        .forEach(links.remover());
   }
 
   public Link getByUrl(Long userId, String url) {

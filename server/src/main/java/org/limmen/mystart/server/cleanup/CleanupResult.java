@@ -1,5 +1,6 @@
 package org.limmen.mystart.server.cleanup;
 
+import java.time.LocalDateTime;
 import org.limmen.mystart.Link;
 
 public class CleanupResult {
@@ -14,6 +15,8 @@ public class CleanupResult {
     this.link = link;
     this.reason = reason;
     this.cleanupResultType = cleanupResultType;
+    link.setCheckResult(reason);
+    link.setLastCheck(LocalDateTime.now());
   }
 
   public CleanupResultType getCleanupResultType() {
