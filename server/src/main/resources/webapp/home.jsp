@@ -15,20 +15,22 @@
       <input type="text" name="search"/>
       <button type="submit" name="searchButton">Search</button>
     </form>
-    <section>
-      <c:if test="${!empty labels && empty links}">
-        <div class="labelmenu">
-          <c:forEach items="${labels}" var="label">
-            <c:url value="/home" var="url">
-              <c:param name="label" value="${label}" />
-            </c:url>
-            <a href="${url}">${label}</a><br/>
-          </c:forEach>
-        </div>
+    <section>      
+      <c:if test="${!empty labels}">
+        <aside>
+          <div class="labelmenu">
+            <c:forEach items="${labels}" var="label">
+              <c:url value="/home" var="url">
+                <c:param name="label" value="${label}" />
+              </c:url>
+              <a href="${url}">${label}</a><br/>
+            </c:forEach>
+          </div>
+        </aside>
       </c:if>
-      <c:if test="${!empty links}">
-        <a href="/home">Back</a>
+      <c:if test="${!empty links}">        
         <div class="container">
+          <a class="home" href="/home">Back</a>
           <c:forEach items="${links}" var="link">
             <section class="bookmark">
               <div class="bookmark-content">

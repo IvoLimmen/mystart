@@ -1,3 +1,15 @@
+.labelmenu {
+  float: left;
+  padding: 5px;
+}
+
+.container {
+}
+
+.container .home {
+  display: block;
+}
+
 .bookmark {
   float: left;
   border-style: solid;
