@@ -5,6 +5,7 @@
   <jsp:include page="parts/header.jsp"/>
   <body>
     <h1>MyStart</h1>
+    <a href="/login?logout">Logout</a>
     <a href="/user">Account settings</a>
     <a href="import.jsp">Import new links</a>
     <a href="check.jsp">Check links</a>

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -63,8 +64,42 @@ public class AbstractServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
     if (req.getSession().getAttribute(USER_ID) == null) {
-      req.getRequestDispatcher("/login.jsp").include(req, res);
-    } else {
+      // check cookies
+      Cookie[] cookies = req.getCookies();
+      if (cookies != null) {
+        String name = null;
+        String password = null;
+        Long id = null;
+        for (Cookie cookie : cookies) {
+          switch (cookie.getName()) {
+            case "mystartUser":
+              name = cookie.getValue();
+              break;
+            case "mystartUserId":
+              id = Long.parseLong(cookie.getValue());
+              break;
+            case "mystartUserPassword":
+              password = cookie.getValue();
+              break;
+            default:
+              break;
+          }
+        }
+        // check cookie data
+        if (id != null && password != null & name != null) {
+          User user = getUserStorage().get(id);
+          if (user != null && user.getPassword().equals(password)) {
+            req.getSession().setAttribute(USER_ID, id);
+          }
+        }
+      }
+
+      if (req.getSession().getAttribute(USER_ID) == null) {
+        req.getRequestDispatcher("/login.jsp").include(req, res);
+      }
+    }
+
+    if (req.getSession().getAttribute(USER_ID) != null) {
       Long userId = (Long) req.getSession().getAttribute(USER_ID);
       User user = getUserStorage().get(userId);
       req.setAttribute(USER_ID, userId);

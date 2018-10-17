@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.limmen.mystart.LinkStorage;
@@ -35,7 +36,6 @@ public class LoginServlet extends AbstractServlet {
       getUserStorage().store(user);
 
       user = getUserStorage().getByNameOrEmail(email);
-      req.getSession().setAttribute(USER_ID, user.getId());
 
       res.sendRedirect("/home");
 
@@ -47,6 +47,9 @@ public class LoginServlet extends AbstractServlet {
         res.sendRedirect("/login.jsp?error=1");
       } else {
         req.getSession().setAttribute(USER_ID, user.getId());
+        addCookie(res, "mystartUser", name);
+        addCookie(res, "mystartUserId", user.getId() + "");
+        addCookie(res, "mystartUserPassword", user.getPassword());
         res.sendRedirect("/home");
       }
 
@@ -54,5 +57,33 @@ public class LoginServlet extends AbstractServlet {
 
       res.sendRedirect("/home");
     }
+  }
+
+  @Override
+  protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    super.doGet(req, res);
+
+    if (exists(req, "logout")) {
+      Cookie[] cookies = req.getCookies();
+      if (cookies != null) {
+        for (Cookie cookie : cookies) {
+          if (cookie.getName().startsWith("mystart")) {
+            cookie.setValue("");
+            cookie.setPath("/");
+            cookie.setMaxAge(0);
+            res.addCookie(cookie);
+          }
+        }
+      }
+
+      req.getSession().invalidate();
+      res.sendRedirect("/home");
+    }
+  }
+
+  private void addCookie(HttpServletResponse res, String key, String value) {
+    Cookie cookie = new Cookie(key, value);
+    cookie.setMaxAge(60 * 60 * 24 * 7); // week
+    res.addCookie(cookie);
   }
 }
