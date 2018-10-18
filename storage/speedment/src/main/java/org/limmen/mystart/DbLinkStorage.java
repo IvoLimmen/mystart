@@ -152,8 +152,15 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
   }
 
   public Link getByUrl(Long userId, String url) {
+    String partUrl = null;
+    if (url.startsWith("https://")) {
+      partUrl = url.substring(8);
+    } else if (url.startsWith("http://")) {
+      partUrl = url.substring(7);
+    }
+
     return links.stream()
-        .filter(MsLink.URL.equal(url))
+        .filter(MsLink.URL.contains(partUrl))
         .filter(MsLink.USER_ID.equal(userId))
         .map(this::fromDb)
         .findFirst()
