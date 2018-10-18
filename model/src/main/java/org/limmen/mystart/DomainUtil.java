@@ -20,6 +20,9 @@ public class DomainUtil {
       labels = new String[1];
       labels[0] = label;
     }
-    return Arrays.asList(labels);
+
+    return Arrays.asList(labels).stream()
+        .map(l -> l.trim())
+        .collect(Collectors.toList());
   }
 }
