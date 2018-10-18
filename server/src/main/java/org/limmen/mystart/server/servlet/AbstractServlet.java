@@ -16,9 +16,8 @@ import org.limmen.mystart.UserStorage;
 
 public class AbstractServlet extends HttpServlet {
 
-  public static final String USER_ID = "userId";
-
   public static final String USER = "user";
+  public static final String USER_ID = "userId";
 
   private static final long serialVersionUID = 1L;
 
@@ -61,6 +60,21 @@ public class AbstractServlet extends HttpServlet {
     return userStorage;
   }
 
+  protected void clearCookies(HttpServletRequest req, HttpServletResponse res) {
+    Cookie[] cookies = req.getCookies();
+    if (cookies != null) {
+      for (Cookie cookie : cookies) {
+        if (cookie.getName().startsWith("mystart")) {
+          cookie.setValue("");
+          cookie.setPath("/");
+          cookie.setMaxAge(0);
+          res.addCookie(cookie);
+        }
+      }
+    }
+    req.getSession().invalidate();
+  }
+
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
     if (req.getSession().getAttribute(USER_ID) == null) {
@@ -69,14 +83,10 @@ public class AbstractServlet extends HttpServlet {
       if (cookies != null) {
         String name = null;
         String password = null;
-        Long id = null;
         for (Cookie cookie : cookies) {
           switch (cookie.getName()) {
             case "mystartUser":
               name = cookie.getValue();
-              break;
-            case "mystartUserId":
-              id = Long.parseLong(cookie.getValue());
               break;
             case "mystartUserPassword":
               password = cookie.getValue();
@@ -86,10 +96,12 @@ public class AbstractServlet extends HttpServlet {
           }
         }
         // check cookie data
-        if (id != null && password != null & name != null) {
-          User user = getUserStorage().get(id);
+        if (password != null & name != null) {
+          User user = getUserStorage().getByNameOrEmail(name);
           if (user != null && user.getPassword().equals(password)) {
-            req.getSession().setAttribute(USER_ID, id);
+            req.getSession().setAttribute(USER_ID, user.getId());
+          } else {
+            clearCookies(req, res);
           }
         }
       }

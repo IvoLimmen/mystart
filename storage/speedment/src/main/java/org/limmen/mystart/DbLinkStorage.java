@@ -152,7 +152,7 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
   }
 
   public Link getByUrl(Long userId, String url) {
-    String partUrl = null;
+    String partUrl = url;
     if (url.startsWith("https://")) {
       partUrl = url.substring(8);
     } else if (url.startsWith("http://")) {

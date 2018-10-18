@@ -25,6 +25,23 @@ public class LoginServlet extends AbstractServlet {
     super(parser, linkStorage, userStorage, multipartConfigElement, temporaryDirectory);
   }
 
+  private void addCookie(HttpServletResponse res, String key, String value) {
+    Cookie cookie = new Cookie(key, value);
+    cookie.setMaxAge(60 * 60 * 24 * 7); // week
+    res.addCookie(cookie);
+  }
+
+  @Override
+  protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    super.doGet(req, res);
+
+    if (exists(req, "logout")) {
+      clearCookies(req, res);
+
+      res.sendRedirect("/home");
+    }
+  }
+
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
     String email = req.getParameter("email");
@@ -48,7 +65,6 @@ public class LoginServlet extends AbstractServlet {
       } else {
         req.getSession().setAttribute(USER_ID, user.getId());
         addCookie(res, "mystartUser", name);
-        addCookie(res, "mystartUserId", user.getId() + "");
         addCookie(res, "mystartUserPassword", user.getPassword());
         res.sendRedirect("/home");
       }
@@ -57,33 +73,5 @@ public class LoginServlet extends AbstractServlet {
 
       res.sendRedirect("/home");
     }
-  }
-
-  @Override
-  protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-    super.doGet(req, res);
-
-    if (exists(req, "logout")) {
-      Cookie[] cookies = req.getCookies();
-      if (cookies != null) {
-        for (Cookie cookie : cookies) {
-          if (cookie.getName().startsWith("mystart")) {
-            cookie.setValue("");
-            cookie.setPath("/");
-            cookie.setMaxAge(0);
-            res.addCookie(cookie);
-          }
-        }
-      }
-
-      req.getSession().invalidate();
-      res.sendRedirect("/home");
-    }
-  }
-
-  private void addCookie(HttpServletResponse res, String key, String value) {
-    Cookie cookie = new Cookie(key, value);
-    cookie.setMaxAge(60 * 60 * 24 * 7); // week
-    res.addCookie(cookie);
   }
 }
