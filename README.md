@@ -2,18 +2,7 @@
 
 ## Why build something like this? 
 
-I don't know. I have a lot of bookmarks and there is no tooling for it.
-
-## But why in JSP's????
-
-This project started like three years ago? Made a nice back end in Ratpack. Nice! Humm might be nicer in Vert.x? Rewrite!
-Let's make a front end in JavaFX, very cool. Humm in JDK 9 there no longer is a JavaFX when you run Linux; damn. Let's build
-a front end in Angular. Everyone is doing it. It takes a long time to build it and lose interest. Humm I have more experience
-in Wicket. Let's rewrite. Still takes long, lose interest. 
-
-Screw it, I will make a JSP front end in a weekend. Check. After 3 years finally got a product that actually works.
-
-Yes looks like crap but that I will remedy in the future.
+I don't know. I have a lot of bookmarks and there is no (proper) tooling for it.
 
 # Importing bookmarks
 
@@ -30,8 +19,11 @@ This application can import from the following sources:
 
 Do a checkout of this project. You need to following to build:
 
-* JDK 11
+* Minimal JDK 8*
 * Maven 3.5.*
+
+(*) I made it in JDK11 but needed it to work on JDK8 so it would work under a PINE64 (ARM). It builds on JDK's 8 
+through 11 but it is only tested on 8 & 11.
 
 Then execute the following command:
 

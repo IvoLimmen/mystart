@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
+  <modelVersion>4.0.0</modelVersion>
+    
+  <parent>
+    <groupId>org.limmen.mystart</groupId>
+    <artifactId>mystart-project</artifactId>
+    <version>0.1</version>
+  </parent>
+        
+  <name>MyStart - Cleanup - Project</name>        
+  <artifactId>cleanup-project</artifactId>
+  <packaging>pom</packaging>    
+  
+  <modules>
+    <module>api</module>           
+  </modules>
+
+  <profiles>
+    <profile>
+      <id>jdk8</id>
+      <activation>
+        <jdk>[1.8,10)</jdk>
+      </activation>
+      <modules>
+        <module>jdk8</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>jdk11</id>
+      <activation>
+        <jdk>11</jdk>
+      </activation>
+      <modules>
+        <module>jdk11</module>
+      </modules>
+    </profile>
+  </profiles>  
+</project>

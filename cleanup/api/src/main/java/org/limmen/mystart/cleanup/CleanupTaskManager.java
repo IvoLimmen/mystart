@@ -1,7 +1,8 @@
-package org.limmen.mystart.server.cleanup;
+package org.limmen.mystart.cleanup;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ServiceLoader;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -17,19 +18,21 @@ public class CleanupTaskManager implements Runnable {
 
   private final CleanupContext context;
 
+  private final AtomicLong errorCount = new AtomicLong();
+
   private final ExecutorService executorService = Executors.newFixedThreadPool(10);
 
   private final LinkStorage linkStorage;
-
-  private final Long userId;
-
-  private final AtomicLong updatedCount = new AtomicLong();
 
   private final AtomicLong removeCount = new AtomicLong();
 
   private final AtomicLong skippedCount = new AtomicLong();
 
-  private final AtomicLong errorCount = new AtomicLong();
+  private final AtomicLong updatedCount = new AtomicLong();
+
+  private final Long userId;
+
+  private CleanupTaskFactory cleanupTaskFactory;
 
   public CleanupTaskManager(LinkStorage linkStorage, Long userId, CleanupContext cleanupContext) {
     this.linkStorage = linkStorage;
@@ -40,6 +43,10 @@ public class CleanupTaskManager implements Runnable {
   @Override
   public void run() {
     log.info("Starting cleanup task in background...");
+
+    ServiceLoader<CleanupTaskFactory> serviceLoader = ServiceLoader.load(CleanupTaskFactory.class);
+    cleanupTaskFactory = serviceLoader.iterator().next();
+
     LocalDateTime start = LocalDateTime.now();
     linkStorage.getAll(userId).forEach(this::startCleanupTask);
     Duration duration = Duration.between(start, LocalDateTime.now());
@@ -53,7 +60,7 @@ public class CleanupTaskManager implements Runnable {
 
   public void startCleanupTask(Link oldLink) {
     try {
-      CleanupResult cleanupResult = executorService.submit(new CleanupTask(oldLink, context))
+      CleanupResult cleanupResult = executorService.submit(cleanupTaskFactory.newCleanupTask(oldLink, context))
           .get(5 + context.getMaximumTimeoutInSeconds(), TimeUnit.SECONDS);
 
       Link link = cleanupResult.getLink();

@@ -1,4 +1,4 @@
-package org.limmen.mystart.server.cleanup;
+package org.limmen.mystart.cleanup;
 
 import java.time.LocalDateTime;
 import org.limmen.mystart.Link;

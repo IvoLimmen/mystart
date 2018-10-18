@@ -19,8 +19,8 @@ import org.limmen.mystart.Link;
 import org.limmen.mystart.LinkStorage;
 import org.limmen.mystart.Parser;
 import org.limmen.mystart.UserStorage;
-import org.limmen.mystart.server.cleanup.CleanupContext;
-import org.limmen.mystart.server.cleanup.CleanupTaskManager;
+import org.limmen.mystart.cleanup.CleanupContext;
+import org.limmen.mystart.cleanup.CleanupTaskManager;
 
 @Slf4j
 public class LinkServlet extends AbstractServlet {

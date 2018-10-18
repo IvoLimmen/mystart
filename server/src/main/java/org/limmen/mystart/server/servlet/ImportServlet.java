@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.IOUtils;
 import org.limmen.mystart.Link;
 import org.limmen.mystart.LinkStorage;
 import org.limmen.mystart.ParseContext;
@@ -72,9 +73,9 @@ public class ImportServlet extends AbstractServlet {
     Path tempFile = Paths.get(getTemporaryDirectory().toString(), UUID.randomUUID().toString());
 
     try (FileOutputStream fileOutputStream = new FileOutputStream(tempFile.toFile())) {
-      fileOutputStream.write(filePart.getInputStream().readAllBytes());
+      fileOutputStream.write(IOUtils.toByteArray(filePart.getInputStream()));
     }
 
-    return new ParseContext(new ByteArrayInputStream(filePart.getInputStream().readAllBytes()), tempFile.toString(), fileName);
+    return new ParseContext(new ByteArrayInputStream(IOUtils.toByteArray(filePart.getInputStream())), tempFile.toString(), fileName);
   }
 }

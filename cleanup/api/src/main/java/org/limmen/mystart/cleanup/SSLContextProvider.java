@@ -1,4 +1,4 @@
-package org.limmen.mystart.server.cleanup;
+package org.limmen.mystart.cleanup;
 
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
