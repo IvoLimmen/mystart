@@ -1,7 +1,6 @@
 package org.limmen.mystart;
 
 import java.sql.Timestamp;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -51,7 +50,7 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
   @Override
   public Collection<Link> getAllByLabel(Long userId, String tagName) throws StorageException {
     return links.stream()
-        .filter(MsLink.LABELS.containsIgnoreCase(tagName))
+        .filter(MsLink.LABELS.containsIgnoreCase(";" + tagName.trim() + ";"))
         .map(this::fromDb)
         .collect(Collectors.toList());
   }
@@ -62,7 +61,7 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
 
     this.links.stream().forEach((l -> {
       String lbls = l.getLabels().get();
-      labels.addAll(Arrays.asList(lbls.split(";")));
+      labels.addAll(DomainUtil.parseLabels(lbls));
     }));
 
     return labels.stream().sorted((c1, c2) -> {
@@ -97,7 +96,7 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
     MsLink msLink = new MsLinkImpl();
     msLink.setUserId(userId);
     msLink.setDescription(link.getDescription());
-    msLink.setLabels(link.getLabels().stream().reduce((acc, item) -> acc + ";" + item).get());
+    msLink.setLabels(DomainUtil.storeLabels(link));
     msLink.setPrivateNetwork(link.isPrivateNetwork());
     msLink.setTitle(link.getTitle());
     msLink.setUrl(link.getUrl());
@@ -121,8 +120,7 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
           msLink.setTitle(link.getTitle());
           msLink.setUrl(link.getUrl());
           msLink.setPrivateNetwork(link.isPrivateNetwork());
-      msLink.setLabels(link.getLabels().stream()
-          .reduce((acc, item) -> acc + ";" + item).get());
+      msLink.setLabels(DomainUtil.storeLabels(link));
       msLink.setDescription(link.getDescription());
       msLink.setCheckResult(link.getCheckResult());
       msLink.setLastCheck(ts(link.getLastCheck()));
