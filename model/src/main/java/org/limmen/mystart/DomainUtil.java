@@ -12,8 +12,12 @@ public class DomainUtil {
 
   public static Set<String> parseLabels(String label) {
     // remove the leading and trailing ;
-    label = label.substring(1);
-    label = label.substring(0, label.length() - 1);
+    if (label.startsWith(";")) {
+      label = label.substring(1);
+    }
+    if (label.endsWith(";")) {
+      label = label.substring(0, label.length() - 1);
+    }
 
     String[] labels;
     if (label.contains(",")) {
