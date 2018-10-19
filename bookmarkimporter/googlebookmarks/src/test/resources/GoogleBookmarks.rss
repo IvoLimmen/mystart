@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:smh="http://www.google.com/history/" xmlns:recommend="http://www.google.com/history/items">
+  <channel>
+    <title>Google Bookmarks</title>
+    <link>http://www.google.com/bookmarks/</link>
+    <description>Google - Bookmarks RSS feed</description>
+    <smh:signature>AODP23YAAAAAW8ofc8IkKFREJjA3jkUEZ_uFdqGL70gZ</smh:signature>
+    <smh:homepage_label>homepage</smh:homepage_label>
+    <item>
+      <title>Some title</title>
+      <link>http://www.somelink.com/</link>
+      <pubDate>Fri, 19 Oct 2018 18:16:07 GMT</pubDate>
+      <category>bookmark result</category>
+      <description></description>
+      <guid isPermaLink="false">Zx_KW9SfNuiQgLAPAA</guid>
+      <smh:bkmk>yes</smh:bkmk>
+      <smh:bkmk_id>11985552068516402004</smh:bkmk_id>
+      <smh:bkmk_title>Title!</smh:bkmk_title>
+      <smh:bkmk_label>Label1</smh:bkmk_label>
+      <smh:bkmk_label>Label2</smh:bkmk_label>
+      <smh:bkmk_annotation>Some description</smh:bkmk_annotation>
+    </item>
+    <item>
+      <title>Another title</title>
+      <link>https://www.somelink2.org/</link>
+      <pubDate>Sun, 14 Oct 2018 18:20:22 GMT</pubDate>
+      <category>bookmark result</category>
+      <description></description>
+      <guid isPermaLink="false">5ojDW7_XCLeIgLAPAA</guid>
+      <smh:bkmk>yes</smh:bkmk>
+      <smh:bkmk_id>3528603716883505393</smh:bkmk_id>
+      <smh:bkmk_title>Title</smh:bkmk_title>
+      <smh:bkmk_label>Label1</smh:bkmk_label>
+      <smh:bkmk_annotation>Bla bla</smh:bkmk_annotation>
+    </item>
+  </channel>
+</rss>

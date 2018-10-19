@@ -10,7 +10,8 @@ This application can import from the following sources:
 
  * FireFox (upload your places.sqlite from your profile directory)
  * GitHub (enter a link: https://api.github.com/users/ivolimmen/starred)
- * Google Bookmarks (export the XML: https://www.google.com/bookmarks/?output=xml and upload it)
+ * Google Bookmarks XML (export the XML: https://www.google.com/bookmarks/?output=xml and upload it)
+ * Google Bookmarks RSS (export the RSS: https://www.google.com/bookmarks/?output=rss&num=500&start=0 and upload it)
  * Google Chrome/Chromium (upload your Bookmarks file from your profile directory)
  * Netscape (It is an XML file if your still got one)
  * XBEL (It's a XML standard for bookmarks)
