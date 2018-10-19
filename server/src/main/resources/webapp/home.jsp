@@ -35,7 +35,7 @@
           <c:forEach items="${links}" var="link">
             <section class="bookmark">
               <div class="bookmark-content">
-                <a href="/link?reg=${link.id}" ${user.isOpenInNewTab() ? "target=\"_BLANK\"" : "" }><h3>${link.title}</h3></a>
+                <a href="/link?reg=${link.id}" ${user.isOpenInNewTab() ? "target=\"_BLANK\"" : "" } title="${link.url}"><h3>${link.title}</h3></a>
                 <p class="description">${link.description}</p>
                 <p class="created">Created: ${link.formattedCreationDate}</p>
                 <p class="visited">Visited: ${link.formattedLastVisit}</p>     
