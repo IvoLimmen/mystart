@@ -9,7 +9,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.HashSet;
+import java.util.Set;
 import javax.servlet.MultipartConfigElement;
+import javax.servlet.SessionTrackingMode;
 import javax.servlet.http.HttpServlet;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.jetty.jsp.JettyJspServlet;
@@ -52,6 +55,9 @@ public class Main {
     URI baseUri = getWebRootResourceUri();
 
     ServletContextHandler servletContextHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
+    Set<SessionTrackingMode> trackingModes = new HashSet<>();
+    trackingModes.add(SessionTrackingMode.COOKIE);
+    servletContextHandler.getSessionHandler().setSessionTrackingModes(trackingModes);
     servletContextHandler.setContextPath("/");
     servletContextHandler.setResourceBase(baseUri.toASCIIString());
     ClassLoader jspClassLoader = new URLClassLoader(new URL[0], Main.class.getClassLoader());
