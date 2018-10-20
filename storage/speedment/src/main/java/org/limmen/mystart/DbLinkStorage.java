@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
-import org.limmen.mystart.exception.StorageException;
 import org.limmen.mystart.mystart.public_.ms_link.MsLink;
 import org.limmen.mystart.mystart.public_.ms_link.MsLinkImpl;
 import org.limmen.mystart.mystart.public_.ms_link.MsLinkManager;
@@ -48,7 +47,7 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
   }
 
   @Override
-  public Collection<Link> getAllByLabel(Long userId, String tagName) throws StorageException {
+  public Collection<Link> getAllByLabel(Long userId, String tagName) {
     return links.stream()
         .filter(MsLink.LABELS.containsIgnoreCase(";" + tagName.trim() + ";"))
         .map(this::fromDb)
@@ -56,7 +55,7 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
   }
 
   @Override
-  public Collection<String> getAllLabels(Long userId) throws StorageException {
+  public Collection<String> getAllLabels(Long userId) {
     Set<String> labels = new HashSet<>();
 
     this.links.stream().forEach((l -> {
@@ -70,7 +69,7 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
   }
 
   @Override
-  public void importCollection(Long userId, Collection<Link> links, boolean skipDuplicates) throws StorageException {
+  public void importCollection(Long userId, Collection<Link> links, boolean skipDuplicates) {
     links.forEach(l -> {
       if (l.getUrl() == null) {
         LOGGER.info("Not adding link {} with title {} as it is empty.", l.getUrl(), l.getTitle());
@@ -110,7 +109,7 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
   }
 
   @Override
-  public void update(Long userId, Link link) throws StorageException {
+  public void update(Long userId, Link link) {
     links.stream()
         .filter(MsLink.ID.equal(link.getId()))
         .filter(MsLink.USER_ID.equal(userId))
@@ -138,7 +137,7 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
   }
 
   @Override
-  public void remove(Long userId, Long id) throws StorageException {
+  public void remove(Long userId, Long id) {
     visits.stream()
         .filter(MsVisits.LINK_ID.equal(id))
         .forEach(visits.remover());
@@ -167,7 +166,7 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
   }
 
   @Override
-  public Link get(Long userId, Long id) throws StorageException {
+  public Link get(Long userId, Long id) {
     return links.stream()
         .filter(MsLink.ID.equal(id))
         .filter(MsLink.USER_ID.equal(userId))
@@ -177,7 +176,7 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
   }
 
   @Override
-  public Collection<Link> getAll(Long userId) throws StorageException {
+  public Collection<Link> getAll(Long userId) {
     return links.stream().map(this::fromDb).collect(Collectors.toList());
   }
 }
