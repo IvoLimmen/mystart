@@ -70,6 +70,7 @@ public class LinkServlet extends AbstractServlet {
 
     } else if (exists(req, "edit")) {
 
+      String type = "normal";
       Link link = null;
       if (req.getParameter("id") != null && req.getParameter("id").length() > 0) {
         // edit by id
@@ -77,6 +78,7 @@ public class LinkServlet extends AbstractServlet {
         link = getLinkStorage().get(userId, id);
       } else if (req.getParameter("url") != null && req.getParameter("url").length() > 0) {
         // new (or edit) by url
+        type = "popup";
         String url = req.getParameter("url");
         link = getLinkStorage().getByUrl(userId, url);
       }
@@ -99,6 +101,7 @@ public class LinkServlet extends AbstractServlet {
       req.setAttribute("referer", getOrignalParameters(req));
       req.setAttribute("link", link);
       req.setAttribute("labels", DomainUtil.formatLabels(link));
+      req.setAttribute("type", type);
       req.getRequestDispatcher("/edit.jsp").include(req, res);
 
     } else if (exists(req, "delete")) {
@@ -205,11 +208,20 @@ public class LinkServlet extends AbstractServlet {
       } else {
         getLinkStorage().update(userId, link);
       }
-      res.sendRedirect("/home?" + req.getParameter("referer"));
+
+      if (hasValue(req, "type") && req.getParameter("type").equals("popup")) {
+        req.getRequestDispatcher("/close.jsp").include(req, res);
+      } else {
+        res.sendRedirect("/home?" + req.getParameter("referer"));
+      }
 
     } else if (exists(req, "cancelButton")) {
 
-      res.sendRedirect("/home?" + req.getParameter("referer"));
+      if (hasValue(req, "type") && req.getParameter("type").equals("popup")) {
+        req.getRequestDispatcher("/close.jsp").include(req, res);
+      } else {
+        res.sendRedirect("/home?" + req.getParameter("referer"));
+      }
     }
   }
 }

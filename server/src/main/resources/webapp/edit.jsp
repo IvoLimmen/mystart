@@ -8,6 +8,7 @@
     <form name="link" action="link" method="post">
       <input type="hidden" name="id" value="${link.id}"/>             
       <input type="hidden" name="referer" value="${referer}"/>             
+      <input type="hidden" name="type" value="${type}"/>             
       <div>      
         <label for="title">Title</label><br/>
         <input type="text" name="title" size="50" value="${link.title}"/>
