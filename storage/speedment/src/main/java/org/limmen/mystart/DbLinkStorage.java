@@ -149,6 +149,7 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
         .forEach(links.remover());
   }
 
+  @Override
   public Link getByUrl(Long userId, String url) {
     String partUrl = url;
     if (url.startsWith("https://")) {

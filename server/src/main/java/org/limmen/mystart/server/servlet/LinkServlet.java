@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.limmen.mystart.DomainUtil;
 import org.limmen.mystart.Link;
 import org.limmen.mystart.LinkStorage;
@@ -70,12 +71,29 @@ public class LinkServlet extends AbstractServlet {
     } else if (exists(req, "edit")) {
 
       Link link = null;
-      if (req.getParameter("edit") != null && req.getParameter("edit").length() > 0) {
-
-        Long id = Long.parseLong(req.getParameter("edit"));
+      if (req.getParameter("id") != null && req.getParameter("id").length() > 0) {
+        // edit by id
+        Long id = Long.parseLong(req.getParameter("id"));
         link = getLinkStorage().get(userId, id);
-      } else {
+      } else if (req.getParameter("url") != null && req.getParameter("url").length() > 0) {
+        // new (or edit) by url
+        String url = req.getParameter("url");
+        link = getLinkStorage().getByUrl(userId, url);
+      }
+
+      if (link == null) {
         link = new Link();
+      }
+
+      if (exists(req, "url")) {
+        if (StringUtils.isBlank(link.getUrl())) {
+          link.setUrl(req.getParameter("url"));
+        }
+      }
+      if (exists(req, "title")) {
+        if (StringUtils.isBlank(link.getTitle())) {
+          link.setTitle(req.getParameter("title"));
+        }
       }
 
       req.setAttribute("referer", getOrignalParameters(req));

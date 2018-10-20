@@ -15,6 +15,8 @@ public interface LinkStorage {
 
   Collection<String> getAllLabels(Long userId) throws StorageException;
 
+  Link getByUrl(Long userId, String url);
+
   void importCollection(Long userId, Collection<Link> link, boolean skipDuplicates) throws StorageException;
 
   void remove(Long userId, Long id) throws StorageException;
