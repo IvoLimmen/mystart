@@ -39,6 +39,13 @@
               </c:forEach>
             </p>
             <p class="source">Source: ${link.source}</p>     
+            <p class="visits">Visits:
+              <ul>
+                <c:forEach items="${visits}" var="visit">
+                  <li class="visit">${visit}</li>
+                </c:forEach>
+              </ul>
+            </p>
             <div class="actions">
               <a href="/link?edit&id=${link.id}">Edit</a>
               <a href="/link?delete&id=${link.id}">Delete</a>

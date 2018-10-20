@@ -1,6 +1,7 @@
 package org.limmen.mystart;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -27,23 +28,45 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
     this.visits = visits;
   }
 
-  private Link fromDb(MsLink link) {
-    Link l = new Link(link.getUrl().get());
+  @Override
+  public void create(Long userId, Link link) {
 
-    l.setId(link.getId());
-    l.setDescription(link.getDescription().orElse(null));
-    if (link.getLabels().isPresent()) {
-      l.setLabels(DomainUtil.parseLabels(link.getLabels().get()));
+    MsLink msLink = new MsLinkImpl();
+    msLink.setUserId(userId);
+    msLink.setDescription(link.getDescription());
+    msLink.setLabels(DomainUtil.storeLabels(link));
+    msLink.setPrivateNetwork(link.isPrivateNetwork());
+    msLink.setTitle(link.getTitle());
+    msLink.setUrl(link.getUrl());
+    msLink.setSource(link.getSource());
+    msLink.setCheckResult(link.getCheckResult());
+    msLink.setCreationDate(ts(link.getCreationDate()));
+    msLink.setLastVisit(ts(link.getLastVisit()));
+    msLink.setLastCheck(ts(link.getLastCheck()));
+
+    links.persist(msLink);
+
+    if (link.getLastVisit() != null) {
+      Timestamp timestamp = ts(link.getLastVisit());
+      visits.persist(new MsVisitsImpl()
+          .setLinkId(link.getId())
+          .setVisit(timestamp));
     }
-    l.setPrivateNetwork(link.getPrivateNetwork().getAsBoolean());
-    l.setTitle(link.getTitle().orElse(null));
-    l.setSource(link.getSource().orElse(null));
-    l.setCheckResult(link.getCheckResult().orElse(null));
-    l.setCreationDate(date(link.getCreationDate()));
-    l.setLastVisit(date(link.getLastVisit()));
-    l.setLastCheck(date(link.getLastCheck()));
+  }
 
-    return l;
+  @Override
+  public Link get(Long userId, Long id) {
+    return links.stream()
+        .filter(MsLink.ID.equal(id))
+        .filter(MsLink.USER_ID.equal(userId))
+        .map(this::fromDb)
+        .findFirst()
+        .orElse(null);
+  }
+
+  @Override
+  public Collection<Link> getAll(Long userId) {
+    return links.stream().map(this::fromDb).collect(Collectors.toList());
   }
 
   @Override
@@ -69,6 +92,34 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
   }
 
   @Override
+  public Set<LocalDateTime> getAllVisists(Long id) {
+    return visits.stream().filter(MsVisits.LINK_ID.equal(id))
+        .map(visit -> date(visit.getVisit()))
+        .sorted((localDateTime1, localDateTime2) -> {
+      return localDateTime2.compareTo(localDateTime1);
+        })
+        .limit(20)
+        .collect(Collectors.toSet());
+  }
+
+  @Override
+  public Link getByUrl(Long userId, String url) {
+    String partUrl = url;
+    if (url.startsWith("https://")) {
+      partUrl = url.substring(8);
+    } else if (url.startsWith("http://")) {
+      partUrl = url.substring(7);
+    }
+
+    return links.stream()
+        .filter(MsLink.URL.contains(partUrl))
+        .filter(MsLink.USER_ID.equal(userId))
+        .map(this::fromDb)
+        .findFirst()
+        .orElse(null);
+  }
+
+  @Override
   public void importCollection(Long userId, Collection<Link> links, boolean skipDuplicates) {
     links.forEach(l -> {
       if (l.getUrl() == null) {
@@ -90,22 +141,15 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
   }
 
   @Override
-  public void create(Long userId, Link link) {
+  public void remove(Long userId, Long id) {
+    visits.stream()
+        .filter(MsVisits.LINK_ID.equal(id))
+        .forEach(visits.remover());
 
-    MsLink msLink = new MsLinkImpl();
-    msLink.setUserId(userId);
-    msLink.setDescription(link.getDescription());
-    msLink.setLabels(DomainUtil.storeLabels(link));
-    msLink.setPrivateNetwork(link.isPrivateNetwork());
-    msLink.setTitle(link.getTitle());
-    msLink.setUrl(link.getUrl());
-    msLink.setSource(link.getSource());
-    msLink.setCheckResult(link.getCheckResult());
-    msLink.setCreationDate(ts(link.getCreationDate()));
-    msLink.setLastVisit(ts(link.getLastVisit()));
-    msLink.setLastCheck(ts(link.getLastCheck()));
-
-    links.persist(msLink);
+    links.stream()
+        .filter(MsLink.ID.equal(id))
+        .filter(MsLink.USER_ID.equal(userId))
+        .forEach(links.remover());
   }
 
   @Override
@@ -136,47 +180,23 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
         });
   }
 
-  @Override
-  public void remove(Long userId, Long id) {
-    visits.stream()
-        .filter(MsVisits.LINK_ID.equal(id))
-        .forEach(visits.remover());
+  private Link fromDb(MsLink link) {
+    Link l = new Link(link.getUrl().get());
 
-    links.stream()
-        .filter(MsLink.ID.equal(id))
-        .filter(MsLink.USER_ID.equal(userId))
-        .forEach(links.remover());
-  }
-
-  @Override
-  public Link getByUrl(Long userId, String url) {
-    String partUrl = url;
-    if (url.startsWith("https://")) {
-      partUrl = url.substring(8);
-    } else if (url.startsWith("http://")) {
-      partUrl = url.substring(7);
+    l.setId(link.getId());
+    l.setDescription(link.getDescription().orElse(null));
+    if (link.getLabels().isPresent()) {
+      l.setLabels(DomainUtil.parseLabels(link.getLabels().get()));
     }
+    l.setPrivateNetwork(link.getPrivateNetwork().getAsBoolean());
+    l.setTitle(link.getTitle().orElse(null));
+    l.setSource(link.getSource().orElse(null));
+    l.setCheckResult(link.getCheckResult().orElse(null));
+    l.setCreationDate(date(link.getCreationDate()));
+    l.setLastVisit(date(link.getLastVisit()));
+    l.setLastCheck(date(link.getLastCheck()));
 
-    return links.stream()
-        .filter(MsLink.URL.contains(partUrl))
-        .filter(MsLink.USER_ID.equal(userId))
-        .map(this::fromDb)
-        .findFirst()
-        .orElse(null);
+    return l;
   }
 
-  @Override
-  public Link get(Long userId, Long id) {
-    return links.stream()
-        .filter(MsLink.ID.equal(id))
-        .filter(MsLink.USER_ID.equal(userId))
-        .map(this::fromDb)
-        .findFirst()
-        .orElse(null);
-  }
-
-  @Override
-  public Collection<Link> getAll(Long userId) {
-    return links.stream().map(this::fromDb).collect(Collectors.toList());
-  }
 }
