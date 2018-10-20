@@ -2,14 +2,16 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
-  <jsp:include page="parts/header.jsp"/>
+  <jsp:include page="parts/head.jsp"/>
   <body>
-    <h1>MyStart - Stats</h1>    
-    <a href="/home">Back</a>
-    <a href="/link?stats=create_year">Group by creation year</a>
-    <a href="/link?stats=visit_year">Group by last visit year</a>
-    <a href="/link?stats=labels">Group by label</a>
-    <a href="/link?stats=source">Group by source</a>
+    <jsp:include page="parts/menu.jsp"/>
+    <section class="submenu">
+      <a href="/home">Back</a>
+      <a href="/link?stats=create_year">Group by creation year</a>
+      <a href="/link?stats=visit_year">Group by last visit year</a>
+      <a href="/link?stats=labels">Group by label</a>
+      <a href="/link?stats=source">Group by source</a>
+    </section>
     <table>
       <tr>
         <td>Label</td><td>Count</td>

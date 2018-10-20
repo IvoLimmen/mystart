@@ -2,7 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
-  <jsp:include page="parts/header.jsp"/>
+  <jsp:include page="parts/head.jsp"/>
   <body>
     <h1>Check links</h1>    
     <form name="check" action="link" method="post">

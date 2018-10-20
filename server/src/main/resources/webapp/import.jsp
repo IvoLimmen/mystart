@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-  <jsp:include page="parts/header.jsp" flush="true"/>
+  <jsp:include page="parts/head.jsp" flush="true"/>
   <body>
     <h1>MyStart</h1>
     <form name="import" action="/import" method="post" enctype="multipart/form-data">

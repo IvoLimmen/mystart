@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-  <jsp:include page="parts/header.jsp" flush="true"/>
+  <jsp:include page="parts/head.jsp" flush="true"/>
   <body>
     <h1>MyStart - Login</h1>
     <section id="login">
