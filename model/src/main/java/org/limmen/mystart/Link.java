@@ -95,6 +95,15 @@ public class Link extends BaseObject implements Comparable<Link> {
         .format(this.getCreationDate());
   }
 
+  public String getFormattedLastCheckDate() {
+    if (this.getLastCheck() == null) {
+      return null;
+    }
+    return DateTimeFormatter
+        .ofPattern("yyyy-MM-dd")
+        .format(this.getLastCheck());
+  }
+
   public String getFormattedLastVisit() {
     if (this.getLastVisit() == null) {
       return "Never";

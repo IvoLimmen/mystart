@@ -43,6 +43,7 @@
                   <p class="source">${link.source}</p>
                 </div>
                 <div class="actions">
+                  <a href="/link?details&id=${link.id}">Details</a>
                   <a href="/link?edit&id=${link.id}">Edit</a>
                   <a href="/link?delete&id=${link.id}">Delete</a>
                 </div>

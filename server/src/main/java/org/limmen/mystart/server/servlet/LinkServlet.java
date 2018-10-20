@@ -104,6 +104,13 @@ public class LinkServlet extends AbstractServlet {
       req.setAttribute("type", type);
       req.getRequestDispatcher("/edit.jsp").include(req, res);
 
+    } else if (exists(req, "details")) {
+
+      Long id = Long.parseLong(req.getParameter("id"));
+      Link link = getLinkStorage().get(userId, id);
+      req.setAttribute("link", link);
+      req.getRequestDispatcher("/details.jsp").include(req, res);
+
     } else if (exists(req, "delete")) {
 
       Long id = Long.parseLong(req.getParameter("id"));
