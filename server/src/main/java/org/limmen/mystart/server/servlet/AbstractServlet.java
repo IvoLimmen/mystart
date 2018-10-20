@@ -162,4 +162,8 @@ public class AbstractServlet extends HttpServlet {
   protected boolean hasValue(HttpServletRequest req, String parameter) {
     return req.getParameter(parameter) != null && req.getParameter(parameter).length() > 0;
   }
+
+  protected boolean hasValue(HttpServletRequest req, String parameter, String value) {
+    return value.equals(req.getParameter(parameter));
+  }
 }

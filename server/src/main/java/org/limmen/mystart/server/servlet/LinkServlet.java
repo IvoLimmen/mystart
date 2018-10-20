@@ -209,7 +209,7 @@ public class LinkServlet extends AbstractServlet {
         getLinkStorage().update(userId, link);
       }
 
-      if (hasValue(req, "type") && req.getParameter("type").equals("popup")) {
+      if (hasValue(req, "type", "popup")) {
         req.getRequestDispatcher("/close.jsp").include(req, res);
       } else {
         res.sendRedirect("/home?" + req.getParameter("referer"));
@@ -217,7 +217,7 @@ public class LinkServlet extends AbstractServlet {
 
     } else if (exists(req, "cancelButton")) {
 
-      if (hasValue(req, "type") && req.getParameter("type").equals("popup")) {
+      if (hasValue(req, "type", "popup")) {
         req.getRequestDispatcher("/close.jsp").include(req, res);
       } else {
         res.sendRedirect("/home?" + req.getParameter("referer"));
