@@ -106,7 +106,7 @@ public class LinkServlet extends AbstractServlet {
 
     } else if (exists(req, "delete")) {
 
-      Long id = Long.parseLong(req.getParameter("delete"));
+      Long id = Long.parseLong(req.getParameter("id"));
       getLinkStorage().remove(userId, id);
       res.sendRedirect("/home?" + getOrignalParameters(req));
 

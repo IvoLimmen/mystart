@@ -56,7 +56,7 @@
                 </div>
                 <div class="actions">
                   <a href="/link?edit&id=${link.id}">Edit</a>
-                  <a href="/link?delete=${link.id}">Delete</a>
+                  <a href="/link?delete&id=${link.id}">Delete</a>
                 </div>
               </div>
             </section>            
