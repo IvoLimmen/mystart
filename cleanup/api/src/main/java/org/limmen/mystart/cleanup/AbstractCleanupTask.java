@@ -41,8 +41,10 @@ public abstract class AbstractCleanupTask implements CleanupTask {
 
   protected CleanupResult checkForReachableDomain(Link link) {
     try {
-      InetAddress address = InetAddress.getByName(new URL(link.getUrl()).getHost());
-      if (address.isSiteLocalAddress()) {
+      String host = new URL(link.getUrl()).getHost();
+
+      InetAddress address = InetAddress.getByName(host);
+      if (address.isSiteLocalAddress() || isPrivateNetworkHost(host)) {
         link.setPrivateNetwork(true);
         return new CleanupResult(link, "Host/IP address is a site local address. Marking private network.", CleanupResultType.UPDATE);
       }
@@ -52,4 +54,13 @@ public abstract class AbstractCleanupTask implements CleanupTask {
     return null;
   }
 
+  private boolean isPrivateNetworkHost(String host) {
+    if (host.matches("^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$")) {
+      if (host.startsWith("10.") || host.startsWith("192.168.")) {
+        return true;
+      }
+    }
+
+    return false;
+  }
 }

@@ -117,4 +117,33 @@
       </plugin>                     
     </plugins>
   </build>
+  
+  <profiles>
+    <profile>
+      <id>jdk8</id>
+      <activation>
+        <jdk>[1.8,10)</jdk>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>cleanup-jdk8</artifactId>
+          <version>${project.version}</version>
+        </dependency>
+      </dependencies>
+    </profile>
+    <profile>
+      <id>jdk11</id>
+      <activation>
+        <jdk>11</jdk>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>cleanup-jdk11</artifactId>
+          <version>${project.version}</version>
+        </dependency>
+      </dependencies>
+    </profile>
+  </profiles>
 </project>

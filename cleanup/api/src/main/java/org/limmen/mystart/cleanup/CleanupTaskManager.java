@@ -47,6 +47,12 @@ public class CleanupTaskManager implements Runnable {
     ServiceLoader<CleanupTaskFactory> serviceLoader = ServiceLoader.load(CleanupTaskFactory.class);
     cleanupTaskFactory = serviceLoader.iterator().next();
 
+    if (cleanupTaskFactory == null) {
+      throw new IllegalStateException("No CleanupTaskFactory found!");
+    }
+
+    log.info("Using {}", cleanupTaskFactory.getClass().getSimpleName());
+
     LocalDateTime start = LocalDateTime.now();
     linkStorage.getAll(userId).forEach(this::startCleanupTask);
     Duration duration = Duration.between(start, LocalDateTime.now());

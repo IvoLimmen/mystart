@@ -39,6 +39,8 @@ public class LinkServlet extends AbstractServlet {
 
   private void scheduleCleanup(HttpServletRequest req, Long userId) {
 
+    log.info("Starting a new thread for checking...");
+
     new Thread(new CleanupTaskManager(
         getLinkStorage(),
         userId,
