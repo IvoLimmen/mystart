@@ -56,6 +56,16 @@ public class ImportServlet extends AbstractServlet {
     }
 
     boolean skipDuplicates = getBool(req, "skipDuplicates");
+    boolean importHomepageAsExtra = getBool(req, "importHomepageAsExtra");
+    boolean importLanguageAsLabel = getBool(req, "importLanguageAsLabel");
+
+    if (importHomepageAsExtra) {
+      parseContext.addOption("github.importHomepageAsExtra", "true");
+    }
+    if (importLanguageAsLabel) {
+      parseContext.addOption("github.importLanguageAsLabel", "true");
+    }
+
     Set<Link> links = getParser().parse(parseContext);
     log.info("Parsed {} links from {}", links.size(), getParser().getName());
 

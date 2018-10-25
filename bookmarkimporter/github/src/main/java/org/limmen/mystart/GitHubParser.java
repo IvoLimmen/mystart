@@ -15,13 +15,10 @@ import org.json.JSONObject;
 
 public class GitHubParser extends AbstractParser implements Parser {
 
+  private ParseContext context;
+
   public GitHubParser() {
     setSource("GitHub Stars");
-  }
-
-  @Override
-  public String getName() {
-    return "GitHub";
   }
 
   @Override
@@ -30,7 +27,13 @@ public class GitHubParser extends AbstractParser implements Parser {
   }
 
   @Override
+  public String getName() {
+    return "GitHub";
+  }
+
+  @Override
   public Set<Link> parse(ParseContext context) throws IOException {
+    this.context = context;
 
     GitHubPageLoader loader = new GitHubPageLoader();
 
@@ -41,6 +44,14 @@ public class GitHubParser extends AbstractParser implements Parser {
     }
 
     return getLinks();
+  }
+
+  private LocalDateTime getTimestamp(JSONObject link) {
+    String timeStr = link.getString("created_at");
+    if (timeStr == null || timeStr.equals("")) {
+      return null;
+    }
+    return LocalDateTime.parse(timeStr, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'"));
   }
 
   private void parseFile(File file) throws IOException {
@@ -66,26 +77,23 @@ public class GitHubParser extends AbstractParser implements Parser {
 
     List<String> labels = new ArrayList<>();
     if (json.has("language") && !json.isNull("language")) {
-      labels.add(json.getString("language"));
+      if (context.hasOption("github.importLanguageAsLabel")) {
+        labels.add(json.getString("language"));
+      }
     }
-    labels.add("GitHub");
 
     String href = json.getString("html_url");
 
     if (json.has("homepage") && !json.isNull("homepage")) {
-      href = json.getString("homepage");
+      if (context.hasOption("github.importHomepageAsExtra")) {
+        addLink(name, json.getString("homepage"), labels, description, getTimestamp(json), null);
+      } else {
+        href = json.getString("homepage");
+      }
     }
 
     if (!StringUtils.isBlank(href)) {
       addLink(name, href, labels, description, getTimestamp(json), null);
     }
-  }
-
-  private LocalDateTime getTimestamp(JSONObject link) {
-    String timeStr = link.getString("created_at");
-    if (timeStr == null || timeStr.equals("")) {
-      return null;
-    }
-    return LocalDateTime.parse(timeStr, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'"));
   }
 }

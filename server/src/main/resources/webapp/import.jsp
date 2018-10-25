@@ -17,6 +17,14 @@
         <input type="checkbox" name="skipDuplicates"/>
       </div>
       <div>
+        <label for="importHomepageAsExtra">Import homepage as extra link (GitHub only)</label><br/>
+        <input type="checkbox" name="importHomepageAsExtra"/>
+      </div>
+      <div>
+        <label for="importLanguageAsLabel">Import language as label (GitHub only)</label><br/>
+        <input type="checkbox" name="importLanguageAsLabel"/>
+      </div>
+      <div>
         <button type="submit" name="importButton">Import</button>
       </div>
     </form>      

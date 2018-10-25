@@ -2,52 +2,69 @@ package org.limmen.mystart;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ParseContext {
 
-   private final String fileName;
+  private final String fileName;
 
-   private final ByteArrayInputStream inputStream;
+  private final ByteArrayInputStream inputStream;
 
-   private final String temporaryFileName;
+  private Map<String, String> options = new HashMap<>();
 
-   private final String url;
+  private final String temporaryFileName;
 
-   public ParseContext(final String url) {
-      this.url = url;
-      this.inputStream = null;
-      this.fileName = null;
-      this.temporaryFileName = null;
-   }
+  private final String url;
+
+  public ParseContext(final String url) {
+    this.url = url;
+    this.inputStream = null;
+    this.fileName = null;
+    this.temporaryFileName = null;
+  }
 
   public ParseContext(final ByteArrayInputStream inputStream, final String temporaryFileName, final String fileName) {
-      this.url = null;
-      this.inputStream = inputStream;
-      this.temporaryFileName = temporaryFileName;
-      this.fileName = fileName;
-      if (this.inputStream != null) {
-         this.inputStream.mark(0);
-      }
-   }
+    this.url = null;
+    this.inputStream = inputStream;
+    this.temporaryFileName = temporaryFileName;
+    this.fileName = fileName;
+    if (this.inputStream != null) {
+      this.inputStream.mark(0);
+    }
+  }
 
-   public String getFileName() {
-      return fileName;
-   }
+  public void addOption(String key, String value) {
+    this.options.put(key, value);
+  }
 
-   public InputStream getInputStream() {
-      inputStream.reset();
-      return inputStream;
-   }
+  public String getFileName() {
+    return fileName;
+  }
 
-   public String getTemporaryFileName() {
-      return temporaryFileName;
-   }
+  public InputStream getInputStream() {
+    inputStream.reset();
+    return inputStream;
+  }
 
-   public String getUrl() {
-      return url;
-   }
+  public String getOption(String key) {
+    return this.options.get(key);
+  }
 
-   public boolean hasData() {
-      return this.inputStream != null;
-   }
+  public String getTemporaryFileName() {
+    return temporaryFileName;
+  }
+
+  public String getUrl() {
+    return url;
+  }
+
+  public boolean hasData() {
+    return this.inputStream != null;
+  }
+
+  public boolean hasOption(String key) {
+    return this.options.containsKey(key);
+  }
+
 }
