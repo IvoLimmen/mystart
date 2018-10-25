@@ -26,10 +26,11 @@ public abstract class AbstractCleanupTask implements CleanupTask {
         return new CleanupResult(getLink(), "200", CleanupResultType.NOTHING);
       case 301: // MOVED PERMANENTLY
       case 302: // MOVED TEMPORARELY
-        if (movedUrl != null && movedUrl.length() > 0) {
+        if (movedUrl != null && movedUrl.length() > 0 && movedUrl.startsWith("http")) {
           getLink().setUrl(movedUrl);
+          return new CleanupResult(getLink(), "Site has moved", CleanupResultType.UPDATE);
         }
-        return new CleanupResult(getLink(), "Site has moved", CleanupResultType.UPDATE);
+        return new CleanupResult(getLink(), "30X", CleanupResultType.NOTHING);
       case 403: // FORBIDDEN
         return new CleanupResult(getLink(), "Forbidden to access but exists", CleanupResultType.NOTHING);
       case 404: // NOT FOUND
