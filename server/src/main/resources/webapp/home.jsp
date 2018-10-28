@@ -20,7 +20,6 @@
       </c:if>
       <c:if test="${!empty links}">        
         <div class="container">
-          <a class="home" href="/home">Back</a>
           <c:forEach items="${links}" var="link">
             <section class="bookmark">
               <div class="bookmark-content">
