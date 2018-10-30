@@ -20,6 +20,7 @@
       </c:if>
       <c:if test="${!empty links}">        
         <div class="container">
+          <p class="stats">Count: (${links.size()})</p>
           <c:forEach items="${links}" var="link">
             <section class="bookmark">
               <div class="bookmark-content">
