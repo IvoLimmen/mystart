@@ -33,6 +33,7 @@ import org.limmen.mystart.server.servlet.ImportServlet;
 import org.limmen.mystart.server.servlet.LinkServlet;
 import org.limmen.mystart.server.servlet.LoginServlet;
 import org.limmen.mystart.server.servlet.UserServlet;
+import org.limmen.mystart.server.servlet.ajax.AjaxServlet;
 
 @Slf4j
 public class Main {
@@ -91,6 +92,8 @@ public class Main {
         new ImportServlet(parser, linkStorage, userStorage, multipartConfigElement, scratchDir.toPath()));
     addServlet(server, servletContextHandler, "linkServlet", "/link",
         new LinkServlet(parser, linkStorage, userStorage, multipartConfigElement, scratchDir.toPath()));
+    addServlet(server, servletContextHandler, "ajaxServlet", "/ajax",
+        new AjaxServlet(parser, linkStorage, userStorage, multipartConfigElement, scratchDir.toPath()));
 
     server.start();
     server.join();

@@ -1,14 +1,8 @@
 package org.limmen.mystart.server.servlet;
 
 import java.io.IOException;
-import static java.lang.String.CASE_INSENSITIVE_ORDER;
 import java.net.URLDecoder;
 import java.nio.file.Path;
-import java.util.Collection;
-import java.util.Map;
-import java.util.TreeMap;
-import static java.util.stream.Collectors.counting;
-import static java.util.stream.Collectors.groupingBy;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -102,7 +96,7 @@ public class LinkServlet extends AbstractServlet {
 
       req.setAttribute("referer", getOrignalParameters(req));
       req.setAttribute("link", link);
-      req.setAttribute("labels", DomainUtil.formatLabels(link));
+      req.setAttribute("editlabels", DomainUtil.formatLabels(link));
       req.setAttribute("type", type);
       req.getRequestDispatcher("/edit.jsp").include(req, res);
 
@@ -143,40 +137,6 @@ public class LinkServlet extends AbstractServlet {
       }
 
       res.sendRedirect("/home");
-
-    } else if (exists(req, "stats")) {
-
-      String key = req.getParameter("stats");
-      Collection<Link> links = getLinkStorage().getAll(userId);
-      Collection<String> labels = getLinkStorage().getAllLabels(userId);
-
-      Map<String, Long> stats = new TreeMap<>(CASE_INSENSITIVE_ORDER);
-
-      switch (key) {
-        case "source":
-          stats.putAll(
-              links.stream()
-                  .collect(groupingBy(g -> g.getSource(), counting())));
-          break;
-        case "create_year":
-          stats.putAll(
-              links.stream()
-                  .collect(groupingBy(g -> g.getCreationDate().getYear() + "", counting())));
-          break;
-        case "visit_year":
-          stats.putAll(
-              links.stream()
-                  .collect(groupingBy(g -> g.getLastVisit() == null ? "Never" : g.getLastVisit().getYear() + "", counting())));
-          break;
-        case "labels":
-          labels.forEach(l -> {
-            stats.put(l, links.stream().filter(f -> f.getLabels().contains(l)).count());
-          });
-          break;
-      }
-
-      req.setAttribute("map", stats);
-      req.getRequestDispatcher("/stats.jsp").include(req, res);
     }
   }
 

@@ -151,7 +151,7 @@ public class AbstractServlet extends HttpServlet {
   protected String getOrignalParameters(HttpServletRequest req) {
     String referer = req.getHeader("Referer");
 
-    if (referer.contains("?")) {
+    if (referer != null && referer.contains("?")) {
       int index = referer.indexOf("?");
       return referer.substring(1 + index);
     }

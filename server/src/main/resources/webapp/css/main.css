@@ -1,54 +1,5 @@
-.labelmenu {
-  float: left;
-  padding: 5px;
-}
-
-.container {
-}
-
-.container .home {
-  display: block;
-}
-
-.bookmark {
-  float: left;
-  border-style: solid;
-  border-width: 1px;
-  margin: 5px;
-  padding: 5px 10px 5px 10px;
-  width: 300px;
-  height: 200px;
-}
-
-.bookmark-content {
-  overflow: auto;
-  height: 90%;
-}
-
-.bookmark-content h3 {
-  margin-top: 5px;
-  margin-bottom: 7px;
-}
-
-.bookmark-content p {
-  margin: 2px;
-}
-
-.bookmark-footer {    
-  height: 10%;
-}
-
-.bookmark-footer .info {  
-  float: left;    
-}
-
-.info > p {
-  color: #999;
-  font-size: smaller;
-  margin: 0px;  
-}
-
-.bookmark-footer .actions {  
-  float: right;    
-  font-size: smaller;
+.box-header > .box-links {
+  position: absolute;
+  right: 10px;
+  bottom: 5px;
 }
