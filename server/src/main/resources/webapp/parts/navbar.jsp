@@ -25,7 +25,7 @@
               ${user.name}
               <small>${user.email}</small>
             </p>
-          </li>                
+          </li>                         
           <!-- Menu Footer-->
           <li class="user-footer">
             <div class="pull-left">

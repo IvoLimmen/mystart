@@ -30,17 +30,7 @@
           <!-- /.search form -->
     
           <!-- Sidebar Menu -->
-          <ul class="sidebar-menu" data-widget="tree">
-            <li class="header">Labels</li>
-            <c:if test="${!empty labels}">
-              <c:forEach items="${labels}" var="label">
-                <c:url value="/home" var="url">
-                  <c:param name="label" value="${label}" />
-                </c:url>
-                <li><a href="${url}"><i class="fa fa-link"></i> <span>${label}</span></a></li>
-              </c:forEach>
-            </c:if>
-          </ul>
+          <jsp:include page="parts/sidemenu.jsp"/>
           <!-- /.sidebar-menu -->
         </section>
         <!-- /.sidebar -->
@@ -68,8 +58,7 @@
                         <c:url value="/home" var="url">
                           <c:param name="label" value="${label}"/>
                         </c:url>
-                        <a href="${url}">${label}</a>
-                        <c:if test="${!status.last}">, </c:if>
+                        <a href="${url}">${label}</a><c:if test="${!status.last}">,</c:if>
                       </c:forEach>
                     </p>
                   </div>                  

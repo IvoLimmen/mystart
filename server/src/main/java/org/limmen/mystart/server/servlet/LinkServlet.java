@@ -102,7 +102,7 @@ public class LinkServlet extends AbstractServlet {
 
       req.setAttribute("referer", getOrignalParameters(req));
       req.setAttribute("link", link);
-      req.setAttribute("labels", DomainUtil.formatLabels(link));
+      req.setAttribute("editlabels", DomainUtil.formatLabels(link));
       req.setAttribute("type", type);
       req.getRequestDispatcher("/edit.jsp").include(req, res);
 
