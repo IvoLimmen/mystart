@@ -73,7 +73,7 @@ public class LinkServlet extends AbstractServlet {
         Long id = Long.parseLong(req.getParameter("id"));
         link = getLinkStorage().get(userId, id);
       } else if (req.getParameter("url") != null && req.getParameter("url").length() > 0) {
-        // new (or edit) by url
+        // new (or edit) by url        
         type = "popup";
         String url = req.getParameter("url");
         link = getLinkStorage().getByUrl(userId, url);
@@ -98,8 +98,11 @@ public class LinkServlet extends AbstractServlet {
       req.setAttribute("link", link);
       req.setAttribute("editlabels", DomainUtil.formatLabels(link));
       req.setAttribute("type", type);
-      req.getRequestDispatcher("/edit.jsp").include(req, res);
-
+      if (type.equals("normal")) {
+        req.getRequestDispatcher("/edit.jsp").include(req, res);
+      } else {
+        req.getRequestDispatcher("/popup.jsp").include(req, res);
+      }
     } else if (exists(req, "details")) {
 
       Long id = Long.parseLong(req.getParameter("id"));
