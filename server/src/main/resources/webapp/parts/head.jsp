@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="css/font-awesome.min.css">
   <link rel="stylesheet" href="css/ionicons.min.css">
   <link rel="stylesheet" href="css/AdminLTE.min.css">
+  <link rel="stylesheet" href="css/awesomplete.base.css">
+  <link rel="stylesheet" href="css/awesomplete.css">
   <link rel="stylesheet" href="css/skins/skin-blue.min.css">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">

@@ -73,10 +73,8 @@
       <!-- /.content-wrapper -->    
     </div>
     <!-- ./wrapper -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <jsp:include page="parts/javascript.jsp"/>  
     <script src="js/Chart.min.js"></script>
-    <script src="js/adminlte.min.js"></script>
     <script>
       $(function () {
         var pieOptions     = {

@@ -43,3 +43,10 @@ Create a new database (postgres) by executing:
 After a full build execute the following to start the server:
 
     ./server/target/appassembler/bin/mystart
+
+# Thanks
+
+Thanks to the following project this project could be build:
+
+ * [AdminLTE](https://adminlte.io/), for the nice look and feel.
+ * [Awesomplete](https://leaverou.github.io/awesomplete/), for the nice and small autocomplete function.

@@ -51,7 +51,7 @@
                 </div>
                 <div class="form-group">    
                   <label for="labels">Labels</label><br/>
-                  <input type="text" class="form-control" name="labels" size="50" value="${editlabels}"/>
+                  <input type="text" class="form-control" name="labels" size="50" value="${editlabels}" autocomplete="off" data-multiple/>
                 </div>
                 <button type="submit" class="btn btn-default" name="cancelButton">Cancel</button>
                 <button type="submit" class="btn btn-default" name="saveButton">Save</button>              
@@ -66,8 +66,7 @@
       <!-- /.content-wrapper -->    
     </div>
     <!-- ./wrapper -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/adminlte.min.js"></script>
+    <jsp:include page="parts/javascript.jsp"/>  
+    <jsp:include page="parts/autocomplete.jsp"/>  
   </body>
 </html>
