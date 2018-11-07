@@ -34,11 +34,22 @@
           <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4">
-              <form name="account" action="/user" method="post">
+              <form name="account" action="/user" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="${user.id}"/>             
                 <div class="form-group">
                   <label for="name">Name</label>
                   <input type="text" class="form-control" name="name" value="${user.name}"/>
+                </div>
+                <div class="form-group">
+                  <label for="fullname">Full name</label>
+                  <input type="text" class="form-control" name="fullname" value="${user.fullName}"/>
+                </div>
+                <div class="form-group">
+                  <img src="${user.avatarFileName}" width="160" height="160">
+                </div>
+                <div class="form-group">
+                  <label for="avatar">Avatar</label>
+                  <input type="file" name="avatar"/>
                 </div>
                 <div>      
                   <label for="email">Email</label><br/>

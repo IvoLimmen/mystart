@@ -12,7 +12,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.limmen.mystart.DomainUtil;
 import org.limmen.mystart.Link;
 import org.limmen.mystart.LinkStorage;
-import org.limmen.mystart.Parser;
 import org.limmen.mystart.UserStorage;
 import org.limmen.mystart.cleanup.CleanupContext;
 import org.limmen.mystart.cleanup.CleanupTaskManager;
@@ -22,13 +21,11 @@ public class LinkServlet extends AbstractServlet {
 
   private static final long serialVersionUID = 1L;
 
-  public LinkServlet(
-      Parser parser,
-      LinkStorage linkStorage,
-      UserStorage userStorage,
-      MultipartConfigElement multipartConfigElement,
-      Path temporaryDirectory) {
-    super(parser, linkStorage, userStorage, multipartConfigElement, temporaryDirectory);
+  public LinkServlet(LinkStorage linkStorage,
+                     UserStorage userStorage,
+                     MultipartConfigElement multipartConfigElement,
+                     Path temporaryDirectory) {
+    super(linkStorage, userStorage, multipartConfigElement, temporaryDirectory);
   }
 
   private void scheduleCleanup(HttpServletRequest req, Long userId) {

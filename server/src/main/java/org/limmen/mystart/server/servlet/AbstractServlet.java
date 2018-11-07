@@ -25,19 +25,14 @@ public class AbstractServlet extends HttpServlet {
 
   private final MultipartConfigElement multipartConfigElement;
 
-  private final Parser parser;
-
   private final Path temporaryDirectory;
 
   private final UserStorage userStorage;
 
-  public AbstractServlet(
-      Parser parser,
-      LinkStorage linkStorage,
-      UserStorage userStorage,
-      MultipartConfigElement multipartConfigElement,
-      Path temporaryDirectory) {
-    this.parser = parser;
+  public AbstractServlet(LinkStorage linkStorage,
+                         UserStorage userStorage,
+                         MultipartConfigElement multipartConfigElement,
+                         Path temporaryDirectory) {
     this.linkStorage = linkStorage;
     this.userStorage = userStorage;
     this.multipartConfigElement = multipartConfigElement;
@@ -46,10 +41,6 @@ public class AbstractServlet extends HttpServlet {
 
   public LinkStorage getLinkStorage() {
     return linkStorage;
-  }
-
-  public Parser getParser() {
-    return parser;
   }
 
   public Path getTemporaryDirectory() {

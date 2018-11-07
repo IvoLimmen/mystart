@@ -22,7 +22,7 @@
           <li class="user-header">
             <%-- <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">   --%>
             <p>
-              ${user.name}
+              ${user.fullName}
               <small>${user.email}</small>
             </p>
           </li>                         

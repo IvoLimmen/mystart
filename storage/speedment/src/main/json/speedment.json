@@ -69,8 +69,8 @@
                 "columns" : [
                   {
                     "databaseType" : "java.lang.Integer",
-                    "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
                     "expanded" : true,
+                    "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
                     "nullable" : false,
                     "name" : "installed_rank",
                     "id" : "installed_rank",
@@ -142,8 +142,8 @@
                   },
                   {
                     "databaseType" : "java.lang.Integer",
-                    "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
                     "expanded" : true,
+                    "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
                     "nullable" : false,
                     "name" : "execution_time",
                     "id" : "execution_time",
@@ -152,8 +152,8 @@
                   },
                   {
                     "databaseType" : "java.lang.Boolean",
-                    "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
                     "expanded" : true,
+                    "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
                     "nullable" : false,
                     "name" : "success",
                     "id" : "success",
@@ -340,7 +340,7 @@
                 "enabled" : true
               },
               {
-                "expanded" : false,
+                "expanded" : true,
                 "primaryKeyColumns" : [
                   {
                     "expanded" : true,
@@ -418,6 +418,30 @@
                     "nullableImplementation" : "OPTIONAL",
                     "id" : "open_in_new_tab",
                     "ordinalPosition" : 5,
+                    "enabled" : true
+                  },
+                  {
+                    "databaseType" : "java.lang.String",
+                    "nameProtected" : true,
+                    "expanded" : true,
+                    "nullable" : true,
+                    "autoIncrement" : false,
+                    "name" : "full_name",
+                    "nullableImplementation" : "OPTIONAL",
+                    "id" : "full_name",
+                    "ordinalPosition" : 6,
+                    "enabled" : true
+                  },
+                  {
+                    "databaseType" : "java.lang.String",
+                    "nameProtected" : true,
+                    "expanded" : true,
+                    "nullable" : true,
+                    "autoIncrement" : false,
+                    "name" : "avatar_filename",
+                    "nullableImplementation" : "OPTIONAL",
+                    "id" : "avatar_filename",
+                    "ordinalPosition" : 7,
                     "enabled" : true
                   }
                 ],

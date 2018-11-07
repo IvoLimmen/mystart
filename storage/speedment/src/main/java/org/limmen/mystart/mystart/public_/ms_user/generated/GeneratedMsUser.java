@@ -81,6 +81,28 @@ public interface GeneratedMsUser {
         TypeMapper.identity(),
         false
     );
+    /**
+     * This Field corresponds to the {@link MsUser} field that can be obtained
+     * using the {@link MsUser#getFullName()} method.
+     */
+    StringField<MsUser, String> FULL_NAME = StringField.create(
+        Identifier.FULL_NAME,
+        o -> OptionalUtil.unwrap(o.getFullName()),
+        MsUser::setFullName,
+        TypeMapper.identity(),
+        false
+    );
+    /**
+     * This Field corresponds to the {@link MsUser} field that can be obtained
+     * using the {@link MsUser#getAvatarFilename()} method.
+     */
+    StringField<MsUser, String> AVATAR_FILENAME = StringField.create(
+        Identifier.AVATAR_FILENAME,
+        o -> OptionalUtil.unwrap(o.getAvatarFilename()),
+        MsUser::setAvatarFilename,
+        TypeMapper.identity(),
+        false
+    );
     
     /**
      * Returns the id of this MsUser. The id field corresponds to the database
@@ -122,6 +144,23 @@ public interface GeneratedMsUser {
      * @return the openInNewTab of this MsUser
      */
     OptionalBoolean getOpenInNewTab();
+    
+    /**
+     * Returns the fullName of this MsUser. The fullName field corresponds to
+     * the database column mystart.public.ms_user.full_name.
+     * 
+     * @return the fullName of this MsUser
+     */
+    Optional<String> getFullName();
+    
+    /**
+     * Returns the avatarFilename of this MsUser. The avatarFilename field
+     * corresponds to the database column
+     * mystart.public.ms_user.avatar_filename.
+     * 
+     * @return the avatarFilename of this MsUser
+     */
+    Optional<String> getAvatarFilename();
     
     /**
      * Sets the id of this MsUser. The id field corresponds to the database
@@ -168,13 +207,34 @@ public interface GeneratedMsUser {
      */
     MsUser setOpenInNewTab(Boolean openInNewTab);
     
+    /**
+     * Sets the fullName of this MsUser. The fullName field corresponds to the
+     * database column mystart.public.ms_user.full_name.
+     * 
+     * @param fullName to set of this MsUser
+     * @return         this MsUser instance
+     */
+    MsUser setFullName(String fullName);
+    
+    /**
+     * Sets the avatarFilename of this MsUser. The avatarFilename field
+     * corresponds to the database column
+     * mystart.public.ms_user.avatar_filename.
+     * 
+     * @param avatarFilename to set of this MsUser
+     * @return               this MsUser instance
+     */
+    MsUser setAvatarFilename(String avatarFilename);
+    
     enum Identifier implements ColumnIdentifier<MsUser> {
         
         ID              ("id"),
         NAME            ("name"),
         EMAIL           ("email"),
         PASSWORD        ("password"),
-        OPEN_IN_NEW_TAB ("open_in_new_tab");
+        OPEN_IN_NEW_TAB ("open_in_new_tab"),
+        FULL_NAME       ("full_name"),
+        AVATAR_FILENAME ("avatar_filename");
         
         private final String columnId;
         private final TableIdentifier<MsUser> tableIdentifier;

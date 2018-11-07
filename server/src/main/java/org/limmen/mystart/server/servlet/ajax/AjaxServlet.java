@@ -18,7 +18,6 @@ import org.json.JSONException;
 import org.json.JSONWriter;
 import org.limmen.mystart.Link;
 import org.limmen.mystart.LinkStorage;
-import org.limmen.mystart.Parser;
 import org.limmen.mystart.UserStorage;
 import org.limmen.mystart.server.servlet.AbstractServlet;
 import org.limmen.mystart.server.servlet.model.ChartData;
@@ -38,16 +37,14 @@ public class AjaxServlet extends AbstractServlet {
     COLORS.add("#d2d6de");
   }
 
-  public AjaxServlet(Parser parser,
-                     LinkStorage linkStorage,
+  public AjaxServlet(LinkStorage linkStorage,
                      UserStorage userStorage,
                      MultipartConfigElement multipartConfigElement,
                      Path temporaryDirectory) {
-    super(parser,
-        linkStorage,
-        userStorage,
-        multipartConfigElement,
-        temporaryDirectory);
+    super(linkStorage,
+          userStorage,
+          multipartConfigElement,
+          temporaryDirectory);
   }
 
   private List<ChartData> bySource(Collection<Link> links) {

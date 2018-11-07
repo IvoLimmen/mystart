@@ -26,6 +26,8 @@ public abstract class GeneratedMsUserImpl implements MsUser {
     private String email;
     private String password;
     private Boolean openInNewTab;
+    private String fullName;
+    private String avatarFilename;
     
     protected GeneratedMsUserImpl() {}
     
@@ -52,6 +54,16 @@ public abstract class GeneratedMsUserImpl implements MsUser {
     @Override
     public OptionalBoolean getOpenInNewTab() {
         return OptionalUtil.ofNullable(openInNewTab);
+    }
+    
+    @Override
+    public Optional<String> getFullName() {
+        return Optional.ofNullable(fullName);
+    }
+    
+    @Override
+    public Optional<String> getAvatarFilename() {
+        return Optional.ofNullable(avatarFilename);
     }
     
     @Override
@@ -85,13 +97,27 @@ public abstract class GeneratedMsUserImpl implements MsUser {
     }
     
     @Override
+    public MsUser setFullName(String fullName) {
+        this.fullName = fullName;
+        return this;
+    }
+    
+    @Override
+    public MsUser setAvatarFilename(String avatarFilename) {
+        this.avatarFilename = avatarFilename;
+        return this;
+    }
+    
+    @Override
     public String toString() {
         final StringJoiner sj = new StringJoiner(", ", "{ ", " }");
-        sj.add("id = "           + Objects.toString(getId()));
-        sj.add("name = "         + Objects.toString(OptionalUtil.unwrap(getName())));
-        sj.add("email = "        + Objects.toString(OptionalUtil.unwrap(getEmail())));
-        sj.add("password = "     + Objects.toString(OptionalUtil.unwrap(getPassword())));
-        sj.add("openInNewTab = " + Objects.toString(OptionalUtil.unwrap(getOpenInNewTab())));
+        sj.add("id = "             + Objects.toString(getId()));
+        sj.add("name = "           + Objects.toString(OptionalUtil.unwrap(getName())));
+        sj.add("email = "          + Objects.toString(OptionalUtil.unwrap(getEmail())));
+        sj.add("password = "       + Objects.toString(OptionalUtil.unwrap(getPassword())));
+        sj.add("openInNewTab = "   + Objects.toString(OptionalUtil.unwrap(getOpenInNewTab())));
+        sj.add("fullName = "       + Objects.toString(OptionalUtil.unwrap(getFullName())));
+        sj.add("avatarFilename = " + Objects.toString(OptionalUtil.unwrap(getAvatarFilename())));
         return "MsUserImpl " + sj.toString();
     }
     
@@ -105,6 +131,8 @@ public abstract class GeneratedMsUserImpl implements MsUser {
         if (!Objects.equals(this.getEmail(), thatMsUser.getEmail())) { return false; }
         if (!Objects.equals(this.getPassword(), thatMsUser.getPassword())) { return false; }
         if (!Objects.equals(this.getOpenInNewTab(), thatMsUser.getOpenInNewTab())) { return false; }
+        if (!Objects.equals(this.getFullName(), thatMsUser.getFullName())) { return false; }
+        if (!Objects.equals(this.getAvatarFilename(), thatMsUser.getAvatarFilename())) { return false; }
         return true;
     }
     
@@ -116,6 +144,8 @@ public abstract class GeneratedMsUserImpl implements MsUser {
         hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getEmail()));
         hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getPassword()));
         hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getOpenInNewTab()));
+        hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getFullName()));
+        hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getAvatarFilename()));
         return hash;
     }
 }
