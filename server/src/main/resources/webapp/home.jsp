@@ -47,11 +47,8 @@
                 <div class="box box-solid box-default">
                   <div class="box-header">
                     <h3 class="box-title"><a href="/link?reg=${link.id}" ${user.isOpenInNewTab() ? "target=\"_BLANK\"" : "" } title="${link.url}">${link.title}</a></h3>
-                    <div class="box-links">
-                      <a href="/link?details&id=${link.id}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                      <a href="/link?edit&id=${link.id}" class="small-box-footer">Edit <i class="fa fa-edit"></i></a>
-                      <a href="/link?delete&id=${link.id}" class="small-box-footer">Delete <i class="fa fa-trash"></i></a>
-                    </div>
+                  </div>                  
+                  <div class="box-body">
                     <p>${link.description}</p>
                     <p>
                       <c:forEach items="${link.labels}" var="label" varStatus="status">
@@ -61,7 +58,12 @@
                         <a href="${url}">${label}</a><c:if test="${!status.last}">,</c:if>
                       </c:forEach>
                     </p>
-                  </div>                  
+                  </div>
+                  <div class="box-footer">
+                    <a href="/link?details&id=${link.id}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="/link?edit&id=${link.id}" class="small-box-footer">Edit <i class="fa fa-edit"></i></a>
+                    <a href="/link?delete&id=${link.id}" class="small-box-footer">Delete <i class="fa fa-trash"></i></a>
+                  </div>
                 </div>
               </div>
               <c:if test="${(ls.count % 4 == 0)}">
