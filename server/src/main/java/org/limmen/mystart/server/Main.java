@@ -9,6 +9,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.Set;
 import javax.servlet.MultipartConfigElement;
@@ -54,6 +57,8 @@ public class Main {
 
     Server server = new Server(conf.getInt("server.port"));
     URI baseUri = getWebRootResourceUri();
+    Path avatarPath = Paths.get(new File(baseUri.toURL().toURI()).toPath().toString(), "avatar");
+    Files.createDirectory(avatarPath);
 
     ServletContextHandler servletContextHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
     Set<SessionTrackingMode> trackingModes = new HashSet<>();
@@ -83,17 +88,17 @@ public class Main {
     server.setHandler(servletContextHandler);
 
     addServlet(server, servletContextHandler, "homeServlet", "/home",
-        new HomeServlet(parser, linkStorage, userStorage, multipartConfigElement, scratchDir.toPath()));
+               new HomeServlet(linkStorage, userStorage, multipartConfigElement, scratchDir.toPath()));
     addServlet(server, servletContextHandler, "userServlet", "/user",
-        new UserServlet(parser, linkStorage, userStorage, multipartConfigElement, scratchDir.toPath()));
+               new UserServlet(linkStorage, userStorage, multipartConfigElement, scratchDir.toPath(), avatarPath));
     addServlet(server, servletContextHandler, "loginServlet", "/login",
-        new LoginServlet(parser, linkStorage, userStorage, multipartConfigElement, scratchDir.toPath()));
+               new LoginServlet(linkStorage, userStorage, multipartConfigElement, scratchDir.toPath()));
     addServlet(server, servletContextHandler, "importServlet", "/import",
-        new ImportServlet(parser, linkStorage, userStorage, multipartConfigElement, scratchDir.toPath()));
+               new ImportServlet(parser, linkStorage, userStorage, multipartConfigElement, scratchDir.toPath()));
     addServlet(server, servletContextHandler, "linkServlet", "/link",
-        new LinkServlet(parser, linkStorage, userStorage, multipartConfigElement, scratchDir.toPath()));
+               new LinkServlet(linkStorage, userStorage, multipartConfigElement, scratchDir.toPath()));
     addServlet(server, servletContextHandler, "ajaxServlet", "/ajax",
-        new AjaxServlet(parser, linkStorage, userStorage, multipartConfigElement, scratchDir.toPath()));
+               new AjaxServlet(linkStorage, userStorage, multipartConfigElement, scratchDir.toPath()));
 
     server.start();
     server.join();

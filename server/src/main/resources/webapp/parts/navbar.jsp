@@ -1,3 +1,5 @@
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Header Navbar -->
 <nav class="navbar navbar-static-top" role="navigation">
   <!-- Sidebar toggle button-->
@@ -12,17 +14,14 @@
       <li class="dropdown user user-menu">
         <!-- Menu Toggle Button -->
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-          <!-- The user image in the navbar-->
-          <%-- <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image"> --%>
-          <!-- hidden-xs hides the username on small devices so only the image appears. -->
-          <span class="hidden-xs">${user.name}</span>
+          <span>${user.name}</span>
         </a>
         <ul class="dropdown-menu">
           <!-- The user image in the menu -->
           <li class="user-header">
-            <%-- <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">   --%>
+            <c:if test="${not empty user.avatarFileName}"><img src="${user.avatarFileName}" class="img-circle" width="160" height="160" alt="User Image"></c:if>          
             <p>
-              ${user.name}
+              ${user.fullName}
               <small>${user.email}</small>
             </p>
           </li>                         

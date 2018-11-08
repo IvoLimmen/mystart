@@ -14,5 +14,5 @@
   <link rel="stylesheet" href="css/skins/skin-blue.min.css">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-  <link rel="icon" sizes="32x32" type="image/png" href="img/favicon-32.png" type="image/x-icon">
+  <link rel="icon" sizes="32x32" href="img/favicon-32.png" type="image/x-icon">
 </head>

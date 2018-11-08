@@ -446,10 +446,39 @@ public class GeneratedMyStartMetadata extends AbstractApplicationMetadata {
             "                    \"nullable\" : true,",
             "                    \"nullableImplementation\" : \"OPTIONAL\",",
             "                    \"ordinalPosition\" : 5",
+            "                  },",
+            "                  {",
+            "                    \"autoIncrement\" : false,",
+            "                    \"databaseType\" : \"java.lang.String\",",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : true,",
+            "                    \"id\" : \"full_name\",",
+            "                    \"name\" : \"full_name\",",
+            "                    \"nameProtected\" : true,",
+            "                    \"nullable\" : true,",
+            "                    \"nullableImplementation\" : \"OPTIONAL\",",
+            "                    \"ordinalPosition\" : 6"
+        ).forEachOrdered(sb::append);
+    }
+    
+    private static void initPart4(StringBuilder sb) {
+        Stream.of(
+            "                  },",
+            "                  {",
+            "                    \"autoIncrement\" : false,",
+            "                    \"databaseType\" : \"java.lang.String\",",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : true,",
+            "                    \"id\" : \"avatar_filename\",",
+            "                    \"name\" : \"avatar_filename\",",
+            "                    \"nameProtected\" : true,",
+            "                    \"nullable\" : true,",
+            "                    \"nullableImplementation\" : \"OPTIONAL\",",
+            "                    \"ordinalPosition\" : 7",
             "                  }",
             "                ],",
             "                \"enabled\" : true,",
-            "                \"expanded\" : false,",
+            "                \"expanded\" : true,",
             "                \"id\" : \"ms_user\",",
             "                \"indexes\" : [",
             "                  {",
@@ -457,12 +486,7 @@ public class GeneratedMyStartMetadata extends AbstractApplicationMetadata {
             "                    \"expanded\" : false,",
             "                    \"id\" : \"ms_user_pkey\",",
             "                    \"indexColumns\" : [",
-            "                      {"
-        ).forEachOrdered(sb::append);
-    }
-    
-    private static void initPart4(StringBuilder sb) {
-        Stream.of(
+            "                      {",
             "                        \"expanded\" : true,",
             "                        \"id\" : \"id\",",
             "                        \"name\" : \"id\",",
@@ -539,7 +563,12 @@ public class GeneratedMyStartMetadata extends AbstractApplicationMetadata {
             "                    \"id\" : \"ms_visits_link_id_fkey\",",
             "                    \"name\" : \"ms_visits_link_id_fkey\"",
             "                  }",
-            "                ],",
+            "                ],"
+        ).forEachOrdered(sb::append);
+    }
+    
+    private static void initPart5(StringBuilder sb) {
+        Stream.of(
             "                \"id\" : \"ms_visits\",",
             "                \"indexes\" : [",
             "                  {",
@@ -563,12 +592,7 @@ public class GeneratedMyStartMetadata extends AbstractApplicationMetadata {
             "                \"name\" : \"ms_visits\",",
             "                \"primaryKeyColumns\" : [",
             "                  {",
-            "                    \"enabled\" : true,"
-        ).forEachOrdered(sb::append);
-    }
-    
-    private static void initPart5(StringBuilder sb) {
-        Stream.of(
+            "                    \"enabled\" : true,",
             "                    \"expanded\" : true,",
             "                    \"id\" : \"id\",",
             "                    \"name\" : \"id\",",

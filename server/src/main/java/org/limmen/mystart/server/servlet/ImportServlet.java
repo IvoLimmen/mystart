@@ -25,13 +25,15 @@ public class ImportServlet extends AbstractServlet {
 
   private static final long serialVersionUID = 1L;
 
-  public ImportServlet(
-      Parser parser,
-      LinkStorage linkStorage,
-      UserStorage userStorage,
-      MultipartConfigElement multipartConfigElement,
-      Path temporaryDirectory) {
-    super(parser, linkStorage, userStorage, multipartConfigElement, temporaryDirectory);
+  private final Parser parser;
+
+  public ImportServlet(Parser parser,
+                       LinkStorage linkStorage,
+                       UserStorage userStorage,
+                       MultipartConfigElement multipartConfigElement,
+                       Path temporaryDirectory) {
+    super(linkStorage, userStorage, multipartConfigElement, temporaryDirectory);
+    this.parser = parser;
   }
 
   @Override
@@ -66,8 +68,8 @@ public class ImportServlet extends AbstractServlet {
       parseContext.addOption("github.importLanguageAsLabel", "true");
     }
 
-    Set<Link> links = getParser().parse(parseContext);
-    log.info("Parsed {} links from {}", links.size(), getParser().getName());
+    Set<Link> links = parser.parse(parseContext);
+    log.info("Parsed {} links from {}", links.size(), parser.getName());
 
     getLinkStorage().importCollection(userId, links, skipDuplicates);
 

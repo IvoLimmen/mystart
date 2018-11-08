@@ -8,17 +8,18 @@ public final class User extends BaseObject {
 
   private static final long serialVersionUID = -8464832961657168773L;
 
+  private String avatarFileName;
   private String email;
-
+  private String fullName;
   private String name;
-
   private boolean openInNewTab;
-
   private String password;
 
-  public User(String name, String email, String password) {
+  public User(String name, String fullName, String email, String avatarFileName, String password) {
     this.email = email;
     this.name = name;
+    this.fullName = fullName;
+    this.avatarFileName = avatarFileName;
     this.password = encode(email, password);
   }
 
@@ -26,8 +27,16 @@ public final class User extends BaseObject {
     return this.password.equals(encode(email, password));
   }
 
+  public String getAvatarFileName() {
+    return avatarFileName;
+  }
+
   public String getEmail() {
     return email;
+  }
+
+  public String getFullName() {
+    return fullName;
   }
 
   public String getName() {
@@ -42,8 +51,16 @@ public final class User extends BaseObject {
     return openInNewTab;
   }
 
+  public void setAvatarFileName(String avatarFileName) {
+    this.avatarFileName = avatarFileName;
+  }
+
   public void setEmail(String email) {
     this.email = email;
+  }
+
+  public void setFullName(String fullName) {
+    this.fullName = fullName;
   }
 
   public void setName(String name) {

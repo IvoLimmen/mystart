@@ -57,12 +57,14 @@ public class DbUserStorage extends DbAbstractStorage implements UserStorage {
   @Override
   public void store(User item) throws StorageException {
     MsUser user = users.stream()
-        .filter(MsUser.EMAIL.equal(item.getEmail()))
+        .filter(MsUser.ID.equal(item.getId()))
         .findAny()
         .orElse(new MsUserImpl().setId(0));
 
     user.setName(item.getName());
     user.setEmail(item.getEmail());
+    user.setAvatarFilename(item.getAvatarFileName());
+    user.setFullName(item.getFullName());
     user.setPassword(item.getPassword());
     user.setOpenInNewTab(item.isOpenInNewTab());
 
@@ -77,7 +79,11 @@ public class DbUserStorage extends DbAbstractStorage implements UserStorage {
     if (user == null) {
       return null;
     }
-    User u = new User(user.getName().get(), user.getEmail().get(), user.getPassword().get());
+    User u = new User(user.getName().get(),
+                      user.getFullName().orElse(null),
+                      user.getEmail().get(),
+                      user.getAvatarFilename().orElse(null),
+                      user.getPassword().get());
     u.setId(user.getId());
     u.setPassword(user.getPassword().get());
     u.setOpenInNewTab(user.getOpenInNewTab().getAsBoolean());
