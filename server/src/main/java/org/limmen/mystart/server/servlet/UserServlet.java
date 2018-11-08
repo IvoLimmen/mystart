@@ -61,13 +61,13 @@ public class UserServlet extends AbstractServlet {
       Part filePart = req.getPart("avatar");
 
       if (filePart != null) {
-        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-        Path tempFile = Paths.get(avatarDirectory.toString(), email + "-" + fileName);
+        String fileName = id + "-" + Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+        Path tempFile = Paths.get(avatarDirectory.toString(), fileName);
 
         try (FileOutputStream fileOutputStream = new FileOutputStream(tempFile.toFile())) {
           fileOutputStream.write(IOUtils.toByteArray(filePart.getInputStream()));
         }
-        user.setAvatarFileName(tempFile.toString());
+        user.setAvatarFileName("/avatar/" + fileName);
       }
       user.setOpenInNewTab(exists(req, "openinnewtab"));
       user.setEmail(email);

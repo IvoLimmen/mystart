@@ -57,7 +57,7 @@ public class DbUserStorage extends DbAbstractStorage implements UserStorage {
   @Override
   public void store(User item) throws StorageException {
     MsUser user = users.stream()
-        .filter(MsUser.EMAIL.equal(item.getEmail()))
+        .filter(MsUser.ID.equal(item.getId()))
         .findAny()
         .orElse(new MsUserImpl().setId(0));
 

@@ -9,6 +9,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashSet;
@@ -56,6 +57,8 @@ public class Main {
 
     Server server = new Server(conf.getInt("server.port"));
     URI baseUri = getWebRootResourceUri();
+    Path avatarPath = Paths.get(new File(baseUri.toURL().toURI()).toPath().toString(), "avatar");
+    Files.createDirectory(avatarPath);
 
     ServletContextHandler servletContextHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
     Set<SessionTrackingMode> trackingModes = new HashSet<>();
@@ -84,12 +87,10 @@ public class Main {
     servletContextHandler.addServlet(holderDefault, "/");
     server.setHandler(servletContextHandler);
 
-    Path avatarDirectory = Paths.get(System.getProperty("user.dir"), conf.getString("server.avatarDirectory"));
-
     addServlet(server, servletContextHandler, "homeServlet", "/home",
                new HomeServlet(linkStorage, userStorage, multipartConfigElement, scratchDir.toPath()));
     addServlet(server, servletContextHandler, "userServlet", "/user",
-               new UserServlet(linkStorage, userStorage, multipartConfigElement, scratchDir.toPath(), avatarDirectory));
+               new UserServlet(linkStorage, userStorage, multipartConfigElement, scratchDir.toPath(), avatarPath));
     addServlet(server, servletContextHandler, "loginServlet", "/login",
                new LoginServlet(linkStorage, userStorage, multipartConfigElement, scratchDir.toPath()));
     addServlet(server, servletContextHandler, "importServlet", "/import",

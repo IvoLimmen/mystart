@@ -3,6 +3,5 @@
 	"server.db.jdbcUrl": "jdbc:postgresql://localhost:5678/mystart",
 	"server.db.username": "postgres",
 	"server.db.password": "postgres",
-	"server.port": "8080",
-	"avatarDirectory": "config/webapp/"
+	"server.port": "8080"
 }
