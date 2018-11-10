@@ -61,6 +61,7 @@ public class LinkServlet extends AbstractServlet {
       Link link = getLinkStorage().get(userId, id);
       link.visited();
       getLinkStorage().update(userId, link);
+      getVisitStorage().visit(link.getId());
       res.sendRedirect(link.getRedirectUrl());
 
     } else if (exists(req, "edit")) {
