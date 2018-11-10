@@ -11,9 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.limmen.mystart.DomainUtil;
 import org.limmen.mystart.Link;
-import org.limmen.mystart.LinkStorage;
-import org.limmen.mystart.UserStorage;
-import org.limmen.mystart.VisitStorage;
+import org.limmen.mystart.Storage;
 import org.limmen.mystart.cleanup.CleanupContext;
 import org.limmen.mystart.cleanup.CleanupTaskManager;
 
@@ -22,12 +20,10 @@ public class LinkServlet extends AbstractServlet {
 
   private static final long serialVersionUID = 1L;
 
-  public LinkServlet(LinkStorage linkStorage,
-                     UserStorage userStorage,
-                     VisitStorage visitStorage,
+  public LinkServlet(Storage storage,
                      MultipartConfigElement multipartConfigElement,
                      Path temporaryDirectory) {
-    super(linkStorage, userStorage, visitStorage, multipartConfigElement, temporaryDirectory);
+    super(storage, multipartConfigElement, temporaryDirectory);
   }
 
   private void scheduleCleanup(HttpServletRequest req, Long userId) {

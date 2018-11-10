@@ -10,21 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.limmen.mystart.Link;
-import org.limmen.mystart.LinkStorage;
-import org.limmen.mystart.UserStorage;
-import org.limmen.mystart.VisitStorage;
+import org.limmen.mystart.Storage;
 
 @Slf4j
 public class HomeServlet extends AbstractServlet {
 
   private static final long serialVersionUID = 1L;
 
-  public HomeServlet(LinkStorage linkStorage,
-                     UserStorage userStorage,
-                     VisitStorage visitStorage,
+  public HomeServlet(Storage storage,
                      MultipartConfigElement multipartConfigElement,
                      Path temporaryDirectory) {
-    super(linkStorage, userStorage, visitStorage, multipartConfigElement, temporaryDirectory);
+    super(storage,
+          multipartConfigElement,
+          temporaryDirectory);
   }
 
   @Override

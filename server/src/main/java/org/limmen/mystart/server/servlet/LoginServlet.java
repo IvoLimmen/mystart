@@ -7,21 +7,17 @@ import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.limmen.mystart.LinkStorage;
+import org.limmen.mystart.Storage;
 import org.limmen.mystart.User;
-import org.limmen.mystart.UserStorage;
-import org.limmen.mystart.VisitStorage;
 
 public class LoginServlet extends AbstractServlet {
 
   private static final long serialVersionUID = 1L;
 
-  public LoginServlet(LinkStorage linkStorage,
-                      UserStorage userStorage,
-                      VisitStorage visitStorage,
+  public LoginServlet(Storage storage,
                       MultipartConfigElement multipartConfigElement,
                       Path temporaryDirectory) {
-    super(linkStorage, userStorage, visitStorage, multipartConfigElement, temporaryDirectory);
+    super(storage, multipartConfigElement, temporaryDirectory);
   }
 
   private void addCookie(HttpServletResponse res, String key, String value) {

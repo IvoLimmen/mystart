@@ -17,9 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.json.JSONException;
 import org.json.JSONWriter;
 import org.limmen.mystart.Link;
-import org.limmen.mystart.LinkStorage;
-import org.limmen.mystart.UserStorage;
-import org.limmen.mystart.VisitStorage;
+import org.limmen.mystart.Storage;
 import org.limmen.mystart.server.servlet.AbstractServlet;
 import org.limmen.mystart.server.servlet.model.ChartData;
 
@@ -38,14 +36,10 @@ public class AjaxServlet extends AbstractServlet {
     COLORS.add("#d2d6de");
   }
 
-  public AjaxServlet(LinkStorage linkStorage,
-                     UserStorage userStorage,
-                     VisitStorage visitStorage,
+  public AjaxServlet(Storage storage,
                      MultipartConfigElement multipartConfigElement,
                      Path temporaryDirectory) {
-    super(linkStorage,
-          userStorage,
-          visitStorage,
+    super(storage,
           multipartConfigElement,
           temporaryDirectory);
   }

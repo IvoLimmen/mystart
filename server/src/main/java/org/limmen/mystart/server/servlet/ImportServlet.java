@@ -15,11 +15,9 @@ import javax.servlet.http.Part;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.limmen.mystart.Link;
-import org.limmen.mystart.LinkStorage;
 import org.limmen.mystart.ParseContext;
 import org.limmen.mystart.Parser;
-import org.limmen.mystart.UserStorage;
-import org.limmen.mystart.VisitStorage;
+import org.limmen.mystart.Storage;
 
 @Slf4j
 public class ImportServlet extends AbstractServlet {
@@ -29,13 +27,26 @@ public class ImportServlet extends AbstractServlet {
   private final Parser parser;
 
   public ImportServlet(Parser parser,
-                       LinkStorage linkStorage,
-                       UserStorage userStorage,
-                       VisitStorage visitStorage,
+                       Storage storage,
                        MultipartConfigElement multipartConfigElement,
                        Path temporaryDirectory) {
-    super(linkStorage, userStorage, visitStorage, multipartConfigElement, temporaryDirectory);
+    super(storage, multipartConfigElement, temporaryDirectory);
     this.parser = parser;
+  }
+
+  private ParseContext handleFileUpload(Part filePart) throws IOException {
+    String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+    Path tempFile = Paths.get(getTemporaryDirectory().toString(), UUID.randomUUID().toString());
+
+    try (FileOutputStream fileOutputStream = new FileOutputStream(tempFile.toFile())) {
+      fileOutputStream.write(IOUtils.toByteArray(filePart.getInputStream()));
+    }
+
+    return new ParseContext(new ByteArrayInputStream(IOUtils.toByteArray(filePart.getInputStream())), tempFile.toString(), fileName);
+  }
+
+  private ParseContext handleUrl(String url) {
+    return new ParseContext(url);
   }
 
   @Override
@@ -76,20 +87,5 @@ public class ImportServlet extends AbstractServlet {
     getLinkStorage().importCollection(userId, links, skipDuplicates);
 
     res.sendRedirect("/home");
-  }
-
-  private ParseContext handleUrl(String url) {
-    return new ParseContext(url);
-  }
-
-  private ParseContext handleFileUpload(Part filePart) throws IOException {
-    String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-    Path tempFile = Paths.get(getTemporaryDirectory().toString(), UUID.randomUUID().toString());
-
-    try (FileOutputStream fileOutputStream = new FileOutputStream(tempFile.toFile())) {
-      fileOutputStream.write(IOUtils.toByteArray(filePart.getInputStream()));
-    }
-
-    return new ParseContext(new ByteArrayInputStream(IOUtils.toByteArray(filePart.getInputStream())), tempFile.toString(), fileName);
   }
 }

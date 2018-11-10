@@ -9,16 +9,19 @@ import org.limmen.mystart.VisitStorage;
 
 public class DbStorage implements Storage {
 
+  private LinkStorage linkStorage;
   private String password;
   private String url;
   private String user;
+  private UserStorage userStorage;
+  private VisitStorage visitStorage;
 
   public DbStorage() {
   }
 
   @Override
   public LinkStorage getLinkStorage() {
-    return new DbLinkStorage(user, password, url);
+    return this.linkStorage;
   }
 
   @Override
@@ -28,12 +31,12 @@ public class DbStorage implements Storage {
 
   @Override
   public UserStorage getUserStorage() {
-    return new DbUserStorage(user, password, url);
+    return this.userStorage;
   }
 
   @Override
   public VisitStorage getVisitStorage() {
-    return new DbVisitStorage(user, password, url);
+    return this.visitStorage;
   }
 
   @Override
@@ -47,5 +50,9 @@ public class DbStorage implements Storage {
         .dataSource(url, user, password)
         .load()
         .migrate();
+
+    this.linkStorage = new DbLinkStorage(user, password, url);
+    this.userStorage = new DbUserStorage(user, password, url);
+    this.visitStorage = new DbVisitStorage(user, password, url);
   }
 }

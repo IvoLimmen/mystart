@@ -26,12 +26,9 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.util.log.Log;
 import org.eclipse.jetty.util.log.Slf4jLog;
 import org.limmen.mystart.AutoDetectParser;
-import org.limmen.mystart.LinkStorage;
 import org.limmen.mystart.Parser;
 import org.limmen.mystart.Storage;
 import org.limmen.mystart.StorageProvider;
-import org.limmen.mystart.UserStorage;
-import org.limmen.mystart.VisitStorage;
 import org.limmen.mystart.server.servlet.HomeServlet;
 import org.limmen.mystart.server.servlet.ImportServlet;
 import org.limmen.mystart.server.servlet.LinkServlet;
@@ -47,9 +44,6 @@ public class Main {
     Config conf = ConfigFactory.load();
 
     Storage storage = StorageProvider.getStorageByName(conf, conf.getString("server.storage"));
-    UserStorage userStorage = storage.getUserStorage();
-    LinkStorage linkStorage = storage.getLinkStorage();
-    VisitStorage visitStorage = storage.getVisitStorage();
 
     Parser parser = new AutoDetectParser();
 
@@ -90,17 +84,17 @@ public class Main {
     server.setHandler(servletContextHandler);
 
     addServlet(server, servletContextHandler, "homeServlet", "/home",
-               new HomeServlet(linkStorage, userStorage, visitStorage, multipartConfigElement, scratchDir.toPath()));
+               new HomeServlet(storage, multipartConfigElement, scratchDir.toPath()));
     addServlet(server, servletContextHandler, "userServlet", "/user",
-               new UserServlet(linkStorage, userStorage, visitStorage, multipartConfigElement, scratchDir.toPath(), avatarPath));
+               new UserServlet(storage, multipartConfigElement, scratchDir.toPath(), avatarPath));
     addServlet(server, servletContextHandler, "loginServlet", "/login",
-               new LoginServlet(linkStorage, userStorage, visitStorage, multipartConfigElement, scratchDir.toPath()));
+               new LoginServlet(storage, multipartConfigElement, scratchDir.toPath()));
     addServlet(server, servletContextHandler, "importServlet", "/import",
-               new ImportServlet(parser, linkStorage, userStorage, visitStorage, multipartConfigElement, scratchDir.toPath()));
+               new ImportServlet(parser, storage, multipartConfigElement, scratchDir.toPath()));
     addServlet(server, servletContextHandler, "linkServlet", "/link",
-               new LinkServlet(linkStorage, userStorage, visitStorage, multipartConfigElement, scratchDir.toPath()));
+               new LinkServlet(storage, multipartConfigElement, scratchDir.toPath()));
     addServlet(server, servletContextHandler, "ajaxServlet", "/ajax",
-               new AjaxServlet(linkStorage, userStorage, visitStorage, multipartConfigElement, scratchDir.toPath()));
+               new AjaxServlet(storage, multipartConfigElement, scratchDir.toPath()));
 
     server.start();
     server.join();

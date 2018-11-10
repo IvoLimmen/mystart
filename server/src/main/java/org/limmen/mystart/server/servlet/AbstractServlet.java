@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.eclipse.jetty.server.Request;
 import org.limmen.mystart.LinkStorage;
+import org.limmen.mystart.Storage;
 import org.limmen.mystart.User;
 import org.limmen.mystart.UserStorage;
 import org.limmen.mystart.VisitStorage;
@@ -21,26 +22,24 @@ public class AbstractServlet extends HttpServlet {
 
   private static final long serialVersionUID = 1L;
 
-  private final LinkStorage linkStorage;
   private final MultipartConfigElement multipartConfigElement;
+  private final Storage storage;
   private final Path temporaryDirectory;
-  private final UserStorage userStorage;
-  private final VisitStorage visitStorage;
 
-  public AbstractServlet(LinkStorage linkStorage,
-                         UserStorage userStorage,
-                         VisitStorage visitStorage,
+  public AbstractServlet(Storage storage,
                          MultipartConfigElement multipartConfigElement,
                          Path temporaryDirectory) {
-    this.linkStorage = linkStorage;
-    this.userStorage = userStorage;
-    this.visitStorage = visitStorage;
+    this.storage = storage;
     this.multipartConfigElement = multipartConfigElement;
     this.temporaryDirectory = temporaryDirectory;
   }
 
   public LinkStorage getLinkStorage() {
-    return linkStorage;
+    return this.storage.getLinkStorage();
+  }
+
+  public Storage getStorage() {
+    return storage;
   }
 
   public Path getTemporaryDirectory() {
@@ -48,11 +47,11 @@ public class AbstractServlet extends HttpServlet {
   }
 
   public UserStorage getUserStorage() {
-    return userStorage;
+    return this.storage.getUserStorage();
   }
 
   public VisitStorage getVisitStorage() {
-    return visitStorage;
+    return this.storage.getVisitStorage();
   }
 
   protected void clearCookies(HttpServletRequest req, HttpServletResponse res) {

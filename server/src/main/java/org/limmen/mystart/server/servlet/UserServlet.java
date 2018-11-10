@@ -10,10 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import org.apache.commons.io.IOUtils;
-import org.limmen.mystart.LinkStorage;
+import org.limmen.mystart.Storage;
 import org.limmen.mystart.User;
-import org.limmen.mystart.UserStorage;
-import org.limmen.mystart.VisitStorage;
 
 public class UserServlet extends AbstractServlet {
 
@@ -21,13 +19,11 @@ public class UserServlet extends AbstractServlet {
 
   private final Path avatarDirectory;
 
-  public UserServlet(LinkStorage linkStorage,
-                     UserStorage userStorage,
-                     VisitStorage visitStorage,
+  public UserServlet(Storage storage,
                      MultipartConfigElement multipartConfigElement,
                      Path temporaryDirectory,
                      Path avatarDirectory) {
-    super(linkStorage, userStorage, visitStorage, multipartConfigElement, temporaryDirectory);
+    super(storage, multipartConfigElement, temporaryDirectory);
     this.avatarDirectory = avatarDirectory;
   }
 
