@@ -2,6 +2,8 @@ package org.limmen.mystart.server.servlet;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -22,9 +24,30 @@ public class AbstractServlet extends HttpServlet {
 
   private static final long serialVersionUID = 1L;
 
+  private static final Map<String, String> flair = new HashMap<>();
   private final MultipartConfigElement multipartConfigElement;
   private final Storage storage;
   private final Path temporaryDirectory;
+
+  static {
+    // common domains
+    flair.put("github.com", "fa-github");
+    flair.put("gitlab.com", "fa-gitlab");
+    flair.put("bitbucket.org", "fa-bitbucket");
+    flair.put("stackoverflow.com", "fa-stack-overflow");
+
+    flair.put("bandcamp.com", "fa-bandcamp");
+    flair.put("last.fm", "fa-lastfm");
+    flair.put("soundcloud.com", "fa-soundcloud");
+    flair.put("youtube.com", "fa-youtube");
+    flair.put("reddit.com", "fa-reddit");
+    flair.put("yelp.com", "fa-yelp");
+    flair.put("slack.com", "fa-slack");
+    flair.put("amazon.com", "fa-amazon");
+    flair.put("google.com", "fa-google");
+    flair.put("medium.com", "fa-medium");
+    flair.put("news.ycombinator.com", "fa-hacker-news");
+  }
 
   public AbstractServlet(Storage storage,
                          MultipartConfigElement multipartConfigElement,
@@ -112,6 +135,7 @@ public class AbstractServlet extends HttpServlet {
       req.setAttribute(USER, user);
       req.setAttribute("labels", getLinkStorage().getAllLabels(userId));
       req.setAttribute("links", getLinkStorage().getAllByLabel(userId, "MyStart"));
+      req.setAttribute("flair", flair);
     }
   }
 

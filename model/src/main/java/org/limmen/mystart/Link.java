@@ -1,5 +1,7 @@
 package org.limmen.mystart;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
@@ -129,6 +131,18 @@ public class Link extends BaseObject implements Comparable<Link> {
       } else {
         return "today";
       }
+    }
+  }
+
+  public String getHost() {
+    try {
+      String host = new URI(this.url).getHost();
+      if (host.startsWith("www")) {
+        host = host.substring(4);
+      }
+      return host;
+    } catch (URISyntaxException ex) {
+      return null;
     }
   }
 
