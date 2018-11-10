@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.limmen.mystart.LinkStorage;
 import org.limmen.mystart.User;
 import org.limmen.mystart.UserStorage;
+import org.limmen.mystart.VisitStorage;
 
 public class LoginServlet extends AbstractServlet {
 
@@ -17,9 +18,10 @@ public class LoginServlet extends AbstractServlet {
 
   public LoginServlet(LinkStorage linkStorage,
                       UserStorage userStorage,
+                      VisitStorage visitStorage,
                       MultipartConfigElement multipartConfigElement,
                       Path temporaryDirectory) {
-    super(linkStorage, userStorage, multipartConfigElement, temporaryDirectory);
+    super(linkStorage, userStorage, visitStorage, multipartConfigElement, temporaryDirectory);
   }
 
   private void addCookie(HttpServletResponse res, String key, String value) {
@@ -46,7 +48,10 @@ public class LoginServlet extends AbstractServlet {
     String password = req.getParameter("password");
 
     if (exists(req, "registerButton")) {
-      User user = new User(name, null, email, null, password);
+      User user = new User();
+      user.setEmail(email);
+      user.setName(name);
+      user.updatePassword(password);
       getUserStorage().store(user);
 
       user = getUserStorage().getByNameOrEmail(email);

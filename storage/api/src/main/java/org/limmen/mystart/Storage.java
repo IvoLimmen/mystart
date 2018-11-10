@@ -1,15 +1,16 @@
 package org.limmen.mystart;
 
 import com.typesafe.config.Config;
-import org.limmen.mystart.exception.StorageException;
 
 public interface Storage {
 
-    LinkStorage getLinkStorage();
+  LinkStorage getLinkStorage();
 
-    String getName();
+  String getName();
 
-    UserStorage getUserStorage();
+  UserStorage getUserStorage();
 
-    void initialize(Config conf) throws StorageException;
+  VisitStorage getVisitStorage();
+
+  void initialize(Config conf);
 }

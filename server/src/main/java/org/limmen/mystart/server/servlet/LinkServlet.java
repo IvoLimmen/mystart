@@ -13,6 +13,7 @@ import org.limmen.mystart.DomainUtil;
 import org.limmen.mystart.Link;
 import org.limmen.mystart.LinkStorage;
 import org.limmen.mystart.UserStorage;
+import org.limmen.mystart.VisitStorage;
 import org.limmen.mystart.cleanup.CleanupContext;
 import org.limmen.mystart.cleanup.CleanupTaskManager;
 
@@ -23,9 +24,10 @@ public class LinkServlet extends AbstractServlet {
 
   public LinkServlet(LinkStorage linkStorage,
                      UserStorage userStorage,
+                     VisitStorage visitStorage,
                      MultipartConfigElement multipartConfigElement,
                      Path temporaryDirectory) {
-    super(linkStorage, userStorage, multipartConfigElement, temporaryDirectory);
+    super(linkStorage, userStorage, visitStorage, multipartConfigElement, temporaryDirectory);
   }
 
   private void scheduleCleanup(HttpServletRequest req, Long userId) {
@@ -59,6 +61,7 @@ public class LinkServlet extends AbstractServlet {
       Link link = getLinkStorage().get(userId, id);
       link.visited();
       getLinkStorage().update(userId, link);
+      getVisitStorage().visit(link.getId());
       res.sendRedirect(link.getRedirectUrl());
 
     } else if (exists(req, "edit")) {
@@ -105,7 +108,7 @@ public class LinkServlet extends AbstractServlet {
       Long id = Long.parseLong(req.getParameter("id"));
       Link link = getLinkStorage().get(userId, id);
       req.setAttribute("link", link);
-      req.setAttribute("visits", getLinkStorage().getAllVisists(id));
+      req.setAttribute("visits", getVisitStorage().getLast20Visists(id));
       req.getRequestDispatcher("/details.jsp").include(req, res);
 
     } else if (exists(req, "delete")) {

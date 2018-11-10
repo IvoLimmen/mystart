@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.limmen.mystart.Link;
 import org.limmen.mystart.LinkStorage;
 import org.limmen.mystart.UserStorage;
+import org.limmen.mystart.VisitStorage;
 
 @Slf4j
 public class HomeServlet extends AbstractServlet {
@@ -20,9 +21,10 @@ public class HomeServlet extends AbstractServlet {
 
   public HomeServlet(LinkStorage linkStorage,
                      UserStorage userStorage,
+                     VisitStorage visitStorage,
                      MultipartConfigElement multipartConfigElement,
                      Path temporaryDirectory) {
-    super(linkStorage, userStorage, multipartConfigElement, temporaryDirectory);
+    super(linkStorage, userStorage, visitStorage, multipartConfigElement, temporaryDirectory);
   }
 
   @Override
