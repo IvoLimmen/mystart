@@ -49,7 +49,7 @@ public class LoginServlet extends AbstractServlet {
       User user = new User();
       user.setEmail(email);
       user.setName(name);
-      user.setPassword(password);
+      user.updatePassword(password);
       getUserStorage().store(user);
 
       user = getUserStorage().getByNameOrEmail(email);
