@@ -85,6 +85,21 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
 
   @Override
   public void importCollection(Long userId, Collection<Link> links, boolean skipDuplicates) {
+    links.forEach(l -> {
+      Link link = getByUrl(userId, l.getUrl());
+      if (link == null) {
+        log.info("Creating link {}", l.getUrl());
+        create(userId, l);
+      } else {
+        if (!skipDuplicates) {
+          log.info("Updating link {}", l.getUrl());
+          link.addLabels(l.getLabels());
+          update(userId, link);
+        } else {
+          log.info("Scipping link {}", l.getUrl());
+        }
+      }
+    });
   }
 
   @Override
