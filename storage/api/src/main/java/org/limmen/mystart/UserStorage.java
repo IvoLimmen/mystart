@@ -10,8 +10,6 @@ public interface UserStorage {
 
   User getByEmail(String email);
 
-  User getByNameOrEmail(String nameOrEmail);
-
   void remove(Long id);
 
   void store(User item);

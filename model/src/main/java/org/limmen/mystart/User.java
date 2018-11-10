@@ -11,7 +11,6 @@ public final class User extends BaseObject {
   private String avatarFileName;
   private String email;
   private String fullName;
-  private String name;
   private boolean openInNewTab;
   private String password;
 
@@ -34,10 +33,6 @@ public final class User extends BaseObject {
     return fullName;
   }
 
-  public String getName() {
-    return name;
-  }
-
   public String getPassword() {
     return password;
   }
@@ -56,10 +51,6 @@ public final class User extends BaseObject {
 
   public void setFullName(String fullName) {
     this.fullName = fullName;
-  }
-
-  public void setName(String name) {
-    this.name = name;
   }
 
   public void setOpenInNewTab(boolean openInNewTab) {

@@ -74,7 +74,6 @@ public class UserServlet extends AbstractServlet {
       user.setOpenInNewTab(exists(req, "openinnewtab"));
       user.setEmail(email);
       user.setFullName(fullName);
-      user.setName(name);
       if (password != null && password.length() > 0 && password2 != null && password.equals(password2)) {
         user.updatePassword(password);
       }

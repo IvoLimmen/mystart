@@ -44,29 +44,27 @@ public class LoginServlet extends AbstractServlet {
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
     String email = req.getParameter("email");
-    String name = req.getParameter("name");
     String password = req.getParameter("password");
 
     if (exists(req, "registerButton")) {
       User user = new User();
       user.setEmail(email);
-      user.setName(name);
       user.updatePassword(password);
       getUserStorage().store(user);
 
-      user = getUserStorage().getByNameOrEmail(email);
+      user = getUserStorage().getByEmail(email);
 
       res.sendRedirect("/home");
 
     } else if (exists(req, "loginButton")) {
 
-      User user = getUserStorage().getByNameOrEmail(name);
+      User user = getUserStorage().getByEmail(email);
 
       if (user == null || !user.check(password)) {
         res.sendRedirect("/login.jsp?error=1");
       } else {
         req.getSession().setAttribute(USER_ID, user.getId());
-        addCookie(res, "mystartUser", name);
+        addCookie(res, "mystartUser", email);
         addCookie(res, "mystartUserPassword", user.getPassword());
         res.sendRedirect("/home");
       }

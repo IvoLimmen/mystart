@@ -14,7 +14,7 @@
       <li class="dropdown user user-menu">
         <!-- Menu Toggle Button -->
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-          <span>${user.name}</span>
+          <span>${user.fullName}</span>
         </a>
         <ul class="dropdown-menu">
           <!-- The user image in the menu -->

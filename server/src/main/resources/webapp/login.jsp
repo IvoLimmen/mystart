@@ -39,8 +39,8 @@
               </div>
               <form name="login" method="post" action="/login">
                 <div class="form-group">
-                  <label for="email">Name</label>
-                  <input type="text" class="form-control" name="name" placeholder="Please enter email adres or name"/>
+                  <label for="email">Email</label>
+                  <input type="email" class="form-control" name="email" placeholder="Please enter email adres"/>
                 </div>
                 <div class="form-group">
                   <label for="password">Password</label>

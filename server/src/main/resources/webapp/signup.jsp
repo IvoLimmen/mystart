@@ -36,10 +36,6 @@
             <div class="col-md-4">
               <form name="signup" method="post" action="/login">
                 <div class="form-group">
-                  <label for="name">Name</label>
-                  <input type="text" class="form-control" name="name" placeholder="Please enter a name"/>
-                </div>
-                <div class="form-group">
                   <label for="email">Email address</label>
                   <input type="email" class="form-control" name="email" placeholder="Please enter an email adres"/>
                 </div>

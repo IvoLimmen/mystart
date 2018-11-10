@@ -37,10 +37,6 @@
               <form name="account" action="/user" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="${user.id}"/>             
                 <div class="form-group">
-                  <label for="name">Name</label>
-                  <input type="text" class="form-control" name="name" value="${user.name}"/>
-                </div>
-                <div class="form-group">
                   <label for="fullname">Full name</label>
                   <input type="text" class="form-control" name="fullname" value="${user.fullName}"/>
                 </div>

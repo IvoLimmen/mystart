@@ -76,12 +76,12 @@ public class AbstractServlet extends HttpServlet {
       // check cookies
       Cookie[] cookies = req.getCookies();
       if (cookies != null) {
-        String name = null;
+        String email = null;
         String password = null;
         for (Cookie cookie : cookies) {
           switch (cookie.getName()) {
             case "mystartUser":
-              name = cookie.getValue();
+              email = cookie.getValue();
               break;
             case "mystartUserPassword":
               password = cookie.getValue();
@@ -91,8 +91,8 @@ public class AbstractServlet extends HttpServlet {
           }
         }
         // check cookie data
-        if (password != null & name != null) {
-          User user = getUserStorage().getByNameOrEmail(name);
+        if (password != null & email != null) {
+          User user = getUserStorage().getByEmail(email);
           if (user != null && user.getPassword().equals(password)) {
             req.getSession().setAttribute(USER_ID, user.getId());
           } else {
