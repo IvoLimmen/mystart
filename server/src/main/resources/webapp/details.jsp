@@ -41,11 +41,6 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-12">
-              <a href="/home">Back</a>
-            </div>  
-          </div>
-          <div class="row">
-            <div class="col-md-12">
               <h3>${link.title}</h3>
               <a href="/link?reg=${link.id}" ${user.isOpenInNewTab() ? "target=\"_BLANK\"" : "" }>${link.url}</a>
               <p class="description">Description: ${link.description}</p>
