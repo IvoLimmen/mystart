@@ -13,6 +13,7 @@ import org.apache.commons.io.IOUtils;
 import org.limmen.mystart.LinkStorage;
 import org.limmen.mystart.User;
 import org.limmen.mystart.UserStorage;
+import org.limmen.mystart.VisitStorage;
 
 public class UserServlet extends AbstractServlet {
 
@@ -22,10 +23,11 @@ public class UserServlet extends AbstractServlet {
 
   public UserServlet(LinkStorage linkStorage,
                      UserStorage userStorage,
+                     VisitStorage visitStorage,
                      MultipartConfigElement multipartConfigElement,
                      Path temporaryDirectory,
                      Path avatarDirectory) {
-    super(linkStorage, userStorage, multipartConfigElement, temporaryDirectory);
+    super(linkStorage, userStorage, visitStorage, multipartConfigElement, temporaryDirectory);
     this.avatarDirectory = avatarDirectory;
   }
 

@@ -19,6 +19,7 @@ import org.json.JSONWriter;
 import org.limmen.mystart.Link;
 import org.limmen.mystart.LinkStorage;
 import org.limmen.mystart.UserStorage;
+import org.limmen.mystart.VisitStorage;
 import org.limmen.mystart.server.servlet.AbstractServlet;
 import org.limmen.mystart.server.servlet.model.ChartData;
 
@@ -39,10 +40,12 @@ public class AjaxServlet extends AbstractServlet {
 
   public AjaxServlet(LinkStorage linkStorage,
                      UserStorage userStorage,
+                     VisitStorage visitStorage,
                      MultipartConfigElement multipartConfigElement,
                      Path temporaryDirectory) {
     super(linkStorage,
           userStorage,
+          visitStorage,
           multipartConfigElement,
           temporaryDirectory);
   }

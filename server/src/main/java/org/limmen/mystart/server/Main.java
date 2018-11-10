@@ -31,6 +31,7 @@ import org.limmen.mystart.Parser;
 import org.limmen.mystart.Storage;
 import org.limmen.mystart.StorageProvider;
 import org.limmen.mystart.UserStorage;
+import org.limmen.mystart.VisitStorage;
 import org.limmen.mystart.server.servlet.HomeServlet;
 import org.limmen.mystart.server.servlet.ImportServlet;
 import org.limmen.mystart.server.servlet.LinkServlet;
@@ -48,6 +49,7 @@ public class Main {
     Storage storage = StorageProvider.getStorageByName(conf, conf.getString("server.storage"));
     UserStorage userStorage = storage.getUserStorage();
     LinkStorage linkStorage = storage.getLinkStorage();
+    VisitStorage visitStorage = storage.getVisitStorage();
 
     Parser parser = new AutoDetectParser();
 
@@ -88,20 +90,26 @@ public class Main {
     server.setHandler(servletContextHandler);
 
     addServlet(server, servletContextHandler, "homeServlet", "/home",
-               new HomeServlet(linkStorage, userStorage, multipartConfigElement, scratchDir.toPath()));
+               new HomeServlet(linkStorage, userStorage, visitStorage, multipartConfigElement, scratchDir.toPath()));
     addServlet(server, servletContextHandler, "userServlet", "/user",
-               new UserServlet(linkStorage, userStorage, multipartConfigElement, scratchDir.toPath(), avatarPath));
+               new UserServlet(linkStorage, userStorage, visitStorage, multipartConfigElement, scratchDir.toPath(), avatarPath));
     addServlet(server, servletContextHandler, "loginServlet", "/login",
-               new LoginServlet(linkStorage, userStorage, multipartConfigElement, scratchDir.toPath()));
+               new LoginServlet(linkStorage, userStorage, visitStorage, multipartConfigElement, scratchDir.toPath()));
     addServlet(server, servletContextHandler, "importServlet", "/import",
-               new ImportServlet(parser, linkStorage, userStorage, multipartConfigElement, scratchDir.toPath()));
+               new ImportServlet(parser, linkStorage, userStorage, visitStorage, multipartConfigElement, scratchDir.toPath()));
     addServlet(server, servletContextHandler, "linkServlet", "/link",
-               new LinkServlet(linkStorage, userStorage, multipartConfigElement, scratchDir.toPath()));
+               new LinkServlet(linkStorage, userStorage, visitStorage, multipartConfigElement, scratchDir.toPath()));
     addServlet(server, servletContextHandler, "ajaxServlet", "/ajax",
-               new AjaxServlet(linkStorage, userStorage, multipartConfigElement, scratchDir.toPath()));
+               new AjaxServlet(linkStorage, userStorage, visitStorage, multipartConfigElement, scratchDir.toPath()));
 
     server.start();
     server.join();
+  }
+
+  private static void addServlet(Server server, ServletContextHandler servletContextHandler, String name, String url, HttpServlet servlet) {
+    ServletHolder holderDefault = new ServletHolder(name, servlet);
+    servletContextHandler.addServlet(holderDefault, url);
+    server.setHandler(servletContextHandler);
   }
 
   private static File createScratchDirectory() throws IOException {
@@ -113,12 +121,6 @@ public class Main {
       }
     }
     return scratchDir;
-  }
-
-  private static void addServlet(Server server, ServletContextHandler servletContextHandler, String name, String url, HttpServlet servlet) {
-    ServletHolder holderDefault = new ServletHolder(name, servlet);
-    servletContextHandler.addServlet(holderDefault, url);
-    server.setHandler(servletContextHandler);
   }
 
   private static URI getWebRootResourceUri() throws FileNotFoundException, URISyntaxException {

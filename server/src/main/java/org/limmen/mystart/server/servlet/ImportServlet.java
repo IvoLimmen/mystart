@@ -19,6 +19,7 @@ import org.limmen.mystart.LinkStorage;
 import org.limmen.mystart.ParseContext;
 import org.limmen.mystart.Parser;
 import org.limmen.mystart.UserStorage;
+import org.limmen.mystart.VisitStorage;
 
 @Slf4j
 public class ImportServlet extends AbstractServlet {
@@ -30,9 +31,10 @@ public class ImportServlet extends AbstractServlet {
   public ImportServlet(Parser parser,
                        LinkStorage linkStorage,
                        UserStorage userStorage,
+                       VisitStorage visitStorage,
                        MultipartConfigElement multipartConfigElement,
                        Path temporaryDirectory) {
-    super(linkStorage, userStorage, multipartConfigElement, temporaryDirectory);
+    super(linkStorage, userStorage, visitStorage, multipartConfigElement, temporaryDirectory);
     this.parser = parser;
   }
 

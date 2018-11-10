@@ -1,9 +1,7 @@
 package org.limmen.mystart.postgres;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Set;
 import java.util.function.Function;
 import lombok.extern.slf4j.Slf4j;
 import org.limmen.mystart.Link;
@@ -75,11 +73,6 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
     return executeSqlStringCollection("select distinct unnest(labels) from links where user_id = ? order by 1", args -> {
                                     args.setLong(1, userId);
                                   });
-  }
-
-  @Override
-  public Set<LocalDateTime> getAllVisists(Long id) {
-    return null;
   }
 
   @Override

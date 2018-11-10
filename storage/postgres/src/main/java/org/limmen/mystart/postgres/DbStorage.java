@@ -5,6 +5,7 @@ import org.flywaydb.core.Flyway;
 import org.limmen.mystart.LinkStorage;
 import org.limmen.mystart.Storage;
 import org.limmen.mystart.UserStorage;
+import org.limmen.mystart.VisitStorage;
 
 public class DbStorage implements Storage {
 
@@ -28,6 +29,11 @@ public class DbStorage implements Storage {
   @Override
   public UserStorage getUserStorage() {
     return new DbUserStorage(user, password, url);
+  }
+
+  @Override
+  public VisitStorage getVisitStorage() {
+    return new DbVisitStorage(user, password, url);
   }
 
   @Override
