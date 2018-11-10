@@ -1,19 +1,18 @@
 package org.limmen.mystart;
 
 import java.util.Collection;
-import org.limmen.mystart.exception.StorageException;
 
 public interface UserStorage {
 
-  User get(Long id) throws StorageException;
+  User get(Long id);
 
-  Collection<User> getAll() throws StorageException;
+  Collection<User> getAll();
 
-  User getByEmail(String email) throws StorageException;
+  User getByEmail(String email);
 
-  User getByNameOrEmail(String nameOrEmail) throws StorageException;
+  User getByNameOrEmail(String nameOrEmail);
 
-  void remove(Long id) throws StorageException;
+  void remove(Long id);
 
-  void store(User item) throws StorageException;
+  void store(User item);
 }

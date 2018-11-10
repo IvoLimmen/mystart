@@ -15,12 +15,7 @@ public final class User extends BaseObject {
   private boolean openInNewTab;
   private String password;
 
-  public User(String name, String fullName, String email, String avatarFileName, String password) {
-    this.email = email;
-    this.name = name;
-    this.fullName = fullName;
-    this.avatarFileName = avatarFileName;
-    this.password = encode(email, password);
+  public User() {
   }
 
   public boolean check(String password) {

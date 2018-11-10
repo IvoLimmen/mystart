@@ -58,7 +58,7 @@ public class Main {
     Server server = new Server(conf.getInt("server.port"));
     URI baseUri = getWebRootResourceUri();
     Path avatarPath = Paths.get(new File(baseUri.toURL().toURI()).toPath().toString(), "avatar");
-    Files.createDirectory(avatarPath);
+    Files.createDirectories(avatarPath);
 
     ServletContextHandler servletContextHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
     Set<SessionTrackingMode> trackingModes = new HashSet<>();

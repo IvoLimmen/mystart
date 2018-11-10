@@ -46,7 +46,10 @@ public class LoginServlet extends AbstractServlet {
     String password = req.getParameter("password");
 
     if (exists(req, "registerButton")) {
-      User user = new User(name, null, email, null, password);
+      User user = new User();
+      user.setEmail(email);
+      user.setName(name);
+      user.setPassword(password);
       getUserStorage().store(user);
 
       user = getUserStorage().getByNameOrEmail(email);
