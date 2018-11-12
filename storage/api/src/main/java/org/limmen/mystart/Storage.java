@@ -1,6 +1,6 @@
 package org.limmen.mystart;
 
-import com.typesafe.config.Config;
+import java.util.Properties;
 
 public interface Storage {
 
@@ -12,5 +12,5 @@ public interface Storage {
 
   VisitStorage getVisitStorage();
 
-  void initialize(Config conf);
+  void initialize(Properties properties);
 }

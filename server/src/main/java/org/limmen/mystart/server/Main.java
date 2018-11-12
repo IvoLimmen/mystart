@@ -1,10 +1,9 @@
 package org.limmen.mystart.server;
 
-import com.typesafe.config.Config;
-import com.typesafe.config.ConfigFactory;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -13,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashSet;
+import java.util.Properties;
 import java.util.Set;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.SessionTrackingMode;
@@ -41,9 +41,13 @@ public class Main {
 
   public static void main(String[] args) throws Exception {
     Log.setLog(new Slf4jLog());
-    Config conf = ConfigFactory.load();
+    Properties properties = new Properties();
 
-    Storage storage = StorageProvider.getStorageByName(conf, conf.getString("server.storage"));
+    try (InputStream inputStream = Main.class.getResourceAsStream("/application.properties")) {
+      properties.load(inputStream);
+    }
+
+    Storage storage = StorageProvider.getStorageByName(properties, properties.getProperty("server.storage"));
 
     Parser parser = new AutoDetectParser();
 
@@ -51,7 +55,7 @@ public class Main {
 
     MultipartConfigElement multipartConfigElement = new MultipartConfigElement(scratchDir.getAbsolutePath(), 41943040, 41943040, 4096);
 
-    Server server = new Server(conf.getInt("server.port"));
+    Server server = new Server(Integer.parseInt(properties.getProperty("server.port")));
     URI baseUri = getWebRootResourceUri();
     Path avatarPath = Paths.get(new File(baseUri.toURL().toURI()).toPath().toString(), "avatar");
     Files.createDirectories(avatarPath);

@@ -1,6 +1,6 @@
 package org.limmen.mystart.postgres;
 
-import com.typesafe.config.Config;
+import java.util.Properties;
 import org.flywaydb.core.Flyway;
 import org.limmen.mystart.LinkStorage;
 import org.limmen.mystart.Storage;
@@ -40,11 +40,11 @@ public class DbStorage implements Storage {
   }
 
   @Override
-  public void initialize(Config conf) {
+  public void initialize(Properties properties) {
 
-    this.url = conf.getString("server.db.jdbcUrl");
-    this.user = conf.getString("server.db.username");
-    this.password = conf.getString("server.db.password");
+    this.url = properties.getProperty("server.db.jdbcUrl");
+    this.user = properties.getProperty("server.db.username");
+    this.password = properties.getProperty("server.db.password");
 
     Flyway.configure()
         .dataSource(url, user, password)

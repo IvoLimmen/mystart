@@ -19,11 +19,6 @@
       <artifactId>model</artifactId>
       <version>${project.version}</version>
     </dependency>
-    
-    <dependency>
-      <groupId>com.typesafe</groupId>
-      <artifactId>config</artifactId>
-    </dependency>
 
     <dependency>
       <groupId>junit</groupId>
