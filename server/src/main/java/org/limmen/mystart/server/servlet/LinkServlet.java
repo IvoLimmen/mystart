@@ -3,6 +3,7 @@ package org.limmen.mystart.server.servlet;
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.file.Path;
+import java.util.Collection;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -109,9 +110,23 @@ public class LinkServlet extends AbstractServlet {
 
     } else if (exists(req, "delete")) {
 
-      Long id = Long.parseLong(req.getParameter("id"));
-      getLinkStorage().remove(userId, id);
-      res.sendRedirect("/home?" + getOrignalParameters(req));
+      if (exists(req, "id")) {
+
+        Long id = Long.parseLong(req.getParameter("id"));
+        getLinkStorage().remove(userId, id);
+        res.sendRedirect("/home?" + getOrignalParameters(req));
+
+      } else if (exists(req, "lbl")) {
+
+        String label = req.getParameter("lbl");
+        Collection<Link> links = getLinkStorage().getAllByLabel(userId, label);
+        links.forEach(link -> {
+          link.removeLabel(label);
+          getLinkStorage().update(userId, link);
+        });
+
+        res.sendRedirect("/home?show=labels");
+      }
 
     } else if (exists(req, "delall")) {
 

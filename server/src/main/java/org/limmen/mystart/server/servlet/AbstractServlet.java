@@ -133,7 +133,6 @@ public class AbstractServlet extends HttpServlet {
       User user = getUserStorage().get(userId);
       req.setAttribute(USER_ID, userId);
       req.setAttribute(USER, user);
-      req.setAttribute("labels", getLinkStorage().getAllLabels(userId));
       req.setAttribute("links", getLinkStorage().getAllByLabel(userId, "MyStart"));
       req.setAttribute("flair", flair);
     }

@@ -13,6 +13,8 @@ import java.util.Set;
 
 public class Link extends BaseObject implements Comparable<Link> {
 
+  private static final String UNCATEGORIZED = "Uncategorized";
+
   private static final long serialVersionUID = -1267285018252976552L;
 
   private String checkResult;
@@ -137,7 +139,7 @@ public class Link extends BaseObject implements Comparable<Link> {
   public String getHost() {
     try {
       String host = new URI(this.url).getHost();
-      if (host.startsWith("www")) {
+      if (host != null && host.startsWith("www")) {
         host = host.substring(4);
       }
       return host;
@@ -217,6 +219,14 @@ public class Link extends BaseObject implements Comparable<Link> {
 
   public boolean isPrivateNetwork() {
     return privateNetwork;
+  }
+
+  public void removeLabel(String label) {
+    this.labels.remove(label);
+
+    if (this.labels.isEmpty()) {
+      this.labels.add(UNCATEGORIZED);
+    }
   }
 
   public void setCheckResult(String checkResult) {

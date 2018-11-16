@@ -3,6 +3,8 @@ package org.limmen.mystart.server.servlet;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Collection;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletException;
@@ -48,13 +50,31 @@ public class HomeServlet extends AbstractServlet {
           .collect(Collectors.toList());
 
       req.setAttribute("links", links);
+      req.getRequestDispatcher("/home.jsp").include(req, res);
 
     } else if (exists(req, "label")) {
 
       Collection<Link> links = getLinkStorage().getAllByLabel(userId, req.getParameter("label"));
       req.setAttribute("links", links);
-    }
+      req.getRequestDispatcher("/home.jsp").include(req, res);
 
-    req.getRequestDispatcher("/home.jsp").include(req, res);
+    } else if (exists(req, "show")) {
+
+      if ("labels".equals(req.getParameter("show"))) {
+
+        Map<String, Long> stats = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+        Collection<String> labels = getLinkStorage().getAllLabels(userId);
+        Collection<Link> links = getLinkStorage().getAll(userId);
+        labels.forEach(l -> {
+          stats.put(l, links.stream().filter(f -> f.getLabels().contains(l)).count());
+        });
+
+        req.setAttribute("labels", labels);
+        req.setAttribute("stats", stats);
+        req.getRequestDispatcher("/labels.jsp").include(req, res);
+      }
+    } else {
+      req.getRequestDispatcher("/home.jsp").include(req, res);
+    }
   }
 }
