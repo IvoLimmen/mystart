@@ -127,6 +127,11 @@ public class LinkServlet extends AbstractServlet {
 
         res.sendRedirect("/home?show=labels");
       }
+    } else if (exists(req, "move")) {
+
+      req.setAttribute("label", req.getParameter("lbl"));
+      req.setAttribute("labels", getLinkStorage().getAllLabels(userId));
+      req.getRequestDispatcher("/move.jsp").include(req, res);
 
     } else if (exists(req, "delall")) {
 
@@ -169,6 +174,22 @@ public class LinkServlet extends AbstractServlet {
 
       res.sendRedirect("/home");
 
+    } else if (exists(req, "moveButton")) {
+
+      String oldLabel = req.getParameter("old-label");
+      String labels = req.getParameter("labels");
+
+      Collection<Link> links = getLinkStorage().getAllByLabel(userId, oldLabel);
+
+      links.forEach(link -> {
+        link.removeLabel(oldLabel);
+        link.addLabel(labels);
+
+        getLinkStorage().update(userId, link);
+      });
+
+      res.sendRedirect("/home?show=labels");
+
     } else if (exists(req, "saveButton")) {
 
       Link link = new Link();
@@ -198,6 +219,10 @@ public class LinkServlet extends AbstractServlet {
       } else {
         res.sendRedirect("/home?" + req.getParameter("referer"));
       }
+
+    } else if (exists(req, "cancelMoveButton")) {
+
+      res.sendRedirect("/home?show=labels");
 
     } else if (exists(req, "cancelButton")) {
 
