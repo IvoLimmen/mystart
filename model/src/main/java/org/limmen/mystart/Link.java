@@ -221,6 +221,11 @@ public class Link extends BaseObject implements Comparable<Link> {
     return privateNetwork;
   }
 
+  public void moveLabel(String oldLabel, String newLabel) {
+    this.addLabel(newLabel);
+    this.removeLabel(oldLabel);
+  }
+
   public void removeLabel(String label) {
     this.labels.remove(label);
 

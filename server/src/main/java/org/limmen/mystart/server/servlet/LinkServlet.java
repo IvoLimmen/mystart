@@ -182,8 +182,7 @@ public class LinkServlet extends AbstractServlet {
       Collection<Link> links = getLinkStorage().getAllByLabel(userId, oldLabel);
 
       links.forEach(link -> {
-        link.addLabel(labels);
-        link.removeLabel(oldLabel);
+        link.moveLabel(oldLabel, labels);
 
         getLinkStorage().update(userId, link);
       });

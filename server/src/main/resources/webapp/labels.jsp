@@ -46,14 +46,23 @@
               <div class="col-lg-3 col-xs-6">
                 <div class="box box-solid box-default">
                   <div class="box-header">
-                    <h3 class="box-title"><a href="/home?label=${label}">${label}</a></h3>
+                    <h3 class="box-title">
+                      <c:url value="/home" var="url">
+                        <c:param name="label" value="${label}"/>
+                      </c:url>
+                      <a href="${url}">${label}</a>
+                    </h3>
                   </div>                  
                   <div class="box-body">
                     <p>Links: ${stats[label]}</p>
                   </div>
                   <div class="box-footer">
                     <a href="/link?move&lbl=${label}" class="small-box-footer">Move links <i class="fa fa-arrow-circle-right"></i></a>
-                    <a href="/link?delete&lbl=${label}" class="small-box-footer">Delete <i class="fa fa-trash"></i></a>
+                    <c:url value="/link" var="delurl">
+                      <c:param name="delete"/>
+                      <c:param name="lbl" value="${label}"/>
+                    </c:url>
+                    <a href="${delurl}" class="small-box-footer">Delete <i class="fa fa-trash"></i></a>
                   </div>
                 </div>
               </div>
