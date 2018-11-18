@@ -42,32 +42,27 @@
         <!-- Main content -->
         <section class="content container-fluid">
           <div class="row">    
-            <c:forEach items="${links}" var="link" varStatus="ls">
+            <c:forEach items="${labels}" var="label" varStatus="ls">
               <div class="col-lg-3 col-xs-6">
                 <div class="box box-solid box-default">
                   <div class="box-header">
-                    <h3 class="box-title"><a href="/link?reg=${link.id}" ${user.isOpenInNewTab() ? "target=\"_BLANK\"" : "" } title="${link.url}">${link.title}</a></h3>
-                    <c:if test="${link.host != null && flair.containsKey(link.host)}">
-                      <div class="flair">
-                        <i class="fa ${flair[link.host]}" aria-hidden="true"></i>
-                      </div>
-                    </c:if>                    
+                    <h3 class="box-title">
+                      <c:url value="/home" var="url">
+                        <c:param name="label" value="${label}"/>
+                      </c:url>
+                      <a href="${url}">${label}</a>
+                    </h3>
                   </div>                  
                   <div class="box-body">
-                    <p>${link.description}</p>
-                    <p>
-                      <c:forEach items="${link.labels}" var="label" varStatus="status">
-                        <c:url value="/home" var="url">
-                          <c:param name="label" value="${label}"/>
-                        </c:url>
-                        <a href="${url}">${label}</a><c:if test="${!status.last}">,</c:if>
-                      </c:forEach>
-                    </p>
+                    <p>Links: ${stats[label]}</p>
                   </div>
                   <div class="box-footer">
-                    <a href="/link?details&id=${link.id}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                    <a href="/link?edit&id=${link.id}" class="small-box-footer">Edit <i class="fa fa-edit"></i></a>
-                    <a href="/link?delete&id=${link.id}" class="small-box-footer">Delete <i class="fa fa-trash"></i></a>
+                    <a href="/link?move&lbl=${label}" class="small-box-footer">Move links <i class="fa fa-arrow-circle-right"></i></a>
+                    <c:url value="/link" var="delurl">
+                      <c:param name="delete"/>
+                      <c:param name="lbl" value="${label}"/>
+                    </c:url>
+                    <a href="${delurl}" class="small-box-footer">Delete <i class="fa fa-trash"></i></a>
                   </div>
                 </div>
               </div>
