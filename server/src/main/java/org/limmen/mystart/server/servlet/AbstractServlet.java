@@ -22,32 +22,30 @@ public class AbstractServlet extends HttpServlet {
   public static final String USER = "user";
   public static final String USER_ID = "userId";
 
+  private static final Map<String, String> FLAIR = new HashMap<>();
   private static final long serialVersionUID = 1L;
-
-  private static final Map<String, String> flair = new HashMap<>();
-  private final MultipartConfigElement multipartConfigElement;
-  private final Storage storage;
-  private final Path temporaryDirectory;
 
   static {
     // common domains
-    flair.put("github.com", "fa-github");
-    flair.put("gitlab.com", "fa-gitlab");
-    flair.put("bitbucket.org", "fa-bitbucket");
-    flair.put("stackoverflow.com", "fa-stack-overflow");
-
-    flair.put("bandcamp.com", "fa-bandcamp");
-    flair.put("last.fm", "fa-lastfm");
-    flair.put("soundcloud.com", "fa-soundcloud");
-    flair.put("youtube.com", "fa-youtube");
-    flair.put("reddit.com", "fa-reddit");
-    flair.put("yelp.com", "fa-yelp");
-    flair.put("slack.com", "fa-slack");
-    flair.put("amazon.com", "fa-amazon");
-    flair.put("google.com", "fa-google");
-    flair.put("medium.com", "fa-medium");
-    flair.put("news.ycombinator.com", "fa-hacker-news");
+    FLAIR.put("github.com", "fa-github");
+    FLAIR.put("gitlab.com", "fa-gitlab");
+    FLAIR.put("bitbucket.org", "fa-bitbucket");
+    FLAIR.put("stackoverflow.com", "fa-stack-overflow");
+    FLAIR.put("bandcamp.com", "fa-bandcamp");
+    FLAIR.put("last.fm", "fa-lastfm");
+    FLAIR.put("soundcloud.com", "fa-soundcloud");
+    FLAIR.put("youtube.com", "fa-youtube");
+    FLAIR.put("reddit.com", "fa-reddit");
+    FLAIR.put("yelp.com", "fa-yelp");
+    FLAIR.put("slack.com", "fa-slack");
+    FLAIR.put("amazon.com", "fa-amazon");
+    FLAIR.put("google.com", "fa-google");
+    FLAIR.put("medium.com", "fa-medium");
+    FLAIR.put("news.ycombinator.com", "fa-hacker-news");
   }
+  private final MultipartConfigElement multipartConfigElement;
+  private final Storage storage;
+  private final Path temporaryDirectory;
 
   public AbstractServlet(Storage storage,
                          MultipartConfigElement multipartConfigElement,
@@ -77,6 +75,15 @@ public class AbstractServlet extends HttpServlet {
     return this.storage.getVisitStorage();
   }
 
+  protected void addCookie(HttpServletResponse res, String key, String value) {
+    Cookie cookie = new Cookie(key, value);
+    cookie.setMaxAge(60 * 60 * 24 * 7); // week
+    cookie.setHttpOnly(true);
+    cookie.setSecure(true);
+    cookie.setPath("/");
+    res.addCookie(cookie);
+  }
+
   protected void clearCookies(HttpServletRequest req, HttpServletResponse res) {
     Cookie[] cookies = req.getCookies();
     if (cookies != null) {
@@ -101,15 +108,10 @@ public class AbstractServlet extends HttpServlet {
         String email = null;
         String password = null;
         for (Cookie cookie : cookies) {
-          switch (cookie.getName()) {
-            case "mystartUser":
-              email = cookie.getValue();
-              break;
-            case "mystartUserPassword":
-              password = cookie.getValue();
-              break;
-            default:
-              break;
+          if (cookie.getName().equals("mystart")) {
+            String[] value = cookie.getValue().split("|");
+            email = value[0];
+            password = value[1];
           }
         }
         // check cookie data
@@ -134,7 +136,7 @@ public class AbstractServlet extends HttpServlet {
       req.setAttribute(USER_ID, userId);
       req.setAttribute(USER, user);
       req.setAttribute("links", getLinkStorage().getAllByLabel(userId, "MyStart"));
-      req.setAttribute("flair", flair);
+      req.setAttribute("flair", FLAIR);
     }
   }
 

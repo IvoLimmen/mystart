@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.limmen.mystart.Storage;
@@ -17,13 +16,9 @@ public class LoginServlet extends AbstractServlet {
   public LoginServlet(Storage storage,
                       MultipartConfigElement multipartConfigElement,
                       Path temporaryDirectory) {
-    super(storage, multipartConfigElement, temporaryDirectory);
-  }
-
-  private void addCookie(HttpServletResponse res, String key, String value) {
-    Cookie cookie = new Cookie(key, value);
-    cookie.setMaxAge(60 * 60 * 24 * 7); // week
-    res.addCookie(cookie);
+    super(storage,
+          multipartConfigElement,
+          temporaryDirectory);
   }
 
   @Override
@@ -60,8 +55,7 @@ public class LoginServlet extends AbstractServlet {
         res.sendRedirect("/login.jsp?error=1");
       } else {
         req.getSession().setAttribute(USER_ID, user.getId());
-        addCookie(res, "mystartUser", email);
-        addCookie(res, "mystartUserPassword", user.getPassword());
+        addCookie(res, "mystart", email + "|" + user.getPassword());
         res.sendRedirect("/home");
       }
 
