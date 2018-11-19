@@ -11,19 +11,9 @@ public class DomainUtil {
   }
 
   public static Set<String> parseLabels(String label) {
-    // remove the leading and trailing ;
-    if (label.startsWith(";")) {
-      label = label.substring(1);
-    }
-    if (label.endsWith(";")) {
-      label = label.substring(0, label.length() - 1);
-    }
-
     String[] labels;
     if (label.contains(",")) {
       labels = label.split(",");
-    } else if (label.contains(";")) {
-      labels = label.split(";");
     } else {
       labels = new String[1];
       labels[0] = label;
@@ -31,10 +21,7 @@ public class DomainUtil {
 
     return Arrays.asList(labels).stream()
         .map(l -> l.trim())
+        .filter(l -> !l.isEmpty())
         .collect(Collectors.toSet());
-  }
-
-  public static String storeLabels(Link link) {
-    return ";" + link.getLabels().stream().collect(Collectors.joining(";")) + ";";
   }
 }
