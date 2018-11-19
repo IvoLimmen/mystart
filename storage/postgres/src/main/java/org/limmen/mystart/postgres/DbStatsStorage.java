@@ -6,17 +6,32 @@ import org.limmen.mystart.StatsStorage;
 
 public class DbStatsStorage extends DbAbstractStorage implements StatsStorage {
 
+  private static final Function<Result, Map.Entry<String, Long>> MAPPER = res -> {
+    String key = res.string("key");
+    return new Map.Entry<String, Long>() {
+      @Override
+      public String getKey() {
+        if (key == null) {
+          return "EMPTY";
+        }
+        return key;
+      }
+
+      @Override
+      public Long getValue() {
+        return res.lng("value");
+      }
+
+      @Override
+      public Long setValue(Long value) {
+        throw new UnsupportedOperationException("Not supported yet.");
+      }
+    };
+  };
+
   public DbStatsStorage(String user, String password, String url) {
     super(user, password, url);
   }
-
-  private static final Function<Result, Map.Entry<String, Long>> MAPPER = res -> {
-    String key = res.string("key");
-    if (key == null) {
-      key = "EMPTY";
-    }
-    return Map.entry(key, res.lng("value"));
-  };
 
   @Override
   public Map<String, Long> getCreationStatistics(Long userId) {
