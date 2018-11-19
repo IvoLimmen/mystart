@@ -58,10 +58,36 @@
 
               <div class="box box-danger">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Visits</h3>
+                  <h3 class="box-title">Last year of visit</h3>
                 </div>
                 <div class="box-body">
                   <canvas id="visits" style="height:250px"></canvas>
+                </div>          
+              </div>
+
+            </div>
+          </div>         
+          <div class="row">
+            <div class="col-md-6">      
+
+              <div class="box box-danger">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Protocol use</h3>
+                </div>
+                <div class="box-body">
+                  <canvas id="protocol" style="height:250px"></canvas>
+                </div>          
+              </div>
+
+            </div>
+            <div class="col-md-6">      
+
+              <div class="box box-danger">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Creation year</h3>
+                </div>
+                <div class="box-body">
+                  <canvas id="creation" style="height:250px"></canvas>
                 </div>          
               </div>
 
@@ -107,6 +133,16 @@
         });
         $.ajax({url: '/ajax?stats=visits', dataType: 'json', type: 'GET'}).done(function(result) {
             var pieChartCanvas = $('#visits').get(0).getContext('2d');
+            var pieChart       = new Chart(pieChartCanvas);
+            pieChart.Doughnut(result, pieOptions);
+        });
+        $.ajax({url: '/ajax?stats=protocol', dataType: 'json', type: 'GET'}).done(function(result) {
+            var pieChartCanvas = $('#protocol').get(0).getContext('2d');
+            var pieChart       = new Chart(pieChartCanvas);
+            pieChart.Doughnut(result, pieOptions);
+        });
+        $.ajax({url: '/ajax?stats=create_year', dataType: 'json', type: 'GET'}).done(function(result) {
+            var pieChartCanvas = $('#creation').get(0).getContext('2d');
             var pieChart       = new Chart(pieChartCanvas);
             pieChart.Doughnut(result, pieOptions);
         });

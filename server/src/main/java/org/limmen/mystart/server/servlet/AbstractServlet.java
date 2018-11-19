@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.eclipse.jetty.server.Request;
 import org.limmen.mystart.LinkStorage;
+import org.limmen.mystart.StatsStorage;
 import org.limmen.mystart.Storage;
 import org.limmen.mystart.User;
 import org.limmen.mystart.UserStorage;
@@ -57,6 +58,10 @@ public class AbstractServlet extends HttpServlet {
 
   public LinkStorage getLinkStorage() {
     return this.storage.getLinkStorage();
+  }
+
+  public StatsStorage getStatsStorage() {
+    return this.storage.getStatsStorage();
   }
 
   public Storage getStorage() {

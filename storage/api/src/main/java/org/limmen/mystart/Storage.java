@@ -8,6 +8,8 @@ public interface Storage {
 
   String getName();
 
+  StatsStorage getStatsStorage();
+
   UserStorage getUserStorage();
 
   VisitStorage getVisitStorage();

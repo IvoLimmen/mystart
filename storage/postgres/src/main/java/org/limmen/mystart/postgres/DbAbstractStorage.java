@@ -8,7 +8,9 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -101,6 +103,24 @@ public abstract class DbAbstractStorage {
         try (ResultSet resultSet = statement.executeQuery()) {
           while (resultSet.next()) {
             results.add(DbUtil.toLocateDateTime(resultSet.getTimestamp(1)));
+          }
+        }
+      }
+    } catch (SQLException e) {
+      throw new StorageException(e);
+    }
+    return results;
+  }
+
+  protected Map<String, Long> executeStatisticsSql(String sql, Consumer<StatementBuilder> arguments, Function<Result, Map.Entry<String, Long>> mapper) {
+    Map<String, Long> results = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+    try (Connection connection = connection()) {
+      try (PreparedStatement statement = connection.prepareStatement(sql)) {
+        arguments.accept(new StatementBuilder(connection, statement));
+        try (ResultSet resultSet = statement.executeQuery()) {
+          while (resultSet.next()) {
+            Map.Entry<String, Long> entry = mapper.apply(new Result(resultSet));
+            results.put(entry.getKey(), entry.getValue());
           }
         }
       }
