@@ -24,7 +24,21 @@
               ${user.fullName}
               <small>${user.email}</small>
             </p>
-          </li>                         
+          </li>         
+          <!-- Menu Body -->
+          <li class="user-body">
+            <div class="row">
+              <div class="col-xs-4 text-center">
+                <a href="/nav?page=import">Import links</a>
+              </div>
+              <div class="col-xs-4 text-center">
+                <a href="/nav?page=check">Check links</a>
+              </div>
+              <div class="col-xs-4 text-center">
+                <a href='javascript:(function(){var a=window,b=document,c=encodeURIComponent,d=a.open("https://limmen.org/link?edit&url="+c(b.location)+"&title="+c(b.title),"popup","left="+((a.screenX||a.screenLeft)+10)+",top="+((a.screenY||a.screenTop)+10)+",height=510px,width=550px,resizable=1,alwaysRaised=1");a.setTimeout(function(){d.focus()},300)})();' title="Make it easier: use the bookmarklet!">Book- marklet</a>
+              </div>
+            </div>
+          </li>          
           <!-- Menu Footer-->
           <li class="user-footer">
             <div class="pull-left">

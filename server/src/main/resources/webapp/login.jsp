@@ -19,7 +19,6 @@
     
           <!-- Sidebar Menu -->
           <ul class="sidebar-menu" data-widget="tree">
-            <li class="header">Labels</li>           
           </ul>
           <!-- /.sidebar-menu -->
         </section>
