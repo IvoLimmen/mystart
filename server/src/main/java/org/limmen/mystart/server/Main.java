@@ -33,6 +33,7 @@ import org.limmen.mystart.server.servlet.HomeServlet;
 import org.limmen.mystart.server.servlet.ImportServlet;
 import org.limmen.mystart.server.servlet.LinkServlet;
 import org.limmen.mystart.server.servlet.LoginServlet;
+import org.limmen.mystart.server.servlet.NavServlet;
 import org.limmen.mystart.server.servlet.UserServlet;
 import org.limmen.mystart.server.servlet.ajax.AjaxServlet;
 
@@ -97,6 +98,8 @@ public class Main {
                new ImportServlet(parser, storage, multipartConfigElement, scratchDir.toPath()));
     addServlet(server, servletContextHandler, "linkServlet", "/link",
                new LinkServlet(storage, multipartConfigElement, scratchDir.toPath()));
+    addServlet(server, servletContextHandler, "navServlet", "/nav",
+               new NavServlet(storage, multipartConfigElement, scratchDir.toPath()));
     addServlet(server, servletContextHandler, "ajaxServlet", "/ajax",
                new AjaxServlet(storage, multipartConfigElement, scratchDir.toPath()));
 

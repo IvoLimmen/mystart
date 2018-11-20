@@ -74,11 +74,13 @@ public class ImportServlet extends AbstractServlet {
     boolean importHomepageAsExtra = getBool(req, "importHomepageAsExtra");
     boolean importLanguageAsLabel = getBool(req, "importLanguageAsLabel");
 
-    if (importHomepageAsExtra) {
-      parseContext.addOption("github.importHomepageAsExtra", "true");
-    }
-    if (importLanguageAsLabel) {
-      parseContext.addOption("github.importLanguageAsLabel", "true");
+    if (parseContext != null) {
+      if (importHomepageAsExtra) {
+        parseContext.addOption("github.importHomepageAsExtra", "true");
+      }
+      if (importLanguageAsLabel) {
+        parseContext.addOption("github.importLanguageAsLabel", "true");
+      }
     }
 
     Set<Link> links = parser.parse(parseContext);
