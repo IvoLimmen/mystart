@@ -5,7 +5,7 @@
     
   <groupId>org.limmen.mystart</groupId>
   <artifactId>mystart-project</artifactId>
-  <version>0.1</version>
+  <version>0.2</version>
   <packaging>pom</packaging>
   <name>MyStart - Project</name>
         
