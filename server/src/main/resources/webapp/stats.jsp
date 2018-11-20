@@ -49,7 +49,7 @@
                   <h3 class="box-title">Source of bookmarks</h3>
                 </div>
                 <div class="box-body">
-                  <canvas id="source" style="height:250px"></canvas>
+                  <canvas id="source" style="height:200px"></canvas>
                 </div>          
               </div>
 
@@ -61,7 +61,7 @@
                   <h3 class="box-title">Last year of visit</h3>
                 </div>
                 <div class="box-body">
-                  <canvas id="visits" style="height:250px"></canvas>
+                  <canvas id="visits" style="height:200px"></canvas>
                 </div>          
               </div>
 
@@ -75,7 +75,7 @@
                   <h3 class="box-title">Protocol use</h3>
                 </div>
                 <div class="box-body">
-                  <canvas id="protocol" style="height:250px"></canvas>
+                  <canvas id="protocol" style="height:200px"></canvas>
                 </div>          
               </div>
 
@@ -87,12 +87,12 @@
                   <h3 class="box-title">Creation year</h3>
                 </div>
                 <div class="box-body">
-                  <canvas id="creation" style="height:250px"></canvas>
+                  <canvas id="creation" style="height:200px"></canvas>
                 </div>          
               </div>
 
             </div>
-          </div>         
+          </div>   
         </section>
         <!-- /.content -->
       </div>
@@ -103,7 +103,7 @@
     <script src="js/Chart.min.js"></script>
     <script>
       $(function () {
-        var pieOptions     = {
+        var pieOptions = {
           //Boolean - Whether we should show a stroke on each segment
           segmentShowStroke    : true,
           //String - The colour of each segment stroke
@@ -146,7 +146,7 @@
             var pieChart       = new Chart(pieChartCanvas);
             pieChart.Doughnut(result, pieOptions);
         });
-      })
+      });
     </script>
   </body>
 </html>

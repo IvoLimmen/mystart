@@ -18,7 +18,10 @@ public interface LinkStorage {
 
   void importCollection(Long userId, Collection<Link> link, boolean skipDuplicates);
 
+  Collection<Link> last20Visits(Long userId);
+
   void remove(Long userId, Long id);
 
   void update(Long userId, Link item);
+
 }

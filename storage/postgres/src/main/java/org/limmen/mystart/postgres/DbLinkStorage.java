@@ -103,6 +103,19 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
   }
 
   @Override
+  public Collection<Link> last20Visits(Long userId) {
+    String sql = "select l.* "
+        + "from links l "
+        + "join visits v ON v.link_id = l.id "
+        + "where l.user_id = ? "
+        + "order by v.visit desc limit 20";
+
+    return executeSql(sql, args -> {
+                    args.setLong(1, userId);
+                  }, LINK_MAPPER);
+  }
+
+  @Override
   public void remove(Long userId, Long id) {
     executeSql("delete from links where id = ? and user_id = ?", stmt -> {
              stmt.setLong(1, id);
