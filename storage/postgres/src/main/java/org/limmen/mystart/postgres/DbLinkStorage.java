@@ -2,10 +2,12 @@ package org.limmen.mystart.postgres;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import lombok.extern.slf4j.Slf4j;
 import org.limmen.mystart.Link;
 import org.limmen.mystart.LinkStorage;
+import org.limmen.mystart.criteria.AbstractCriteria;
 
 @Slf4j
 public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
@@ -121,6 +123,30 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
              stmt.setLong(1, id);
              stmt.setLong(2, userId);
            });
+  }
+
+  @Override
+  public Collection<Link> search(Long userId, Collection<AbstractCriteria> criteria) {
+    StringBuilder sql = new StringBuilder();
+    sql.append("select l.* from links l where l.user_id = ? ");
+
+    criteria.forEach(c -> {
+      sql.append(" and ").append(c.toSQL());
+    });
+    sql.append(" order by l.title asc");
+
+    AtomicInteger index = new AtomicInteger(0);
+    return executeSql(sql.toString(), args -> {
+                    args.setLong(index.incrementAndGet(), userId);
+      criteria.forEach(c -> {
+        if (c.getValueType().equals(String.class)) {
+          args.setString(index.incrementAndGet(), "%" + c.getValue() + "%");
+        }
+        if (c.getValueType().equals(String[].class)) {
+          args.setString(index.incrementAndGet(), (String) c.getValue());
+        }
+      });
+                  }, LINK_MAPPER);
   }
 
   @Override

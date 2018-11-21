@@ -32,28 +32,25 @@
           <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4">
-              <h1>${link.id == null ? "New" : "Edit"} ${link.title}</h1>
-              <form name="link" action="/link" method="post">
-                <input type="hidden" name="id" value="${link.id}"/>             
-                <input type="hidden" name="referer" value="${referer}"/>             
-                <input type="hidden" name="type" value="${type}"/>   
+              <h1>Advanced search</h1>
+              <form name="advsearch" action="/home" method="post">
                 <div class="form-group">
                   <label for="title">Title</label><br/>
-                  <input type="text" class="form-control" name="title" size="50" value="${link.title}"/>
+                  <input type="text" class="form-control" name="title" size="50"/>
                 </div>
                 <div class="form-group">      
                   <label for="url">URL</label><br/>
-                  <input type="text" class="form-control" name="url" size="80" value="${link.url}"/>
+                  <input type="text" class="form-control" name="url" size="50"/>
                 </div>
                 <div class="form-group">      
                   <label for="description">Description</label><br/>
-                  <textarea rows="10" cols="40" name="description">${link.description}</textarea>        
+                  <input type="text" class="form-control" name="description" size="50"/>
                 </div>
                 <div class="form-group">    
-                  <label for="labels">Labels</label><br/>
-                  <input type="text" class="form-control" name="labels" size="50" value="${editlabels}" autocomplete="off" data-multiple/>
+                  <label for="label">Label</label><br/>
+                  <input type="text" class="form-control" name="label" size="50" value="" data-autocomplete/>
                 </div>
-                <button type="submit" class="btn btn-default" name="saveButton">Save</button>              
+                <button type="submit" class="btn btn-default" name="advSearchButton">Search</button>
                 <button type="submit" class="btn btn-default" name="cancelButton">Cancel</button>
               </form>                    
             </div>          
@@ -67,6 +64,6 @@
     </div>
     <!-- ./wrapper -->
     <jsp:include page="parts/javascript.jsp"/>  
-    <jsp:include page="parts/autocomplete.jsp"/>  
+    <jsp:include page="parts/autocomplete-single.jsp"/>  
   </body>
 </html>

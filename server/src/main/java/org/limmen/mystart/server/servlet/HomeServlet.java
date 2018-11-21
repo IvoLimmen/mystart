@@ -2,7 +2,9 @@ package org.limmen.mystart.server.servlet;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
@@ -13,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.limmen.mystart.Link;
 import org.limmen.mystart.Storage;
+import org.limmen.mystart.criteria.AbstractCriteria;
+import org.limmen.mystart.criteria.Like;
 
 @Slf4j
 public class HomeServlet extends AbstractServlet {
@@ -75,6 +79,41 @@ public class HomeServlet extends AbstractServlet {
       }
     } else {
       req.getRequestDispatcher("/home.jsp").include(req, res);
+    }
+  }
+
+  @Override
+  protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    super.doPost(req, res);
+
+    Long userId = (Long) req.getSession().getAttribute(USER_ID);
+
+    if (userId == null) {
+      return;
+    }
+
+    if (exists(req, "advSearchButton")) {
+
+      List<AbstractCriteria> criteria = new ArrayList<>();
+
+      if (hasValue(req, "title")) {
+        criteria.add(new Like("title", req.getParameter("title"), String.class));
+      }
+      if (hasValue(req, "url")) {
+        criteria.add(new Like("url", req.getParameter("url"), String.class));
+      }
+      if (hasValue(req, "description")) {
+        criteria.add(new Like("description", req.getParameter("description"), String.class));
+      }
+      if (hasValue(req, "label")) {
+        criteria.add(new Like("labels", req.getParameter("label"), String[].class));
+      }
+
+      req.setAttribute("links", getLinkStorage().search(userId, criteria));
+      req.getRequestDispatcher("/home.jsp").include(req, res);
+    } else if (exists(req, "cancelButton")) {
+
+      res.sendRedirect("/home");
     }
   }
 }

@@ -39,6 +39,7 @@ public class Link extends BaseObject implements Comparable<Link> {
 
   public Link() {
     this.creationDate = LocalDateTime.now();
+    this.source = "MyStart";
   }
 
   public Link(String url) {
