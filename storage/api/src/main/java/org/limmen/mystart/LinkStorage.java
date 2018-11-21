@@ -1,6 +1,7 @@
 package org.limmen.mystart;
 
 import java.util.Collection;
+import org.limmen.mystart.criteria.AbstractCriteria;
 
 public interface LinkStorage {
 
@@ -22,6 +23,7 @@ public interface LinkStorage {
 
   void remove(Long userId, Long id);
 
-  void update(Long userId, Link item);
+  Collection<Link> search(Long userId, Collection<AbstractCriteria> criteria);
 
+  void update(Long userId, Link item);
 }

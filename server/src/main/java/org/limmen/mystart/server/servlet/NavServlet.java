@@ -37,7 +37,13 @@ public class NavServlet extends AbstractServlet {
 
     if (exists(req, "page")) {
 
-      req.getRequestDispatcher("/" + req.getParameter("page") + ".jsp").include(req, res);
+      String page = req.getParameter("page");
+
+      if ("search".equals(page)) {
+        req.setAttribute("labels", getLinkStorage().getAllLabels(userId));
+      }
+
+      req.getRequestDispatcher("/" + page + ".jsp").include(req, res);
     }
   }
 

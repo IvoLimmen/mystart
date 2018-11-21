@@ -208,7 +208,6 @@ public class LinkServlet extends AbstractServlet {
       }
 
       if (link.getId() == null) {
-        link.setSource("MyStart");
         getLinkStorage().create(userId, link);
       } else {
         getLinkStorage().update(userId, link);
