@@ -35,8 +35,8 @@
                   <label for="labels">Labels</label><br/>
                   <input type="text" class="form-control" name="labels" size="50" value="${editlabels}" autocomplete="off" data-multiple/>
                 </div>
-                <button type="submit" class="btn btn-default" name="cancelButton">Cancel</button>
                 <button type="submit" class="btn btn-default" name="saveButton">Save</button>              
+                <button type="submit" class="btn btn-default" name="cancelButton">Cancel</button>
               </form>                    
             </div>          
             <div class="col-md-4"></div>
