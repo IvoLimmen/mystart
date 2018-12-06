@@ -79,9 +79,38 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
 
   @Override
   public Link getByUrl(Long userId, String url) {
-    return executeSqlSingle("select * from links where user_id = ? and url = ?", args -> {
+
+    if (url.startsWith("https://")) {
+      url = url.substring(8);
+    } else if (url.startsWith("http://")) {
+      url = url.substring(7);
+    }
+    String strippedUrl = url.replaceAll("/", "");
+    log.debug("Searching for url: {}", strippedUrl);
+
+    String sql = "select t.* from (select l.id, "
+        + "case "
+        + "  when strpos(l.url, 'https://') = 1 "
+        + "  then translate(substr(l.url, 9), '/', '') "
+        + "  when strpos(l.url, 'http://') = 1 "
+        + "  then translate(substr(l.url, 8), '/', '') "
+        + "  else l.url "
+        + "  end, "
+        + "  l.title, "
+        + "  l.creation_date, "
+        + "  l.source, "
+        + "  l.labels, "
+        + "  l.description, "
+        + "  l.private_network, "
+        + "  l.last_check, "
+        + "  l.check_result, "
+        + "  l.last_visit, "
+        + "  l.user_id "
+        + "from links l) t "
+        + "where t.user_id = ? and t.url = ?";
+    return executeSqlSingle(sql, args -> {
                           args.setLong(1, userId);
-                          args.setString(2, url);
+      args.setString(2, strippedUrl);
                         }, LINK_MAPPER);
   }
 
