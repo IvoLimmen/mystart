@@ -2,7 +2,32 @@
 
 ## Why build something like this? 
 
-I don't know. I have a lot of bookmarks and there is no (proper) tooling for it.
+I don't know. I have a lot of bookmarks and there is no (proper) tooling for it. I use Google Bookmarks a lot
+but there is no nice add-on for both Chrome and Firefox. I use Firefox mostly as browser and I also use the
+bookmarks in the browser a lot. But then you suddenly think: I know I found something that I bookmarked. But
+where did I bookmark it in?
+
+# Features of MyStart
+
+ * Quick search
+
+    Searches in title, description, label and url.
+
+ * Advanced search
+
+    Specify a single label, part of description, part of title, part of url.
+
+ * Bookmarklet
+
+    I copied the one from Google that works with MyStart.
+
+ * Statistics
+
+    Added some statistics on source, visits and creation date.
+
+ * Import
+
+    MyStart can import from multiple sources.
 
 # Importing bookmarks
 
