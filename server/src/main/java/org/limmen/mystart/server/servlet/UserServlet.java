@@ -47,7 +47,6 @@ public class UserServlet extends AbstractServlet {
     super.doPost(req, res);
 
     String email = req.getParameter("email");
-    String name = req.getParameter("name");
     String password = req.getParameter("password");
 
     if (exists(req, "saveButton")) {
@@ -58,7 +57,7 @@ public class UserServlet extends AbstractServlet {
       String fullName = req.getParameter("fullname");
       Part filePart = req.getPart("avatar");
 
-      if (filePart != null) {
+      if (filePart != null && filePart.getSize() > 0) {
         String fileName = id + "-" + Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         Path tempFile = Paths.get(avatarDirectory.toString(), fileName);
 
