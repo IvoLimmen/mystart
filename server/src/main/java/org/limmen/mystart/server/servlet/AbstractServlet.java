@@ -10,6 +10,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.eclipse.jetty.server.Request;
 import org.limmen.mystart.LinkStorage;
 import org.limmen.mystart.StatsStorage;
@@ -18,6 +19,7 @@ import org.limmen.mystart.User;
 import org.limmen.mystart.UserStorage;
 import org.limmen.mystart.VisitStorage;
 
+@Slf4j
 public class AbstractServlet extends HttpServlet {
 
   public static final String USER = "user";
@@ -44,8 +46,11 @@ public class AbstractServlet extends HttpServlet {
     FLAIR.put("medium.com", "fa-medium");
     FLAIR.put("news.ycombinator.com", "fa-hacker-news");
   }
+
   private final MultipartConfigElement multipartConfigElement;
+
   private final Storage storage;
+
   private final Path temporaryDirectory;
 
   public AbstractServlet(Storage storage,
@@ -114,7 +119,7 @@ public class AbstractServlet extends HttpServlet {
         String password = null;
         for (Cookie cookie : cookies) {
           if (cookie.getName().equals("mystart")) {
-            String[] value = cookie.getValue().split("|");
+            String[] value = cookie.getValue().split("\\|");
             email = value[0];
             password = value[1];
           }

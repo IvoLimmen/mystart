@@ -47,6 +47,7 @@ public class Main {
     try (InputStream inputStream = Main.class.getResourceAsStream("/application.properties")) {
       properties.load(inputStream);
     }
+    properties.putAll(System.getProperties());
 
     Storage storage = StorageProvider.getStorageByName(properties, properties.getProperty("server.storage"));
 
@@ -56,7 +57,8 @@ public class Main {
 
     MultipartConfigElement multipartConfigElement = new MultipartConfigElement(scratchDir.getAbsolutePath(), 41943040, 41943040, 4096);
 
-    Server server = new Server(Integer.parseInt(properties.getProperty("server.port")));
+    String domain = properties.getProperty("server.domain", "");
+    Server server = new Server(Integer.parseInt(properties.getProperty("server.port", "8080")));
     URI baseUri = getWebRootResourceUri();
     Path avatarPath = Paths.get(new File(baseUri.toURL().toURI()).toPath().toString(), "avatar");
     Files.createDirectories(avatarPath);
