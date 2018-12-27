@@ -43,8 +43,6 @@ public class LoginServlet extends AbstractServlet {
       user.updatePassword(password);
       getUserStorage().store(user);
 
-      user = getUserStorage().getByEmail(email);
-
       res.sendRedirect("/home");
 
     } else if (exists(req, "loginButton")) {
