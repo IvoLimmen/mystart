@@ -33,22 +33,12 @@
           <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4">
-              <div class="alert alert-info" role="alert">
-                No account yet? <a href="signup.jsp">Sign up!</a>
-              </div>
-              <div class="alert alert-info" role="alert">
-                Forgot your password? <a href="forgot.jsp">Click here!</a>
-              </div>
               <form name="login" method="post" action="/login">
                 <div class="form-group">
                   <label for="email">Email</label>
                   <input type="email" class="form-control" name="email" placeholder="Please enter email adres"/>
                 </div>
-                <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="password" class="form-control" name="password" placeholder="Please enter password"/>
-                </div>
-                <button type="submit" class="btn btn-default" name="loginButton">Login</button>
+                <button type="submit" class="btn btn-default" name="resetButton">Reset my password</button>
               </form>
             </div>          
             <div class="col-md-4"></div>

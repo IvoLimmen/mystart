@@ -36,6 +36,8 @@ import org.limmen.mystart.server.servlet.LoginServlet;
 import org.limmen.mystart.server.servlet.NavServlet;
 import org.limmen.mystart.server.servlet.UserServlet;
 import org.limmen.mystart.server.servlet.ajax.AjaxServlet;
+import org.limmen.mystart.server.support.MailService;
+import org.limmen.mystart.server.support.MailServiceImpl;
 
 @Slf4j
 public class Main {
@@ -49,6 +51,15 @@ public class Main {
     }
     properties.putAll(System.getProperties());
 
+    MailService mailService = MailServiceImpl.builder()
+            .from(properties.getProperty("mail.smtp.from"))
+            .port(Integer.parseInt(properties.getProperty("mail.smtp.port")))
+            .host(properties.getProperty("mail.smtp.host"))
+            .startTls(Boolean.parseBoolean(properties.getProperty("mail.smtp.starttls")))
+            .username(properties.getProperty("mail.smtp.username"))
+            .password(properties.getProperty("mail.smtp.password"))
+            .build();
+    
     Storage storage = StorageProvider.getStorageByName(properties, properties.getProperty("server.storage"));
 
     Parser parser = new AutoDetectParser();
@@ -57,7 +68,6 @@ public class Main {
 
     MultipartConfigElement multipartConfigElement = new MultipartConfigElement(scratchDir.getAbsolutePath(), 41943040, 41943040, 4096);
 
-    String domain = properties.getProperty("server.domain", "");
     Server server = new Server(Integer.parseInt(properties.getProperty("server.port", "8080")));
     URI baseUri = getWebRootResourceUri();
     Path avatarPath = Paths.get(new File(baseUri.toURL().toURI()).toPath().toString(), "avatar");
@@ -95,7 +105,7 @@ public class Main {
     addServlet(server, servletContextHandler, "userServlet", "/user",
                new UserServlet(storage, multipartConfigElement, scratchDir.toPath(), avatarPath));
     addServlet(server, servletContextHandler, "loginServlet", "/login",
-               new LoginServlet(storage, multipartConfigElement, scratchDir.toPath()));
+               new LoginServlet(storage, multipartConfigElement, scratchDir.toPath(), mailService));
     addServlet(server, servletContextHandler, "importServlet", "/import",
                new ImportServlet(parser, storage, multipartConfigElement, scratchDir.toPath()));
     addServlet(server, servletContextHandler, "linkServlet", "/link",
