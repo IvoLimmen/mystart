@@ -15,6 +15,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class MailServiceImpl implements MailService {
 
+  private static final String LINE_END = "\n";
+
   private final String from;
 
   private final String host;
@@ -37,6 +39,16 @@ public class MailServiceImpl implements MailService {
     this.password = password;
     this.username = username;
     createSession();
+  }
+
+  @Override
+  public void sendPasswordReset(String email, String fullName, String link) {
+    StringBuilder txt = new StringBuilder(512);
+    txt.append("Hello ").append(fullName).append(", ").append(LINE_END);
+    txt.append(LINE_END);
+    txt.append("CLick here to reset your password: ").append(link).append(LINE_END);
+
+    sendMessage("Your password reset link", String.format("%s <%s>", fullName, email), txt.toString());
   }
 
   private MimeMessage createMessage(String subject, String to) {
@@ -63,11 +75,11 @@ public class MailServiceImpl implements MailService {
     properties.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 
     this.session = Session.getDefaultInstance(properties, new Authenticator() {
-      @Override
-      protected PasswordAuthentication getPasswordAuthentication() {
-        return new PasswordAuthentication(username, password);
-      }
-    });
+                                            @Override
+                                            protected PasswordAuthentication getPasswordAuthentication() {
+                                              return new PasswordAuthentication(username, password);
+                                            }
+                                          });
   }
 
   private void sendMessage(String subject, String to, String msg) {
@@ -82,8 +94,4 @@ public class MailServiceImpl implements MailService {
     }
   }
 
-  @Override
-  public void sendPasswordReset(String email, String fullName) {
-    sendMessage("Your password reset link", String.format("%s <%s>", fullName, email), "email contents");
-  }
 }

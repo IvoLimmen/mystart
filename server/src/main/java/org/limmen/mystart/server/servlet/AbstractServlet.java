@@ -135,7 +135,7 @@ public class AbstractServlet extends HttpServlet {
         }
       }
 
-      if (req.getSession().getAttribute(USER_ID) == null) {
+      if (req.getSession().getAttribute(USER_ID) == null && !"/login".equals(req.getServletPath())) {
         req.getRequestDispatcher("/login.jsp").include(req, res);
       }
     }

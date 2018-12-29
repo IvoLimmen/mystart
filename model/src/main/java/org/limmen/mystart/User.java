@@ -3,6 +3,7 @@ package org.limmen.mystart;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDateTime;
 
 public final class User extends BaseObject {
 
@@ -13,6 +14,8 @@ public final class User extends BaseObject {
   private String fullName;
   private boolean openInNewTab;
   private String password;
+  private String resetCode;
+  private LocalDateTime resetCodeValid;
 
   public User() {
   }
@@ -37,6 +40,14 @@ public final class User extends BaseObject {
     return password;
   }
 
+  public String getResetCode() {
+    return resetCode;
+  }
+
+  public LocalDateTime getResetCodeValid() {
+    return resetCodeValid;
+  }
+
   public boolean isOpenInNewTab() {
     return openInNewTab;
   }
@@ -59,6 +70,14 @@ public final class User extends BaseObject {
 
   public void setPassword(String password) {
     this.password = password;
+  }
+
+  public void setResetCode(String resetCode) {
+    this.resetCode = resetCode;
+  }
+
+  public void setResetCodeValid(LocalDateTime resetCodeValid) {
+    this.resetCodeValid = resetCodeValid;
   }
 
   public void updatePassword(String password) {

@@ -10,6 +10,8 @@ public interface UserStorage {
 
   User getByEmail(String email);
 
+  User getByResetCode(String resetCode);
+
   void remove(Long id);
 
   void store(User item);

@@ -2,5 +2,5 @@ package org.limmen.mystart.server.support;
 
 public interface MailService {
 
-  void sendPasswordReset(String email, String fullName);
+  void sendPasswordReset(String email, String fullName, String link);
 }

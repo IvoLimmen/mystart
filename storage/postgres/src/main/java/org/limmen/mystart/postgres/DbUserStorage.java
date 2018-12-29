@@ -17,6 +17,8 @@ public class DbUserStorage extends DbAbstractStorage implements UserStorage {
     u.setAvatarFileName(res.string("avatar_filename"));
     u.setOpenInNewTab(res.bool("open_in_new_tab"));
     u.setPassword(res.string("password"));
+    u.setResetCode(res.string("reset_code"));
+    u.setResetCodeValid(res.localDateTime("reset_code_valid"));
     return u;
   };
 
@@ -44,6 +46,13 @@ public class DbUserStorage extends DbAbstractStorage implements UserStorage {
   }
 
   @Override
+  public User getByResetCode(String resetCode) {
+    return executeSqlSingle("select * from users where reset_code = ?", stmt -> {
+                          stmt.setString(1, resetCode);
+                        }, USER_MAPPER);
+  }
+
+  @Override
   public void remove(Long id) {
     executeSql("delete from users where id = ?", stmt -> {
              stmt.setLong(1, id);
@@ -62,13 +71,15 @@ public class DbUserStorage extends DbAbstractStorage implements UserStorage {
              });
 
     } else {
-      executeSql("update users set email = ?, password = ?, full_name = ?, avatar_filename = ?, open_in_new_tab = ? where id = ?", stmt -> {
+      executeSql("update users set email = ?, password = ?, full_name = ?, avatar_filename = ?, open_in_new_tab = ?, reset_code = ?, reset_code_valid = ? where id = ?", stmt -> {
                stmt.setString(1, item.getEmail());
                stmt.setString(2, item.getPassword());
                stmt.setString(3, item.getFullName());
                stmt.setString(4, item.getAvatarFileName());
                stmt.setBool(5, item.isOpenInNewTab());
-               stmt.setLong(6, item.getId());
+               stmt.setString(6, item.getResetCode());
+               stmt.setLocalDate(7, item.getResetCodeValid());
+               stmt.setLong(8, item.getId());
              });
     }
   }

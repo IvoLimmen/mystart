@@ -52,14 +52,17 @@ public class Main {
     properties.putAll(System.getProperties());
 
     MailService mailService = MailServiceImpl.builder()
-            .from(properties.getProperty("mail.smtp.from"))
-            .port(Integer.parseInt(properties.getProperty("mail.smtp.port")))
-            .host(properties.getProperty("mail.smtp.host"))
-            .startTls(Boolean.parseBoolean(properties.getProperty("mail.smtp.starttls")))
-            .username(properties.getProperty("mail.smtp.username"))
-            .password(properties.getProperty("mail.smtp.password"))
-            .build();
-    
+        .from(properties.getProperty("mail.smtp.from"))
+        .port(Integer.parseInt(properties.getProperty("mail.smtp.port")))
+        .host(properties.getProperty("mail.smtp.host"))
+        .startTls(Boolean.parseBoolean(properties.getProperty("mail.smtp.starttls")))
+        .username(properties.getProperty("mail.smtp.username"))
+        .password(properties.getProperty("mail.smtp.password"))
+        .build();
+
+    String serverName = properties.getProperty("server.name");
+    String localUrl = createUrl(serverName);
+
     Storage storage = StorageProvider.getStorageByName(properties, properties.getProperty("server.storage"));
 
     Parser parser = new AutoDetectParser();
@@ -105,7 +108,7 @@ public class Main {
     addServlet(server, servletContextHandler, "userServlet", "/user",
                new UserServlet(storage, multipartConfigElement, scratchDir.toPath(), avatarPath));
     addServlet(server, servletContextHandler, "loginServlet", "/login",
-               new LoginServlet(storage, multipartConfigElement, scratchDir.toPath(), mailService));
+               new LoginServlet(storage, multipartConfigElement, scratchDir.toPath(), mailService, localUrl));
     addServlet(server, servletContextHandler, "importServlet", "/import",
                new ImportServlet(parser, storage, multipartConfigElement, scratchDir.toPath()));
     addServlet(server, servletContextHandler, "linkServlet", "/link",
@@ -134,6 +137,14 @@ public class Main {
       }
     }
     return scratchDir;
+  }
+
+  private static String createUrl(String serverName) {
+    if (serverName.equals("localhost")) {
+      return "http://" + serverName + ":8080";
+    }
+
+    return "https://" + serverName;
   }
 
   private static URI getWebRootResourceUri() throws FileNotFoundException, URISyntaxException {
