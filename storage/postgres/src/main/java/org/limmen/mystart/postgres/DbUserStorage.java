@@ -19,6 +19,7 @@ public class DbUserStorage extends DbAbstractStorage implements UserStorage {
     u.setPassword(res.string("password"));
     u.setResetCode(res.string("reset_code"));
     u.setResetCodeValid(res.localDateTime("reset_code_valid"));
+    u.setAutoStartLabel(res.string("auto_start_label"));
     return u;
   };
 
@@ -62,16 +63,17 @@ public class DbUserStorage extends DbAbstractStorage implements UserStorage {
   @Override
   public void store(User item) {
     if (item.getId() == null) {
-      executeSql("insert into users (email, password, full_name, avatar_filename, open_in_new_tab) values (?, ?, ?, ?, ?)", stmt -> {
+      executeSql("insert into users (email, password, full_name, avatar_filename, open_in_new_tab, auto_start_label) values (?, ?, ?, ?, ?, ?)", stmt -> {
                stmt.setString(1, item.getEmail());
                stmt.setString(2, item.getPassword());
                stmt.setString(3, item.getFullName());
                stmt.setString(4, item.getAvatarFileName());
                stmt.setBool(5, item.isOpenInNewTab());
+               stmt.setString(6, item.getAutoStartLabel());
              });
 
     } else {
-      executeSql("update users set email = ?, password = ?, full_name = ?, avatar_filename = ?, open_in_new_tab = ?, reset_code = ?, reset_code_valid = ? where id = ?", stmt -> {
+      executeSql("update users set email = ?, password = ?, full_name = ?, avatar_filename = ?, open_in_new_tab = ?, reset_code = ?, reset_code_valid = ?, auto_start_label = ? where id = ?", stmt -> {
                stmt.setString(1, item.getEmail());
                stmt.setString(2, item.getPassword());
                stmt.setString(3, item.getFullName());
@@ -79,7 +81,8 @@ public class DbUserStorage extends DbAbstractStorage implements UserStorage {
                stmt.setBool(5, item.isOpenInNewTab());
                stmt.setString(6, item.getResetCode());
                stmt.setLocalDate(7, item.getResetCodeValid());
-               stmt.setLong(8, item.getId());
+               stmt.setString(8, item.getAutoStartLabel());
+               stmt.setLong(9, item.getId());
              });
     }
   }

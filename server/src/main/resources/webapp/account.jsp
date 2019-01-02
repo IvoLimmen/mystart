@@ -51,14 +51,18 @@
                   <label for="email">Email</label><br/>
                   <input type="email" class="form-control" name="email" size="50" value="${user.email}"/>
                 </div>
-                  <div class="checkbox">
+                <div>      
+                  <label for="autostart">Auto start label</label><br/>
+                  <input type="text" class="form-control" name="autostart" size="50" value="${user.autoStartLabel}" data-autocomplete/>
+                </div>
+                <div class="checkbox">
                   <label>
                     <input type="checkbox" name="openinnewtab" ${user.isOpenInNewTab() ? "checked" : "" }> Open links in new tab
                   </label>
                 </div>               
                 <div>      
                   <label for="password">Password</label><br/>
-                  <input type="password" class="form-control" min-length="6"name="password"/>
+                  <input type="password" class="form-control" min-length="6" name="password"/>
                 </div>
                 <div>      
                   <label for="password2">Password confirmation</label><br/>
@@ -78,5 +82,6 @@
     </div>
     <!-- ./wrapper -->
     <jsp:include page="parts/javascript.jsp"/>  
+    <jsp:include page="parts/autocomplete-single.jsp"/>  
   </body>
 </html>

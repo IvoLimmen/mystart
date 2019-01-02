@@ -8,7 +8,8 @@ import java.time.LocalDateTime;
 public final class User extends BaseObject {
 
   private static final long serialVersionUID = -8464832961657168773L;
-
+  
+  private String autoStartLabel;
   private String avatarFileName;
   private String email;
   private String fullName;
@@ -18,10 +19,30 @@ public final class User extends BaseObject {
   private LocalDateTime resetCodeValid;
 
   public User() {
+    this.openInNewTab = true;
+    this.autoStartLabel = "MyStart";
   }
 
   public boolean check(String password) {
     return this.password.equals(encode(email, password));
+  }
+
+  private String encode(String email, String password) {
+    try {
+      String text = email + "/myStartSalt/" + password;
+      MessageDigest md = MessageDigest.getInstance("SHA-1");
+      StringBuilder pw = new StringBuilder(64);
+      for (byte b : md.digest(text.getBytes("UTF-8"))) {
+        pw.append(String.format("%02x", b));
+      }
+      return pw.toString();
+    } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public String getAutoStartLabel() {
+    return autoStartLabel;
   }
 
   public String getAvatarFileName() {
@@ -50,6 +71,10 @@ public final class User extends BaseObject {
 
   public boolean isOpenInNewTab() {
     return openInNewTab;
+  }
+
+  public void setAutoStartLabel(String autoStartLabel) {
+    this.autoStartLabel = autoStartLabel;
   }
 
   public void setAvatarFileName(String avatarFileName) {
@@ -84,17 +109,4 @@ public final class User extends BaseObject {
     this.password = encode(email, password);
   }
 
-  private String encode(String email, String password) {
-    try {
-      String text = email + "/myStartSalt/" + password;
-      MessageDigest md = MessageDigest.getInstance("SHA-1");
-      StringBuilder pw = new StringBuilder(64);
-      for (byte b : md.digest(text.getBytes("UTF-8"))) {
-        pw.append(String.format("%02x", b));
-      }
-      return pw.toString();
-    } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
-      throw new RuntimeException(e);
-    }
-  }
 }

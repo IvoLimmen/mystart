@@ -39,6 +39,7 @@ public class UserServlet extends AbstractServlet {
 
     User user = getUserStorage().get(userId);
     req.setAttribute("user", user);
+    req.setAttribute("labels", getLinkStorage().getAllLabels(userId));
     req.getRequestDispatcher("/account.jsp").include(req, res);
   }
 
@@ -67,6 +68,7 @@ public class UserServlet extends AbstractServlet {
         user.setAvatarFileName("/avatar/" + fileName);
       }
       user.setOpenInNewTab(exists(req, "openinnewtab"));
+      user.setAutoStartLabel(req.getParameter("autostart"));
       user.setEmail(email);
       user.setFullName(fullName);
       if (password != null && password.length() > 0 && password2 != null && password.equals(password2)) {
