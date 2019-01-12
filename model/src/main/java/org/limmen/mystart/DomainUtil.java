@@ -10,6 +10,10 @@ public class DomainUtil {
     return link.getLabels().stream().collect(Collectors.joining(", "));
   }
 
+  public static String formatLabels(Set<String> labels) {
+    return labels.stream().collect(Collectors.joining(", "));
+  }
+  
   public static Set<String> parseLabels(String label) {
     String[] labels;
     if (label.contains(",")) {

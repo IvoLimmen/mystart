@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import org.apache.commons.io.IOUtils;
+import org.limmen.mystart.DomainUtil;
 import org.limmen.mystart.Storage;
 import org.limmen.mystart.User;
 
@@ -20,9 +21,9 @@ public class UserServlet extends AbstractServlet {
   private final Path avatarDirectory;
 
   public UserServlet(Storage storage,
-                     MultipartConfigElement multipartConfigElement,
-                     Path temporaryDirectory,
-                     Path avatarDirectory) {
+          MultipartConfigElement multipartConfigElement,
+          Path temporaryDirectory,
+          Path avatarDirectory) {
     super(storage, multipartConfigElement, temporaryDirectory);
     this.avatarDirectory = avatarDirectory;
   }
@@ -40,6 +41,7 @@ public class UserServlet extends AbstractServlet {
     User user = getUserStorage().get(userId);
     req.setAttribute("user", user);
     req.setAttribute("labels", getLinkStorage().getAllLabels(userId));
+    req.setAttribute("editmenulabels", DomainUtil.formatLabels(user.getMenuLabels()));
     req.getRequestDispatcher("/account.jsp").include(req, res);
   }
 
@@ -69,6 +71,7 @@ public class UserServlet extends AbstractServlet {
       }
       user.setOpenInNewTab(exists(req, "openinnewtab"));
       user.setAutoStartLabel(req.getParameter("autostart"));
+      user.setMenuLabels(DomainUtil.parseLabels(req.getParameter("menulabels")));
       user.setEmail(email);
       user.setFullName(fullName);
       if (password != null && password.length() > 0 && password2 != null && password.equals(password2)) {

@@ -59,7 +59,11 @@
                   <label>
                     <input type="checkbox" name="openinnewtab" ${user.isOpenInNewTab() ? "checked" : "" }> Open links in new tab
                   </label>
-                </div>               
+                </div>    
+                <div class="form-group">    
+                  <label for="labels">Labels for menu</label><br/>
+                  <input type="text" class="form-control" name="menulabels" size="50" value="${editmenulabels}" autocomplete="off" data-multiple/>
+                </div>                  
                 <div>      
                   <label for="password">Password</label><br/>
                   <input type="password" class="form-control" min-length="6" name="password"/>
@@ -83,5 +87,6 @@
     <!-- ./wrapper -->
     <jsp:include page="parts/javascript.jsp"/>  
     <jsp:include page="parts/autocomplete-single.jsp"/>  
+    <jsp:include page="parts/autocomplete.jsp"/>
   </body>
 </html>

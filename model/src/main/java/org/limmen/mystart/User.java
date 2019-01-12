@@ -4,15 +4,19 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 public final class User extends BaseObject {
 
   private static final long serialVersionUID = -8464832961657168773L;
-  
+
   private String autoStartLabel;
   private String avatarFileName;
   private String email;
   private String fullName;
+  private Set<String> menuLabels = new HashSet<>();
   private boolean openInNewTab;
   private String password;
   private String resetCode;
@@ -57,6 +61,10 @@ public final class User extends BaseObject {
     return fullName;
   }
 
+  public Set<String> getMenuLabels() {
+    return menuLabels;
+  }
+
   public String getPassword() {
     return password;
   }
@@ -89,6 +97,11 @@ public final class User extends BaseObject {
     this.fullName = fullName;
   }
 
+  public void setMenuLabels(Collection<String> menuLabels) {
+    this.menuLabels.clear();
+    this.menuLabels.addAll(menuLabels);
+  }
+
   public void setOpenInNewTab(boolean openInNewTab) {
     this.openInNewTab = openInNewTab;
   }
@@ -108,5 +121,4 @@ public final class User extends BaseObject {
   public void updatePassword(String password) {
     this.password = encode(email, password);
   }
-
 }
