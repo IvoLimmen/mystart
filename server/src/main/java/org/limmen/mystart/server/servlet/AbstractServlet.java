@@ -35,6 +35,7 @@ public class AbstractServlet extends HttpServlet {
     FLAIR.put("bitbucket.org", "fa-bitbucket");
     FLAIR.put("stackoverflow.com", "fa-stack-overflow");
     FLAIR.put("bandcamp.com", "fa-bandcamp");
+    FLAIR.put("blogger.com", "fa-blogger");
     FLAIR.put("last.fm", "fa-lastfm");
     FLAIR.put("soundcloud.com", "fa-soundcloud");
     FLAIR.put("youtube.com", "fa-youtube");
@@ -54,8 +55,8 @@ public class AbstractServlet extends HttpServlet {
   private final Path temporaryDirectory;
 
   public AbstractServlet(Storage storage,
-                         MultipartConfigElement multipartConfigElement,
-                         Path temporaryDirectory) {
+          MultipartConfigElement multipartConfigElement,
+          Path temporaryDirectory) {
     this.storage = storage;
     this.multipartConfigElement = multipartConfigElement;
     this.temporaryDirectory = temporaryDirectory;
