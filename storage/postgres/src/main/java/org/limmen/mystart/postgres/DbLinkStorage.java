@@ -57,14 +57,14 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
 
   @Override
   public Collection<Link> getAll(Long userId) {
-    return executeSql("select * from links where user_id = ?", args -> {
+    return executeSql("select * from links where user_id = ? order by title asc", args -> {
                     args.setLong(1, userId);
                   }, LINK_MAPPER);
   }
 
   @Override
   public Collection<Link> getAllByLabel(Long userId, String label) {
-    return executeSql("select * from links where user_id = ? and labels && array[?]", args -> {
+    return executeSql("select * from links where user_id = ? and labels && array[?] order by title asc", args -> {
                     args.setLong(1, userId);
       args.setStringArray(2, new String[]{label});
                   }, LINK_MAPPER);
