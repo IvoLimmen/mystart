@@ -11,20 +11,20 @@ import org.limmen.mystart.UserStorage;
 public class DbUserStorage extends DbAbstractStorage implements UserStorage {
 
   private static final Function<Result, User> USER_MAPPER = res -> {
-    User u = new User();
-    u.setId(res.lng("id"));
-    u.setFullName(res.string("full_name"));
-    u.setEmail(res.string("email"));
-    u.setAvatarFileName(res.string("avatar_filename"));
-    u.setOpenInNewTab(res.bool("open_in_new_tab"));
-    u.setPassword(res.string("password"));
-    u.setResetCode(res.string("reset_code"));
-    u.setResetCodeValid(res.localDateTime("reset_code_valid"));
-    u.setAutoStartLabel(res.string("auto_start_label"));
+    var user = new User();
+    user.setId(res.lng("id"));
+    user.setFullName(res.string("full_name"));
+    user.setEmail(res.string("email"));
+    user.setAvatarFileName(res.string("avatar_filename"));
+    user.setOpenInNewTab(res.bool("open_in_new_tab"));
+    user.setPassword(res.string("password"));
+    user.setResetCode(res.string("reset_code"));
+    user.setResetCodeValid(res.localDateTime("reset_code_valid"));
+    user.setAutoStartLabel(res.string("auto_start_label"));
     if (res.stringArray("menu_labels") != null) {
-      u.setMenuLabels(Arrays.asList(res.stringArray("menu_labels")));
+      user.setMenuLabels(Arrays.asList(res.stringArray("menu_labels")));
     }
-    return u;
+    return user;
   };
 
   public DbUserStorage(String user, String password, String url) {

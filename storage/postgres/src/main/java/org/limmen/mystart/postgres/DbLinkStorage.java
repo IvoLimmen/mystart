@@ -12,20 +12,20 @@ import org.limmen.mystart.criteria.AbstractCriteria;
 @Slf4j
 public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
 
-  private static final Function<Result, Link> LINK_MAPPER = res -> {
-    Link l = new Link();
-    l.setId(res.lng("id"));
-    l.setUrl(res.string("url"));
-    l.setTitle(res.string("title"));
-    l.setDescription(res.string("description"));
-    l.setSource(res.string("source"));
-    l.setCheckResult(res.string("check_result"));
-    l.setCreationDate(res.localDateTime("creation_date"));
-    l.setLastVisit(res.localDateTime("last_visit"));
-    l.setLastCheck(res.localDateTime("last_check"));
-    l.setLabels(Arrays.asList(res.stringArray("labels")));
-    l.setPrivateNetwork(res.bool("private_network"));
-    return l;
+  private static final Function<Result, Link> LINK_MAPPER = (var res) -> {
+    var link = new Link();
+    link.setId(res.lng("id"));
+    link.setUrl(res.string("url"));
+    link.setTitle(res.string("title"));
+    link.setDescription(res.string("description"));
+    link.setSource(res.string("source"));
+    link.setCheckResult(res.string("check_result"));
+    link.setCreationDate(res.localDateTime("creation_date"));
+    link.setLastVisit(res.localDateTime("last_visit"));
+    link.setLastCheck(res.localDateTime("last_check"));
+    link.setLabels(Arrays.asList(res.stringArray("labels")));
+    link.setPrivateNetwork(res.bool("private_network"));
+    return link;
   };
 
   public DbLinkStorage(String user, String password, String url) {
@@ -38,12 +38,12 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
         + "values (?, ?, ?, ?, ?, ?, ?)";
     executeSql(sql, stmt -> {
              stmt.setLong(1, userId);
-      stmt.setString(2, link.getDescription());
-      stmt.setString(3, link.getSource());
-      stmt.setString(4, link.getTitle());
-      stmt.setString(5, link.getUrl());
-      stmt.setStringArray(6, link.getLabels().toArray(new String[link.getLabels().size()]));
-      stmt.setLocalDate(7, link.getCreationDate());
+             stmt.setString(2, link.getDescription());
+             stmt.setString(3, link.getSource());
+             stmt.setString(4, link.getTitle());
+             stmt.setString(5, link.getUrl());
+             stmt.setStringArray(6, link.getLabels().toArray(new String[link.getLabels().size()]));
+             stmt.setLocalDate(7, link.getCreationDate());
            });
   }
 
@@ -66,7 +66,7 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
   public Collection<Link> getAllByLabel(Long userId, String label) {
     return executeSql("select * from links where user_id = ? and labels && array[?] order by title asc", args -> {
                     args.setLong(1, userId);
-      args.setStringArray(2, new String[]{label});
+                    args.setStringArray(2, new String[]{label});
                   }, LINK_MAPPER);
   }
 
@@ -110,7 +110,7 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
         + "where t.user_id = ? and t.url = ?";
     return executeSqlSingle(sql, args -> {
                           args.setLong(1, userId);
-      args.setString(2, strippedUrl);
+                          args.setString(2, strippedUrl);
                         }, LINK_MAPPER);
   }
 
@@ -167,14 +167,14 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
     AtomicInteger index = new AtomicInteger(0);
     return executeSql(sql.toString(), args -> {
                     args.setLong(index.incrementAndGet(), userId);
-      criteria.forEach(c -> {
-        if (c.getValueType().equals(String.class)) {
-          args.setString(index.incrementAndGet(), "%" + c.getValue() + "%");
-        }
-        if (c.getValueType().equals(String[].class)) {
-          args.setString(index.incrementAndGet(), (String) c.getValue());
-        }
-      });
+                    criteria.forEach(c -> {
+                      if (c.getValueType().equals(String.class)) {
+                        args.setString(index.incrementAndGet(), "%" + c.getValue() + "%");
+                      }
+                      if (c.getValueType().equals(String[].class)) {
+                        args.setString(index.incrementAndGet(), (String) c.getValue());
+                      }
+                    });
                   }, LINK_MAPPER);
   }
 
@@ -194,17 +194,17 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
         + "and user_id = ?";
     executeSql(sql, stmt -> {
              stmt.setString(1, link.getDescription());
-      stmt.setString(2, link.getTitle());
-      stmt.setString(3, link.getSource());
-      stmt.setString(4, link.getUrl());
-      stmt.setStringArray(5, link.getLabels().toArray(new String[link.getLabels().size()]));
-      stmt.setBool(6, link.isPrivateNetwork());
-      stmt.setString(7, link.getCheckResult());
-      stmt.setLocalDate(8, link.getLastCheck());
-      stmt.setLocalDate(9, link.getLastVisit());
+             stmt.setString(2, link.getTitle());
+             stmt.setString(3, link.getSource());
+             stmt.setString(4, link.getUrl());
+             stmt.setStringArray(5, link.getLabels().toArray(new String[link.getLabels().size()]));
+             stmt.setBool(6, link.isPrivateNetwork());
+             stmt.setString(7, link.getCheckResult());
+             stmt.setLocalDate(8, link.getLastCheck());
+             stmt.setLocalDate(9, link.getLastVisit());
 
-      stmt.setLong(10, link.getId());
-      stmt.setLong(11, userId);
+             stmt.setLong(10, link.getId());
+             stmt.setLong(11, userId);
            });
   }
 }
