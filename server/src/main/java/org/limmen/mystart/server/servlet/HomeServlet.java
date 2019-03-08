@@ -41,7 +41,6 @@ public class HomeServlet extends AbstractServlet {
     }
 
     if (exists(req, "searchButton")) {
-
       String search = req.getParameter("search");
       Collection<Link> links = getLinkStorage().getAll(userId).stream()
           .filter(link -> link.hasKeyword(search))

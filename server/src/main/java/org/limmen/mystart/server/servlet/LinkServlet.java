@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.text.StringEscapeUtils;
 import org.limmen.mystart.DomainUtil;
 import org.limmen.mystart.Link;
 import org.limmen.mystart.Storage;
@@ -87,7 +88,7 @@ public class LinkServlet extends AbstractServlet {
       }
       if (exists(req, "title")) {
         if (StringUtils.isBlank(link.getTitle())) {
-          link.setTitle(req.getParameter("title"));
+          link.setTitle(StringEscapeUtils.escapeHtml4(req.getParameter("title")));
         }
       }
 
@@ -198,12 +199,12 @@ public class LinkServlet extends AbstractServlet {
         link = getLinkStorage().get(userId, id);
       }
 
-      link.setDescription(req.getParameter("description"));
-      link.setTitle(req.getParameter("title"));
-      link.setUrl(req.getParameter("url"));
+      link.setDescription(StringEscapeUtils.escapeHtml4(req.getParameter("description")));
+      link.setTitle(StringEscapeUtils.escapeHtml4(req.getParameter("title")));
+      link.setUrl(StringEscapeUtils.escapeHtml4(req.getParameter("url")));
 
       if (hasValue(req, "labels")) {
-        String label = req.getParameter("labels");
+        String label = StringEscapeUtils.escapeHtml4(req.getParameter("labels"));
         link.setLabels(DomainUtil.parseLabels(label));
       }
 
