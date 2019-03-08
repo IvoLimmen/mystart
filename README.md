@@ -45,7 +45,7 @@ This application can import from the following sources:
 
 Do a checkout of this project. You need to following to build:
 
-* Minimal JDK 8*
+* Minimal JDK 11*
 * Maven 3.5.*
 
 (*) I made it in JDK11 but needed it to work on JDK8 so it would work under a PINE64 (ARM). It builds on JDK's 8 

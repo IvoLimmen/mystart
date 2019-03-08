@@ -15,26 +15,6 @@
   
   <modules>
     <module>api</module>           
+    <module>jdk11</module>           
   </modules>
-
-  <profiles>
-    <profile>
-      <id>jdk8</id>
-      <activation>
-        <jdk>[1.8,10)</jdk>
-      </activation>
-      <modules>
-        <module>jdk8</module>
-      </modules>
-    </profile>
-    <profile>
-      <id>jdk11</id>
-      <activation>
-        <jdk>11</jdk>
-      </activation>
-      <modules>
-        <module>jdk11</module>
-      </modules>
-    </profile>
-  </profiles>  
 </project>
