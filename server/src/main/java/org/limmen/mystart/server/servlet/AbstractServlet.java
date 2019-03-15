@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.jetty.server.Request;
+import org.limmen.mystart.Link;
 import org.limmen.mystart.LinkStorage;
 import org.limmen.mystart.StatsStorage;
 import org.limmen.mystart.Storage;
@@ -48,6 +49,17 @@ public class AbstractServlet extends HttpServlet {
     FLAIR.put("news.ycombinator.com", "fa-hacker-news");
   }
 
+  public String getFlair(Link link) {
+    if (link.getHost() == null) {
+      return null;
+    }
+
+    return FLAIR.keySet().stream()
+        .filter(filter -> link.getHost().toLowerCase().contains(filter))
+        .findFirst()
+        .orElse(null);
+  }
+
   private final MultipartConfigElement multipartConfigElement;
 
   private final Storage storage;
@@ -55,8 +67,8 @@ public class AbstractServlet extends HttpServlet {
   private final Path temporaryDirectory;
 
   public AbstractServlet(Storage storage,
-          MultipartConfigElement multipartConfigElement,
-          Path temporaryDirectory) {
+                         MultipartConfigElement multipartConfigElement,
+                         Path temporaryDirectory) {
     this.storage = storage;
     this.multipartConfigElement = multipartConfigElement;
     this.temporaryDirectory = temporaryDirectory;
@@ -149,6 +161,7 @@ public class AbstractServlet extends HttpServlet {
       req.setAttribute("menulabels", user.getMenuLabels());
       req.setAttribute("links", getLinkStorage().getAllByLabel(userId, user.getAutoStartLabel()));
       req.setAttribute("flair", FLAIR);
+      req.setAttribute("util", this);
     }
   }
 

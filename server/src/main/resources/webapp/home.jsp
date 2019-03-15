@@ -47,9 +47,9 @@
                 <div class="box box-solid box-default">
                   <div class="box-header">
                     <h3 class="box-title"><a href="/link?reg=${link.id}" ${user.isOpenInNewTab() ? "target=\"_BLANK\"" : "" } title="${link.url}">${link.title}</a></h3>
-                    <c:if test="${link.host != null && flair.containsKey(link.host)}">
+                    <c:if test="${link.host != null && util.getFlair(link) != null}">
                       <div class="flair">
-                        <i class="fa ${flair[link.host]}" aria-hidden="true"></i>
+                        <i class="fa ${flair[util.getFlair(link)]}" aria-hidden="true"></i>
                       </div>
                     </c:if>                    
                   </div>                  
