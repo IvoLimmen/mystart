@@ -17,6 +17,8 @@ public interface LinkStorage {
 
   Link getByUrl(Long userId, String url);
 
+  Collection<Link> getLastVisited(Long userId, int limit);
+
   void importCollection(Long userId, Collection<Link> link, boolean skipDuplicates);
 
   Collection<Link> last20Visits(Long userId);

@@ -115,6 +115,14 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
   }
 
   @Override
+  public Collection<Link> getLastVisited(Long userId, int limit) {
+    return executeSql("select l.* from links l join visits v on l.id = v.link_id where user_id = ? order by v.visit desc", args -> {
+                    args.setLong(1, userId);
+                    args.setMaxRows(limit);
+                  }, LINK_MAPPER);
+  }
+
+  @Override
   public void importCollection(Long userId, Collection<Link> links, boolean skipDuplicates) {
     links.forEach(l -> {
       Link link = getByUrl(userId, l.getUrl());

@@ -75,6 +75,12 @@ public class HomeServlet extends AbstractServlet {
         req.setAttribute("labels", labels);
         req.setAttribute("stats", stats);
         req.getRequestDispatcher("/labels.jsp").include(req, res);
+
+      } else if ("lastvisit".equals(req.getParameter("show"))) {
+
+        Collection<Link> links = getLinkStorage().getLastVisited(userId, 20);
+        req.setAttribute("links", links);
+        req.getRequestDispatcher("/home.jsp").include(req, res);
       }
     } else {
       req.getRequestDispatcher("/home.jsp").include(req, res);

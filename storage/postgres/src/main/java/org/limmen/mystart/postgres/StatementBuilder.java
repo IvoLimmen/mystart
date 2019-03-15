@@ -41,6 +41,14 @@ public class StatementBuilder {
     }
   }
 
+  public void setMaxRows(int limit) {
+    try {
+      this.preparedStatement.setMaxRows(limit);
+    } catch (SQLException ex) {
+      throw new StorageException(ex);
+    }
+  }
+
   public void setString(int index, String arg) {
     try {
       this.preparedStatement.setString(index, arg);

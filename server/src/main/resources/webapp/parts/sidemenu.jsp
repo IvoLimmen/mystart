@@ -2,11 +2,12 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <ul class="sidebar-menu" data-widget="tree">
   <li class="header">Menu</li>
-  <li><a href="/nav?page=search">Advanced search</a></li>
   <li><a href="/link?edit">Add a new link</a></li>
+  <li><a href="/nav?page=search">Advanced search</a></li>
   <li><a href="/link?delall">Delete current selection</a></li>
   <li><a href="/nav?page=stats">Statistics</a></li>  
   <li><a href="/home?show=labels">Labels</a></li>
+  <li><a href="/home?show=lastvisit">Last visited</a></li>
   <c:if test="${not empty user.menuLabels}">
   <li class="header">Quick labels</li>
   <c:forEach items="${user.menuLabels}" var="label">
