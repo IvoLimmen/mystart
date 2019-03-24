@@ -23,7 +23,6 @@
     <maven.compiler.target>11</maven.compiler.target>
     
     <postgresql.version>42.2.5</postgresql.version>
-    <speedment.version>3.1.6</speedment.version>
     <jetty.version>9.4.12.v20180830</jetty.version>
   </properties>
 
@@ -90,12 +89,6 @@
         <artifactId>flyway-core</artifactId>
         <version>5.2.1</version>
       </dependency>      
-      <dependency>
-        <groupId>com.speedment</groupId>
-        <artifactId>runtime</artifactId>
-        <version>${speedment.version}</version>
-        <type>pom</type>
-      </dependency>
       <dependency>
         <groupId>org.postgresql</groupId>
         <artifactId>postgresql</artifactId>
