@@ -11,7 +11,7 @@ public class Main {
     port(8080);
     
     staticFiles.location("/public");
-    staticFiles.expireTime(600); // ten minutes
+    staticFiles.expireTime(3600); // hour
 
     get("/command", (req, res) -> CommandHandler.handle(req, res));
   }

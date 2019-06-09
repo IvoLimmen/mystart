@@ -4,9 +4,11 @@ var maxSelection;
 var gridSize = 3;
 
 function unselect() {
-  var oldElement = document.getElementById('content').children[oldSelection];
-  if (oldElement != null) {
-    oldElement.className = 'box';
+  if (oldSelection > 0) {
+    var oldElement = document.getElementById('content').children[oldSelection];
+    if (oldElement != null) {
+      oldElement.className = 'box';
+    }
   }
 }
 

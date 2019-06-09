@@ -10,7 +10,6 @@ body {
   position: relative;
   width: 25%;
   float: right;
-  background-color: #999;
 }
 
 .content {
@@ -21,7 +20,7 @@ body {
 }
 
 .box {
-  background-color: #eee;
+  background-color: #bbb;
   color: #000;
   border-radius: 3px;
   padding: 5px;
