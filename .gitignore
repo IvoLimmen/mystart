@@ -6,3 +6,5 @@ target/
 .factorypath
 nb-configuration.xml
 nbactions.xml
+
+.vscode/
