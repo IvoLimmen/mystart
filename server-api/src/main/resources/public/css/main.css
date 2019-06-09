@@ -4,10 +4,19 @@ body {
   background-color: #444;
 }
 
+.menu {
+  right: 0;
+  top: 0;
+  position: relative;
+  width: 25%;
+  float: right;
+  background-color: #999;
+}
+
 .content {
-  width: 100%;
+  width: 75%;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 5px;
 }
 
@@ -20,9 +29,7 @@ body {
 }
 
 .selected {
-  border-style: solid;
-  border-width: 1px;
-  border-color: red;
+  background-color: #fff;
 }
 
 .command {
