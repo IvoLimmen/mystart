@@ -6,6 +6,6 @@ import spark.Response;
 public class CommandHandler {
 
   public static String handle(Request req, Response res) {
-    return "test";
+    return req.queryParams("input");
   }
 }
