@@ -1,6 +1,6 @@
 # MyStart
 
-## Why build something like this? 
+## Why build something like this?
 
 I don't know. I have a lot of bookmarks and there is no (proper) tooling for it. I use Google Bookmarks a lot
 but there is no nice add-on for both Chrome and Firefox. I use Firefox mostly as browser and I also use the
@@ -47,9 +47,6 @@ Do a checkout of this project. You need to following to build:
 
 * Minimal JDK 11*
 * Maven 3.5.*
-
-(*) I made it in JDK11 but needed it to work on JDK8 so it would work under a PINE64 (ARM). It builds on JDK's 8 
-through 11 but it is only tested on 8 & 11.
 
 Then execute the following command:
 
