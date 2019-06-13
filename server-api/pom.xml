@@ -70,6 +70,26 @@
     </dependency>
 
     <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-annotations</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jdk8</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+    </dependency>
+    <dependency>
       <groupId>com.sparkjava</groupId>
       <artifactId>spark-core</artifactId>
     </dependency>
@@ -105,8 +125,8 @@
         <configuration>
           <repositoryLayout>flat</repositoryLayout>
           <repositoryName>lib</repositoryName>
-          <configurationDirectory>config</configurationDirectory>
-          <configurationSourceDirectory>src/main/resources</configurationSourceDirectory>
+          <configurationDirectory>/home/ivo/projects/java/mystart/config</configurationDirectory>
+          <!-- <configurationSourceDirectory>src/main/resources</configurationSourceDirectory> -->
           <copyConfigurationDirectory>true</copyConfigurationDirectory>
           <includeConfigurationDirectoryInClasspath>true</includeConfigurationDirectoryInClasspath>
           <extraJvmArguments>-Xms128m</extraJvmArguments>

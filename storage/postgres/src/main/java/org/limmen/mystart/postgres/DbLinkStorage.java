@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
+import java.util.stream.Collectors;
+
 import lombok.extern.slf4j.Slf4j;
 import org.limmen.mystart.Link;
 import org.limmen.mystart.LinkStorage;
@@ -143,7 +145,7 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
           link.addLabels(l.getLabels());
           update(userId, link);
         } else {
-          log.info("Scipping link {}", l.getUrl());
+          log.info("Skipping link {}", l.getUrl());
         }
       }
     });
@@ -173,12 +175,16 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
   @Override
   public Collection<Link> search(Long userId, Collection<AbstractCriteria> criteria) {
     StringBuilder sql = new StringBuilder();
-    sql.append("select l.* from links l where l.user_id = ? ");
+    sql.append("select l.* from links l where l.user_id = ? and (");
 
-    criteria.forEach(c -> {
-      sql.append(" and ").append(c.toSQL());
-    });
-    sql.append(" order by l.title asc");
+    if (criteria == null || criteria.isEmpty()) {
+      throw new IllegalArgumentException();
+    }
+
+    sql.append(criteria.stream()
+      .map(c -> c.toSQL())
+      .collect(Collectors.joining(" or ")));
+    sql.append(") order by l.title asc");
 
     AtomicInteger index = new AtomicInteger(0);
     return executeSql(sql.toString(), args -> {

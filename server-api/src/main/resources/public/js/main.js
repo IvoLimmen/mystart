@@ -55,6 +55,10 @@ function navigationHandler(keyEvent) {
     } else {
       return;
     }
+  } else if (keyEvent.key === 'Enter') {
+    // enter on link
+    console.log('enter on link');
+    return;
   } else {
     // not navigation
     return;
@@ -74,22 +78,38 @@ function focusHandler(keyEvent) {
   }
 }
 
+function createLink(link) {
+  var div = document.createElement('div');
+  div.textContent = link.title;
+  div.className = "box";
+  document.getElementById('content').appendChild(div);
+}
+
+function removeChildren() {
+  var children = document.getElementById('content').children;
+
+  for (var i = 1; i < children.length; i++) {
+    document.getElementById('content').removeChild(children[i]);
+  }
+}
+
 function commandHandler(keyEvent) {
   if (keyEvent.key === 'Enter') {
     var me = document.getElementById('command_input');
     keyEvent.preventDefault();
+    removeChildren();
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
-        var div = document.createElement('div');
-        div.textContent = xhttp.responseText;
-        div.className = "box";
-        document.getElementById('content').appendChild(div);
+        var links = JSON.parse(xhttp.responseText);
+        for (var i = 0; i < links.length; i++) {          
+          createLink(links[i]);
+        }
         currentSelection = 0;
         unselect();
       }
     };
-    xhttp.open("GET", "/command?input=" + me.value, true);
+    xhttp.open("GET", "/api/link/search?input=" + me.value, true);
     xhttp.send();
   }
 }
