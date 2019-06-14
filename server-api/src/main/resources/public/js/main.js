@@ -1,7 +1,7 @@
 var currentSelection = 0;
 var oldSelection;
 var maxSelection;
-var gridSize = 3;
+var gridSize = 4;
 
 function unselect() {
   if (oldSelection > 0) {
@@ -57,7 +57,9 @@ function navigationHandler(keyEvent) {
     }
   } else if (keyEvent.key === 'Enter') {
     // enter on link
-    console.log('enter on link');
+    if (currentSelection > 0) {
+      document.getElementById('menu').className = 'menu glide-in';
+    }
     return;
   } else {
     // not navigation
@@ -81,15 +83,18 @@ function focusHandler(keyEvent) {
 function createLink(link) {
   var div = document.createElement('div');
   div.textContent = link.title;
+  div.link = link;
   div.className = "box";
   document.getElementById('content').appendChild(div);
 }
 
-function removeChildren() {
-  var children = document.getElementById('content').children;
+function removeChildrenFromParent(elementId, leaveFirst) {
+  var parent = document.getElementById(elementId);
+  var children = parent.children;
+  var startIndex = leaveFirst ? 1 : 0;
 
-  for (var i = 1; i < children.length; i++) {
-    document.getElementById('content').removeChild(children[i]);
+  for (var i = startIndex; i < children.length; i++) {
+    parent.removeChild(children[i]);
   }
 }
 
@@ -97,7 +102,7 @@ function commandHandler(keyEvent) {
   if (keyEvent.key === 'Enter') {
     var me = document.getElementById('command_input');
     keyEvent.preventDefault();
-    removeChildren();
+    removeChildrenFromParent('content', true);
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
