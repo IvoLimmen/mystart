@@ -1,3 +1,7 @@
+:root {
+  --menu-height: 60px;
+}
+
 body {
   margin: 5px;
   padding: 0px;
@@ -5,7 +9,7 @@ body {
 }
 
 @keyframes menu-glide-in {
-  0%   { bottom: -60px; }
+  0%   { bottom: calc(0px - var(--menu-height)); }
   100% { bottom: 0px; }
 }
 
@@ -16,11 +20,11 @@ body {
 
 @keyframes menu-glide-out {
   0%   { bottom: 0px; }
-  100% { bottom: -60px; }
+  100% { bottom: calc(0px - var(--menu-height)); }
 }
 
 .menu-out {
-  bottom: -60px;
+  bottom: calc(0px - var(--menu-height));
 }
 
 .glide-out {
@@ -48,7 +52,7 @@ body {
   color: #000;
   border-radius: 3px;
   padding: 5px;
-  height: 40px;  
+  height: calc(var(--menu-height) - 20px);  
 }
 
 .content {  
