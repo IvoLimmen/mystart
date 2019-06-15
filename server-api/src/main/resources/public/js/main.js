@@ -2,6 +2,7 @@ var currentSelection = 0;
 var oldSelection;
 var maxSelection;
 var gridSize = 4;
+var menuOpen = false;
 
 function unselect() {
   if (oldSelection > 0) {
@@ -9,6 +10,7 @@ function unselect() {
     if (oldElement != null) {
       oldElement.className = 'box';
     }
+    closeMenu();
   }
 }
 
@@ -19,11 +21,36 @@ function select() {
   }
 }
 
-function navigationHandler(keyEvent) {
+function openMenu() {
+  if (!menuOpen) {
+    document.getElementById('menu').className = 'menu glide-in';
+    menuOpen = true;
+  }
+}
+
+function closeMenu() {
+  if (menuOpen) { 
+    document.getElementById('menu').className = 'menu glide-out';
+    menuOpen = false;
+  }
+}
+
+function resetSelection() {
+  unselect();
+  currentSelection = 0;
+}
+
+function keyboardInputHandler(keyEvent) {
+  var inputHasFocus = (document.activeElement === document.getElementById('command_input'));
   oldSelection = currentSelection;
   maxSelection = document.getElementById('content').children.length;
 
-  if (keyEvent.keyCode === 37) {
+  if (!inputHasFocus && keyEvent.key === '/') {
+    resetSelection();
+    keyEvent.preventDefault();
+    document.getElementById('command_input').focus();
+    return;  
+  } else if (keyEvent.keyCode === 37) {
     // left
     if (currentSelection > 1) {
       currentSelection--;
@@ -56,10 +83,11 @@ function navigationHandler(keyEvent) {
       return;
     }
   } else if (keyEvent.key === 'Enter') {
-    // enter on link
-    if (currentSelection > 0) {
-      document.getElementById('menu').className = 'menu glide-in';
+    if (inputHasFocus) {
+      return;
     }
+    // enter on link
+    openMenu();
     return;
   } else {
     // not navigation
@@ -68,16 +96,6 @@ function navigationHandler(keyEvent) {
   document.getElementById('command_input').blur();
   unselect();
   select();
-}
-
-function focusHandler(keyEvent) {
-  if (document.activeElement === document.getElementById('command_input')) {
-    return;
-  }
-  if (keyEvent.key === '/') {
-    keyEvent.preventDefault();
-    document.getElementById('command_input').focus();
-  }
 }
 
 function createLink(link) {
@@ -110,8 +128,7 @@ function commandHandler(keyEvent) {
         for (var i = 0; i < links.length; i++) {          
           createLink(links[i]);
         }
-        currentSelection = 0;
-        unselect();
+        resetSelection();
       }
     };
     xhttp.open("GET", "/api/link/search?input=" + me.value, true);
@@ -121,7 +138,6 @@ function commandHandler(keyEvent) {
 
 // bootstrap
 (function () {
-  document.onkeypress = focusHandler;
-  document.onkeydown = navigationHandler;
+  document.onkeydown = keyboardInputHandler;
   document.getElementById('command_input').onkeypress = commandHandler;
 })();
