@@ -1,16 +1,41 @@
 :root {
-  --menu-height: 60px;
+  --menu-height: 250px;
+  --edit-height: 500px;
   --main-background-color: #444;
   --link-background-color: #bbb;
   --selected-background-color: #fff;
-  --menu-background-color: #aaaa00;
-  --menuitem-background-color: #ffff00;
+  --menu-background-color: #000;
+  --menuitem-background-color: #bbb;
 }
 
 body {
   margin: 5px;
   padding: 0px;
   background-color: var(--main-background-color);
+}
+
+@keyframes edit-glide-in {
+  0%   { bottom: calc(0px - var(--edit-height)); }
+  100% { bottom: 0px; }
+}
+
+.edit-glide-in {
+  animation: 'edit-glide-in' 500ms;
+  animation-fill-mode: forwards;  
+}
+
+@keyframes edit-glide-out {
+  0%   { bottom: 0px; }
+  100% { bottom: calc(0px - var(--edit-height)); }
+}
+
+.edit-out {
+  bottom: calc(0px - var(--edit-height));
+}
+
+.edit-glide-out {
+  animation: 'edit-glide-out' 500ms;
+  animation-fill-mode: forwards;  
 }
 
 @keyframes menu-glide-in {
@@ -37,6 +62,32 @@ body {
   animation-fill-mode: forwards;  
 }
 
+#edit {
+  border-radius: 3px;
+  padding: 5px;
+  width: 50%;
+  position: fixed;
+  left: 25%;  
+}
+
+.edit {
+  border-style: solid;
+  border-color: var(--main-background-color);
+  border-width: 2px;
+  background-color: var(--menuitem-background-color);
+}
+
+.edit div {
+  padding: 3px;
+}
+
+.edit div label {
+  display: inline-block;
+  width: 150px;
+  text-align: left;
+  vertical-align: top;
+}
+
 #menu {
   border-radius: 3px;
   padding: 5px;
@@ -48,16 +99,24 @@ body {
 
 .menu {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 5px;    
 }
 
-.menuitem {
+.info {
   background-color: var(--menuitem-background-color);
-  color: #000;
+  grid-row: 1;
+  grid-column: 1 / 4;
+}
+
+.menuitem {
+  text-align: center;
+  vertical-align: middle; 
+  font-size: 18px;
+  font-weight: bold;
+  background-color: var(--menuitem-background-color);
   border-radius: 3px;
-  padding: 5px;
-  height: calc(var(--menu-height) - 20px);  
+  padding: 5px;  
 }
 
 .content {  
@@ -68,10 +127,16 @@ body {
 
 .box {
   background-color: var(--link-background-color);
-  color: #000;
   border-radius: 3px;
   padding: 5px;
-  height: 40px;  
+  height: 60px;  
+  overflow: hidden;
+}
+
+.box h1 {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
 }
 
 .selected {

@@ -3,6 +3,8 @@ var oldSelection;
 var maxSelection;
 var gridSize = 4;
 var menuOpen = false;
+var editOpen = false;
+var selectedMenuItem = 0;
 
 function unselect() {
   if (oldSelection > 0) {
@@ -21,10 +23,47 @@ function select() {
   }
 }
 
+function selectMenuItem() {
+  var items = document.getElementsByClassName('menuitem');
+
+  for (var i = 0; i < items.length; i++) {
+    if (i === selectedMenuItem) {
+      items[i].className = 'menuitem selected'
+    } else {
+      items[i].className = 'menuitem'
+    }
+  }
+}
+
+function openEdit() {
+  if (!editOpen) { 
+    closeMenu();
+    document.getElementById('edit').className = 'edit edit-glide-in';
+    editOpen = true;
+  }
+
+}
+
+function closeEdit() {
+  if (editOpen) { 
+    document.getElementById('edit').className = 'edit edit-glide-out';
+    editOpen = false;
+  }
+}
+
 function openMenu() {
   if (!menuOpen) {
+    // fill data
+    var link = document.getElementById('content').children[currentSelection].link;
+    var description = link.description ? link.description : "";
+    document.getElementById('link.url').textContent = "URL: " + link.url;
+    document.getElementById('link.description').textContent = "Description: " + description;
+    document.getElementById('link.labels').textContent = "Labels: " + link.labels;
+
     document.getElementById('menu').className = 'menu glide-in';
     menuOpen = true;
+    selectedMenuItem = 0;
+    selectMenuItem();
   }
 }
 
@@ -44,6 +83,37 @@ function keyboardInputHandler(keyEvent) {
   var inputHasFocus = (document.activeElement === document.getElementById('command_input'));
   oldSelection = currentSelection;
   maxSelection = document.getElementById('content').children.length;
+
+  if (menuOpen) {
+    if (keyEvent.key === 'Enter') {
+      var link = document.getElementById('content').children[currentSelection].link;
+      if (selectedMenuItem === 0) {
+        window.open(link.url, "_BLANK");
+        fireVisitLink(link);
+      } else if (selectedMenuItem === 1) {
+        openEdit();
+      } else if (selectedMenuItem === 2) {
+        fireDeleteLink(link);
+      }
+    } else if (keyEvent.keyCode === 39) {
+      // right
+      if (selectedMenuItem < 2) {
+        selectedMenuItem++;
+      }
+      selectMenuItem();      
+    } else if (keyEvent.keyCode === 37) {
+      // left
+      if (selectedMenuItem > 0) {
+        selectedMenuItem--;
+      }
+      selectMenuItem();      
+    } else if (keyEvent.keyCode === 27 || keyEvent.keyCode === 38 || keyEvent.keyCode === 40) {
+      // esc, up or down
+      closeMenu();
+    }
+
+    return;
+  }
 
   if (!inputHasFocus && keyEvent.key === '/') {
     resetSelection();
@@ -86,7 +156,6 @@ function keyboardInputHandler(keyEvent) {
     if (inputHasFocus) {
       return;
     }
-    // enter on link
     openMenu();
     return;
   } else {
@@ -100,9 +169,14 @@ function keyboardInputHandler(keyEvent) {
 
 function createLink(link) {
   var div = document.createElement('div');
-  div.textContent = link.title;
   div.link = link;
   div.className = "box";
+  var h1 = document.createElement('h1');
+  h1.textContent = link.title;
+  div.appendChild(h1);
+  var p = document.createElement('p');
+  p.textContent = link.description;
+  div.appendChild(p);
   document.getElementById('content').appendChild(div);
 }
 
@@ -114,6 +188,31 @@ function removeChildrenFromParent(elementId, leaveFirst) {
   for (var i = startIndex; i < children.length; i++) {
     parent.removeChild(children[i]);
   }
+}
+
+function fireVisitLink(link) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      closeMenu();
+    }
+  };
+  xhttp.open("PUT", "/api/link/visit?id=" + link.id, true);
+  xhttp.send();
+}
+
+function fireDeleteLink(link) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById('content').children[currentSelection].remove();
+      unselect();
+      currentSelection--;
+      select();
+    }
+  };
+  xhttp.open("DELETE", "/api/link/delete?id=" + link.id, true);
+  xhttp.send();
 }
 
 function commandHandler(keyEvent) {

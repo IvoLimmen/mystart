@@ -27,7 +27,7 @@ public abstract class BaseHandler {
     this.objectMapper = objectMapper;
   }
 
-  public String toJson(Object object) {
+  protected String toJson(Object object) {
     try {
       return objectMapper.writeValueAsString(object);
     } catch (Exception e) {

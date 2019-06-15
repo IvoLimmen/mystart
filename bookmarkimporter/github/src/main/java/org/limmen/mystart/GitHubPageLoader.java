@@ -15,12 +15,8 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 import org.apache.commons.io.IOUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class GitHubPageLoader implements Enumeration<File> {
-
-   private final static Logger LOGGER = LoggerFactory.getLogger(GitHubPageLoader.class);
    
    static {
       TrustManager[] trustAllCerts = new TrustManager[]{

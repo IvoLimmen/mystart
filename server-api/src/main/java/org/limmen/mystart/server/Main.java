@@ -1,40 +1,34 @@
 package org.limmen.mystart.server;
 
 import static spark.Spark.before;
+import static spark.Spark.delete;
 import static spark.Spark.get;
-import static spark.Spark.halt;
+import static spark.Spark.put;
 import static spark.Spark.path;
 import static spark.Spark.port;
 import static spark.Spark.staticFiles;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 
-import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
-import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 
 import org.limmen.mystart.AutoDetectParser;
 import org.limmen.mystart.Parser;
 import org.limmen.mystart.Storage;
 import org.limmen.mystart.StorageProvider;
-import org.limmen.mystart.User;
 import org.limmen.mystart.server.support.MailService;
 import org.limmen.mystart.server.support.MailServiceImpl;
 
 import lombok.extern.slf4j.Slf4j;
 import spark.Request;
 import spark.Response;
-import spark.Session;
 
 @Slf4j
 public class Main {
@@ -80,11 +74,11 @@ public class Main {
 
     path("/api", () -> {
       path("/link", () -> {
-        get("/search", (req, res) -> linkHandler.search(req, res));
+        get("/search", linkHandler::search);
+        delete("/delete", linkHandler::delete);
+        put("/visit", linkHandler::visit);
       });
     });
-
-    get("/command", (req, res) -> CommandHandler.handle(req, res));
   }
 
   protected static void addCookie(Response res, String key, String value) {

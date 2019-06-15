@@ -3,11 +3,9 @@ package org.limmen.mystart;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.Set;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -127,11 +125,5 @@ public class XbelParser extends AbstractParser {
       return map.getNamedItem(attrName).getNodeValue();
     }
     return null;
-  }
-
-  private LocalDateTime getTimestamp(Node node) {
-    long time = Long.parseLong(node.getTextContent());
-    time = time / 1000;
-    return LocalDateTime.ofInstant(new Date(time).toInstant(), ZoneId.systemDefault());
   }
 }

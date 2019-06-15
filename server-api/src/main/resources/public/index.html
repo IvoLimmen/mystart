@@ -11,10 +11,28 @@
     <div class="box command"><input id="command_input" type="text" placeholder="Enter command..."></div>
   </div>
   <div id="menu" class="menu menu-out">
+    <div class="info">
+      <p id="link.url">URL:</p>
+      <p id="link.description">Description:</p>
+      <p id="link.labels">Labels:</p>
+    </div>
     <div class="menuitem">Visit</div>
     <div class="menuitem">Edit</div>
     <div class="menuitem">Delete</div>
   </div>
-</body>
+  <div id="edit" class="edit edit-out">
+    <div>
+      <label for="url">URL</label>
+      <input type="text" class="form-control" name="url" size="80"/>
+    </div>
+    <div>
+      <label for="description">Description</label>
+      <textarea rows="10" cols="40" name="description"></textarea>        
+    </div>
+    <div>
+      <label for="labels">Labels</label>
+      <input type="text" class="form-control" name="labels" size="50" autocomplete="off"/>
+    </div>
+  </body>
 </html>
 <script src="js/main.js"></script>
