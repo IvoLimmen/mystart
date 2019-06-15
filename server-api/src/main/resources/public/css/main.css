@@ -1,11 +1,16 @@
 :root {
   --menu-height: 60px;
+  --main-background-color: #444;
+  --link-background-color: #bbb;
+  --selected-background-color: #fff;
+  --menu-background-color: #aaaa00;
+  --menuitem-background-color: #ffff00;
 }
 
 body {
   margin: 5px;
   padding: 0px;
-  background-color: #444;
+  background-color: var(--main-background-color);
 }
 
 @keyframes menu-glide-in {
@@ -35,7 +40,7 @@ body {
 #menu {
   border-radius: 3px;
   padding: 5px;
-  background-color: #aaaa00;
+  background-color: var(--menu-background-color);
   width: 90%;
   position: fixed;
   left: 5%;  
@@ -48,7 +53,7 @@ body {
 }
 
 .menuitem {
-  background-color: #ffff00;
+  background-color: var(--menuitem-background-color);
   color: #000;
   border-radius: 3px;
   padding: 5px;
@@ -62,7 +67,7 @@ body {
 }
 
 .box {
-  background-color: #bbb;
+  background-color: var(--link-background-color);
   color: #000;
   border-radius: 3px;
   padding: 5px;
@@ -70,7 +75,7 @@ body {
 }
 
 .selected {
-  background-color: #fff;
+  background-color: var(--selected-background-color);
 }
 
 .command {
