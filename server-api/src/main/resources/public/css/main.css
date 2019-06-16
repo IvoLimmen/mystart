@@ -64,28 +64,27 @@ body {
 
 #edit {
   border-radius: 3px;
-  padding: 5px;
   width: 50%;
   position: fixed;
   left: 25%;  
-}
-
-.edit {
   border-style: solid;
-  border-color: var(--main-background-color);
   border-width: 2px;
   background-color: var(--menuitem-background-color);
 }
 
-.edit div {
+.form-control label {
   padding: 3px;
-}
-
-.edit div label {
   display: inline-block;
   width: 150px;
+  font-weight: bold;
   text-align: left;
   vertical-align: top;
+}
+
+#edit-menu {
+  padding: 5px;
+  border-radius: 3px;
+  background-color: var(--menu-background-color);
 }
 
 #menu {
@@ -95,12 +94,6 @@ body {
   width: 90%;
   position: fixed;
   left: 5%;  
-}
-
-.menu {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 5px;    
 }
 
 .info {
@@ -119,7 +112,19 @@ body {
   padding: 5px;  
 }
 
-.content {  
+.grid2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 5px;    
+}
+
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 5px;    
+}
+
+.grid4 {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 5px;
@@ -145,8 +150,4 @@ body {
 
 .command {
   text-align: center;  
-}
-
-.command input {
-  /* styling for input */
 }

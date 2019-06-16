@@ -77,6 +77,7 @@ public class Main {
         get("/search", linkHandler::search);
         delete("/delete", linkHandler::delete);
         put("/visit", linkHandler::visit);
+        put("/update", linkHandler::update);
       });
     });
   }

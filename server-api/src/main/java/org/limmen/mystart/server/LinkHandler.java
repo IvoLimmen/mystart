@@ -37,6 +37,15 @@ public class LinkHandler extends BaseHandler {
     return "";
   }
 
+  public String update(Request req, Response res) {
+    Long userId = 1L;
+    Link link = fromJson(req.body(), Link.class);    
+    
+    getLinkStorage().update(userId, link);
+    res.status(200);
+    return "";
+  }
+
   public String visit(Request req, Response res) {
     Long userId = 1L;
     Long id = Long.valueOf(req.queryParams("id"));

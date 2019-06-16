@@ -9,8 +9,8 @@ var selectedMenuItem = 0;
 function unselect() {
   if (oldSelection > 0) {
     var oldElement = document.getElementById('content').children[oldSelection];
-    if (oldElement != null) {
-      oldElement.className = 'box';
+    if (oldElement != null) {      
+      oldElement.classList.remove('selected');
     }
     closeMenu();
   }
@@ -19,18 +19,23 @@ function unselect() {
 function select() {
   var newElement = document.getElementById('content').children[currentSelection];
   if (newElement != null) {
-    newElement.className = 'box selected';
+    newElement.classList.add('selected');
   }
 }
 
 function selectMenuItem() {
-  var items = document.getElementsByClassName('menuitem');
+  var items = null;
+  if (menuOpen) {
+    items = document.querySelectorAll('#menu .menuitem');
+  } else if (editOpen)  {
+    items = document.querySelectorAll('#edit .menuitem');
+  }
 
   for (var i = 0; i < items.length; i++) {
     if (i === selectedMenuItem) {
-      items[i].className = 'menuitem selected'
+      items[i].classList.add('selected');
     } else {
-      items[i].className = 'menuitem'
+      items[i].classList.remove('selected');
     }
   }
 }
@@ -38,15 +43,26 @@ function selectMenuItem() {
 function openEdit() {
   if (!editOpen) { 
     closeMenu();
-    document.getElementById('edit').className = 'edit edit-glide-in';
+    document.getElementById('edit').classList.remove('edit-glide-out');    
+    document.getElementById('edit').classList.add('edit-glide-in');
     editOpen = true;
-  }
+    selectedMenuItem = 0;
+    selectMenuItem();
 
+    // fill form
+    var link = document.getElementById('content').children[currentSelection].link;
+    var description = link.description ? link.description : "";
+    document.getElementById('edit.title').value = link.title;
+    document.getElementById('edit.url').value = link.url;
+    document.getElementById('edit.description').value = description;
+    document.getElementById('edit.labels').value = link.labels;
+  }
 }
 
 function closeEdit() {
   if (editOpen) { 
-    document.getElementById('edit').className = 'edit edit-glide-out';
+    document.getElementById('edit').classList.remove('edit-glide-int');    
+    document.getElementById('edit').classList.add('edit-glide-out');
     editOpen = false;
   }
 }
@@ -60,7 +76,8 @@ function openMenu() {
     document.getElementById('link.description').textContent = "Description: " + description;
     document.getElementById('link.labels').textContent = "Labels: " + link.labels;
 
-    document.getElementById('menu').className = 'menu glide-in';
+    document.getElementById('menu').classList.remove('glide-out');
+    document.getElementById('menu').classList.add('glide-in');
     menuOpen = true;
     selectedMenuItem = 0;
     selectMenuItem();
@@ -69,7 +86,8 @@ function openMenu() {
 
 function closeMenu() {
   if (menuOpen) { 
-    document.getElementById('menu').className = 'menu glide-out';
+    document.getElementById('menu').classList.add('glide-out');
+    document.getElementById('menu').classList.remove('glide-in');
     menuOpen = false;
   }
 }
@@ -83,6 +101,38 @@ function keyboardInputHandler(keyEvent) {
   var inputHasFocus = (document.activeElement === document.getElementById('command_input'));
   oldSelection = currentSelection;
   maxSelection = document.getElementById('content').children.length;
+
+  if (editOpen) {
+    if (keyEvent.key === 'Enter') {
+      var link = document.getElementById('content').children[currentSelection].link;
+      if (selectedMenuItem === 0) {
+        link.url = document.getElementById('edit.url');
+        link.description = document.getElementById('edit.description');
+        link.labels = document.getElementById('edit.labels');
+        link.title = document.getElementById('edit.title');
+        fireUpdateLink(link);
+      } else if (selectedMenuItem === 1) {
+        closeEdit();
+      }
+    } else if (keyEvent.keyCode === 39) {
+      // right
+      if (selectedMenuItem < 1) {
+        selectedMenuItem++;
+      }
+      selectMenuItem();      
+    } else if (keyEvent.keyCode === 37) {
+      // left
+      if (selectedMenuItem > 0) {
+        selectedMenuItem--;
+      }
+      selectMenuItem();      
+    } else if (keyEvent.keyCode === 27) {
+      // esc
+      closeEdit();
+    }
+
+    return;
+  }
 
   if (menuOpen) {
     if (keyEvent.key === 'Enter') {
@@ -199,6 +249,17 @@ function fireVisitLink(link) {
   };
   xhttp.open("PUT", "/api/link/visit?id=" + link.id, true);
   xhttp.send();
+}
+
+function fireUpdateLink(link) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      closeEdit();
+    }
+  };
+  xhttp.open("PUT", "/api/link/update?id=" + link.id, true);
+  xhttp.send(link);
 }
 
 function fireDeleteLink(link) {
