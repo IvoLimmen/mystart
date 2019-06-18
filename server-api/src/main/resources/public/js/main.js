@@ -106,13 +106,15 @@ function keyboardInputHandler(keyEvent) {
     if (keyEvent.key === 'Enter') {
       var link = document.getElementById('content').children[currentSelection].link;
       if (selectedMenuItem === 0) {
-        link.url = document.getElementById('edit.url');
-        link.description = document.getElementById('edit.description');
-        link.labels = document.getElementById('edit.labels');
-        link.title = document.getElementById('edit.title');
+        link.url = document.getElementById('edit.url').value;
+        link.description = document.getElementById('edit.description').value;
+        link.labels = document.getElementById('edit.labels').value;
+        link.title = document.getElementById('edit.title').value;
         fireUpdateLink(link);
+        return;
       } else if (selectedMenuItem === 1) {
         closeEdit();
+        return;
       }
     } else if (keyEvent.keyCode === 39) {
       // right
@@ -140,10 +142,13 @@ function keyboardInputHandler(keyEvent) {
       if (selectedMenuItem === 0) {
         window.open(link.url, "_BLANK");
         fireVisitLink(link);
+        return;
       } else if (selectedMenuItem === 1) {
         openEdit();
+        return;
       } else if (selectedMenuItem === 2) {
         fireDeleteLink(link);
+        return;
       }
     } else if (keyEvent.keyCode === 39) {
       // right
@@ -232,11 +237,12 @@ function createLink(link) {
 
 function removeChildrenFromParent(elementId, leaveFirst) {
   var parent = document.getElementById(elementId);
-  var children = parent.children;
-  var startIndex = leaveFirst ? 1 : 0;
 
-  for (var i = startIndex; i < children.length; i++) {
-    parent.removeChild(children[i]);
+  while (parent.hasChildNodes()) {
+    if (leaveFirst && parent.children.length === 1) {
+      break;
+    }
+    parent.removeChild(parent.lastChild);
   }
 }
 
@@ -252,14 +258,29 @@ function fireVisitLink(link) {
 }
 
 function fireUpdateLink(link) {
+  var data = {};
+  data.id = link.id;
+  data.url = link.url;
+  data.description = link.description;
+  data.labels = [];
+  if (link.labels.indexOf(",") !== -1) {
+    var lbl = link.labels.split(',');
+    for (var i = 0; i < lbl.length; i++) {
+      data.labels.push(lbl[i]);
+    }  
+  } else {
+    data.labels.push(link.labels);
+  }
+  data.title = link.title;
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       closeEdit();
     }
   };
-  xhttp.open("PUT", "/api/link/update?id=" + link.id, true);
-  xhttp.send(link);
+  xhttp.open("PUT", "/api/link/update", true);
+  xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  xhttp.send(JSON.stringify(data));
 }
 
 function fireDeleteLink(link) {
@@ -300,4 +321,8 @@ function commandHandler(keyEvent) {
 (function () {
   document.onkeydown = keyboardInputHandler;
   document.getElementById('command_input').onkeypress = commandHandler;
+  document.getElementById('edit.url').onkeypress = commandHandler;
+  document.getElementById('edit.title').onkeypress = commandHandler;
+  document.getElementById('edit.description').onkeypress = commandHandler;
+  document.getElementById('edit.labels').onkeypress = commandHandler;
 })();

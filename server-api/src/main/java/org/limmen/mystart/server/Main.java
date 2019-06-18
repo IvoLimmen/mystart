@@ -2,13 +2,14 @@ package org.limmen.mystart.server;
 
 import static spark.Spark.before;
 import static spark.Spark.delete;
+import static spark.Spark.exception;
 import static spark.Spark.get;
+import static spark.Spark.initExceptionHandler;
 import static spark.Spark.put;
 import static spark.Spark.path;
 import static spark.Spark.port;
 import static spark.Spark.staticFiles;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -19,6 +20,8 @@ import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 
+import org.eclipse.jetty.util.log.Log;
+import org.eclipse.jetty.util.log.Slf4jLog;
 import org.limmen.mystart.AutoDetectParser;
 import org.limmen.mystart.Parser;
 import org.limmen.mystart.Storage;
@@ -36,8 +39,8 @@ public class Main {
   public static final String USER = "user";
   public static final String USER_ID = "userId";
 
-  public static void main(String[] args) throws IOException {
-
+  public static void main(String[] args) throws Exception {
+    Log.setLog(new Slf4jLog());
     Properties properties = new Properties();
 
     try (InputStream inputStream = Main.class.getResourceAsStream("/application.properties")) {
@@ -63,10 +66,18 @@ public class Main {
 
     LinkHandler linkHandler = new LinkHandler(storage, mapper);
 
+    initExceptionHandler((e) -> {
+      log.error("Error:", e);
+    });
+
     port(8080);
 
     staticFiles.location("/public");
     staticFiles.expireTime(3600); // hour
+
+    exception(Exception.class, (exception, request, response) -> {
+      log.error("Error", exception);
+    });
 
     before("/api/*", (req, res) -> {
       // check for session/header key

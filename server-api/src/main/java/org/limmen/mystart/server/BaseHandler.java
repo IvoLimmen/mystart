@@ -8,8 +8,10 @@ import org.limmen.mystart.Storage;
 import org.limmen.mystart.UserStorage;
 import org.limmen.mystart.VisitStorage;
 
+import lombok.extern.slf4j.Slf4j;
 import lombok.Getter;
 
+@Slf4j
 @Getter
 public abstract class BaseHandler {
 
@@ -29,7 +31,7 @@ public abstract class BaseHandler {
 
   protected <T> T fromJson(String json, Class<T> clazz) {
     try {
-    return objectMapper.readValue(json, clazz);    
+      return objectMapper.readValue(json, clazz);    
     } catch (Exception e) {
       return null;
     }
