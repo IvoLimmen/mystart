@@ -1,13 +1,14 @@
-var currentSelection = 0;
+var currentSelection = -1;
 var oldSelection;
 var maxSelection;
 var gridSize = 4;
+var searchOpen = false;
 var menuOpen = false;
 var editOpen = false;
 var selectedMenuItem = 0;
 
 function unselect() {
-  if (oldSelection > 0) {
+  if (oldSelection >= 0) {
     var oldElement = document.getElementById('content').children[oldSelection];
     if (oldElement != null) {      
       oldElement.classList.remove('selected');
@@ -17,9 +18,11 @@ function unselect() {
 }
 
 function select() {
-  var newElement = document.getElementById('content').children[currentSelection];
-  if (newElement != null) {
-    newElement.classList.add('selected');
+  if (currentSelection >= 0) {
+    var newElement = document.getElementById('content').children[currentSelection];
+    if (newElement != null) {
+      newElement.classList.add('selected');
+    }
   }
 }
 
@@ -93,16 +96,30 @@ function closeMenu() {
   }
 }
 
+function openSearch() {
+  if (!searchOpen) { 
+    document.getElementById('search').classList.remove('search-glide-out');    
+    document.getElementById('search').classList.add('search-glide-in');
+    searchOpen = true;
+    document.getElementById('command_input').focus();
+  }
+}
+
+function closeSearch() {
+  if (searchOpen) { 
+    document.getElementById('search').classList.add('search-glide-out');
+    document.getElementById('search').classList.remove('search-glide-in');
+    searchOpen = false;    
+  }
+}
+
 function resetSelection() {
   unselect();
   currentSelection = 0;
+  select();
 }
 
 function keyboardInputHandler(keyEvent) {
-  var inputHasFocus = (document.activeElement === document.getElementById('command_input'));
-  oldSelection = currentSelection;
-  maxSelection = document.getElementById('content').children.length;
-
   if (editOpen) {
     if (keyEvent.key === 'Enter') {
       var link = document.getElementById('content').children[currentSelection].link;
@@ -171,56 +188,60 @@ function keyboardInputHandler(keyEvent) {
     return;
   }
 
-  if (!inputHasFocus && keyEvent.key === '/') {
-    resetSelection();
-    keyEvent.preventDefault();
-    document.getElementById('command_input').focus();
-    return;  
-  } else if (keyEvent.keyCode === 37) {
-    // left
-    if (currentSelection > 1) {
-      currentSelection--;
-    } else {
+  if (searchOpen) {    
+    if (keyEvent.keyCode === 27) {
+      closeSearch();
       return;
     }
-  } else if (keyEvent.keyCode === 38) {
-    // up
-    if ((currentSelection - gridSize) > 0) {
-      currentSelection -= gridSize;
-    } else {
-      return;
-    }
-  } else if (keyEvent.keyCode === 39) {
-    // right
-    if (currentSelection === 0) {
-      currentSelection = 1;
-    } else if ((currentSelection + 1) < maxSelection) {
-      currentSelection++;
-    } else {
-      return;
-    }
-  } else if (keyEvent.keyCode === 40) {
-    // down
-    if (currentSelection === 0) {
-      currentSelection = gridSize;
-    } else if ((currentSelection + gridSize) < maxSelection) {
-      currentSelection += gridSize;
-    } else {
-      return;
-    }
-  } else if (keyEvent.key === 'Enter') {
-    if (inputHasFocus) {
-      return;
-    }
-    openMenu();
+    // entering text
     return;
-  } else {
-    // not navigation
-    return;
+  } else if (!searchOpen) {
+    // select a link
+    oldSelection = currentSelection;
+    maxSelection = document.getElementById('content').children.length;
+  
+    if (keyEvent.key === '/') {
+      resetSelection();
+      keyEvent.preventDefault();
+      openSearch();
+      return;  
+    } else if (keyEvent.key === 'Enter') {
+      keyEvent.preventDefault();
+      openMenu();
+      return;
+    } else if (keyEvent.keyCode === 37) {
+      // left
+      if (currentSelection > 0) {
+        currentSelection--;
+      } else {
+        return;
+      }
+    } else if (keyEvent.keyCode === 38) {
+      // up
+      if ((currentSelection - gridSize) > 0) {
+        currentSelection -= gridSize;
+      } else {
+        return;
+      }
+    } else if (keyEvent.keyCode === 39) {
+      // right
+      if ((currentSelection + 1) < maxSelection) {
+        currentSelection++;
+      } else {
+        return;
+      }
+    } else if (keyEvent.keyCode === 40) {
+      // down
+      if ((currentSelection + gridSize) < maxSelection) {
+        currentSelection += gridSize;
+      } else {
+        return;
+      }
+    }  
+    document.getElementById('command_input').blur();
+    unselect();
+    select();
   }
-  document.getElementById('command_input').blur();
-  unselect();
-  select();
 }
 
 function createLink(link) {
@@ -236,13 +257,10 @@ function createLink(link) {
   document.getElementById('content').appendChild(div);
 }
 
-function removeChildrenFromParent(elementId, leaveFirst) {
+function removeChildrenFromParent(elementId) {
   var parent = document.getElementById(elementId);
 
   while (parent.hasChildNodes()) {
-    if (leaveFirst && parent.children.length === 1) {
-      break;
-    }
     parent.removeChild(parent.lastChild);
   }
 }
@@ -302,7 +320,7 @@ function commandHandler(keyEvent) {
   if (keyEvent.key === 'Enter') {
     var me = document.getElementById('command_input');
     keyEvent.preventDefault();
-    removeChildrenFromParent('content', true);
+    removeChildrenFromParent('content');
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
@@ -311,6 +329,7 @@ function commandHandler(keyEvent) {
           createLink(links[i]);
         }
         resetSelection();
+        closeSearch();
       }
     };
     xhttp.open("GET", "/api/link/search?input=" + me.value, true);

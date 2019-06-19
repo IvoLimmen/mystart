@@ -1,4 +1,5 @@
 :root {
+  --search-height: 60px;
   --menu-height: 250px;
   --edit-height: 500px;
   --main-background-color: #444;
@@ -62,6 +63,30 @@ body {
   animation-fill-mode: forwards;  
 }
 
+@keyframes search-glide-in {
+  0%   { top: calc(0px - var(--search-height)); }
+  100% { top: 0px; }
+}
+
+.search-glide-in {
+  animation: 'search-glide-in' 500ms;
+  animation-fill-mode: forwards;  
+}
+
+@keyframes search-glide-out {
+  0%   { top: 0px; }
+  100% { top: calc(0px - var(--search-height)); }
+}
+
+.search-out {
+  top: calc(0px - var(--search-height));
+}
+
+.search-glide-out {
+  animation: 'search-glide-out' 500ms;
+  animation-fill-mode: forwards;  
+}
+
 #edit {
   border-radius: 3px;
   width: 50%;
@@ -87,6 +112,15 @@ body {
   background-color: var(--menu-background-color);
 }
 
+#search {
+  border-radius: 3px;
+  padding: 5px;
+  background-color: var(--menu-background-color);
+  width: 80%;
+  position: fixed;
+  left: 10%;    
+}
+
 #menu {
   border-radius: 3px;
   padding: 5px;
@@ -110,6 +144,12 @@ body {
   background-color: var(--menuitem-background-color);
   border-radius: 3px;
   padding: 5px;  
+}
+
+.grid1 {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 5px;    
 }
 
 .grid2 {
@@ -149,5 +189,10 @@ body {
 }
 
 .command {
+  background-color: var(--link-background-color);
+  border-radius: 3px;
+  padding: 5px;
+  height: 40px;  
+  overflow: hidden;
   text-align: center;  
 }
