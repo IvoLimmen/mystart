@@ -33,6 +33,7 @@ public abstract class BaseHandler {
     try {
       return objectMapper.readValue(json, clazz);    
     } catch (Exception e) {
+      log.error("Error while reading JSON", e);
       return null;
     }
   }
@@ -41,7 +42,8 @@ public abstract class BaseHandler {
     try {
       return objectMapper.writeValueAsString(object);
     } catch (Exception e) {
-      return e.getMessage();
+      log.error("Error while writing object to JSON", e);
+      return null;
     }
   }
 }

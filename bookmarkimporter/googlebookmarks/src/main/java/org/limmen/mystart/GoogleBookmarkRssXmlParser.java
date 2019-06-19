@@ -24,7 +24,7 @@ public class GoogleBookmarkRssXmlParser extends AbstractParser {
 
   @Override
   public String getName() {
-    return "Google Bookmarks";
+    return "Google Bookmarks RSS XML";
   }
 
   @Override
