@@ -33,7 +33,7 @@ public class LinkHandler extends BaseHandler {
   public String search(Request req, Response res) {
     Long userId = 1L;
     String input = req.queryParams("input");
-    
+  
     return toJson(getLinkStorage().search(userId, List.of(
       new Like("description", input, String.class),
       new Like("title", input, String.class),

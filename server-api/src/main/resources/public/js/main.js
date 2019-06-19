@@ -56,6 +56,7 @@ function openEdit() {
     document.getElementById('edit.url').value = link.url;
     document.getElementById('edit.description').value = description;
     document.getElementById('edit.labels').value = link.labels;
+    document.getElementById('edit.url').focus();
   }
 }
 
