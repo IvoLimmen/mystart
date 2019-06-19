@@ -80,8 +80,8 @@ function openMenu() {
     document.getElementById('link.description').textContent = "Description: " + description;
     document.getElementById('link.labels').textContent = "Labels: " + link.labels;
 
-    document.getElementById('menu').classList.remove('glide-out');
-    document.getElementById('menu').classList.add('glide-in');
+    document.getElementById('menu').classList.remove('menu-glide-out');
+    document.getElementById('menu').classList.add('menu-glide-in');
     menuOpen = true;
     selectedMenuItem = 0;
     selectMenuItem();
@@ -90,8 +90,8 @@ function openMenu() {
 
 function closeMenu() {
   if (menuOpen) { 
-    document.getElementById('menu').classList.add('glide-out');
-    document.getElementById('menu').classList.remove('glide-in');
+    document.getElementById('menu').classList.add('menu-glide-out');
+    document.getElementById('menu').classList.remove('menu-glide-in');
     menuOpen = false;
   }
 }

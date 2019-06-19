@@ -44,7 +44,7 @@ body {
   100% { bottom: 0px; }
 }
 
-.glide-in {
+.menu-glide-in {
   animation: 'menu-glide-in' 500ms;
   animation-fill-mode: forwards;  
 }
@@ -58,7 +58,7 @@ body {
   bottom: calc(0px - var(--menu-height));
 }
 
-.glide-out {
+.menu-glide-out {
   animation: 'menu-glide-out' 500ms;
   animation-fill-mode: forwards;  
 }
