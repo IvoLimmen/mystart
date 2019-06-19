@@ -46,8 +46,7 @@ function selectMenuItem() {
 function openEdit() {
   if (!editOpen) { 
     closeMenu();
-    document.getElementById('edit').classList.remove('edit-glide-out');    
-    document.getElementById('edit').classList.add('edit-glide-in');
+    glideIn('edit');
     editOpen = true;
     selectedMenuItem = 0;
     selectMenuItem();
@@ -64,9 +63,8 @@ function openEdit() {
 }
 
 function closeEdit() {
-  if (editOpen) { 
-    document.getElementById('edit').classList.remove('edit-glide-int');    
-    document.getElementById('edit').classList.add('edit-glide-out');
+  if (editOpen) {
+    glideOut('edit'); 
     editOpen = false;
   }
 }
@@ -80,8 +78,7 @@ function openMenu() {
     document.getElementById('link.description').textContent = "Description: " + description;
     document.getElementById('link.labels').textContent = "Labels: " + link.labels;
 
-    document.getElementById('menu').classList.remove('menu-glide-out');
-    document.getElementById('menu').classList.add('menu-glide-in');
+    glideIn('menu');
     menuOpen = true;
     selectedMenuItem = 0;
     selectMenuItem();
@@ -90,16 +87,24 @@ function openMenu() {
 
 function closeMenu() {
   if (menuOpen) { 
-    document.getElementById('menu').classList.add('menu-glide-out');
-    document.getElementById('menu').classList.remove('menu-glide-in');
+    glideOut('menu');
     menuOpen = false;
   }
 }
 
+function glideOut(name) {
+  document.getElementById(name).classList.add(name + '-glide-out');
+  document.getElementById(name).classList.remove(name + '-glide-in');
+}
+
+function glideIn(name) {
+  document.getElementById(name).classList.remove(name + '-glide-out');
+  document.getElementById(name).classList.add(name + '-glide-in');
+}
+
 function openSearch() {
   if (!searchOpen) { 
-    document.getElementById('search').classList.remove('search-glide-out');    
-    document.getElementById('search').classList.add('search-glide-in');
+    glideIn('search');
     searchOpen = true;
     document.getElementById('command_input').focus();
   }
@@ -107,8 +112,7 @@ function openSearch() {
 
 function closeSearch() {
   if (searchOpen) { 
-    document.getElementById('search').classList.add('search-glide-out');
-    document.getElementById('search').classList.remove('search-glide-in');
+    glideOut('search');
     searchOpen = false;    
   }
 }
