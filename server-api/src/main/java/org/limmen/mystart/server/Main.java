@@ -67,7 +67,7 @@ public class Main {
     LinkHandler linkHandler = new LinkHandler(storage, mapper);
 
     initExceptionHandler((e) -> {
-      log.error("Error:", e);
+      log.error("Error during initialization:", e);
     });
 
     port(8080);
@@ -86,6 +86,7 @@ public class Main {
     path("/api", () -> {
       path("/link", () -> {
         get("/search", linkHandler::search);
+        get("/by_label", linkHandler::byLabel);
         delete("/delete", linkHandler::delete);
         put("/visit", linkHandler::visit);
         put("/update", linkHandler::update);

@@ -5,12 +5,13 @@ var gridSize = 4;
 var searchOpen = false;
 var menuOpen = false;
 var editOpen = false;
+var labelMode = false;
 var selectedMenuItem = 0;
 
 function unselect() {
   if (oldSelection >= 0) {
     var oldElement = document.getElementById('content').children[oldSelection];
-    if (oldElement != null) {      
+    if (oldElement != null) {
       oldElement.classList.remove('selected');
     }
     closeMenu();
@@ -29,8 +30,12 @@ function select() {
 function selectMenuItem() {
   var items = null;
   if (menuOpen) {
-    items = document.querySelectorAll('#menu .menuitem');
-  } else if (editOpen)  {
+    if (labelMode) {
+      items = document.querySelectorAll('#labelmenu .menuitem');
+    } else {
+      items = document.querySelectorAll('#menu .menuitem');
+    }
+  } else if (editOpen) {
     items = document.querySelectorAll('#edit .menuitem');
   }
 
@@ -44,7 +49,7 @@ function selectMenuItem() {
 }
 
 function openEdit() {
-  if (!editOpen) { 
+  if (!editOpen) {
     closeMenu();
     glideIn('edit');
     editOpen = true;
@@ -64,21 +69,27 @@ function openEdit() {
 
 function closeEdit() {
   if (editOpen) {
-    glideOut('edit'); 
+    glideOut('edit');
     editOpen = false;
   }
 }
 
 function openMenu() {
   if (!menuOpen) {
-    // fill data
-    var link = document.getElementById('content').children[currentSelection].link;
-    var description = link.description ? link.description : "";
-    document.getElementById('link.url').textContent = "URL: " + link.url;
-    document.getElementById('link.description').textContent = "Description: " + description;
-    document.getElementById('link.labels').textContent = "Labels: " + link.labels;
+    if (labelMode) {
+      var label = document.getElementById('content').children[currentSelection].label;
 
-    glideIn('menu');
+      glideIn('labelmenu');
+    } else {
+      // fill data
+      var link = document.getElementById('content').children[currentSelection].link;
+      var description = link.description ? link.description : "";
+      document.getElementById('link.url').textContent = "URL: " + link.url;
+      document.getElementById('link.description').textContent = "Description: " + description;
+      document.getElementById('link.labels').textContent = "Labels: " + link.labels;
+
+      glideIn('menu');
+    }
     menuOpen = true;
     selectedMenuItem = 0;
     selectMenuItem();
@@ -86,8 +97,12 @@ function openMenu() {
 }
 
 function closeMenu() {
-  if (menuOpen) { 
-    glideOut('menu');
+  if (menuOpen) {
+    if (labelMode) {
+      glideOut('labelmenu');
+    } else {
+      glideOut('menu');
+    }
     menuOpen = false;
   }
 }
@@ -103,7 +118,7 @@ function glideIn(name) {
 }
 
 function openSearch() {
-  if (!searchOpen) { 
+  if (!searchOpen) {
     glideIn('search');
     searchOpen = true;
     document.getElementById('command_input').focus();
@@ -111,9 +126,9 @@ function openSearch() {
 }
 
 function closeSearch() {
-  if (searchOpen) { 
+  if (searchOpen) {
     glideOut('search');
-    searchOpen = false;    
+    searchOpen = false;
   }
 }
 
@@ -143,13 +158,13 @@ function keyboardInputHandler(keyEvent) {
       if (selectedMenuItem < 1) {
         selectedMenuItem++;
       }
-      selectMenuItem();      
+      selectMenuItem();
     } else if (keyEvent.keyCode === 37) {
       // left
       if (selectedMenuItem > 0) {
         selectedMenuItem--;
       }
-      selectMenuItem();      
+      selectMenuItem();
     } else if (keyEvent.keyCode === 27) {
       // esc
       closeEdit();
@@ -160,30 +175,44 @@ function keyboardInputHandler(keyEvent) {
 
   if (menuOpen) {
     if (keyEvent.key === 'Enter') {
-      var link = document.getElementById('content').children[currentSelection].link;
-      if (selectedMenuItem === 0) {
-        window.open(link.url, "_BLANK");
-        fireVisitLink(link);
-        return;
-      } else if (selectedMenuItem === 1) {
-        openEdit();
-        return;
-      } else if (selectedMenuItem === 2) {
-        fireDeleteLink(link);
-        return;
+      if (labelMode) {
+        var label = document.getElementById('content').children[currentSelection].label;
+        if (selectedMenuItem === 0) {
+          // todo: show all links from this label
+          return;
+        } else if (selectedMenuItem === 1) {
+          // todo: move the links from this label to another
+          return;
+        } else if (selectedMenuItem === 2) {
+          // todo: delete the label
+          return;
+        }
+      } else {
+        var link = document.getElementById('content').children[currentSelection].link;
+        if (selectedMenuItem === 0) {
+          window.open(link.url, "_BLANK");
+          fireVisitLink(link);
+          return;
+        } else if (selectedMenuItem === 1) {
+          openEdit();
+          return;
+        } else if (selectedMenuItem === 2) {
+          fireDeleteLink(link);
+          return;
+        }
       }
     } else if (keyEvent.keyCode === 39) {
       // right
       if (selectedMenuItem < 2) {
         selectedMenuItem++;
       }
-      selectMenuItem();      
+      selectMenuItem();
     } else if (keyEvent.keyCode === 37) {
       // left
       if (selectedMenuItem > 0) {
         selectedMenuItem--;
       }
-      selectMenuItem();      
+      selectMenuItem();
     } else if (keyEvent.keyCode === 27 || keyEvent.keyCode === 38 || keyEvent.keyCode === 40) {
       // esc, up or down
       closeMenu();
@@ -192,7 +221,7 @@ function keyboardInputHandler(keyEvent) {
     return;
   }
 
-  if (searchOpen) {    
+  if (searchOpen) {
     if (keyEvent.keyCode === 27) {
       closeSearch();
       return;
@@ -203,15 +232,20 @@ function keyboardInputHandler(keyEvent) {
     // select a link
     oldSelection = currentSelection;
     maxSelection = document.getElementById('content').children.length;
-  
+
     if (keyEvent.key === '/') {
       resetSelection();
       keyEvent.preventDefault();
       openSearch();
-      return;  
+      return;
     } else if (keyEvent.key === 'Enter') {
       keyEvent.preventDefault();
       openMenu();
+      return;
+    } else if (keyEvent.key === '?') {
+      // open help
+    } else if (keyEvent.key === 'l') {
+      fireGetLabels();
       return;
     } else if (keyEvent.keyCode === 37) {
       // left
@@ -241,7 +275,7 @@ function keyboardInputHandler(keyEvent) {
       } else {
         return;
       }
-    }  
+    }
     document.getElementById('command_input').blur();
     unselect();
     select();
@@ -257,6 +291,19 @@ function createLink(link) {
   div.appendChild(h1);
   var p = document.createElement('p');
   p.textContent = link.description;
+  div.appendChild(p);
+  document.getElementById('content').appendChild(div);
+}
+
+function createLabel(label, value) {
+  var div = document.createElement('div');
+  div.label = label;
+  div.className = "box";
+  var h1 = document.createElement('h1');
+  h1.textContent = label;
+  div.appendChild(h1);
+  var p = document.createElement('p');
+  p.textContent = value;
   div.appendChild(p);
   document.getElementById('content').appendChild(div);
 }
@@ -290,7 +337,7 @@ function fireUpdateLink(link) {
     var lbl = link.labels.split(',');
     for (var i = 0; i < lbl.length; i++) {
       data.labels.push(lbl[i]);
-    }  
+    }
   } else {
     data.labels.push(link.labels);
   }
@@ -298,6 +345,7 @@ function fireUpdateLink(link) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
+      // TODO: update
       closeEdit();
     }
   };
@@ -320,7 +368,24 @@ function fireDeleteLink(link) {
   xhttp.send();
 }
 
-function commandHandler(keyEvent) {
+function fireGetLabels() {
+  removeChildrenFromParent('content');
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      var labels = JSON.parse(xhttp.responseText);
+      for (var property in labels) {
+        createLabel(property, labels[property]);
+      }
+      resetSelection();
+      labelMode = true;
+    }
+  };
+  xhttp.open("GET", "/api/link/by_label", true);
+  xhttp.send();
+}
+
+function searchHandler(keyEvent) {
   if (keyEvent.key === 'Enter') {
     var me = document.getElementById('command_input');
     keyEvent.preventDefault();
@@ -329,10 +394,11 @@ function commandHandler(keyEvent) {
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
         var links = JSON.parse(xhttp.responseText);
-        for (var i = 0; i < links.length; i++) {          
+        for (var i = 0; i < links.length; i++) {
           createLink(links[i]);
         }
         resetSelection();
+        labelMode = false;
         closeSearch();
       }
     };
@@ -341,12 +407,19 @@ function commandHandler(keyEvent) {
   }
 }
 
+function disableEnter(keyEvent) {
+  if (keyEvent.key === 'Enter') {
+    keyEvent.preventDefault();
+    return;
+  }
+}
+
 // bootstrap
 (function () {
   document.onkeydown = keyboardInputHandler;
-  document.getElementById('command_input').onkeypress = commandHandler;
-  document.getElementById('edit.url').onkeypress = commandHandler;
-  document.getElementById('edit.title').onkeypress = commandHandler;
-  document.getElementById('edit.description').onkeypress = commandHandler;
-  document.getElementById('edit.labels').onkeypress = commandHandler;
+  document.getElementById('command_input').onkeypress = searchHandler;
+  document.getElementById('edit.url').onkeypress = disableEnter;
+  document.getElementById('edit.title').onkeypress = disableEnter;
+  document.getElementById('edit.description').onkeypress = disableEnter;
+  document.getElementById('edit.labels').onkeypress = disableEnter;
 })();
