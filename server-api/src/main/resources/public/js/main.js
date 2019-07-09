@@ -179,6 +179,7 @@ function keyboardInputHandler(keyEvent) {
         var label = document.getElementById('content').children[currentSelection].label;
         if (selectedMenuItem === 0) {
           // todo: show all links from this label
+          fireGetByLabel(label);
           return;
         } else if (selectedMenuItem === 1) {
           // todo: move the links from this label to another
@@ -309,6 +310,7 @@ function createLabel(label, value) {
 }
 
 function removeChildrenFromParent(elementId) {
+  console.log('cleaning ' + elementId);
   var parent = document.getElementById(elementId);
 
   while (parent.hasChildNodes()) {
@@ -317,14 +319,15 @@ function removeChildrenFromParent(elementId) {
 }
 
 function fireVisitLink(link) {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
+  fetch("/api/link/visit?id=" + link.id, {
+    method: 'GET'
+  })
+  .then(function (response) {
       closeMenu();
-    }
-  };
-  xhttp.open("PUT", "/api/link/visit?id=" + link.id, true);
-  xhttp.send();
+  })
+  .catch(function (err) {
+    console.log(err);
+  });   
 }
 
 function fireUpdateLink(link) {
@@ -342,68 +345,95 @@ function fireUpdateLink(link) {
     data.labels.push(link.labels);
   }
   data.title = link.title;
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
+
+  fetch("/api/link/update", { 
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json;charset=UTF-8' },
+    body: JSON.stringify(data)
+  })
+  .then(function (response) {
       // TODO: update
       closeEdit();
-    }
-  };
-  xhttp.open("PUT", "/api/link/update", true);
-  xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-  xhttp.send(JSON.stringify(data));
+  })
+  .catch(function (err) {
+    console.log(err);
+  });    
 }
 
 function fireDeleteLink(link) {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      document.getElementById('content').children[currentSelection].remove();
-      unselect();
-      currentSelection--;
-      select();
+  fetch("/api/link/delete?id=" + link.id, { 
+    method: 'DELETE'
+  })
+  .then(function (response) {
+    document.getElementById('content').children[currentSelection].remove();
+    unselect();
+    currentSelection--;
+    select();
+  })
+  .catch(function (err) {
+    console.log(err);
+  });    
+}
+
+function fireGetByLabel(label) {
+  fetch("/api/link/by_label?label=" + label, {
+    method: 'GET'
+  })
+  .then(response => response.json())
+  .then(function (links) {      
+    removeChildrenFromParent('content');
+    for (var i = 0; i < links.length; i++) {
+      createLink(links[i]);
     }
-  };
-  xhttp.open("DELETE", "/api/link/delete?id=" + link.id, true);
-  xhttp.send();
+    resetSelection();
+    labelMode = false;
+    closeSearch();
+  })
+  .catch(function (err) {
+    console.log(err);
+  });      
 }
 
 function fireGetLabels() {
   removeChildrenFromParent('content');
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      var labels = JSON.parse(xhttp.responseText);
-      for (var property in labels) {
-        createLabel(property, labels[property]);
-      }
-      resetSelection();
-      labelMode = true;
+
+  fetch("/api/link/by_label", {
+    method: 'GET'
+  })
+  .then(response => response.json())
+  .then(function (labels) {
+    for (var property in labels) {
+      createLabel(property, labels[property]);
     }
-  };
-  xhttp.open("GET", "/api/link/by_label", true);
-  xhttp.send();
+    resetSelection();
+    labelMode = true;
+  })
+  .catch(function (err) {
+    console.log(err);
+  });    
 }
 
 function searchHandler(keyEvent) {
-  if (keyEvent.key === 'Enter') {
+  if (keyEvent.key === 'Enter') {    
     var me = document.getElementById('command_input');
     keyEvent.preventDefault();
     removeChildrenFromParent('content');
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-      if (this.readyState == 4 && this.status == 200) {
-        var links = JSON.parse(xhttp.responseText);
-        for (var i = 0; i < links.length; i++) {
-          createLink(links[i]);
-        }
-        resetSelection();
-        labelMode = false;
-        closeSearch();
+
+    fetch("/api/link/search?input=" + me.value, {
+      method: 'GET'
+    })
+    .then(response => response.json())
+    .then(function (links) {      
+      for (var i = 0; i < links.length; i++) {
+        createLink(links[i]);
       }
-    };
-    xhttp.open("GET", "/api/link/search?input=" + me.value, true);
-    xhttp.send();
+      resetSelection();
+      labelMode = false;
+      closeSearch();
+    })
+    .catch(function (err) {
+      console.log(err);
+    });    
   }
 }
 
