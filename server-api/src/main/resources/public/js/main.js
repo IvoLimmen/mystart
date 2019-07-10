@@ -291,7 +291,7 @@ function createLink(link) {
   h1.textContent = link.title;
   div.appendChild(h1);
   var p = document.createElement('p');
-  p.textContent = link.description;
+  p.textContent = link.labels;
   div.appendChild(p);
   document.getElementById('content').appendChild(div);
 }
