@@ -27,7 +27,7 @@ public class FireFoxParserTest {
 
      Link link = links.iterator().next();
 
-      assertEquals("http://example.com/", link.getUrl());
+      assertEquals("http://example.com", link.getUrl());
       assertEquals("Example Domain", link.getTitle());
       assertEquals("Some Description On This Url", link.getDescription());
    }

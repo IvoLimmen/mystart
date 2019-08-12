@@ -44,6 +44,13 @@ public class Link extends BaseObject implements Comparable<Link> {
 
   public Link(String url) {
     this();
+
+    Objects.requireNonNull(url, "URL may nog be null!");
+
+    if (url.endsWith("/")) {
+      url = url.substring(0, url.length() - 1);
+    }
+
     this.url = url;
   }
 
