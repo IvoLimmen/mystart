@@ -87,7 +87,10 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
     } else if (url.startsWith("http://")) {
       url = url.substring(7);
     }
-    String strippedUrl = url.replaceAll("/", "");
+    if (url.endsWith("/")) {
+      url = url.substring(0, url.length() - 1);
+    }    
+    String strippedUrl = url;
     log.debug("Searching for url: {}", strippedUrl);
 
     String sql = "select t.* from (select l.id, "

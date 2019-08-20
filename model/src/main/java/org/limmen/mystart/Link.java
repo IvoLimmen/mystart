@@ -50,6 +50,9 @@ public class Link extends BaseObject implements Comparable<Link> {
     if (url.endsWith("/")) {
       url = url.substring(0, url.length() - 1);
     }
+    if (!url.startsWith("http")) {
+      url = "https://" + url;
+    }
 
     this.url = url;
   }
