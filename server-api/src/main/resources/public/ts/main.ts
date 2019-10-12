@@ -1,12 +1,12 @@
-var currentSelection = -1;
-var oldSelection;
-var maxSelection;
-var gridSize = 4;
-var searchOpen = false;
-var menuOpen = false;
-var editOpen = false;
-var labelMode = false;
-var selectedMenuItem = 0;
+var currentSelection: number = -1;
+var oldSelection: number;
+var maxSelection: number;
+const gridSize: number = 4;
+var searchOpen: boolean = false;
+var menuOpen: boolean = false;
+var editOpen: boolean = false;
+var labelMode: boolean = false;
+var selectedMenuItem: number = 0;
 
 function unselect() {
   if (oldSelection >= 0) {
@@ -57,13 +57,13 @@ function openEdit() {
     selectMenuItem();
 
     // fill form
-    var link = document.getElementById('content').children[currentSelection].link;
+    var link : Link = (document.getElementById('content').children[currentSelection] as any).link;
     var description = link.description ? link.description : "";
-    document.getElementById('edit.title').value = link.title;
-    document.getElementById('edit.url').value = link.url;
-    document.getElementById('edit.description').value = description;
-    document.getElementById('edit.labels').value = link.labels;
-    document.getElementById('edit.url').focus();
+    (<HTMLInputElement>document.getElementById('edit.title')).value = link.title;
+    (<HTMLInputElement>document.getElementById('edit.url')).value = link.url;
+    (<HTMLInputElement>document.getElementById('edit.description')).value = description;
+    (<HTMLInputElement>document.getElementById('edit.labels')).value = link.labels as any;
+    (<HTMLInputElement>document.getElementById('edit.url')).focus();
   }
 }
 
@@ -77,12 +77,12 @@ function closeEdit() {
 function openMenu() {
   if (!menuOpen) {
     if (labelMode) {
-      var label = document.getElementById('content').children[currentSelection].label;
+      var label = (document.getElementById('content').children[currentSelection] as any).label;
 
       glideIn('labelmenu');
     } else {
       // fill data
-      var link = document.getElementById('content').children[currentSelection].link;
+      var link: Link = (document.getElementById('content').children[currentSelection] as any).link;
       var description = link.description ? link.description : "";
       document.getElementById('link.url').textContent = "URL: " + link.url;
       document.getElementById('link.description').textContent = "Description: " + description;
@@ -107,12 +107,12 @@ function closeMenu() {
   }
 }
 
-function glideOut(name) {
+function glideOut(name: string) {
   document.getElementById(name).classList.add(name + '-glide-out');
   document.getElementById(name).classList.remove(name + '-glide-in');
 }
 
-function glideIn(name) {
+function glideIn(name: string) {
   document.getElementById(name).classList.remove(name + '-glide-out');
   document.getElementById(name).classList.add(name + '-glide-in');
 }
@@ -138,15 +138,15 @@ function resetSelection() {
   select();
 }
 
-function keyboardInputHandler(keyEvent) {
+function keyboardInputHandler(keyEvent: KeyboardEvent) {
   if (editOpen) {
     if (keyEvent.key === 'Enter') {
-      var link = document.getElementById('content').children[currentSelection].link;
+      var link: Link = (document.getElementById('content').children[currentSelection] as any).link;
       if (selectedMenuItem === 0) {
-        link.url = document.getElementById('edit.url').value;
-        link.description = document.getElementById('edit.description').value;
-        link.labels = document.getElementById('edit.labels').value;
-        link.title = document.getElementById('edit.title').value;
+        link.url = (<HTMLInputElement>document.getElementById('edit.url')).value;
+        link.description = (<HTMLInputElement>document.getElementById('edit.description')).value;
+        link.setLabelsFromString((<HTMLInputElement>document.getElementById('edit.labels')).value);
+        link.title = (<HTMLInputElement>document.getElementById('edit.title')).value;
         fireUpdateLink(link);
         return;
       } else if (selectedMenuItem === 1) {
@@ -176,7 +176,7 @@ function keyboardInputHandler(keyEvent) {
   if (menuOpen) {
     if (keyEvent.key === 'Enter') {
       if (labelMode) {
-        var label = document.getElementById('content').children[currentSelection].label;
+        var label = (document.getElementById('content').children[currentSelection] as any).label;
         if (selectedMenuItem === 0) {
           // todo: show all links from this label
           fireGetByLabel(label);
@@ -189,7 +189,7 @@ function keyboardInputHandler(keyEvent) {
           return;
         }
       } else {
-        var link = document.getElementById('content').children[currentSelection].link;
+        var link: Link = (document.getElementById('content').children[currentSelection] as any).link;
         if (selectedMenuItem === 0) {
           window.open(link.url, "_BLANK");
           fireVisitLink(link);
@@ -283,21 +283,21 @@ function keyboardInputHandler(keyEvent) {
   }
 }
 
-function createLink(link) {
-  var div = document.createElement('div');
+function createLink(link: Link) {
+  var div = document.createElement('div') as any;
   div.link = link;
   div.className = "box";
   var h1 = document.createElement('h1');
   h1.textContent = link.title;
   div.appendChild(h1);
   var p = document.createElement('p');
-  p.textContent = link.labels;
+  p.textContent = link.labels as any;
   div.appendChild(p);
-  document.getElementById('content').appendChild(div);
+  document.getElementById('content').appendChild(div as any);
 }
 
-function createLabel(label, value) {
-  var div = document.createElement('div');
+function createLabel(label: string, value: string) {
+  var div = document.createElement('div') as any;
   div.label = label;
   div.className = "box";
   var h1 = document.createElement('h1');
@@ -309,8 +309,7 @@ function createLabel(label, value) {
   document.getElementById('content').appendChild(div);
 }
 
-function removeChildrenFromParent(elementId) {
-  console.log('cleaning ' + elementId);
+function removeChildrenFromParent(elementId: string) {
   var parent = document.getElementById(elementId);
 
   while (parent.hasChildNodes()) {
@@ -318,7 +317,7 @@ function removeChildrenFromParent(elementId) {
   }
 }
 
-function fireVisitLink(link) {
+function fireVisitLink(link: Link) {
   fetch("/api/link/visit?id=" + link.id, {
     method: 'GET'
   })
@@ -330,20 +329,12 @@ function fireVisitLink(link) {
   });   
 }
 
-function fireUpdateLink(link) {
-  var data = {};
+function fireUpdateLink(link: Link) {
+  var data: Link = new Link();
   data.id = link.id;
   data.url = link.url;
   data.description = link.description;
-  data.labels = [];
-  if (link.labels.indexOf(",") !== -1) {
-    var lbl = link.labels.split(',');
-    for (var i = 0; i < lbl.length; i++) {
-      data.labels.push(lbl[i]);
-    }
-  } else {
-    data.labels.push(link.labels);
-  }
+  data.labels = link.labels;
   data.title = link.title;
 
   fetch("/api/link/update", { 
@@ -360,7 +351,7 @@ function fireUpdateLink(link) {
   });    
 }
 
-function fireDeleteLink(link) {
+function fireDeleteLink(link: Link) {
   fetch("/api/link/delete?id=" + link.id, { 
     method: 'DELETE'
   })
@@ -375,7 +366,7 @@ function fireDeleteLink(link) {
   });    
 }
 
-function fireGetByLabel(label) {
+function fireGetByLabel(label: string) {
   fetch("/api/link/by_label?label=" + label, {
     method: 'GET'
   })
@@ -413,9 +404,9 @@ function fireGetLabels() {
   });    
 }
 
-function searchHandler(keyEvent) {
+function searchHandler(keyEvent: KeyboardEvent) {
   if (keyEvent.key === 'Enter') {    
-    var me = document.getElementById('command_input');
+    var me = document.getElementById('command_input') as any;
     keyEvent.preventDefault();
     removeChildrenFromParent('content');
 
@@ -437,7 +428,7 @@ function searchHandler(keyEvent) {
   }
 }
 
-function disableEnter(keyEvent) {
+function disableEnter(keyEvent: KeyboardEvent) {
   if (keyEvent.key === 'Enter') {
     keyEvent.preventDefault();
     return;
