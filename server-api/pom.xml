@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
   <modelVersion>4.0.0</modelVersion>
-    
+
   <parent>
     <groupId>org.limmen.mystart</groupId>
     <artifactId>mystart-project</artifactId>
     <version>0.2</version>
   </parent>
-        
-  <name>MyStart - Server API</name>        
+
+  <name>MyStart - Server API</name>
   <artifactId>server-api</artifactId>
-  <packaging>jar</packaging>    
+  <packaging>jar</packaging>
 
   <dependencies>
     <dependency>
@@ -93,16 +94,50 @@
       <groupId>com.sparkjava</groupId>
       <artifactId>spark-core</artifactId>
     </dependency>
-        
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <scope>test</scope>
-    </dependency>        
+    </dependency>
   </dependencies>
-  
+
   <build>
     <plugins>
+      <plugin>
+        <groupId>com.github.eirslett</groupId>
+        <artifactId>frontend-maven-plugin</artifactId>
+        <version>1.8.0</version>
+        <executions>
+          <execution>
+            <id>install node and npm</id>
+            <goals>
+              <goal>install-node-and-npm</goal>
+            </goals>
+            <configuration>
+              <nodeVersion>v10.16.3</nodeVersion>
+            </configuration>
+          </execution>
+          <execution>
+            <id>npm install</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>install</arguments>
+            </configuration>
+          </execution>
+          <execution>
+            <id>npm run compile</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>run compile</arguments>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
@@ -118,7 +153,7 @@
             <id>script</id>
             <phase>package</phase>
             <goals>
-              <goal>assemble</goal>                     
+              <goal>assemble</goal>
             </goals>
           </execution>
         </executions>
@@ -132,7 +167,7 @@
           <extraJvmArguments>-Xms128m</extraJvmArguments>
           <platforms>
             <platform>unix</platform>
-          </platforms>               
+          </platforms>
           <programs>
             <program>
               <mainClass>org.limmen.mystart.server.Main</mainClass>
@@ -140,7 +175,7 @@
             </program>
           </programs>
         </configuration>
-      </plugin>                     
+      </plugin>
     </plugins>
   </build>
 </project> 

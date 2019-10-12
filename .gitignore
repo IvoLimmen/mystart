@@ -9,4 +9,7 @@ nbactions.xml
 
 .vscode/
 
+node/
+node_modules/
+
 config/
