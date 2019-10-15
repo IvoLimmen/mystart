@@ -7,6 +7,9 @@ target/
 nb-configuration.xml
 nbactions.xml
 
+*.js 
+*.js.map
+
 .vscode/
 
 node/
