@@ -16,3 +16,8 @@ class Link {
     }
   }
 }
+
+class Label {
+  label: string;
+  count: number;
+}

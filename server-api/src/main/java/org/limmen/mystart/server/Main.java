@@ -65,6 +65,7 @@ public class Main {
     mapper.registerModule(module);
 
     LinkHandler linkHandler = new LinkHandler(storage, mapper);
+    LabelHandler labelHandler = new LabelHandler(storage, mapper);
 
     initExceptionHandler((e) -> {
       log.error("Error during initialization:", e);
@@ -90,6 +91,9 @@ public class Main {
         delete("/delete", linkHandler::delete);
         put("/visit", linkHandler::visit);
         put("/update", linkHandler::update);
+      });
+      path("/label", () -> {
+        get("/all", labelHandler::all);
       });
     });
   }

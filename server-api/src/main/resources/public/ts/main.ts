@@ -176,10 +176,10 @@ function keyboardInputHandler(keyEvent: KeyboardEvent) {
   if (menuOpen) {
     if (keyEvent.key === 'Enter') {
       if (labelMode) {
-        var label = (document.getElementById('content').children[currentSelection] as any).label;
+        var label: Label = (document.getElementById('content').children[currentSelection] as any).label;
         if (selectedMenuItem === 0) {
           // todo: show all links from this label
-          fireGetByLabel(label);
+          fireGetByLabel(label.label);
           return;
         } else if (selectedMenuItem === 1) {
           // todo: move the links from this label to another
@@ -296,15 +296,15 @@ function createLink(link: Link) {
   document.getElementById('content').appendChild(div as any);
 }
 
-function createLabel(label: string, value: string) {
+function createLabel(label: Label) {
   var div = document.createElement('div') as any;
   div.label = label;
   div.className = "box";
   var h1 = document.createElement('h1');
-  h1.textContent = label;
+  h1.textContent = label.label;
   div.appendChild(h1);
   var p = document.createElement('p');
-  p.textContent = value;
+  p.textContent = label.count.toString();
   div.appendChild(p);
   document.getElementById('content').appendChild(div);
 }
@@ -371,7 +371,7 @@ function fireGetByLabel(label: string) {
     method: 'GET'
   })
   .then(response => response.json())
-  .then(function (links) {      
+  .then(function (links : Link[]) {      
     removeChildrenFromParent('content');
     for (var i = 0; i < links.length; i++) {
       createLink(links[i]);
@@ -388,14 +388,14 @@ function fireGetByLabel(label: string) {
 function fireGetLabels() {
   removeChildrenFromParent('content');
 
-  fetch("/api/link/by_label", {
+  fetch("/api/label/all", {
     method: 'GET'
   })
   .then(response => response.json())
-  .then(function (labels) {
-    for (var property in labels) {
-      createLabel(property, labels[property]);
-    }
+  .then(function (labels : Label[]) {
+    for (var i = 0; i < labels.length; i++) {
+      createLabel(labels[i]);
+    }    
     resetSelection();
     labelMode = true;
   })

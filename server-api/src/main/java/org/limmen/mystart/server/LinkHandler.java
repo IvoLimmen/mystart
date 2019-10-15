@@ -1,10 +1,7 @@
 package org.limmen.mystart.server;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,7 +20,7 @@ public class LinkHandler extends BaseHandler {
     super(storage, objectMapper);
   }
 
-  private LinkDto toDto(Link link) {
+  private LinkDto toLinkDto(Link link) {
     LinkDto dto = new LinkDto();
     dto.setId(link.getId());
     dto.setDescription(link.getDescription());
@@ -41,7 +38,7 @@ public class LinkHandler extends BaseHandler {
       new Like("description", input, String.class),
       new Like("title", input, String.class),
       new Like("url", input, String.class)
-    )).stream().map(this::toDto).collect(Collectors.toList()));
+    )).stream().map(this::toLinkDto).collect(Collectors.toList()));
   }
 
   public String byLabel(Request req, Response res) {
@@ -50,16 +47,10 @@ public class LinkHandler extends BaseHandler {
   
     if (label != null && label.trim().length() > 0) {
       return toJson(getLinkStorage().getAllByLabel(userId, label).stream()
-        .map(this::toDto)
-        .collect(Collectors.toList()));
-    } else {
-      Map<String, Long> stats = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
-      Collection<String> labels = getLinkStorage().getAllLabels(userId);
-      Collection<Link> links = getLinkStorage().getAll(userId);
-      labels.forEach(l -> {
-        stats.put(l, links.stream().filter(f -> f.getLabels().contains(l)).count());
-      });      
-      return toJson(stats);
+        .map(this::toLinkDto)
+        .collect(Collectors.toList()));   
+    } else {  
+      return "";
     }
   }
 
