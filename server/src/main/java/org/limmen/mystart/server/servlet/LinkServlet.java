@@ -4,11 +4,12 @@ import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.file.Path;
 import java.util.Collection;
+
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import lombok.extern.slf4j.Slf4j;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
 import org.limmen.mystart.DomainUtil;
@@ -16,6 +17,8 @@ import org.limmen.mystart.Link;
 import org.limmen.mystart.Storage;
 import org.limmen.mystart.cleanup.CleanupContext;
 import org.limmen.mystart.cleanup.CleanupTaskManager;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class LinkServlet extends AbstractServlet {
@@ -75,6 +78,11 @@ public class LinkServlet extends AbstractServlet {
         type = "popup";
         String url = req.getParameter("url");
         link = getLinkStorage().getByUrl(userId, url);
+        if (link != null) {
+          link.visited();
+          getLinkStorage().update(userId, link);
+          getVisitStorage().visit(link.getId());
+        }
       }
 
       if (link == null) {
