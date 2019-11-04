@@ -43,7 +43,7 @@
             <div class="col-md-12">
               <h3>${link.title}</h3>
               <a href="/link?reg=${link.id}" ${user.isOpenInNewTab() ? "target=\"_BLANK\"" : "" }>${link.url}</a>
-              <p class="description">Description: ${link.description}</p>
+              <p class="description">Description: ${util.getDescription(link)}</p>
               <p class="created">Created: ${link.formattedCreationDate}</p>
               <p class="visited">Visited: ${link.formattedLastVisit}</p>     
               <p class="checked">Checked: ${link.formattedLastCheckDate}</p>

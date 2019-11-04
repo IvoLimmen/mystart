@@ -10,7 +10,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import lombok.extern.slf4j.Slf4j;
 import org.eclipse.jetty.server.Request;
 import org.limmen.mystart.Link;
 import org.limmen.mystart.LinkStorage;
@@ -20,7 +19,8 @@ import org.limmen.mystart.User;
 import org.limmen.mystart.UserStorage;
 import org.limmen.mystart.VisitStorage;
 
-@Slf4j
+import emoji4j.EmojiUtils;
+
 public class AbstractServlet extends HttpServlet {
 
   public static final String USER = "user";
@@ -47,6 +47,13 @@ public class AbstractServlet extends HttpServlet {
     FLAIR.put("google.com", "fa-google");
     FLAIR.put("medium.com", "fa-medium");
     FLAIR.put("news.ycombinator.com", "fa-hacker-news");
+  }
+
+  public String getDescription(Link link) {
+    if (link == null || link.getDescription() == null) {
+      return null;
+    }
+    return EmojiUtils.htmlify(link.getDescription());
   }
 
   public String getFlair(Link link) {

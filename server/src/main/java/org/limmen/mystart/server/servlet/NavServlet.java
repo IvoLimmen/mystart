@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.limmen.mystart.Storage;
 import org.limmen.mystart.User;
-import static org.limmen.mystart.server.servlet.AbstractServlet.USER_ID;
 
 public class NavServlet extends AbstractServlet {
 

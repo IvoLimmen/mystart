@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
   <modelVersion>4.0.0</modelVersion>
-    
+
   <groupId>org.limmen.mystart</groupId>
   <artifactId>mystart-project</artifactId>
   <version>0.2</version>
   <packaging>pom</packaging>
   <name>MyStart - Project</name>
-        
+
   <modules>
     <module>model</module>
     <module>bookmarkimporter</module>
@@ -16,19 +17,24 @@
     <module>cleanup</module>
     <module>server</module>
     <module>server-api</module>
-  </modules> 
+  </modules>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
-    
+
     <postgresql.version>42.2.5</postgresql.version>
     <jetty.version>9.4.12.v20180830</jetty.version>
   </properties>
 
-  <dependencyManagement>    
+  <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>com.kcthota</groupId>
+        <artifactId>emoji4j</artifactId>
+        <version>5.0</version>
+      </dependency>
       <dependency>
         <groupId>com.sun.mail</groupId>
         <artifactId>javax.mail</artifactId>
@@ -84,12 +90,12 @@
         <artifactId>jsoup</artifactId>
         <version>1.11.3</version>
       </dependency>
-      
+
       <dependency>
         <groupId>org.flywaydb</groupId>
         <artifactId>flyway-core</artifactId>
         <version>5.2.1</version>
-      </dependency>      
+      </dependency>
       <dependency>
         <groupId>org.postgresql</groupId>
         <artifactId>postgresql</artifactId>
@@ -134,36 +140,36 @@
           </exclusion>
         </exclusions>
       </dependency>
-            
+
       <dependency>
         <groupId>org.eclipse.jetty</groupId>
         <artifactId>jetty-servlets</artifactId>
         <version>${jetty.version}</version>
-      </dependency>      
+      </dependency>
       <dependency>
         <groupId>org.eclipse.jetty</groupId>
         <artifactId>apache-jsp</artifactId>
         <version>${jetty.version}</version>
-      </dependency>      
+      </dependency>
       <dependency>
         <groupId>org.eclipse.jetty</groupId>
         <artifactId>apache-jstl</artifactId>
         <version>${jetty.version}</version>
       </dependency>
-          
+
       <dependency>
         <groupId>org.projectlombok</groupId>
         <artifactId>lombok</artifactId>
         <version>1.18.2</version>
         <scope>provided</scope>
-      </dependency>      
-      
+      </dependency>
+
       <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
         <version>4.12</version>
-        <scope>test</scope>          
-      </dependency>        
+        <scope>test</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -172,15 +178,15 @@
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <scope>provided</scope>
-    </dependency>      
+    </dependency>
 
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <scope>test</scope>          
-    </dependency>        
+      <scope>test</scope>
+    </dependency>
   </dependencies>
-            
+
   <build>
     <pluginManagement>
       <plugins>
@@ -192,12 +198,12 @@
         <plugin>
           <groupId>com.speedment</groupId>
           <artifactId>speedment-maven-plugin</artifactId>
-          <version>${speedment.version}</version>                
+          <version>${speedment.version}</version>
         </plugin>
         <plugin>
           <groupId>org.eclipse.jetty</groupId>
           <artifactId>jetty-maven-plugin</artifactId>
-          <version>${jetty.version}</version>          
+          <version>${jetty.version}</version>
         </plugin>
       </plugins>
     </pluginManagement>

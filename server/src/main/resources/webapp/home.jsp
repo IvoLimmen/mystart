@@ -54,7 +54,7 @@
                     </c:if>                    
                   </div>                  
                   <div class="box-body">
-                    <p>${link.description}</p>
+                    <p>${util.getDescription(link)}</p>
                     <p>
                       <c:forEach items="${link.labels}" var="label" varStatus="status">
                         <c:url value="/home" var="url">
