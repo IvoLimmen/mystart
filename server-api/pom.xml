@@ -103,6 +103,16 @@
   </dependencies>
 
   <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>        
+      </resource>
+      <resource>
+        <directory>../config</directory>
+        <filtering>true</filtering>        
+      </resource>
+    </resources>
     <plugins>
       <plugin>
         <groupId>com.github.eirslett</groupId>
