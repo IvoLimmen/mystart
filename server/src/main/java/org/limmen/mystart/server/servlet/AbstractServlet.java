@@ -1,5 +1,6 @@
 package org.limmen.mystart.server.servlet;
 
+import emoji4j.EmojiUtils;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.HashMap;
@@ -18,8 +19,6 @@ import org.limmen.mystart.Storage;
 import org.limmen.mystart.User;
 import org.limmen.mystart.UserStorage;
 import org.limmen.mystart.VisitStorage;
-
-import emoji4j.EmojiUtils;
 
 public class AbstractServlet extends HttpServlet {
 
@@ -179,7 +178,7 @@ public class AbstractServlet extends HttpServlet {
       return;
     }
     if (req.getContentType() != null && req.getContentType().startsWith("multipart/form-data")) {
-      req.setAttribute(Request.__MULTIPART_CONFIG_ELEMENT, multipartConfigElement);
+      req.setAttribute(Request.MULTIPART_CONFIG_ELEMENT, multipartConfigElement);
     }
   }
 
