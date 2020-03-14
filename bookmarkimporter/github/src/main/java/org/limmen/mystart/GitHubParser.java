@@ -55,6 +55,10 @@ public class GitHubParser extends AbstractParser implements Parser {
   }
 
   private void parseFile(File file) throws IOException {
+    if (file == null) {
+      return;
+    }
+    
     StringBuilder json = new StringBuilder(4096);
     try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
       String line;

@@ -17,6 +17,7 @@
     <module>cleanup</module>
     <module>server</module>
     <module>server-api</module>
+    <module>util</module>
   </modules>
 
   <properties>
