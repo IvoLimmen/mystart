@@ -34,7 +34,7 @@ where did I bookmark it in?
 This application can import from the following sources:
 
  * FireFox (upload your places.sqlite from your profile directory)
- * GitHub (enter a link: https://api.github.com/users/ivolimmen/starred)
+ * GitHub (enter a link: https://api.github.com/users/ivolimmen/starred) (can only import 60 pages per hours due to rate-limiting)
  * Google Bookmarks XML (export the XML: https://www.google.com/bookmarks/?output=xml and upload it)
  * Google Bookmarks RSS (export the RSS: https://www.google.com/bookmarks/?output=rss&num=500&start=0 and upload it)
  * Google Chrome/Chromium (upload your Bookmarks file from your profile directory)
