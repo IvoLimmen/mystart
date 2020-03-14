@@ -8,12 +8,10 @@ import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import lombok.extern.slf4j.Slf4j;
 import org.limmen.mystart.Storage;
 import org.limmen.mystart.User;
 import org.limmen.mystart.server.support.MailService;
 
-@Slf4j
 public class LoginServlet extends AbstractServlet {
 
   private static final long serialVersionUID = 1L;

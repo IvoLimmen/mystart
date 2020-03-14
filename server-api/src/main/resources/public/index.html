@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MyStart</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/main.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/6.1.2/system.min.js"></script>
+</head>
+<body>
+  <div id="search" class="grid1 search-out">
+    <div class="command">
+      <input id="command_input" type="text" size="50" placeholder="Enter command...">
+    </div>
+  </div>
+  <div id="content" class="grid4">    
+  </div>
+  <div id="menu" class="grid3 menu-out">
+    <div class="info">
+      <p id="link.url">URL:</p>
+      <p id="link.description">Description:</p>
+      <p id="link.labels">Labels:</p>
+    </div>
+    <div class="menuitem">Visit</div>
+    <div class="menuitem">Edit</div>
+    <div class="menuitem">Delete</div>
+  </div>
+  <div id="labelmenu" class="grid3 labelmenu-out">
+      <div class="menuitem">Show</div>
+      <div class="menuitem">Move</div>
+      <div class="menuitem">Delete</div>
+    </div>
+    <div id="edit" class="edit-out">
+    <div class="form-control">
+      <label for="url">URL</label>
+      <input id="edit.url" type="text" name="url" size="80"/>
+    </div>
+    <div class="form-control">
+      <label for="title">Title</label>
+      <input id="edit.title" type="text" name="title" size="50"/>
+    </div>
+    <div class="form-control">
+      <label for="description">Description</label>
+      <textarea id="edit.description" rows="10" cols="50" name="description"></textarea>        
+    </div>
+    <div class="form-control">
+      <label for="labels">Labels</label>
+      <input id="edit.labels" type="text" name="labels" size="50" autocomplete="off"/>
+    </div>
+    <div id="edit-menu" class="grid2">
+      <div class="menuitem">Save</div><div class="menuitem">Cancel</div>
+    </div>
+  </body>
+</html>
+<script src="js/main.js"></script>

@@ -23,7 +23,7 @@ public class GoogleBookmarkXmlParser extends AbstractParser {
 
    @Override
    public String getName() {
-      return "Google Bookmarks";
+      return "Google Bookmarks XML";
    }
 
    @Override

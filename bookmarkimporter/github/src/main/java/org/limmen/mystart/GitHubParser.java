@@ -87,8 +87,6 @@ public class GitHubParser extends AbstractParser implements Parser {
     if (json.has("homepage") && !json.isNull("homepage")) {
       if (context.hasOption("github.importHomepageAsExtra")) {
         addLink(name, json.getString("homepage"), labels, description, getTimestamp(json), null);
-      } else {
-        href = json.getString("homepage");
       }
     }
 

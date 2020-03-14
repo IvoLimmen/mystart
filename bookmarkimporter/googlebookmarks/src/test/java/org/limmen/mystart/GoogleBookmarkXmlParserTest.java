@@ -29,13 +29,8 @@ public class GoogleBookmarkXmlParserTest {
     assertTrue(links.size() == 2);
 
     Iterator<Link> it = links.iterator();
-    Link link = it.next();
-    assertEquals("Some title", link.getTitle());
-    assertEquals("Some title", link.getDescription());
-    assertEquals(1, link.getLabels().size());
-    assertEquals("Label1", link.getLabels().iterator().next());
 
-    link = it.next();
+    Link link = it.next();
     assertEquals("Some title 2", link.getTitle());
     assertEquals("Some title 2", link.getDescription());
     assertEquals(2, link.getLabels().size());
@@ -44,5 +39,11 @@ public class GoogleBookmarkXmlParserTest {
 
     assertEquals("Label1", labels.next());
     assertEquals("Label2", labels.next());
+
+    link = it.next();
+    assertEquals("Some title", link.getTitle());
+    assertEquals("Some title", link.getDescription());
+    assertEquals(1, link.getLabels().size());
+    assertEquals("Label1", link.getLabels().iterator().next());
   }
 }

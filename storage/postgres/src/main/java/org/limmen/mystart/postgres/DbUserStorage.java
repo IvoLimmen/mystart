@@ -3,11 +3,9 @@ package org.limmen.mystart.postgres;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.function.Function;
-import lombok.extern.slf4j.Slf4j;
 import org.limmen.mystart.User;
 import org.limmen.mystart.UserStorage;
 
-@Slf4j
 public class DbUserStorage extends DbAbstractStorage implements UserStorage {
 
   private static final Function<Result, User> USER_MAPPER = res -> {
@@ -36,11 +34,6 @@ public class DbUserStorage extends DbAbstractStorage implements UserStorage {
     return executeSqlSingle("select * from users where id = ?", stmt -> {
       stmt.setLong(1, id);
     }, USER_MAPPER);
-  }
-
-  @Override
-  public Collection<User> getAll() {
-    return null;
   }
 
   @Override

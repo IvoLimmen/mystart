@@ -10,7 +10,13 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
+@Getter
+@Setter
+@ToString
 public class Link extends BaseObject implements Comparable<Link> {
 
   private static final String UNCATEGORIZED = "Uncategorized";
@@ -44,6 +50,17 @@ public class Link extends BaseObject implements Comparable<Link> {
 
   public Link(String url) {
     this();
+
+    Objects.requireNonNull(url, "URL may nog be null!");
+
+    url = url.toLowerCase();
+    if (url.endsWith("/")) {
+      url = url.substring(0, url.length() - 1);
+    }
+    if (!url.startsWith("http")) {
+      url = "https://" + url;
+    }
+
     this.url = url;
   }
 
@@ -80,18 +97,6 @@ public class Link extends BaseObject implements Comparable<Link> {
       return false;
     }
     return true;
-  }
-
-  public String getCheckResult() {
-    return checkResult;
-  }
-
-  public LocalDateTime getCreationDate() {
-    return creationDate;
-  }
-
-  public String getDescription() {
-    return description;
   }
 
   public String getFormattedCreationDate() {
@@ -149,36 +154,12 @@ public class Link extends BaseObject implements Comparable<Link> {
     }
   }
 
-  public Collection<String> getLabels() {
-    return labels;
-  }
-
-  public LocalDateTime getLastCheck() {
-    return lastCheck;
-  }
-
-  public LocalDateTime getLastVisit() {
-    return lastVisit;
-  }
-
   public String getRedirectUrl() {
     if (url.startsWith("http:") || url.startsWith("https:")) {
       return getUrl();
     } else {
       return "https://" + getUrl();
     }
-  }
-
-  public String getSource() {
-    return source;
-  }
-
-  public String getTitle() {
-    return title;
-  }
-
-  public String getUrl() {
-    return url;
   }
 
   /**
@@ -218,10 +199,6 @@ public class Link extends BaseObject implements Comparable<Link> {
     return hash;
   }
 
-  public boolean isPrivateNetwork() {
-    return privateNetwork;
-  }
-
   public void moveLabel(String oldLabel, String newLabel) {
     this.addLabel(newLabel);
     this.removeLabel(oldLabel);
@@ -235,52 +212,9 @@ public class Link extends BaseObject implements Comparable<Link> {
     }
   }
 
-  public void setCheckResult(String checkResult) {
-    this.checkResult = checkResult;
-  }
-
-  public void setCreationDate(LocalDateTime creationDate) {
-    this.creationDate = creationDate;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
   public void setLabels(Collection<String> labels) {
     this.labels.clear();
     this.labels.addAll(labels);
-  }
-
-  public void setLastCheck(LocalDateTime lastCheck) {
-    this.lastCheck = lastCheck;
-  }
-
-  public void setLastVisit(LocalDateTime lastVisit) {
-    this.lastVisit = lastVisit;
-  }
-
-  public void setPrivateNetwork(boolean privateNetwork) {
-    this.privateNetwork = privateNetwork;
-  }
-
-  public void setSource(String source) {
-    this.source = source;
-  }
-
-  public void setTitle(String title) {
-    this.title = title;
-  }
-
-  public void setUrl(String url) {
-    this.url = url;
-  }
-
-  @Override
-  public String toString() {
-    return "Link{" + "description=" + description + ", title=" + title + ", url=" + url + ", creationDate="
-        + creationDate + ", lastVisit=" + lastVisit + ", labels=" + labels + ", source=" + source
-        + ", privateNetwork=" + privateNetwork + '}';
   }
 
   public void visited() {

@@ -6,3 +6,13 @@ target/
 .factorypath
 nb-configuration.xml
 nbactions.xml
+
+*.js 
+*.js.map
+
+.vscode/
+
+node/
+node_modules/
+
+config/

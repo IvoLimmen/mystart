@@ -15,12 +15,11 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 import org.apache.commons.io.IOUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class GitHubPageLoader implements Enumeration<File> {
-
-   private final static Logger LOGGER = LoggerFactory.getLogger(GitHubPageLoader.class);
    
    static {
       TrustManager[] trustAllCerts = new TrustManager[]{
@@ -79,6 +78,7 @@ public class GitHubPageLoader implements Enumeration<File> {
    }   
    
    public File downloadFile(String url) throws IOException {
+      log.info("Downloading next page ({})", url);
       try {
          URI uri = new URI(url);
          HttpURLConnection httpConn = (HttpURLConnection) uri.toURL().openConnection();

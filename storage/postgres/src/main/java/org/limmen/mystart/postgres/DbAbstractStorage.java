@@ -14,10 +14,8 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.function.Consumer;
 import java.util.function.Function;
-import lombok.extern.slf4j.Slf4j;
 import org.limmen.mystart.exception.StorageException;
 
-@Slf4j
 public abstract class DbAbstractStorage {
 
   private final String password;

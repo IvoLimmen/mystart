@@ -1,0 +1,232 @@
+:root {
+  --search-height: 60px;
+  --menu-height: 250px;
+  --labelmenu-height: 150px;
+  --edit-height: 500px;
+  --main-background-color: #444;
+  --link-background-color: #bbb;
+  --selected-background-color: #fff;
+  --menu-background-color: #000;
+  --menuitem-background-color: #bbb;
+}
+
+body {
+  margin: 5px;
+  padding: 0px;
+  background-color: var(--main-background-color);
+}
+
+@keyframes edit-glide-in {
+  0%   { bottom: calc(0px - var(--edit-height)); }
+  100% { bottom: 0px; }
+}
+
+.edit-glide-in {
+  animation: 'edit-glide-in' 500ms;
+  animation-fill-mode: forwards;  
+}
+
+@keyframes edit-glide-out {
+  0%   { bottom: 0px; }
+  100% { bottom: calc(0px - var(--edit-height)); }
+}
+
+.edit-out {
+  bottom: calc(0px - var(--edit-height));
+}
+
+.edit-glide-out {
+  animation: 'edit-glide-out' 500ms;
+  animation-fill-mode: forwards;  
+}
+
+@keyframes menu-glide-in {
+  0%   { bottom: calc(0px - var(--menu-height)); }
+  100% { bottom: 0px; }
+}
+
+.menu-glide-in {
+  animation: 'menu-glide-in' 500ms;
+  animation-fill-mode: forwards;  
+}
+
+@keyframes menu-glide-out {
+  0%   { bottom: 0px; }
+  100% { bottom: calc(0px - var(--menu-height)); }
+}
+
+.menu-out {
+  bottom: calc(0px - var(--menu-height));
+}
+
+.menu-glide-out {
+  animation: 'menu-glide-out' 500ms;
+  animation-fill-mode: forwards;  
+}
+
+@keyframes labelmenu-glide-in {
+  0%   { bottom: calc(0px - var(--labelmenu-height)); }
+  100% { bottom: 0px; }
+}
+
+.labelmenu-glide-in {
+  animation: 'labelmenu-glide-in' 500ms;
+  animation-fill-mode: forwards;  
+}
+
+@keyframes labelmenu-glide-out {
+  0%   { bottom: 0px; }
+  100% { bottom: calc(0px - var(--labelmenu-height)); }
+}
+
+.labelmenu-out {
+  bottom: calc(0px - var(--labelmenu-height));
+}
+
+.labelmenu-glide-out {
+  animation: 'labelmenu-glide-out' 500ms;
+  animation-fill-mode: forwards;  
+}
+
+@keyframes search-glide-in {
+  0%   { top: calc(0px - var(--search-height)); }
+  100% { top: 0px; }
+}
+
+.search-glide-in {
+  animation: 'search-glide-in' 500ms;
+  animation-fill-mode: forwards;  
+}
+
+@keyframes search-glide-out {
+  0%   { top: 0px; }
+  100% { top: calc(0px - var(--search-height)); }
+}
+
+.search-out {
+  top: calc(0px - var(--search-height));
+}
+
+.search-glide-out {
+  animation: 'search-glide-out' 500ms;
+  animation-fill-mode: forwards;  
+}
+
+#edit {
+  border-radius: 3px;
+  width: 50%;
+  position: fixed;
+  left: 25%;  
+  border-style: solid;
+  border-width: 2px;
+  background-color: var(--menuitem-background-color);
+}
+
+.form-control label {
+  padding: 3px;
+  display: inline-block;
+  width: 150px;
+  font-weight: bold;
+  text-align: left;
+  vertical-align: top;
+}
+
+#edit-menu {
+  padding: 5px;
+  border-radius: 3px;
+  background-color: var(--menu-background-color);
+}
+
+#search {
+  border-radius: 3px;
+  padding: 5px;
+  background-color: var(--menu-background-color);
+  width: 80%;
+  position: fixed;
+  left: 10%;    
+}
+
+#menu {
+  border-radius: 3px;
+  padding: 5px;
+  background-color: var(--menu-background-color);
+  width: 90%;
+  position: fixed;
+  left: 5%;  
+}
+
+#labelmenu {
+  border-radius: 3px;
+  padding: 5px;
+  background-color: var(--menu-background-color);
+  width: 90%;
+  position: fixed;
+  left: 5%;  
+}
+
+.info {
+  background-color: var(--menuitem-background-color);
+  grid-row: 1;
+  grid-column: 1 / 4;
+}
+
+.menuitem {
+  text-align: center;
+  vertical-align: middle; 
+  font-size: 18px;
+  font-weight: bold;
+  background-color: var(--menuitem-background-color);
+  border-radius: 3px;
+  padding: 5px;  
+}
+
+.grid1 {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 5px;    
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 5px;    
+}
+
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 5px;    
+}
+
+.grid4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 5px;
+}
+
+.box {
+  background-color: var(--link-background-color);
+  border-radius: 3px;
+  padding: 5px;
+  height: 60px;  
+  overflow: hidden;
+}
+
+.box h1 {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+
+.selected {
+  background-color: var(--selected-background-color);
+}
+
+.command {
+  background-color: var(--link-background-color);
+  border-radius: 3px;
+  padding: 5px;
+  height: 40px;  
+  overflow: hidden;
+  text-align: center;  
+}
