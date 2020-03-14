@@ -6,7 +6,7 @@
 
   <groupId>org.limmen.mystart</groupId>
   <artifactId>mystart-project</artifactId>
-  <version>0.2</version>
+  <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>MyStart - Project</name>
 
@@ -25,7 +25,7 @@
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
 
-    <postgresql.version>42.2.10</postgresql.version>
+    <postgresql.version>42.2.11</postgresql.version>
     <jetty.version>9.4.27.v20200227</jetty.version>
     <jackson.version>2.10.2</jackson.version>
   </properties>

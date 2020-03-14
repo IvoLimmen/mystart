@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.limmen.mystart</groupId>
     <artifactId>mystart-project</artifactId>
-    <version>0.2</version>
+    <version>1.0.0-SNAPSHOT</version>
   </parent>
         
   <name>MyStart - Model</name>        
