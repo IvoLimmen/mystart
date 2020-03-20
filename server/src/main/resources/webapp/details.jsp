@@ -65,9 +65,11 @@
                   </c:forEach>
                 </ul>
               </p>
-              <jsp:include page="parts/similar.jsp"/>
+              <jsp:include page="parts/similar.jsp">
+                <jsp:param name="returnUrl" value="/link?details&id=${link.id}"/>
+              </jsp:include>
               <div class="actions">
-                <a href="/link?edit&id=${link.id}" >Edit <i class="fa fa-edit"></i></a>
+                <a href="/link?edit&id=${link.id}">Edit <i class="fa fa-edit"></i></a>
                 <a href="/link?delete&id=${link.id}">Delete <i class="fa fa-trash"></i></a>
               </div>
             </div>  

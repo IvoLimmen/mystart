@@ -110,6 +110,29 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
   }
 
   @Override
+  public Collection<Link> getSimilarByLink(Long userId, Link link) {
+    String url = link.getUrl();
+
+    if (url.startsWith("http://")) {
+      url = url.substring(7, url.length());
+    }
+    if (url.startsWith("https://")) {
+      url = url.substring(8, url.length());
+    }
+    if (url.endsWith("/")) {
+      url = url.substring(0, url.length() - 1);
+    }
+    String strippedUrl = "%" + url + "%";
+    log.debug("Searching for url: {}", strippedUrl);
+
+    return executeSql("select * from links where user_id = ? and url ilike ? and id != ?", args -> {
+      args.setLong(1, userId);
+      args.setString(2, strippedUrl);
+      args.setLong(3, link.getId());
+    }, LINK_MAPPER);
+  }
+
+  @Override
   public void importCollection(Long userId, Collection<Link> links, boolean skipDuplicates) {
     AtomicInteger updated = new AtomicInteger(0);
     AtomicInteger created = new AtomicInteger(0);

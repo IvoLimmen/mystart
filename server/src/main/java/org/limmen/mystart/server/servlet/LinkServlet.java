@@ -126,7 +126,11 @@ public class LinkServlet extends AbstractServlet {
 
         Long id = Long.parseLong(req.getParameter("id"));
         getLinkStorage().remove(userId, id);
-        res.sendRedirect("/home?" + getOrignalParameters(req));
+        if (exists(req, "returnUrl")) {
+          res.sendRedirect(req.getParameter("returnUrl"));
+        } else {
+          res.sendRedirect("/home?" + getOrignalParameters(req));
+        }
 
       } else if (exists(req, "lbl")) {
 

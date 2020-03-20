@@ -21,6 +21,8 @@ public interface LinkStorage {
 
   Collection<Link> getLastVisited(Long userId, int limit);
 
+  Collection<Link> getSimilarByLink(Long userId, Link link);
+
   void importCollection(Long userId, Collection<Link> link, boolean skipDuplicates);
 
   Collection<Link> last20Visits(Long userId);
