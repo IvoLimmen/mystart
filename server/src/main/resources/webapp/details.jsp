@@ -65,6 +65,7 @@
                   </c:forEach>
                 </ul>
               </p>
+              <jsp:include page="parts/similar.jsp"/>
               <div class="actions">
                 <a href="/link?edit&id=${link.id}" >Edit <i class="fa fa-edit"></i></a>
                 <a href="/link?delete&id=${link.id}">Delete <i class="fa fa-trash"></i></a>

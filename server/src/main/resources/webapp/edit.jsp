@@ -33,6 +33,7 @@
             <div class="col-md-4"></div>
             <div class="col-md-4">
               <h1>${link.id == null ? "New" : "Edit"} ${link.title}</h1>
+              <jsp:include page="parts/similar.jsp"/>  
               <form name="link" action="/link" method="post">
                 <input type="hidden" name="id" value="${link.id}"/>             
                 <input type="hidden" name="referer" value="${referer}"/>             

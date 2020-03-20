@@ -103,6 +103,7 @@ public class LinkServlet extends AbstractServlet {
       req.setAttribute("labels", getLinkStorage().getAllLabels(userId));
       req.setAttribute("referer", getOrignalParameters(req));
       req.setAttribute("link", link);
+      req.setAttribute("similar", getLinkStorage().getSimilarByLink(userId, link));
       req.setAttribute("editlabels", DomainUtil.formatLabels(link));
       req.setAttribute("type", type);
       if (type.equals("normal")) {
@@ -115,6 +116,7 @@ public class LinkServlet extends AbstractServlet {
       Long id = Long.parseLong(req.getParameter("id"));
       Link link = getLinkStorage().get(userId, id);
       req.setAttribute("link", link);
+      req.setAttribute("similar", getLinkStorage().getSimilarByLink(userId, link));
       req.setAttribute("visits", getVisitStorage().getLast20Visists(id));
       req.getRequestDispatcher("/details.jsp").include(req, res);
 
