@@ -65,7 +65,7 @@
                     </p>
                   </div>
                   <div class="box-footer">
-                    <a href="/link?details&id=${link.id}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="/link?details&id=${link.id}" class="small-box-footer">More info <i class="fa fa-info"></i></a>
                     <a href="/link?edit&id=${link.id}" class="small-box-footer">Edit <i class="fa fa-edit"></i></a>
                     <a href="/link?delete&id=${link.id}" class="small-box-footer">Delete <i class="fa fa-trash"></i></a>
                   </div>
