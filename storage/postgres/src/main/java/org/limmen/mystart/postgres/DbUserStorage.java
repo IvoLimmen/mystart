@@ -1,7 +1,6 @@
 package org.limmen.mystart.postgres;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.function.Function;
 import org.limmen.mystart.User;
 import org.limmen.mystart.UserStorage;

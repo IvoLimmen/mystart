@@ -6,7 +6,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-public class NetscapeParser extends AbstractParser implements Parser {
+public class NetscapeParser extends AbstractParser {
 
   public NetscapeParser() {
     setSource("Netscape Bookmark");

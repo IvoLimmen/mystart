@@ -10,14 +10,12 @@ import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import lombok.extern.slf4j.Slf4j;
 import org.json.JSONException;
 import org.json.JSONWriter;
 import org.limmen.mystart.Storage;
 import org.limmen.mystart.server.servlet.AbstractServlet;
 import org.limmen.mystart.server.servlet.model.ChartData;
 
-@Slf4j
 public class AjaxServlet extends AbstractServlet {
 
   private static final long serialVersionUID = 1L;

@@ -17,7 +17,6 @@ import java.util.Set;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.SessionTrackingMode;
 import javax.servlet.http.HttpServlet;
-import lombok.extern.slf4j.Slf4j;
 import org.eclipse.jetty.jsp.JettyJspServlet;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.DefaultServlet;
@@ -39,7 +38,6 @@ import org.limmen.mystart.server.servlet.ajax.AjaxServlet;
 import org.limmen.mystart.server.support.MailService;
 import org.limmen.mystart.server.support.MailServiceImpl;
 
-@Slf4j
 public class Main {
 
   public static void main(String[] args) throws Exception {

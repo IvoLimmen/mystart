@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-public class FireFoxParser extends AbstractParser implements Parser {
+public class FireFoxParser extends AbstractParser {
 
    public FireFoxParser() {
       setSource("FireFox");

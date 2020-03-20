@@ -13,7 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class GitHubParser extends AbstractParser implements Parser {
+public class GitHubParser extends AbstractParser {
 
   private ParseContext context;
 
