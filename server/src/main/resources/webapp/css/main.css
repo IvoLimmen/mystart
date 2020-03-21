@@ -1,3 +1,12 @@
 .flair {
   float: right;
 }
+
+#clickme {
+  cursor: pointer;
+}
+
+#clickme:hover {
+  cursor: pointer;
+  background-color: #e8eaee;
+}
