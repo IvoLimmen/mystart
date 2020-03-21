@@ -1,5 +1,6 @@
 package org.limmen.mystart.server.servlet;
 
+import emoji4j.EmojiManager;
 import emoji4j.EmojiUtils;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -46,12 +47,14 @@ public class AbstractServlet extends HttpServlet {
     FLAIR.put("google.com", "fa-google");
     FLAIR.put("medium.com", "fa-medium");
     FLAIR.put("news.ycombinator.com", "fa-hacker-news");
+
+    EmojiManager.addStopWords("http://", "https://");
   }
 
   public String getDescription(Link link) {
     if (link == null || link.getDescription() == null) {
       return null;
-    }
+    }  
     return EmojiUtils.htmlify(link.getDescription());
   }
 

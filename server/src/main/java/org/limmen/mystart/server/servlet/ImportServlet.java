@@ -84,7 +84,7 @@ public class ImportServlet extends AbstractServlet {
     }
 
     Set<Link> links = parser.parse(parseContext);
-    log.info("Parsed {} links from {}", links.size(), parser.getName());
+    log.info("Parsed {} links using {}", links.size(), parser.getName());
 
     getLinkStorage().importCollection(userId, links, skipDuplicates);
 

@@ -73,3 +73,9 @@ Create a new database (postgres) by executing:
 After a full build execute the following to start the server:
 
     ./server/target/appassembler/bin/mystart
+
+# Credits
+
+* For emoji handling: https://github.com/kcthota/emoji4j
+* For icons: https://fontawesome.com/
+* For look and feel: https://github.com/ColorlibHQ/AdminLTE
