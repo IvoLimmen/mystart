@@ -24,11 +24,5 @@
       <groupId>org.xerial</groupId>
       <artifactId>sqlite-jdbc</artifactId>
     </dependency>
-
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
 </project>

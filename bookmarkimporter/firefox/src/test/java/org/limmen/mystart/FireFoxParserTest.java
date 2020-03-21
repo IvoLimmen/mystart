@@ -1,13 +1,15 @@
 package org.limmen.mystart;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Set;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 
 public class FireFoxParserTest {
 
