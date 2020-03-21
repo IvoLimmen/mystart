@@ -23,11 +23,19 @@ where did I bookmark it in?
 
  * Statistics
 
-    Added some statistics on source, visits and creation date.
+    Added some statistics on source, visits and creation date. There is also a "Last visited" and "Last created" page.
 
  * Import
 
     MyStart can import from multiple sources.
+
+ * Deduplication help
+
+   When adding a new URL or editing an exiting one the page will show you a list of similar bookmarks that you can delete or edit.
+
+ * User accounts
+
+   Regular stuff: create account, change password, forgot password, set a nice picture.
 
 # Importing bookmarks
 
@@ -45,8 +53,8 @@ This application can import from the following sources:
 
 Do a checkout of this project. You need to following to build:
 
-* Minimal JDK 11*
-* Maven 3.5.*
+* Minimal JDK 11 and up
+* Maven 3.* and up
 
 Then execute the following command:
 
