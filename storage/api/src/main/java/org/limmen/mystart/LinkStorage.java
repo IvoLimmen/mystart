@@ -23,6 +23,8 @@ public interface LinkStorage {
 
   Collection<Link> getSimilarByLink(Long userId, Link link);
 
+  Collection<Link> getSimilarByUrl(Long userId, String url);
+
   void importCollection(Long userId, Collection<Link> link, boolean skipDuplicates);
 
   Collection<Link> last20Visits(Long userId);

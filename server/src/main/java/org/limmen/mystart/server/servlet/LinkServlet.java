@@ -103,7 +103,11 @@ public class LinkServlet extends AbstractServlet {
       req.setAttribute("labels", getLinkStorage().getAllLabels(userId));
       req.setAttribute("referer", getOrignalParameters(req));
       req.setAttribute("link", link);
-      req.setAttribute("similar", getLinkStorage().getSimilarByLink(userId, link));
+      if (link.getId() != null) {
+        req.setAttribute("similar", getLinkStorage().getSimilarByLink(userId, link));
+      } else {
+        req.setAttribute("similar", getLinkStorage().getSimilarByUrl(userId, link.getUrl()));
+      }
       req.setAttribute("editlabels", DomainUtil.formatLabels(link));
       req.setAttribute("type", type);
       if (type.equals("normal")) {
