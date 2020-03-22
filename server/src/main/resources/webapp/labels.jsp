@@ -45,13 +45,11 @@
             <c:forEach items="${labels}" var="label" varStatus="ls">
               <div class="col-lg-3 col-xs-6">
                 <div class="box box-solid box-default">
-                  <div class="box-header">
-                    <h3 class="box-title">
-                      <c:url value="/home" var="url">
-                        <c:param name="label" value="${label}"/>
-                      </c:url>
-                      <a href="${url}">${label}</a>
-                    </h3>
+                  <c:url value="/home" var="url">
+                    <c:param name="label" value="${label}"/>
+                  </c:url>
+                  <div id="clickme" class="box-header" onclick="javascript:openLink(false, '${url}')">
+                    <h3 class="box-title">${label}</h3>
                   </div>                  
                   <div class="box-body">
                     <p>Links: ${stats[label]}</p>
