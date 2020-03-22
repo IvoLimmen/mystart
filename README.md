@@ -70,9 +70,14 @@ Create a new database (postgres) by executing:
 
 # Starting the application
 
-After a full build execute the following to start the server:
+## For development tests
 
-    ./server/target/appassembler/bin/mystart
+    mvn -pl :server exec:java
+
+## For release
+
+Extract the generated server-[VERSION].tar.gz. This will create a directory called mystart.
+Go into the `bin` directory and execute the `mystart` script to start it.
 
 # Credits
 
