@@ -68,6 +68,17 @@ Create a new database (postgres) by executing:
 
 (On start the application will create the tables)
 
+# Configuration
+
+In the directory `config` there are two configuration files, one for the application and one for the logging.
+create copies of the files:
+
+```sh
+$ cp config/application-local.properties.example config/application-local.properties
+$ cp config/logback-local.xml.example config/logback-local.xml
+```
+And customize accordingly. When you deploy it you should also have a `production` version.
+
 # Starting the application
 
 ## For development tests
