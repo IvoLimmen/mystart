@@ -83,7 +83,10 @@ And customize accordingly. When you deploy it you should also have a `production
 
 ## For development tests
 
-    mvn -pl :server exec:java
+```sh
+$ cd server
+$ mvn exec:java
+```
 
 ## For release
 
