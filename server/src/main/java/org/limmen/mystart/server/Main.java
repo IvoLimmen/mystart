@@ -2,11 +2,9 @@ package org.limmen.mystart.server;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.file.Files;
@@ -15,9 +13,11 @@ import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
+
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.SessionTrackingMode;
 import javax.servlet.http.HttpServlet;
+
 import org.eclipse.jetty.jsp.JettyJspServlet;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.DefaultServlet;
@@ -39,13 +39,16 @@ import org.limmen.mystart.server.servlet.ajax.AjaxServlet;
 import org.limmen.mystart.server.support.MailService;
 import org.limmen.mystart.server.support.MailServiceImpl;
 
+import ch.qos.logback.classic.ClassicConstants;
+
 public class Main {
 
   private static String configDir;
   private static String webappDir;
+  private static Environment environment;
 
   private static void parseArguments(String[] args) {
-      for (int i = 0; i < args.length; i++) {
+    for (int i = 0; i < args.length; i++) {
       switch (args[i]) {
         case "config.dir":
           configDir = args[++i];
@@ -53,23 +56,38 @@ public class Main {
         case "webapp.dir":
           webappDir = args[++i];
           break;
+        case "env":
+          environment = Environment.valueOf(args[++i].toUpperCase());
+          break;
         default:
           throw new IllegalArgumentException("Unknown program argument: " + args[i]);
       }
     }
 
-    if (configDir == null || webappDir == null) {
-      throw new IllegalArgumentException();
+    if (configDir == null || webappDir == null || environment == null) {
+      throw new IllegalArgumentException("Settings missing!");
     }
 
   }
-  public static void main(String[] args) throws Exception {
-    Log.setLog(new Slf4jLog());
 
+  private static String getFileName(String fileName) {
+    int dot = fileName.indexOf(".");
+    String baseName = fileName.substring(0, dot);
+    String ext = fileName.substring(dot + 1);
+    return String.format("%s-%s.%s", baseName, environment.name().toLowerCase(), ext);
+  }
+
+  public static void main(String[] args) throws Exception {
     parseArguments(args);
 
+    System.setProperty(ClassicConstants.CONFIG_FILE_PROPERTY,
+        Paths.get(configDir, getFileName("logback.xml")).toString());
+
+    Log.setLog(new Slf4jLog());
+
     Properties properties = new Properties();
-    try (InputStream inputStream = new FileInputStream(Paths.get(configDir, "application.properties").toFile())) {
+    try (InputStream inputStream = new FileInputStream(
+        Paths.get(configDir, getFileName("application.properties")).toFile())) {
       properties.load(inputStream);
     }
     properties.putAll(System.getProperties());

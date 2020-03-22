@@ -15,4 +15,5 @@ nbactions.xml
 node/
 node_modules/
 
-config/
+config/*.properties
+config/*.xml

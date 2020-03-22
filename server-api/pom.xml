@@ -102,10 +102,6 @@
         <directory>src/main/resources</directory>
         <filtering>true</filtering>        
       </resource>
-      <resource>
-        <directory>../config</directory>
-        <filtering>true</filtering>        
-      </resource>
     </resources>
     <plugins>
       <plugin>

@@ -97,9 +97,11 @@
           <mainClass>org.limmen.mystart.server.Main</mainClass>
           <arguments>
             <argument>config.dir</argument>
-            <argument>../config</argument>
+            <argument>${basedir}/../config</argument>
             <argument>webapp.dir</argument>
             <argument>src/main/webapp</argument>
+            <argument>env</argument>
+            <argument>local</argument>
           </arguments>          
         </configuration>
       </plugin>

@@ -46,4 +46,5 @@ exec "$JAVACMD" $JAVA_OPTS -server \
   -Dapp.home="$BASEDIR" \
   org.limmen.mystart.server.Main \
   config.dir "$BASEDIR/config" \
-  webapp.dir "$BASEDIR/webapp" 
+  webapp.dir "$BASEDIR/webapp" \
+  env production
