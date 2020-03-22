@@ -1,6 +1,7 @@
 package org.limmen.mystart.server;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -40,22 +41,43 @@ import org.limmen.mystart.server.support.MailServiceImpl;
 
 public class Main {
 
+  private static String configDir;
+  private static String webappDir;
+
+  private static void parseArguments(String[] args) {
+      for (int i = 0; i < args.length; i++) {
+      switch (args[i]) {
+        case "config.dir":
+          configDir = args[++i];
+          break;
+        case "webapp.dir":
+          webappDir = args[++i];
+          break;
+        default:
+          throw new IllegalArgumentException("Unknown program argument: " + args[i]);
+      }
+    }
+
+    if (configDir == null || webappDir == null) {
+      throw new IllegalArgumentException();
+    }
+
+  }
   public static void main(String[] args) throws Exception {
     Log.setLog(new Slf4jLog());
-    Properties properties = new Properties();
 
-    try (InputStream inputStream = Main.class.getResourceAsStream("/application.properties")) {
+    parseArguments(args);
+
+    Properties properties = new Properties();
+    try (InputStream inputStream = new FileInputStream(Paths.get(configDir, "application.properties").toFile())) {
       properties.load(inputStream);
     }
     properties.putAll(System.getProperties());
 
-    MailService mailService = MailServiceImpl.builder()
-        .from(properties.getProperty("mail.smtp.from"))
-        .port(Integer.parseInt(properties.getProperty("mail.smtp.port")))
-        .host(properties.getProperty("mail.smtp.host"))
+    MailService mailService = MailServiceImpl.builder().from(properties.getProperty("mail.smtp.from"))
+        .port(Integer.parseInt(properties.getProperty("mail.smtp.port"))).host(properties.getProperty("mail.smtp.host"))
         .startTls(Boolean.parseBoolean(properties.getProperty("mail.smtp.starttls")))
-        .username(properties.getProperty("mail.smtp.username"))
-        .password(properties.getProperty("mail.smtp.password"))
+        .username(properties.getProperty("mail.smtp.username")).password(properties.getProperty("mail.smtp.password"))
         .build();
 
     String serverName = properties.getProperty("server.name");
@@ -67,11 +89,12 @@ public class Main {
 
     File scratchDir = createScratchDirectory();
 
-    MultipartConfigElement multipartConfigElement = new MultipartConfigElement(scratchDir.getAbsolutePath(), 41943040, 41943040, 4096);
+    MultipartConfigElement multipartConfigElement = new MultipartConfigElement(scratchDir.getAbsolutePath(), 41943040,
+        41943040, 4096);
 
     Server server = new Server(Integer.parseInt(properties.getProperty("server.port", "8080")));
-    URI baseUri = getWebRootResourceUri();
-    Path avatarPath = Paths.get(new File(baseUri.toURL().toURI()).toPath().toString(), "avatar");
+    URI baseUri = Paths.get(webappDir).toUri();
+    Path avatarPath = Paths.get(webappDir, "avatar");
     Files.createDirectories(avatarPath);
 
     ServletContextHandler servletContextHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
@@ -102,25 +125,26 @@ public class Main {
     server.setHandler(servletContextHandler);
 
     addServlet(server, servletContextHandler, "homeServlet", "/home",
-               new HomeServlet(storage, multipartConfigElement, scratchDir.toPath()));
+        new HomeServlet(storage, multipartConfigElement, scratchDir.toPath()));
     addServlet(server, servletContextHandler, "userServlet", "/user",
-               new UserServlet(storage, multipartConfigElement, scratchDir.toPath(), avatarPath));
+        new UserServlet(storage, multipartConfigElement, scratchDir.toPath(), avatarPath));
     addServlet(server, servletContextHandler, "loginServlet", "/login",
-               new LoginServlet(storage, multipartConfigElement, scratchDir.toPath(), mailService, localUrl));
+        new LoginServlet(storage, multipartConfigElement, scratchDir.toPath(), mailService, localUrl));
     addServlet(server, servletContextHandler, "importServlet", "/import",
-               new ImportServlet(parser, storage, multipartConfigElement, scratchDir.toPath()));
+        new ImportServlet(parser, storage, multipartConfigElement, scratchDir.toPath()));
     addServlet(server, servletContextHandler, "linkServlet", "/link",
-               new LinkServlet(storage, multipartConfigElement, scratchDir.toPath()));
+        new LinkServlet(storage, multipartConfigElement, scratchDir.toPath()));
     addServlet(server, servletContextHandler, "navServlet", "/nav",
-               new NavServlet(storage, multipartConfigElement, scratchDir.toPath()));
+        new NavServlet(storage, multipartConfigElement, scratchDir.toPath()));
     addServlet(server, servletContextHandler, "ajaxServlet", "/ajax",
-               new AjaxServlet(storage, multipartConfigElement, scratchDir.toPath()));
+        new AjaxServlet(storage, multipartConfigElement, scratchDir.toPath()));
 
     server.start();
     server.join();
   }
 
-  private static void addServlet(Server server, ServletContextHandler servletContextHandler, String name, String url, HttpServlet servlet) {
+  private static void addServlet(Server server, ServletContextHandler servletContextHandler, String name, String url,
+      HttpServlet servlet) {
     ServletHolder holderDefault = new ServletHolder(name, servlet);
     servletContextHandler.addServlet(holderDefault, url);
     server.setHandler(servletContextHandler);
@@ -143,13 +167,5 @@ public class Main {
     }
 
     return "https://" + serverName;
-  }
-
-  private static URI getWebRootResourceUri() throws FileNotFoundException, URISyntaxException {
-    URL indexUri = Main.class.getResource("../../../../webapp");
-    if (indexUri == null) {
-      throw new FileNotFoundException("Unable to find resources");
-    }
-    return indexUri.toURI();
   }
 }
