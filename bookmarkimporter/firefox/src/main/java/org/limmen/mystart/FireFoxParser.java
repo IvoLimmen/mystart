@@ -13,94 +13,92 @@ import java.util.Set;
 
 public class FireFoxParser extends AbstractParser {
 
-   public FireFoxParser() {
-      setSource("FireFox");
-   }
+  public FireFoxParser() {
+    setSource("FireFox");
+  }
 
-   @Override
-   public String getName() {
-      return "FireFox";
-   }
+  @Override
+  public String getName() {
+    return "FireFox";
+  }
 
-   @Override
-   public boolean canParse(ParseContext context) {
-      return context.getFileName() != null && context.getFileName().endsWith("places.sqlite");
-   }
+  @Override
+  public boolean canParse(ParseContext context) {
+    return context.getFileName() != null && context.getFileName().endsWith("places.sqlite");
+  }
 
-   @Override
+  @Override
   public Set<Link> parse(ParseContext context) throws IOException {
 
-      List<LinkDto> list = new ArrayList<>();
+    List<LinkDto> list = new ArrayList<>();
 
-      try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + context.getTemporaryFileName())) {
-         Statement statement = connection.createStatement();
-         statement.setQueryTimeout(30);
+    try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + context.getTemporaryFileName())) {
+      Statement statement = connection.createStatement();
+      statement.setQueryTimeout(30);
 
-         try (ResultSet rs = statement.executeQuery(
-             "select b.parent, b.title, p.url, b.dateAdded, p.last_visit_date, a.content from moz_bookmarks b "
-             + "left join moz_places p on b.fk = p.id	"
-             + "left join moz_items_annos a on b.id = a.item_id "
-             + "where b.type = 1 and b.guid not in (\"menu________\",\"toolbar_____\",\"tags________\",\"unfiled_____\")")) {
+      try (ResultSet rs = statement.executeQuery(
+          "select b.parent, b.title, p.url, b.dateAdded, p.last_visit_date, a.content from moz_bookmarks b "
+          + "left join moz_places p on b.fk = p.id	"
+          + "left join moz_items_annos a on b.id = a.item_id "
+          + "where b.type = 1 and b.guid not in (\"menu________\",\"toolbar_____\",\"tags________\",\"unfiled_____\")")) {
 
-            while (rs.next()) {
+        while (rs.next()) {
 
-               LinkDto dto = new LinkDto();
-               dto.setUrl(rs.getString("url"));
-               dto.setTitle(rs.getString("title"));
-               dto.setDescription(rs.getString("content"));
-               dto.setDateAdded(convertEpochToTimestamp(rs.getLong("dateAdded")));
-               dto.setDateVisited(convertEpochToTimestamp(rs.getLong("last_visit_date")));
-               dto.setParent(rs.getInt("parent"));
-               
-               if (dto.isValid()) {
-                  list.add(dto);
-               }
-            }
-         }
+          LinkDto dto = new LinkDto();
+          dto.setUrl(rs.getString("url"));
+          dto.setTitle(rs.getString("title"));
+          dto.setDescription(rs.getString("content"));
+          dto.setDateAdded(convertEpochToTimestamp(rs.getLong("dateAdded")));
+          dto.setDateVisited(convertEpochToTimestamp(rs.getLong("last_visit_date")));
+          dto.setParent(rs.getInt("parent"));
 
-         list.forEach(l -> {
-            try {
-               l.addLabels(getLabels(statement, l.getParent()));
-            }
-            catch (SQLException ex) {
-               // ignore
-            }
-         });
-      }
-      catch (SQLException e) {
-         throw new IOException(e);
+          if (dto.isValid()) {
+            list.add(dto);
+          }
+        }
       }
 
       list.forEach(l -> {
-         addLink(l.getTitle(), l.getUrl(), l.getLabels(), l.getDescription(), l.getDateAdded(), l.getDateVisited());
+        try {
+          l.addLabels(getLabels(statement, l.getParent()));
+        } catch (SQLException ex) {
+          // ignore
+        }
       });
+    } catch (SQLException e) {
+      throw new IOException(e);
+    }
 
-      return getLinks();
-   }
+    list.forEach(l -> {
+      addLink(l.getTitle(), l.getUrl(), l.getLabels(), l.getDescription(), l.getDateAdded(), l.getDateVisited());
+    });
 
-   private Collection<String> getLabels(Statement statement, Integer id) throws SQLException {
-      List<String> list = new ArrayList<>();
+    return getLinks();
+  }
 
-      String title = null;
-      Integer type = null;
-      Integer parent = null;
+  private Collection<String> getLabels(Statement statement, Integer id) throws SQLException {
+    List<String> list = new ArrayList<>();
 
-      try (ResultSet rs = statement.executeQuery("select * from moz_bookmarks where id = " + id)) {
-         while (rs.next()) {
-            title = rs.getString("title");
-            type = rs.getInt("type");
-            parent = rs.getInt("parent");
-         }
+    String title = null;
+    Integer type = null;
+    Integer parent = null;
+
+    try (ResultSet rs = statement.executeQuery("select * from moz_bookmarks where id = " + id)) {
+      while (rs.next()) {
+        title = rs.getString("title");
+        type = rs.getInt("type");
+        parent = rs.getInt("parent");
       }
+    }
 
-      if (type != null && type == 2) {
-         list.add(title);
-         if (parent != null && parent > 3) {
-            list.addAll(getLabels(statement, parent));
-         }
+    if (type != null && type == 2) {
+      list.add(title);
+      if (parent != null && parent > 3) {
+        list.addAll(getLabels(statement, parent));
       }
+    }
 
-      return list;
-   }
+    return list;
+  }
 
 }

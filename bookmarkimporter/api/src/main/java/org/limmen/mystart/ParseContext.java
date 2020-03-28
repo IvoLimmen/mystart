@@ -4,14 +4,16 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import lombok.Getter;
 
+@Getter
 public class ParseContext {
 
   private final String fileName;
 
   private final ByteArrayInputStream inputStream;
 
-  private Map<String, String> options = new HashMap<>();
+  private final Map<String, String> options = new HashMap<>();
 
   private final String temporaryFileName;
 
@@ -38,10 +40,6 @@ public class ParseContext {
     this.options.put(key, value);
   }
 
-  public String getFileName() {
-    return fileName;
-  }
-
   public InputStream getInputStream() {
     inputStream.reset();
     return inputStream;
@@ -51,14 +49,6 @@ public class ParseContext {
     return this.options.get(key);
   }
 
-  public String getTemporaryFileName() {
-    return temporaryFileName;
-  }
-
-  public String getUrl() {
-    return url;
-  }
-
   public boolean hasData() {
     return this.inputStream != null;
   }
@@ -66,5 +56,4 @@ public class ParseContext {
   public boolean hasOption(String key) {
     return this.options.containsKey(key);
   }
-
 }

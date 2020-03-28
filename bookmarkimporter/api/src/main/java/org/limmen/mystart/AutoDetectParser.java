@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ServiceLoader;
 import java.util.Set;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class AutoDetectParser extends AbstractParser {
 
   private final List<Parser> parsers = new ArrayList<>();
@@ -13,11 +15,11 @@ public class AutoDetectParser extends AbstractParser {
   private Parser parser = null;
 
   public AutoDetectParser() {
-    LOGGER.info("Searching for bookmark importers...");
+    log.info("Searching for bookmark importers...");
 
     ServiceLoader<Parser> serviceLoader = ServiceLoader.load(Parser.class);
     for (Parser p : serviceLoader) {
-      LOGGER.info("Found parser: {}", p.getName());
+      log.info("Found parser: {}", p.getName());
       parsers.add(p);
     }
   }
@@ -36,9 +38,9 @@ public class AutoDetectParser extends AbstractParser {
   public Set<Link> parse(ParseContext context) throws IOException {
 
     if (context.hasData()) {
-      LOGGER.info("Reading file {} for autodetect", context.getFileName());
+      log.info("Reading file {} for autodetect", context.getFileName());
     } else {
-      LOGGER.info("Reading URL '{}' for autodetect", context.getUrl());
+      log.info("Reading URL '{}' for autodetect", context.getUrl());
     }
 
     this.parser = null;
@@ -48,7 +50,7 @@ public class AutoDetectParser extends AbstractParser {
           parser = p;
         }
       } catch (IOException ex) {
-        LOGGER.error("Failed to detect type while scanning in {}", p.getName());
+        log.error("Failed to detect type while scanning in {}", p.getName());
       }
     });
 
@@ -56,7 +58,7 @@ public class AutoDetectParser extends AbstractParser {
       throw new IllegalStateException("File can not be detected, parsing failed.");
     }
 
-    LOGGER.info("Using {}...", parser.getName());
+    log.info("Using {}...", parser.getName());
 
     return parser.parse(context);
   }

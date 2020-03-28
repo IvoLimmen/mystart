@@ -11,12 +11,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import org.apache.commons.io.IOUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public abstract class AbstractParser implements Parser {
-
-  protected static final Logger LOGGER = LoggerFactory.getLogger(AbstractParser.class);
 
   private final Set<Link> links = new HashSet<>();
 

@@ -97,7 +97,7 @@ public class GitHubPageLoader implements Enumeration<File> {
         log.warn("Not authorized/Rate limit exceeded");
         return null;
       }
-    } catch (Exception ex) {
+    } catch (IOException | InterruptedException ex) {
       //
     }
     return null;
