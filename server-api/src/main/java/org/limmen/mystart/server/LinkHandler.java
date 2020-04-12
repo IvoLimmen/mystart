@@ -1,16 +1,13 @@
 package org.limmen.mystart.server;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import org.limmen.mystart.Link;
 import org.limmen.mystart.Storage;
 import org.limmen.mystart.criteria.Like;
 import org.limmen.mystart.server.dto.LinkDto;
-
 import spark.Request;
 import spark.Response;
 
