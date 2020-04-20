@@ -1,5 +1,6 @@
 package org.limmen.mystart.server;
 
+import ch.qos.logback.classic.ClassicConstants;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -13,11 +14,9 @@ import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
-
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.SessionTrackingMode;
 import javax.servlet.http.HttpServlet;
-
 import org.eclipse.jetty.jsp.JettyJspServlet;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.DefaultServlet;
@@ -38,8 +37,6 @@ import org.limmen.mystart.server.servlet.UserServlet;
 import org.limmen.mystart.server.servlet.ajax.AjaxServlet;
 import org.limmen.mystart.server.support.MailService;
 import org.limmen.mystart.server.support.MailServiceImpl;
-
-import ch.qos.logback.classic.ClassicConstants;
 
 public class Main {
 
@@ -145,9 +142,9 @@ public class Main {
     addServlet(server, servletContextHandler, "homeServlet", "/home",
         new HomeServlet(storage, multipartConfigElement, scratchDir.toPath()));
     addServlet(server, servletContextHandler, "userServlet", "/user",
-        new UserServlet(storage, multipartConfigElement, scratchDir.toPath(), avatarPath));
+        new UserServlet(storage, multipartConfigElement, scratchDir.toPath(), avatarPath, properties.getProperty("server.salt")));
     addServlet(server, servletContextHandler, "loginServlet", "/login",
-        new LoginServlet(storage, multipartConfigElement, scratchDir.toPath(), mailService, localUrl));
+        new LoginServlet(storage, multipartConfigElement, scratchDir.toPath(), mailService, localUrl, properties.getProperty("server.salt")));
     addServlet(server, servletContextHandler, "importServlet", "/import",
         new ImportServlet(parser, storage, multipartConfigElement, scratchDir.toPath()));
     addServlet(server, servletContextHandler, "linkServlet", "/link",

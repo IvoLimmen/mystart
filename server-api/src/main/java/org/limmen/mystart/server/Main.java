@@ -94,7 +94,7 @@ public class Main {
     module.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern("yyyyMMdd")));
     mapper.registerModule(module);
 
-    UserHandler userHandler = new UserHandler(storage, mapper);
+    UserHandler userHandler = new UserHandler(properties.getProperty("server.salt"), storage, mapper);
     LinkHandler linkHandler = new LinkHandler(storage, mapper);
     LabelHandler labelHandler = new LabelHandler(storage, mapper);
 

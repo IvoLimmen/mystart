@@ -18,18 +18,22 @@ public class LoginServlet extends AbstractServlet {
 
   private final String localUrl;
 
+  private final String salt; 
+  
   private final MailService mailService;
 
   public LoginServlet(Storage storage,
                       MultipartConfigElement multipartConfigElement,
                       Path temporaryDirectory,
                       MailService mailService,
-                      String localUrl) {
+                      String localUrl,
+                      String salt) {
     super(storage,
           multipartConfigElement,
           temporaryDirectory);
     this.mailService = mailService;
     this.localUrl = localUrl;
+    this.salt = salt;
   }
 
   private String createUrl(String localUrl, User user) {
@@ -67,7 +71,7 @@ public class LoginServlet extends AbstractServlet {
     if (exists(req, "registerButton")) {
       User user = new User();
       user.setEmail(email);
-      user.updatePassword(password);
+      user.updatePassword(salt, password);
       getUserStorage().store(user);
 
       res.sendRedirect("/home");
@@ -91,7 +95,7 @@ public class LoginServlet extends AbstractServlet {
       if (user != null) {
         user.setResetCode(null);
         user.setResetCodeValid(null);
-        user.updatePassword(password);
+        user.updatePassword(salt, password);
         getUserStorage().store(user);
       }
 
@@ -101,7 +105,7 @@ public class LoginServlet extends AbstractServlet {
 
       User user = getUserStorage().getByEmail(email);
 
-      if (user == null || !user.check(password)) {
+      if (user == null || !user.check(salt, password)) {
         res.sendRedirect("/login.jsp?error=1");
       } else {
         req.getSession().setAttribute(USER_ID, user.getId());

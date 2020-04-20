@@ -20,12 +20,16 @@ public class UserServlet extends AbstractServlet {
 
   private final Path avatarDirectory;
 
+  private final String salt;
+  
   public UserServlet(Storage storage,
           MultipartConfigElement multipartConfigElement,
           Path temporaryDirectory,
-          Path avatarDirectory) {
+          Path avatarDirectory,
+          String salt) {
     super(storage, multipartConfigElement, temporaryDirectory);
     this.avatarDirectory = avatarDirectory;
+    this.salt = salt;
   }
 
   @Override
@@ -75,7 +79,7 @@ public class UserServlet extends AbstractServlet {
       user.setEmail(email);
       user.setFullName(fullName);
       if (password != null && password.length() > 0 && password2 != null && password.equals(password2)) {
-        user.updatePassword(password);
+        user.updatePassword(salt, password);
       }
       getUserStorage().store(user);
 

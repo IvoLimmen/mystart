@@ -16,7 +16,7 @@ public final class User extends BaseObject {
   private String avatarFileName;
   private String email;
   private String fullName;
-  private Set<String> menuLabels = new HashSet<>();
+  private final Set<String> menuLabels = new HashSet<>();
   private boolean openInNewTab;
   private String password;
   private String resetCode;
@@ -27,13 +27,16 @@ public final class User extends BaseObject {
     this.autoStartLabel = "MyStart";
   }
 
-  public boolean check(String password) {
-    return this.password.equals(encode(email, password));
+  public boolean check(String salt, String password) {
+    if (this.password == null || salt == null || password == null) {
+      return false;
+    }
+    return this.password.equals(encode(email, salt, password));
   }
 
-  private String encode(String email, String password) {
+  private String encode(String email, String salt, String password) {
     try {
-      String text = email + "/myStartSalt/" + password;
+      String text = email + salt + password;
       MessageDigest md = MessageDigest.getInstance("SHA-1");
       StringBuilder pw = new StringBuilder(64);
       for (byte b : md.digest(text.getBytes("UTF-8"))) {
@@ -118,7 +121,7 @@ public final class User extends BaseObject {
     this.resetCodeValid = resetCodeValid;
   }
 
-  public void updatePassword(String password) {
-    this.password = encode(email, password);
+  public void updatePassword(String salt, String password) {
+    this.password = encode(email, salt, password);
   }
 }
