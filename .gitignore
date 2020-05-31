@@ -7,8 +7,8 @@ target/
 nb-configuration.xml
 nbactions.xml
 
-*.js 
-*.js.map
+server-api/src/main/resources/public/js/*.js 
+server-api/src/main/resources/public/js/*.js.map
 
 .vscode/
 
