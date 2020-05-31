@@ -15,7 +15,7 @@ public interface LinkStorage {
 
   Collection<String> getAllLabels(Long userId);
 
-  Link getByUrl(Long userId, String url);
+  Link getByUrl(Long userId, Link url);
 
   Collection<Link> getLastCreated(Long userId, int limit);
 
