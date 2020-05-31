@@ -17,6 +17,7 @@ import java.util.Set;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.SessionTrackingMode;
 import javax.servlet.http.HttpServlet;
+import org.eclipse.jetty.http.HttpCookie;
 import org.eclipse.jetty.jsp.JettyJspServlet;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.DefaultServlet;
@@ -116,6 +117,9 @@ public class Main {
     Set<SessionTrackingMode> trackingModes = new HashSet<>();
     trackingModes.add(SessionTrackingMode.COOKIE);
     servletContextHandler.getSessionHandler().setSessionTrackingModes(trackingModes);
+    servletContextHandler.getSessionHandler().setHttpOnly(true);
+    servletContextHandler.getSessionHandler().setSecureRequestOnly(true);
+    servletContextHandler.getSessionHandler().setSameSite(HttpCookie.SameSite.STRICT);
     servletContextHandler.setContextPath("/");
     servletContextHandler.setResourceBase(baseUri.toASCIIString());
     ClassLoader jspClassLoader = new URLClassLoader(new URL[0], Main.class.getClassLoader());
