@@ -23,6 +23,20 @@ public class Link extends BaseObject implements Comparable<Link> {
 
   private static final long serialVersionUID = -1267285018252976552L;
 
+  public static String sanatizeUrl(String url) {
+    Objects.requireNonNull(url, "URL may nog be null!");
+
+    url = url.toLowerCase();
+    if (url.endsWith("/")) {
+      url = url.substring(0, url.length() - 1);
+    }
+    if (!url.startsWith("http")) {
+      url = "https://" + url;
+    }
+
+    return url;
+  }
+
   private String checkResult;
 
   private LocalDateTime creationDate;
@@ -53,15 +67,7 @@ public class Link extends BaseObject implements Comparable<Link> {
 
     Objects.requireNonNull(url, "URL may nog be null!");
 
-    url = url.toLowerCase();
-    if (url.endsWith("/")) {
-      url = url.substring(0, url.length() - 1);
-    }
-    if (!url.startsWith("http")) {
-      url = "https://" + url;
-    }
-
-    this.url = url;
+    this.url = sanatizeUrl(url);
   }
 
   public void addLabel(String label) {
@@ -101,8 +107,8 @@ public class Link extends BaseObject implements Comparable<Link> {
 
   public String getFormattedCreationDate() {
     return DateTimeFormatter
-        .ofPattern("yyyy-MM-dd")
-        .format(this.getCreationDate());
+            .ofPattern("yyyy-MM-dd")
+            .format(this.getCreationDate());
   }
 
   public String getFormattedLastCheckDate() {
@@ -110,8 +116,8 @@ public class Link extends BaseObject implements Comparable<Link> {
       return null;
     }
     return DateTimeFormatter
-        .ofPattern("yyyy-MM-dd")
-        .format(this.getLastCheck());
+            .ofPattern("yyyy-MM-dd")
+            .format(this.getLastCheck());
   }
 
   public String getFormattedLastVisit() {
@@ -177,9 +183,9 @@ public class Link extends BaseObject implements Comparable<Link> {
   public boolean hasKeyword(String keyword) {
     keyword = keyword.toLowerCase();
     return (getUrl() != null && getUrl().toLowerCase().contains(keyword))
-        || (getTitle() != null && getTitle().toLowerCase().contains(keyword))
-        || (getDescription() != null && getDescription().toLowerCase().contains(keyword))
-        || hasKeywordInLabel(keyword);
+            || (getTitle() != null && getTitle().toLowerCase().contains(keyword))
+            || (getDescription() != null && getDescription().toLowerCase().contains(keyword))
+            || hasKeywordInLabel(keyword);
   }
 
   /**

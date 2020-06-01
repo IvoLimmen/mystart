@@ -76,7 +76,7 @@ public class LinkServlet extends AbstractServlet {
       } else if (req.getParameter("url") != null && req.getParameter("url").length() > 0) {
         // new (or edit) by url        
         type = "popup";
-        String url = req.getParameter("url");
+        String url = Link.sanatizeUrl(req.getParameter("url"));
         link = getLinkStorage().getByUrl(userId, new Link(url));
         if (link != null) {
           link.visited();
