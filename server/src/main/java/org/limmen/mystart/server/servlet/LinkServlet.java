@@ -91,7 +91,7 @@ public class LinkServlet extends AbstractServlet {
 
       if (exists(req, "url")) {
         if (StringUtils.isBlank(link.getUrl())) {
-          link.setUrl(req.getParameter("url"));
+          link.setUrl(Link.sanatizeUrl(req.getParameter("url")));
         }
       }
       if (exists(req, "title")) {
