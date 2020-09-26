@@ -1,0 +1,15 @@
+[Unit]
+Description=MyStart Bookmark Service
+
+Wants=network.target
+After=syslog.target network-online.target postgresql.service
+
+[Service]
+Type=simple
+ExecStart=/opt/mystart/bin/mystart
+Restart=on-failure
+RestartSec=20
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target

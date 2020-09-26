@@ -90,8 +90,11 @@ $ mvn exec:java
 
 ## For release
 
-Extract the generated server-[VERSION].tar.gz. This will create a directory called mystart.
-Go into the `bin` directory and execute the `mystart` script to start it.
+1. Go into the `/opt` directory.
+1. Extract the generated server-[VERSION].tar.gz. This will create a directory called mystart.
+1. Copy the `mystart.service` into `/etc/systemd/system`
+1. Reload the service deamon: `systemctl daemon-reload`
+1. Start the service: `systemctl start mystart`
 
 # Credits
 
