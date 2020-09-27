@@ -1,9 +1,7 @@
 package org.limmen.mystart.server;
 
 import ch.qos.logback.classic.ClassicConstants;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URL;
@@ -80,22 +78,22 @@ public class Main {
     parseArguments(args);
 
     System.setProperty(ClassicConstants.CONFIG_FILE_PROPERTY,
-        Paths.get(configDir, getFileName("logback.xml")).toString());
+            Paths.get(configDir, getFileName("logback.xml")).toString());
 
     Log.setLog(new Slf4jLog());
 
     Properties properties = new Properties();
     try (InputStream inputStream = new FileInputStream(
-        Paths.get(configDir, getFileName("application.properties")).toFile())) {
+            Paths.get(configDir, getFileName("application.properties")).toFile())) {
       properties.load(inputStream);
     }
     properties.putAll(System.getProperties());
 
     MailService mailService = MailServiceImpl.builder().from(properties.getProperty("mail.smtp.from"))
-        .port(Integer.parseInt(properties.getProperty("mail.smtp.port"))).host(properties.getProperty("mail.smtp.host"))
-        .startTls(Boolean.parseBoolean(properties.getProperty("mail.smtp.starttls")))
-        .username(properties.getProperty("mail.smtp.username")).password(properties.getProperty("mail.smtp.password"))
-        .build();
+            .port(Integer.parseInt(properties.getProperty("mail.smtp.port"))).host(properties.getProperty("mail.smtp.host"))
+            .startTls(Boolean.parseBoolean(properties.getProperty("mail.smtp.starttls")))
+            .username(properties.getProperty("mail.smtp.username")).password(properties.getProperty("mail.smtp.password"))
+            .build();
 
     String serverName = properties.getProperty("server.name");
     String localUrl = createUrl(serverName);
@@ -104,10 +102,13 @@ public class Main {
 
     Parser parser = new AutoDetectParser();
 
-    File scratchDir = createScratchDirectory();
+    Path scratchDir = Files.createTempDirectory("embedded-jetty-jsp", new FileAttribute<?>[0]);
 
-    MultipartConfigElement multipartConfigElement = new MultipartConfigElement(scratchDir.getAbsolutePath(), 41943040,
-        41943040, 4096);
+    MultipartConfigElement multipartConfigElement = new MultipartConfigElement(
+            scratchDir.toString(),
+            41943040,
+            41943040,
+            4096);
 
     Server server = new Server(Integer.parseInt(properties.getProperty("server.port", "8080")));
     URI baseUri = Paths.get(webappDir).toUri();
@@ -125,7 +126,7 @@ public class Main {
     servletContextHandler.setResourceBase(baseUri.toASCIIString());
     ClassLoader jspClassLoader = new URLClassLoader(new URL[0], Main.class.getClassLoader());
 
-    servletContextHandler.setAttribute("javax.servlet.context.tempdir", scratchDir);
+    servletContextHandler.setAttribute("javax.servlet.context.tempdir", scratchDir.toFile());
     servletContextHandler.setClassLoader(jspClassLoader);
 
     servletContextHandler.addBean(new JspStarter(servletContextHandler));
@@ -145,33 +146,32 @@ public class Main {
     server.setHandler(servletContextHandler);
 
     addServlet(server, servletContextHandler, "homeServlet", "/home",
-        new HomeServlet(storage, multipartConfigElement, scratchDir.toPath()));
+            new HomeServlet(storage, multipartConfigElement, scratchDir));
     addServlet(server, servletContextHandler, "userServlet", "/user",
-        new UserServlet(storage, multipartConfigElement, scratchDir.toPath(), avatarPath, properties.getProperty("server.salt")));
+            new UserServlet(storage, multipartConfigElement, scratchDir, avatarPath, properties.getProperty("server.salt")));
     addServlet(server, servletContextHandler, "loginServlet", "/login",
-        new LoginServlet(storage, multipartConfigElement, scratchDir.toPath(), mailService, localUrl, properties.getProperty("server.salt")));
+            new LoginServlet(storage, multipartConfigElement, scratchDir, mailService, localUrl, properties.getProperty("server.salt")));
     addServlet(server, servletContextHandler, "importServlet", "/import",
-        new ImportServlet(parser, storage, multipartConfigElement, scratchDir.toPath()));
+            new ImportServlet(parser, storage, multipartConfigElement, scratchDir));
     addServlet(server, servletContextHandler, "linkServlet", "/link",
-        new LinkServlet(storage, multipartConfigElement, scratchDir.toPath()));
+            new LinkServlet(storage, multipartConfigElement, scratchDir));
     addServlet(server, servletContextHandler, "navServlet", "/nav",
-        new NavServlet(storage, multipartConfigElement, scratchDir.toPath()));
+            new NavServlet(storage, multipartConfigElement, scratchDir));
     addServlet(server, servletContextHandler, "ajaxServlet", "/ajax",
-        new AjaxServlet(storage, multipartConfigElement, scratchDir.toPath()));
+            new AjaxServlet(storage, multipartConfigElement, scratchDir));
 
     server.start();
     server.join();
   }
 
-  private static void addServlet(Server server, ServletContextHandler servletContextHandler, String name, String url,
-      HttpServlet servlet) {
+  private static void addServlet(Server server,
+                                 ServletContextHandler servletContextHandler,
+                                 String name,
+                                 String url,
+                                 HttpServlet servlet) {
     ServletHolder holderDefault = new ServletHolder(name, servlet);
     servletContextHandler.addServlet(holderDefault, url);
     server.setHandler(servletContextHandler);
-  }
-
-  private static File createScratchDirectory() throws IOException {
-    return Files.createTempDirectory("embedded-jetty-jsp", new FileAttribute<?>[0]).toFile();
   }
 
   private static String createUrl(String serverName) {
