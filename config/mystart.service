@@ -10,6 +10,8 @@ ExecStart=/opt/mystart/bin/mystart
 Restart=on-failure
 RestartSec=20
 KillMode=process
+User=mystart
+Group=mystart
 
 [Install]
 WantedBy=multi-user.target
