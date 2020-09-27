@@ -5,16 +5,19 @@
     
   <parent>
     <groupId>org.limmen.mystart</groupId>
-    <artifactId>mystart-project</artifactId>
+    <artifactId>bookmarkexporter-project</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
         
-  <name>MyStart - Bookmarkexporter - Project</name>        
-  <artifactId>bookmarkexporter-project</artifactId>
-  <packaging>pom</packaging>    
+  <name>MyStart - Bookmarkexporter - JSON</name>        
+  <artifactId>bookmarkexporter-json</artifactId>
+  <packaging>jar</packaging>    
   
-  <modules>
-    <module>api</module>
-    <module>json</module>
-  </modules>
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>bookmarkexporter-api</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
 </project>

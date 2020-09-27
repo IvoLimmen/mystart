@@ -15,8 +15,8 @@ import javax.servlet.http.Part;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.limmen.mystart.Link;
-import org.limmen.mystart.ParseContext;
-import org.limmen.mystart.Parser;
+import org.limmen.mystart.importer.ParseContext;
+import org.limmen.mystart.importer.Parser;
 import org.limmen.mystart.Storage;
 
 @Slf4j
