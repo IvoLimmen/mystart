@@ -11,6 +11,7 @@ import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.attribute.FileAttribute;
 import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
@@ -170,14 +171,7 @@ public class Main {
   }
 
   private static File createScratchDirectory() throws IOException {
-    File tempDir = new File(System.getProperty("java.io.tmpdir"));
-    File scratchDir = new File(tempDir, "embedded-jetty-jsp");
-    if (!scratchDir.exists()) {
-      if (!scratchDir.mkdirs()) {
-        throw new IOException("Unable to create scratch directory: " + scratchDir);
-      }
-    }
-    return scratchDir;
+    return Files.createTempDirectory("embedded-jetty-jsp", new FileAttribute<?>[0]).toFile();
   }
 
   private static String createUrl(String serverName) {
