@@ -3,6 +3,7 @@ package org.limmen.mystart.server.servlet;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
+import java.util.Properties;
 import java.util.UUID;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.limmen.mystart.Storage;
 import org.limmen.mystart.User;
 import org.limmen.mystart.server.support.MailService;
+import org.limmen.mystart.server.support.PropertyHelper;
 
 public class LoginServlet extends AbstractServlet {
 
@@ -27,13 +29,14 @@ public class LoginServlet extends AbstractServlet {
                       Path temporaryDirectory,
                       MailService mailService,
                       String localUrl,
-                      String salt) {
+                      Properties properties) {
     super(storage,
           multipartConfigElement,
-          temporaryDirectory);
+          temporaryDirectory, 
+          properties);
     this.mailService = mailService;
     this.localUrl = localUrl;
-    this.salt = salt;
+    this.salt = PropertyHelper.getSalt(properties);
   }
 
   private String createUrl(String localUrl, User user) {

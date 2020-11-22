@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.file.Path;
 import java.util.Collection;
+import java.util.Properties;
 
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletException;
@@ -27,8 +28,9 @@ public class LinkServlet extends AbstractServlet {
 
   public LinkServlet(Storage storage,
                      MultipartConfigElement multipartConfigElement,
-                     Path temporaryDirectory) {
-    super(storage, multipartConfigElement, temporaryDirectory);
+                     Path temporaryDirectory, 
+                     Properties properties) {
+    super(storage, multipartConfigElement, temporaryDirectory, properties);
   }
 
   private void scheduleCleanup(HttpServletRequest req, Long userId) {

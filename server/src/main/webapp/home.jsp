@@ -46,7 +46,7 @@
               <div class="col-lg-3 col-xs-6">
                 <div class="box box-solid box-default">
                   <div id="clickme" title="${link.url}" class="box-header" onclick="javascript:openLink(${user.isOpenInNewTab()}, '/link?reg=${link.id}')">
-                    <h3 class="box-title">${link.title}</h3>
+                    <h3 class="box-title">${util.getTitle(link)}</h3>
                     <c:if test="${link.host != null && util.getFlair(link) != null}">
                       <div class="flair">
                         <i class="fa ${flair[util.getFlair(link)]}" aria-hidden="true"></i>

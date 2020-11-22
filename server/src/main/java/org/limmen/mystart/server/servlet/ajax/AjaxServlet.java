@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.stream.Stream;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletException;
@@ -22,10 +23,11 @@ public class AjaxServlet extends AbstractServlet {
 
   public AjaxServlet(Storage storage,
                      MultipartConfigElement multipartConfigElement,
-                     Path temporaryDirectory) {
+                     Path temporaryDirectory, Properties properties) {
     super(storage,
           multipartConfigElement,
-          temporaryDirectory);
+          temporaryDirectory, 
+          properties);
   }
 
   private List<ChartData> mapToChartData(Map<String, Long> data) {

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -20,6 +21,7 @@ import org.limmen.mystart.Storage;
 import org.limmen.mystart.User;
 import org.limmen.mystart.UserStorage;
 import org.limmen.mystart.VisitStorage;
+import org.limmen.mystart.server.support.PropertyHelper;
 
 public class AbstractServlet extends HttpServlet {
 
@@ -51,10 +53,40 @@ public class AbstractServlet extends HttpServlet {
     EmojiManager.addStopWords("http://", "https://");
   }
 
+  private final MultipartConfigElement multipartConfigElement;
+
+  private final Storage storage;
+
+  private final Path temporaryDirectory;
+
+  private final Properties properties;
+  
+  public AbstractServlet(Storage storage,
+                         MultipartConfigElement multipartConfigElement,
+                         Path temporaryDirectory, Properties properties) {
+    this.storage = storage;
+    this.multipartConfigElement = multipartConfigElement;
+    this.temporaryDirectory = temporaryDirectory;
+    this.properties = properties;
+  }
+
+  public String getBookmarkletUrl() {
+    String serverName = PropertyHelper.getServerName(properties);
+    return String.format("javascript:(function(){var a=window,b=document,c=encodeURIComponent,d=a.open(\"https://%s/link?edit&url=\"+c(b.location)+\"&title=\"+c(b.title),\"popup\",\"left=\"+((a.screenX||a.screenLeft)+10)+\",top=\"+((a.screenY||a.screenTop)+10)+\",height=750px,width=600px,resizable=1,alwaysRaised=1\");a.setTimeout(function(){d.focus()},300)})();", serverName);
+  }
+
+  public String getTitle(Link link) {
+    if (link == null || link.getTitle() == null) {
+      return null;
+    }
+    return EmojiUtils.htmlify(link.getTitle());
+  }
+
+  
   public String getDescription(Link link) {
     if (link == null || link.getDescription() == null) {
       return null;
-    }  
+    }
     return EmojiUtils.htmlify(link.getDescription());
   }
 
@@ -64,23 +96,9 @@ public class AbstractServlet extends HttpServlet {
     }
 
     return FLAIR.keySet().stream()
-        .filter(filter -> link.getHost().toLowerCase().contains(filter))
-        .findFirst()
-        .orElse(null);
-  }
-
-  private final MultipartConfigElement multipartConfigElement;
-
-  private final Storage storage;
-
-  private final Path temporaryDirectory;
-
-  public AbstractServlet(Storage storage,
-                         MultipartConfigElement multipartConfigElement,
-                         Path temporaryDirectory) {
-    this.storage = storage;
-    this.multipartConfigElement = multipartConfigElement;
-    this.temporaryDirectory = temporaryDirectory;
+            .filter(filter -> link.getHost().toLowerCase().contains(filter))
+            .findFirst()
+            .orElse(null);
   }
 
   public LinkStorage getLinkStorage() {

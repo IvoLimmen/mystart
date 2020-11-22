@@ -35,7 +35,7 @@
                 <a href="/nav?page=check">Check links</a>
               </div>
               <div class="col-xs-4 text-center">
-                <a href='javascript:(function(){var a=window,b=document,c=encodeURIComponent,d=a.open("https://technocratic.nl/link?edit&url="+c(b.location)+"&title="+c(b.title),"popup","left="+((a.screenX||a.screenLeft)+10)+",top="+((a.screenY||a.screenTop)+10)+",height=750px,width=600px,resizable=1,alwaysRaised=1");a.setTimeout(function(){d.focus()},300)})();' title="Make it easier: use the bookmarklet!">Bookmarklet</a>
+                <a href='${util.getBookmarkletUrl()}' title="Make it easier: use the bookmarklet!">Bookmarklet</a>
               </div>
             </div>
           </li>          

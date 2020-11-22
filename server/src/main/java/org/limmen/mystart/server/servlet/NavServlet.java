@@ -2,6 +2,7 @@ package org.limmen.mystart.server.servlet;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Properties;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,10 +16,11 @@ public class NavServlet extends AbstractServlet {
 
   public NavServlet(Storage storage,
                     MultipartConfigElement multipartConfigElement,
-                    Path temporaryDirectory) {
+                    Path temporaryDirectory, Properties properties) {
     super(storage,
           multipartConfigElement,
-          temporaryDirectory);
+          temporaryDirectory, 
+          properties);
   }
 
   @Override
@@ -45,5 +47,4 @@ public class NavServlet extends AbstractServlet {
       req.getRequestDispatcher("/" + page + ".jsp").include(req, res);
     }
   }
-
 }

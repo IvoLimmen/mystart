@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 import javax.servlet.MultipartConfigElement;
@@ -23,10 +24,13 @@ public class HomeServlet extends AbstractServlet {
 
   public HomeServlet(Storage storage,
                      MultipartConfigElement multipartConfigElement,
-                     Path temporaryDirectory) {
+                     Path temporaryDirectory, 
+                     Properties properties) {
     super(storage,
           multipartConfigElement,
-          temporaryDirectory);
+          temporaryDirectory,
+          properties
+    );
   }
 
   @Override

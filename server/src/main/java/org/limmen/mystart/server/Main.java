@@ -16,6 +16,7 @@ import java.util.Set;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.SessionTrackingMode;
 import javax.servlet.http.HttpServlet;
+import lombok.extern.slf4j.Slf4j;
 import org.eclipse.jetty.http.HttpCookie;
 import org.eclipse.jetty.jsp.JettyJspServlet;
 import org.eclipse.jetty.server.Server;
@@ -78,18 +79,16 @@ public class Main {
   public static void main(String[] args) throws Exception {
     parseArguments(args);
 
-    System.setProperty(ClassicConstants.CONFIG_FILE_PROPERTY,
-            Paths.get(configDir, getFileName("logback.xml")).toString());
+    System.setProperty(ClassicConstants.CONFIG_FILE_PROPERTY, Paths.get(configDir, getFileName("logback.xml")).toString());
 
     Log.setLog(new Slf4jLog());
 
     Properties properties = new Properties();
-    try (InputStream inputStream = new FileInputStream(
-            Paths.get(configDir, getFileName("application.properties")).toFile())) {
+    try (InputStream inputStream = new FileInputStream(Paths.get(configDir, getFileName("application.properties")).toFile())) {
       properties.load(inputStream);
     }
     properties.putAll(System.getProperties());
-
+    
     MailService mailService = MailServiceImpl.builder().from(properties.getProperty("mail.smtp.from"))
             .port(Integer.parseInt(properties.getProperty("mail.smtp.port"))).host(properties.getProperty("mail.smtp.host"))
             .startTls(Boolean.parseBoolean(properties.getProperty("mail.smtp.starttls")))
@@ -97,6 +96,7 @@ public class Main {
             .build();
 
     String serverName = properties.getProperty("server.name");
+    Integer port = Integer.parseInt(properties.getProperty("server.port", "8080"));
     String localUrl = createUrl(serverName);
 
     Storage storage = StorageProvider.getStorageByName(properties, properties.getProperty("server.storage"));
@@ -112,7 +112,7 @@ public class Main {
             41943040,
             4096);
 
-    Server server = new Server(Integer.parseInt(properties.getProperty("server.port", "8080")));
+    Server server = new Server(port);
     URI baseUri = Paths.get(webappDir).toUri();
     Path avatarPath = Paths.get(webappDir, "avatar");
     Files.createDirectories(avatarPath);
@@ -148,19 +148,19 @@ public class Main {
     server.setHandler(servletContextHandler);
 
     addServlet(server, servletContextHandler, "homeServlet", "/home",
-            new HomeServlet(storage, multipartConfigElement, scratchDir));
+            new HomeServlet(storage, multipartConfigElement, scratchDir, properties));
     addServlet(server, servletContextHandler, "userServlet", "/user",
-            new UserServlet(storage, multipartConfigElement, scratchDir, avatarPath, properties.getProperty("server.salt")));
+            new UserServlet(storage, multipartConfigElement, scratchDir, avatarPath, properties));
     addServlet(server, servletContextHandler, "loginServlet", "/login",
-            new LoginServlet(storage, multipartConfigElement, scratchDir, mailService, localUrl, properties.getProperty("server.salt")));
+            new LoginServlet(storage, multipartConfigElement, scratchDir, mailService, localUrl, properties));
     addServlet(server, servletContextHandler, "importServlet", "/import",
-            new ImportServlet(parser, storage, multipartConfigElement, scratchDir));
+            new ImportServlet(parser, storage, multipartConfigElement, scratchDir, properties));
     addServlet(server, servletContextHandler, "linkServlet", "/link",
-            new LinkServlet(storage, multipartConfigElement, scratchDir));
+            new LinkServlet(storage, multipartConfigElement, scratchDir, properties));
     addServlet(server, servletContextHandler, "navServlet", "/nav",
-            new NavServlet(storage, multipartConfigElement, scratchDir));
+            new NavServlet(storage, multipartConfigElement, scratchDir, properties));
     addServlet(server, servletContextHandler, "ajaxServlet", "/ajax",
-            new AjaxServlet(storage, multipartConfigElement, scratchDir));
+            new AjaxServlet(storage, multipartConfigElement, scratchDir, properties));
 
     server.start();
     server.join();

@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Properties;
 import java.util.Set;
 import java.util.UUID;
 import javax.servlet.MultipartConfigElement;
@@ -29,8 +30,9 @@ public class ImportServlet extends AbstractServlet {
   public ImportServlet(Parser parser,
                        Storage storage,
                        MultipartConfigElement multipartConfigElement,
-                       Path temporaryDirectory) {
-    super(storage, multipartConfigElement, temporaryDirectory);
+                       Path temporaryDirectory, 
+                       Properties properties) {
+    super(storage, multipartConfigElement, temporaryDirectory, properties);
     this.parser = parser;
   }
 
