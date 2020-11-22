@@ -1,5 +1,9 @@
 package org.limmen.mystart.server.servlet;
 
+import jakarta.servlet.MultipartConfigElement;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -9,10 +13,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
-import javax.servlet.MultipartConfigElement;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.limmen.mystart.Link;
 import org.limmen.mystart.Storage;
 import org.limmen.mystart.criteria.AbstractCriteria;

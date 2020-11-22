@@ -1,14 +1,14 @@
 package org.limmen.mystart.server.servlet;
 
+import jakarta.servlet.MultipartConfigElement;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.Properties;
 import java.util.UUID;
-import javax.servlet.MultipartConfigElement;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.limmen.mystart.Storage;
 import org.limmen.mystart.User;
 import org.limmen.mystart.server.support.MailService;

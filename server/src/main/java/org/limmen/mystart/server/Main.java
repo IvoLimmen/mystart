@@ -1,6 +1,9 @@
 package org.limmen.mystart.server;
 
 import ch.qos.logback.classic.ClassicConstants;
+import jakarta.servlet.MultipartConfigElement;
+import jakarta.servlet.SessionTrackingMode;
+import jakarta.servlet.http.HttpServlet;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.URI;
@@ -13,18 +16,12 @@ import java.nio.file.attribute.FileAttribute;
 import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
-import javax.servlet.MultipartConfigElement;
-import javax.servlet.SessionTrackingMode;
-import javax.servlet.http.HttpServlet;
-import lombok.extern.slf4j.Slf4j;
 import org.eclipse.jetty.http.HttpCookie;
 import org.eclipse.jetty.jsp.JettyJspServlet;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
-import org.eclipse.jetty.util.log.Log;
-import org.eclipse.jetty.util.log.Slf4jLog;
 import org.limmen.mystart.importer.AutoDetectParser;
 import org.limmen.mystart.importer.Parser;
 import org.limmen.mystart.Storage;
@@ -80,8 +77,6 @@ public class Main {
     parseArguments(args);
 
     System.setProperty(ClassicConstants.CONFIG_FILE_PROPERTY, Paths.get(configDir, getFileName("logback.xml")).toString());
-
-    Log.setLog(new Slf4jLog());
 
     Properties properties = new Properties();
     try (InputStream inputStream = new FileInputStream(Paths.get(configDir, getFileName("application.properties")).toFile())) {

@@ -2,17 +2,17 @@ package org.limmen.mystart.server.servlet;
 
 import emoji4j.EmojiManager;
 import emoji4j.EmojiUtils;
+import jakarta.servlet.MultipartConfigElement;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-import javax.servlet.MultipartConfigElement;
-import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.eclipse.jetty.server.Request;
 import org.limmen.mystart.Link;
 import org.limmen.mystart.LinkStorage;
@@ -199,7 +199,7 @@ public class AbstractServlet extends HttpServlet {
       return;
     }
     if (req.getContentType() != null && req.getContentType().startsWith("multipart/form-data")) {
-      req.setAttribute(Request.MULTIPART_CONFIG_ELEMENT, multipartConfigElement);
+      req.setAttribute(Request.__MULTIPART_CONFIG_ELEMENT, multipartConfigElement);
     }
   }
 
