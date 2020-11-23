@@ -2,6 +2,7 @@ package org.limmen.mystart.server;
 
 import ch.qos.logback.classic.ClassicConstants;
 import jakarta.servlet.MultipartConfigElement;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.SessionTrackingMode;
 import jakarta.servlet.http.HttpServlet;
 import java.io.FileInputStream;
@@ -123,7 +124,7 @@ public class Main {
     servletContextHandler.setResourceBase(baseUri.toASCIIString());
     ClassLoader jspClassLoader = new URLClassLoader(new URL[0], Main.class.getClassLoader());
 
-    servletContextHandler.setAttribute("javax.servlet.context.tempdir", scratchDir.toFile());
+    servletContextHandler.setAttribute(ServletContext.TEMPDIR, scratchDir.toFile());
     servletContextHandler.setClassLoader(jspClassLoader);
 
     servletContextHandler.addBean(new JspStarter(servletContextHandler));
@@ -134,6 +135,7 @@ public class Main {
     holderJsp.setInitParameter("fork", "false");
     holderJsp.setInitParameter("xpoweredBy", "false");
     holderJsp.setInitParameter("keepgenerated", "true");
+    holderJsp.setInitParameter("scratchDir", scratchDir.toFile().toString());
     servletContextHandler.addServlet(holderJsp, "*.jsp");
 
     ServletHolder holderDefault = new ServletHolder("default", DefaultServlet.class);

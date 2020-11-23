@@ -44,6 +44,7 @@ exec "$JAVACMD" $JAVA_OPTS -server \
   -Dapp.pid="$$" \
   -Dapp.repo="$REPO" \
   -Dapp.home="$BASEDIR" \
+  -Djava.io.tmpdir="$BASEDIR/tmp" \
   org.limmen.mystart.server.Main \
   config.dir "$BASEDIR/config" \
   webapp.dir "$BASEDIR/webapp" \
