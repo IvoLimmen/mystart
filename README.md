@@ -43,6 +43,7 @@ This application can import from the following sources:
 
  * FireFox (upload your places.sqlite from your profile directory)
  * GitHub (enter a link: https://api.github.com/users/ivolimmen/starred) (can only import 60 pages per hours due to rate-limiting)
+ * GitLab (enter a link: https://gitlab.com/api/v4/users/ivolimmen/starred_projects?per_page=50) (Only from Gitlab itself)
  * Google Bookmarks XML (export the XML: https://www.google.com/bookmarks/?output=xml and upload it)
  * Google Bookmarks RSS (export the RSS: https://www.google.com/bookmarks/?output=rss&num=500&start=0 and upload it)
  * Google Chrome/Chromium (upload your Bookmarks file from your profile directory)
