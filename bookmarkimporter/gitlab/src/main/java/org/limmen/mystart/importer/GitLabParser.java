@@ -77,13 +77,13 @@ public class GitLabParser extends AbstractParser {
     String description = json.optString("description");
 
     List<String> labels = new ArrayList<>();
+    labels.add("GitLab");
     String href;
     if (json.has("web_url")) {
       href = json.getString("web_url");  
     } else {
       href = "https://gitlab.com/" + json.getString("path_with_namespace");
     }
-    
 
     if (!StringUtils.isBlank(href)) {
       addLink(name, href, labels, description, getTimestamp(json), null);

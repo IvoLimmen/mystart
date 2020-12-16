@@ -1,7 +1,5 @@
 package org.limmen.mystart.importer;
 
-import org.limmen.mystart.importer.AbstractParser;
-import org.limmen.mystart.importer.ParseContext;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -83,6 +81,7 @@ public class GitHubParser extends AbstractParser {
     String description = json.optString("description");
 
     List<String> labels = new ArrayList<>();
+    labels.add("GitHub");
     if (json.has("language") && !json.isNull("language")) {
       if (context.hasOption("github.importLanguageAsLabel")) {
         labels.add(json.getString("language"));

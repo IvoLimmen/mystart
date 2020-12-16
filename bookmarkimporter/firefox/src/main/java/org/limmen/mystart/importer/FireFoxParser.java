@@ -1,7 +1,5 @@
 package org.limmen.mystart.importer;
 
-import org.limmen.mystart.importer.AbstractParser;
-import org.limmen.mystart.importer.ParseContext;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
