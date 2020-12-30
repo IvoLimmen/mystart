@@ -65,6 +65,11 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
 
   @Override
   public Collection<Link> getAllByLabel(Long userId, String label) {
+    if (label == null || label.equals("")) {
+      return executeSql("select * from links where user_id = ? and labels = '{}' order by title asc", args -> {
+        args.setLong(1, userId);
+      }, LINK_MAPPER);  
+    }
     return executeSql("select * from links where user_id = ? and labels && array[?] order by title asc", args -> {
       args.setLong(1, userId);
       args.setStringArray(2, new String[]{label});
