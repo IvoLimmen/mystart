@@ -1,0 +1,17 @@
+{
+  "short_name": "MyStart",
+  "name": "MyStart - Bookmark application",
+  "description": "One place for all your bookmarks",
+  "start_url": "/home",
+  "display": "standalone",
+  "share_target": {
+    "action": "/share-target/",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  }
+}
