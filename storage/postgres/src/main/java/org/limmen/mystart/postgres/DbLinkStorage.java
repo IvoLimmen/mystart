@@ -4,11 +4,10 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.limmen.mystart.Link;
 import org.limmen.mystart.LinkStorage;
-import org.limmen.mystart.criteria.AbstractCriteria;
+import org.limmen.mystart.criteria.Criteria;
 
 @Slf4j
 public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
@@ -201,23 +200,20 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
   }
 
   @Override
-  public Collection<Link> search(Long userId, Collection<AbstractCriteria> criteria) {
-    StringBuilder sql = new StringBuilder();
-    sql.append("select l.* from links l where l.user_id = ? and (");
-
-    if (criteria == null || criteria.isEmpty()) {
+  public Collection<Link> search(Long userId, Criteria criteria) {
+    if (criteria == null) {
       throw new IllegalArgumentException();
     }
 
-    sql.append(criteria.stream()
-        .map(c -> c.toSQL())
-        .collect(Collectors.joining(" or ")));
+    StringBuilder sql = new StringBuilder();
+    sql.append("select l.* from links l where l.user_id = ? and (");
+    sql.append(criteria.toSQL());
     sql.append(") order by l.title asc");
 
     AtomicInteger index = new AtomicInteger(0);
     return executeSql(sql.toString(), args -> {
-      args.setLong(index.incrementAndGet(), userId);
-      criteria.forEach(c -> {
+      args.setLong(index.incrementAndGet(), userId);      
+      criteria.toArguments().forEach(c -> {
         if (c.getValueType().equals(String.class)) {
           args.setString(index.incrementAndGet(), "%" + c.getValue() + "%");
         }

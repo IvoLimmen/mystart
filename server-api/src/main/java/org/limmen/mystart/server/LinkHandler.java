@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.limmen.mystart.Link;
 import org.limmen.mystart.Storage;
+import org.limmen.mystart.criteria.Criteria;
 import org.limmen.mystart.criteria.Like;
+import org.limmen.mystart.criteria.Or;
 import org.limmen.mystart.server.dto.LinkDto;
 import spark.Request;
 import spark.Response;
@@ -31,11 +33,17 @@ public class LinkHandler extends BaseHandler {
     Long userId = 1L;
     String input = req.queryParams("input");
   
-    return toJson(getLinkStorage().search(userId, List.of(
-      new Like("description", input, String.class),
-      new Like("title", input, String.class),
-      new Like("url", input, String.class)
-    )).stream().map(this::toLinkDto).collect(Collectors.toList()));
+    Criteria criteria = new Or(
+      new Like("description", input, String.class), 
+      new Or(
+        new Like("title", input, String.class),
+        new Like("url", input, String.class)));
+
+
+    return toJson(getLinkStorage().search(userId, criteria)
+        .stream()
+        .map(this::toLinkDto)
+        .collect(Collectors.toList()));
   }
 
   public String byLabel(Request req, Response res) {

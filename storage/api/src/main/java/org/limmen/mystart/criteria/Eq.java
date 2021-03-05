@@ -1,6 +1,11 @@
 package org.limmen.mystart.criteria;
 
-public class Eq extends AbstractCriteria {
+import java.util.stream.Stream;
+
+import lombok.ToString;
+
+@ToString(callSuper = true)
+public class Eq extends AbstractFieldCriteria {
 
   public Eq(String fieldName, Object value, Class<?> valueType) {
     super(fieldName, value, valueType);
@@ -15,4 +20,9 @@ public class Eq extends AbstractCriteria {
     }
     return null;
   }
+
+  @Override
+  public Stream<AbstractFieldCriteria> toArguments() {
+    return Stream.of(this);
+  }    
 }

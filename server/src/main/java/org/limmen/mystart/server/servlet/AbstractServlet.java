@@ -197,6 +197,15 @@ public class AbstractServlet extends HttpServlet {
     if (req.getSession().getAttribute(USER_ID) == null) {
       res.sendRedirect("/home");
       return;
+    } else {
+      Long userId = (Long) req.getSession().getAttribute(USER_ID);
+      User user = getUserStorage().get(userId);
+      req.setAttribute(USER_ID, userId);
+      req.setAttribute(USER, user);
+      req.setAttribute("menulabels", user.getMenuLabels());
+      req.setAttribute("links", getLinkStorage().getAllByLabel(userId, user.getAutoStartLabel()));
+      req.setAttribute("flair", FLAIR);
+      req.setAttribute("util", this);      
     }
     if (req.getContentType() != null && req.getContentType().startsWith("multipart/form-data")) {
       req.setAttribute(Request.__MULTIPART_CONFIG_ELEMENT, multipartConfigElement);

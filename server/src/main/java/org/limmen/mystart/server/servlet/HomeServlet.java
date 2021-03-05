@@ -6,16 +6,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 import org.limmen.mystart.Link;
 import org.limmen.mystart.Storage;
-import org.limmen.mystart.criteria.AbstractCriteria;
+import org.limmen.mystart.criteria.And;
+import org.limmen.mystart.criteria.Criteria;
 import org.limmen.mystart.criteria.Like;
 
 public class HomeServlet extends AbstractServlet {
@@ -107,19 +106,34 @@ public class HomeServlet extends AbstractServlet {
 
     if (exists(req, "advSearchButton")) {
 
-      List<AbstractCriteria> criteria = new ArrayList<>();
+      Criteria criteria = null;
 
       if (hasValue(req, "title")) {
-        criteria.add(new Like("title", req.getParameter("title"), String.class));
+        criteria = new Like("title", req.getParameter("title"), String.class);
       }
       if (hasValue(req, "url")) {
-        criteria.add(new Like("url", req.getParameter("url"), String.class));
+        Criteria newCriteria = new Like("url", req.getParameter("url"), String.class);
+        if (criteria == null) {
+          criteria = newCriteria;
+        } else {
+          criteria = new And(criteria, newCriteria);
+        }        
       }
       if (hasValue(req, "description")) {
-        criteria.add(new Like("description", req.getParameter("description"), String.class));
+        Criteria newCriteria = new Like("description", req.getParameter("description"), String.class);
+        if (criteria == null) {
+          criteria = newCriteria;
+        } else {
+          criteria = new And(criteria, newCriteria);
+        }        
       }
       if (hasValue(req, "label")) {
-        criteria.add(new Like("labels", req.getParameter("label"), String[].class));
+        Criteria newCriteria = new Like("labels", req.getParameter("label"), String[].class);
+        if (criteria == null) {
+          criteria = newCriteria;
+        } else {
+          criteria = new And(criteria, newCriteria);
+        }        
       }
 
       req.setAttribute("links", getLinkStorage().search(userId, criteria));
