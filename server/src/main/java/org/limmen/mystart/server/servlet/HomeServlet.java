@@ -10,12 +10,15 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Properties;
 import java.util.TreeMap;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.limmen.mystart.Link;
 import org.limmen.mystart.Storage;
 import org.limmen.mystart.criteria.And;
 import org.limmen.mystart.criteria.Criteria;
 import org.limmen.mystart.criteria.Like;
+import org.limmen.mystart.criteria.Or;
 
 public class HomeServlet extends AbstractServlet {
 
@@ -106,6 +109,14 @@ public class HomeServlet extends AbstractServlet {
 
     if (exists(req, "advSearchButton")) {
 
+      boolean andMode = "and".equals(req.getParameter("mode"));
+
+      BiFunction<Criteria, Criteria, Criteria> operation = this::useAnd;
+
+      if (!andMode) {
+        operation = this::useOr;
+      }
+
       Criteria criteria = null;
 
       if (hasValue(req, "title")) {
@@ -116,7 +127,7 @@ public class HomeServlet extends AbstractServlet {
         if (criteria == null) {
           criteria = newCriteria;
         } else {
-          criteria = new And(criteria, newCriteria);
+          criteria = operation.apply(criteria, newCriteria);
         }        
       }
       if (hasValue(req, "description")) {
@@ -124,7 +135,7 @@ public class HomeServlet extends AbstractServlet {
         if (criteria == null) {
           criteria = newCriteria;
         } else {
-          criteria = new And(criteria, newCriteria);
+          criteria = operation.apply(criteria, newCriteria);
         }        
       }
       if (hasValue(req, "label")) {
@@ -132,15 +143,24 @@ public class HomeServlet extends AbstractServlet {
         if (criteria == null) {
           criteria = newCriteria;
         } else {
-          criteria = new And(criteria, newCriteria);
+          criteria = operation.apply(criteria, newCriteria);
         }        
       }
 
       req.setAttribute("links", getLinkStorage().search(userId, criteria));
       req.getRequestDispatcher("/home.jsp").include(req, res);
+
     } else if (exists(req, "cancelButton")) {
 
       res.sendRedirect("/home");
     }
+  }
+
+  private Criteria useAnd(Criteria left, Criteria right) {
+    return new And(left, right);
+  }
+
+  private Criteria useOr(Criteria left, Criteria right) {
+    return new Or(left, right);
   }
 }

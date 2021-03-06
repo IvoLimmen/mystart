@@ -35,6 +35,11 @@
               <h1>Advanced search</h1>
               <form name="advsearch" action="/home" method="post">
                 <div class="form-group">
+                  <label for="use-and">Mode</label><br/>
+                  <input type="radio" name="mode" id="mode-and" value="and"/>&nbsp;<label for="mode-and">And</label><br/>
+                  <input type="radio" name="mode" id="mode-or" value="or" checked/>&nbsp;<label for="mode-or">Or</label>
+                </div>
+                <div class="form-group">
                   <label for="title">Title</label><br/>
                   <input type="text" class="form-control" name="title" size="50"/>
                 </div>
