@@ -2,14 +2,14 @@ package org.limmen.mystart.postgres;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
-import lombok.extern.slf4j.Slf4j;
+
 import org.limmen.mystart.Link;
 import org.limmen.mystart.LinkStorage;
 import org.limmen.mystart.criteria.Criteria;
 
-@Slf4j
 public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
 
   private static final Function<Result, Link> LINK_MAPPER = (var res) -> {
@@ -48,7 +48,7 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
   }
 
   @Override
-  public Link get(Long userId, Long id) {
+  public Optional<Link> get(Long userId, Long id) {
     return executeSqlSingle("select * from links where user_id = ? and id = ?", args -> {
       args.setLong(1, userId);
       args.setLong(2, id);
@@ -83,7 +83,7 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
   }
 
   @Override
-  public Link getByUrl(Long userId, Link url) {
+  public Optional<Link> getByUrl(Long userId, Link url) {
 
     String strippedUrl = url.getUrl();
     log.debug("Searching for url: {}", strippedUrl);
@@ -159,16 +159,16 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
     AtomicInteger created = new AtomicInteger(0);
     links.forEach(l -> {
       log.debug("Searching for URL: {}", l.getUrl());
-      Link link = getByUrl(userId, l);
-      if (link == null) {
+      Optional<Link> link = getByUrl(userId, l);
+      if (link.isEmpty()) {
         log.info("Creating link {}", l.getUrl());
         create(userId, l);
         created.incrementAndGet();
       } else {
         if (!skipDuplicates) {
           log.info("Updating labels of link {}", l.getUrl());
-          link.addLabels(l.getLabels());
-          update(userId, link);
+          link.get().addLabels(l.getLabels());
+          update(userId, link.get());
           updated.incrementAndGet();
         } else {
           log.info("Skipping link {}", l.getUrl());

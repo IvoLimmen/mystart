@@ -4,11 +4,10 @@ import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.UnknownHostException;
-import lombok.Getter;
+
 import org.limmen.mystart.Link;
 import org.limmen.mystart.exception.StorageException;
 
-@Getter
 public abstract class AbstractCleanupTask implements CleanupTask {
 
   private final CleanupContext context;
@@ -47,7 +46,8 @@ public abstract class AbstractCleanupTask implements CleanupTask {
       InetAddress address = InetAddress.getByName(host);
       if (address.isSiteLocalAddress() || isPrivateNetworkHost(host)) {
         link.setPrivateNetwork(true);
-        return new CleanupResult(link, "Host/IP address is a site local address. Marking private network.", CleanupResultType.UPDATE);
+        return new CleanupResult(link, "Host/IP address is a site local address. Marking private network.",
+            CleanupResultType.UPDATE);
       }
     } catch (MalformedURLException | UnknownHostException | StorageException ex) {
       // ignore
@@ -56,12 +56,21 @@ public abstract class AbstractCleanupTask implements CleanupTask {
   }
 
   private boolean isPrivateNetworkHost(String host) {
-    if (host.matches("^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$")) {
+    if (host.matches(
+        "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$")) {
       if (host.startsWith("10.") || host.startsWith("192.168.")) {
         return true;
       }
     }
 
     return false;
+  }
+
+  public CleanupContext getContext() {
+    return context;
+  }
+
+  public Link getLink() {
+    return link;
   }
 }

@@ -1,8 +1,5 @@
 package org.limmen.mystart.criteria;
 
-import lombok.ToString;
-
-@ToString
 public abstract class AbstractFieldCriteria implements Criteria {
 
     private final String fieldName;

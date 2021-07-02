@@ -2,9 +2,6 @@ package org.limmen.mystart.criteria;
 
 import java.util.stream.Stream;
 
-import lombok.ToString;
-
-@ToString(callSuper = true)
 public class Like extends AbstractFieldCriteria {
 
   public Like(String fieldName, Object value, Class<?> valueType) {

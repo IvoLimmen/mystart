@@ -3,11 +3,7 @@ package org.limmen.mystart.importer;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
 public class LinkDto {
 
    private Integer id;
@@ -32,5 +28,69 @@ public class LinkDto {
 
    public void addLabels(Collection<String> labels) {
       this.labels.addAll(labels);
+   }
+
+   public Integer getId() {
+      return id;
+   }
+
+   public void setId(Integer id) {
+      this.id = id;
+   }
+
+   public Integer getParent() {
+      return parent;
+   }
+
+   public void setParent(Integer parent) {
+      this.parent = parent;
+   }
+
+   public String getTitle() {
+      return title;
+   }
+
+   public void setTitle(String title) {
+      this.title = title;
+   }
+
+   public String getDescription() {
+      return description;
+   }
+
+   public void setDescription(String description) {
+      this.description = description;
+   }
+
+   public LocalDateTime getDateAdded() {
+      return dateAdded;
+   }
+
+   public void setDateAdded(LocalDateTime dateAdded) {
+      this.dateAdded = dateAdded;
+   }
+
+   public LocalDateTime getDateVisited() {
+      return dateVisited;
+   }
+
+   public void setDateVisited(LocalDateTime dateVisited) {
+      this.dateVisited = dateVisited;
+   }
+
+   public Collection<String> getLabels() {
+      return labels;
+   }
+
+   public void setLabels(Collection<String> labels) {
+      this.labels = labels;
+   }
+
+   public String getUrl() {
+      return url;
+   }
+
+   public void setUrl(String url) {
+      this.url = url;
    }
 }

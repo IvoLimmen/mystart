@@ -1,13 +1,15 @@
 package org.limmen.mystart;
 
 import java.util.Collection;
+import java.util.Optional;
+
 import org.limmen.mystart.criteria.Criteria;
 
 public interface LinkStorage {
 
   void create(Long userId, Link item);
 
-  Link get(Long userId, Long id);
+  Optional<Link> get(Long userId, Long id);
 
   Collection<Link> getAll(Long userId);
 
@@ -15,7 +17,7 @@ public interface LinkStorage {
 
   Collection<String> getAllLabels(Long userId);
 
-  Link getByUrl(Long userId, Link url);
+  Optional<Link> getByUrl(Long userId, Link url);
 
   Collection<Link> getLastCreated(Long userId, int limit);
 

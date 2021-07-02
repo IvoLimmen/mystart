@@ -1,7 +1,9 @@
 package org.limmen.mystart.postgres;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.function.Function;
+
 import org.limmen.mystart.User;
 import org.limmen.mystart.UserStorage;
 
@@ -29,21 +31,21 @@ public class DbUserStorage extends DbAbstractStorage implements UserStorage {
   }
 
   @Override
-  public User get(Long id) {
+  public Optional<User> get(Long id) {
     return executeSqlSingle("select * from users where id = ?", stmt -> {
       stmt.setLong(1, id);
     }, USER_MAPPER);
   }
 
   @Override
-  public User getByEmail(String email) {
+  public Optional<User> getByEmail(String email) {
     return executeSqlSingle("select * from users where email = ?", stmt -> {
       stmt.setString(1, email);
     }, USER_MAPPER);
   }
 
   @Override
-  public User getByResetCode(String resetCode) {
+  public Optional<User> getByResetCode(String resetCode) {
     return executeSqlSingle("select * from users where reset_code = ?", stmt -> {
       stmt.setString(1, resetCode);
     }, USER_MAPPER);

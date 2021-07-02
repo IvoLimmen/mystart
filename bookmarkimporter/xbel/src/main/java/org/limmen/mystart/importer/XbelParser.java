@@ -1,7 +1,5 @@
 package org.limmen.mystart.importer;
 
-import org.limmen.mystart.importer.ParseContext;
-import org.limmen.mystart.importer.AbstractParser;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -9,9 +7,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+
 import org.limmen.mystart.Link;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;

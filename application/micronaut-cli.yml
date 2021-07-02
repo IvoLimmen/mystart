@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: org.limmen.mystart
+testFramework: junit
+sourceLanguage: java
+buildTool: maven
+features: [annotation-api, app-name, asciidoctor, http-client, java, java-application, junit, logback, maven, mockito, netty-server, yaml, readme, security, security-annotations, security-session, shade]

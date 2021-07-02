@@ -2,9 +2,6 @@ package org.limmen.mystart.criteria;
 
 import java.util.stream.Stream;
 
-import lombok.ToString;
-
-@ToString(callSuper = true)
 public class Eq extends AbstractFieldCriteria {
 
   public Eq(String fieldName, Object value, Class<?> valueType) {

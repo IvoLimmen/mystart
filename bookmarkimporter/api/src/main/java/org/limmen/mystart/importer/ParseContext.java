@@ -4,9 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
-import lombok.Getter;
 
-@Getter
 public class ParseContext {
 
   private final String fileName;
@@ -34,6 +32,22 @@ public class ParseContext {
     if (this.inputStream != null) {
       this.inputStream.mark(0);
     }
+  }
+
+  public Map<String, String> getOptions() {
+    return options;
+  }
+
+  public String getTemporaryFileName() {
+    return temporaryFileName;
+  }
+
+  public String getUrl() {
+    return url;
+  }
+
+  public String getFileName() {
+    return fileName;
   }
 
   public void addOption(String key, String value) {

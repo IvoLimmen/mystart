@@ -9,13 +9,16 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicLong;
-import lombok.extern.slf4j.Slf4j;
+
 import org.limmen.mystart.Link;
 import org.limmen.mystart.LinkStorage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-@Slf4j
 public class CleanupTaskManager implements Runnable {
 
+  private final static Logger log = LoggerFactory.getLogger(CleanupTaskManager.class);
+  
   private final CleanupContext context;
 
   private final AtomicLong errorCount = new AtomicLong();

@@ -9,14 +9,20 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.function.Consumer;
 import java.util.function.Function;
+
 import org.limmen.mystart.exception.StorageException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class DbAbstractStorage {
+
+  protected final static Logger log = LoggerFactory.getLogger(DbAbstractStorage.class);
 
   private final String password;
   private final String url;
@@ -60,20 +66,20 @@ public abstract class DbAbstractStorage {
     return results;
   }
 
-  protected <T> T executeSqlSingle(String sql, Consumer<StatementBuilder> arguments, Function<Result, T> mapper) {
+  protected <T> Optional<T> executeSqlSingle(String sql, Consumer<StatementBuilder> arguments, Function<Result, T> mapper) {
     try (Connection connection = connection()) {
       try (PreparedStatement statement = connection.prepareStatement(sql)) {
         arguments.accept(new StatementBuilder(connection, statement));
         try (ResultSet resultSet = statement.executeQuery()) {
           while (resultSet.next()) {
-            return mapper.apply(new Result(resultSet));
+            return Optional.of(mapper.apply(new Result(resultSet)));
           }
         }
       }
     } catch (SQLException e) {
       throw new StorageException(e);
     }
-    return null;
+    return Optional.empty();
   }
 
   protected List<String> executeSqlStringCollection(String sql, Consumer<StatementBuilder> arguments) {

@@ -1,7 +1,5 @@
 package org.limmen.mystart.importer;
 
-import org.limmen.mystart.importer.GoogleBookmarkRssXmlParser;
-import org.limmen.mystart.importer.ParseContext;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -13,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
 import java.util.Set;
+
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Test;
 import org.limmen.mystart.Link;

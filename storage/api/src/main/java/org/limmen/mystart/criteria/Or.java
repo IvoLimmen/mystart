@@ -1,11 +1,7 @@
 package org.limmen.mystart.criteria;
 
-import java.util.List;
 import java.util.stream.Stream;
 
-import lombok.ToString;
-
-@ToString
 public class Or implements Criteria {
 
     private Criteria left;

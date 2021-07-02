@@ -1,0 +1,6 @@
+micronaut:
+  application:
+    name: mystart
+    
+  security:
+    enabled: true
