@@ -119,14 +119,16 @@
       <plugin>
         <groupId>io.micronaut.build</groupId>
         <artifactId>micronaut-maven-plugin</artifactId>
+        <configuration>
+          <jvmArguments>-Dmicronaut.environments=local -Dconfig.dir=../../config</jvmArguments>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
           <!-- Uncomment to enable incremental compilation -->
-          <!-- <useIncrementalCompilation>false</useIncrementalCompilation> -->
-
+          <!-- <useIncrementalCompilation>false</useIncrementalCompilation> -->          
           <annotationProcessorPaths combine.children="append">
             <path>
               <groupId>io.micronaut.security</groupId>
