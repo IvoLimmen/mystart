@@ -7,6 +7,8 @@ public class Application {
     public static void main(String[] args) {
         Micronaut
         .build(args)
+        .banner(false)        
+        .deduceEnvironment(false)
         .eagerInitSingletons(true)
         .start();        
     }

@@ -22,11 +22,11 @@ import jakarta.inject.Singleton;
 @Singleton
 public class AuthenticationProviderUserPassword implements AuthenticationProvider {
 
-    private SettingsConfig settingsConfig;
+    private SettingsProvider settingsConfig;
     private UserStorage userStorage;
 
     @Inject
-    public AuthenticationProviderUserPassword(UserStorage userStorage, SettingsConfig settingsConfig) {
+    public AuthenticationProviderUserPassword(UserStorage userStorage, SettingsProvider settingsConfig) {
         this.userStorage = userStorage;
         this.settingsConfig = settingsConfig;
     }

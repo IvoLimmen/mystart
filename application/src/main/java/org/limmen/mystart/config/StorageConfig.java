@@ -22,8 +22,9 @@ public class StorageConfig {
     private final VisitStorage visitStorage;
 
     @Inject
-    public StorageConfig(SettingsConfig settingsConfig) {
-        this.storage = StorageProvider.getStorageByName(settingsConfig.getProperties(), "postgres");
+    public StorageConfig(SettingsProvider settingsConfig) {
+        String storageName = settingsConfig.getProperties().getProperty("server.storage");
+        this.storage = StorageProvider.getStorageByName(settingsConfig.getProperties(), storageName);
 
         this.userStorage = this.storage.getUserStorage();
         this.linkStorage = this.storage.getLinkStorage();

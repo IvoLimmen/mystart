@@ -22,12 +22,12 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>model</artifactId>
-      <version>${project.version}</version>        
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>storage-postgres</artifactId>
-      <version>${project.version}</version>        
+      <version>${project.version}</version>
     </dependency>
 
     <dependency>
@@ -95,11 +95,27 @@
       <groupId>io.micronaut.test</groupId>
       <artifactId>micronaut-test-junit5</artifactId>
       <scope>test</scope>
-    </dependency>    
+    </dependency>
   </dependencies>
 
   <build>
     <plugins>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <descriptors>
+            <descriptor>src/assembly/bin.xml</descriptor>
+          </descriptors>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>io.micronaut.build</groupId>
         <artifactId>micronaut-maven-plugin</artifactId>
