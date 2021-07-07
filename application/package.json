@@ -1,0 +1,13 @@
+{
+  "name": "MyStart",
+  "description": "",
+  "version": "2.0.0",
+  "license": "MIT",
+  "author": "Ivo Limmen",
+  "scripts": {
+    "compile": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^4.3.5"
+  }
+}

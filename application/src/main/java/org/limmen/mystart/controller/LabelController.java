@@ -15,7 +15,7 @@ import io.micronaut.security.rules.SecurityRule;
 import io.micronaut.security.utils.DefaultSecurityService;
 import jakarta.inject.Inject;
 
-@Controller("/label")
+@Controller("/api/label")
 @Secured(SecurityRule.IS_AUTHENTICATED)
 public class LabelController extends AbstractController {
     

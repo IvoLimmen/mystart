@@ -10,7 +10,7 @@ import io.micronaut.security.rules.SecurityRule;
 import io.micronaut.security.utils.DefaultSecurityService;
 import jakarta.inject.Inject;
 
-@Controller("/users")
+@Controller("/api/users")
 @Secured(SecurityRule.IS_AUTHENTICATED)
 public class UserController extends AbstractController {
 

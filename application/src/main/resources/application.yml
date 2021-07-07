@@ -1,6 +1,19 @@
 micronaut:
   application:
     name: mystart
-    
+  router:
+    static-resources:
+      default:
+        paths: "classpath:public"
+        mapping: "/**/*"
+        enabled: true    
   security:
     enabled: true
+    intercept-url-map:
+      - pattern : /api/**
+        access:
+          - isAuthenticated()
+      - pattern : /**
+        access:
+          - isAnonymous()
+

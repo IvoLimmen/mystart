@@ -25,7 +25,7 @@ import io.micronaut.security.rules.SecurityRule;
 import io.micronaut.security.utils.DefaultSecurityService;
 import jakarta.inject.Inject;
 
-@Controller("/link")
+@Controller("/api/link")
 @Secured(SecurityRule.IS_AUTHENTICATED)
 public class LinkController extends AbstractController {
 
