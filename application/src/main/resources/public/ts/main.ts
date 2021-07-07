@@ -363,9 +363,9 @@ function removeChildrenFromParent(elementId: string) {
 }
 
 function fireVisitLink(link: Link) {
-  fetch("/api/link/visit?id=" + link.id, {
+  fetch("/api/link/visit/" + link.id, {
     headers: {'Authorization': 'Basic ' + btoa(currentUserName + ':' + currentPassword)},
-    method: 'GET'
+    method: 'PUT'
   })
   .then(function (response) {
       closeMenu();
