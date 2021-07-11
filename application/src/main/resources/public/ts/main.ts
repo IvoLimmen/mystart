@@ -1,3 +1,4 @@
+let me: User;
 let currentUserName: string;
 let currentPassword: string;
 
@@ -23,32 +24,70 @@ function createLoginWindow() {
   titleDiv.appendChild(title);
   mainDiv.appendChild(titleDiv);
 
-  let formDiv = document.createElement('form') as HTMLFormElement;
+  let formElement = document.createElement('form') as HTMLFormElement;
+  let labelName = document.createElement('label') as HTMLLabelElement;
+  labelName.textContent = "Email";
+  labelName.htmlFor = "email";
+  formElement.appendChild(labelName);
   let inputName = document.createElement('input') as HTMLInputElement;
   inputName.type = "text";
-  inputName.name = "username";
+  inputName.name = "email";
   inputName.placeholder = "Enter your email address...";
   inputName.size = 50;  
-  formDiv.appendChild(inputName);
+  formElement.appendChild(inputName);
 
+  let labelPassword = document.createElement('label') as HTMLLabelElement;
+  labelPassword.textContent = "Password";
+  labelPassword.htmlFor = "password";
+  formElement.appendChild(labelPassword);
   let inputPassword = document.createElement('input') as HTMLInputElement;
   inputPassword.type = "password";
   inputPassword.name = "password";
   inputPassword.size = 50;  
-  formDiv.appendChild(inputPassword);
+  formElement.appendChild(inputPassword);
 
   let submitButton = document.createElement('button') as HTMLButtonElement;
   submitButton.type = "button";
   submitButton.name = "submit";
   submitButton.textContent = "Submit";
-  submitButton.addEventListener("click", (event: MouseEvent) => {
+
+  let loginOnEnter = (event: KeyboardEvent) => {
+    if (event.code != "Enter") {
+      return;
+    }
+    event.preventDefault();
+    loginAction.call(event);
+  };
+  let loginAction = () => {
     currentUserName = inputName.value;
     currentPassword = inputPassword.value;    
-    document.body.removeChild(document.querySelector("#login"));
-  });
-  formDiv.appendChild(submitButton);
+    fetch("/api/users/me/", {
+      headers: {'Authorization': 'Basic ' + btoa(currentUserName + ':' + currentPassword)},
+      method: 'GET'
+    })
+    .then(response => response.json())
+    .then(function (response: User) {
+      me = response;
+      localStorage.setItem("me", JSON.stringify(me));
+      localStorage.setItem("currentUserName", currentUserName);
+      localStorage.setItem("currentPassword", currentPassword);
+      document.body.removeChild(document.querySelector("#login"));
+      startup();
+    })
+    .catch(function (err) {
+      console.log(err);
+    }); 
+  };
 
-  mainDiv.appendChild(formDiv);
+  submitButton.addEventListener("click", (event: MouseEvent) => {
+    loginAction.call(event);
+  });
+  submitButton.addEventListener("keydown", loginOnEnter);
+  inputName.addEventListener("keydown", loginOnEnter);
+  inputPassword.addEventListener("keydown", loginOnEnter);
+  formElement.appendChild(submitButton);
+
+  mainDiv.appendChild(formElement);
 
   document.body.appendChild(mainDiv);  
 }
@@ -487,14 +526,25 @@ function disableEnter(keyEvent: KeyboardEvent) {
 
 // bootstrap
 (function () {
+  if (!currentUserName) {
+    me = JSON.parse(localStorage.getItem("me"));
+    currentUserName = localStorage.getItem("currentUserName");
+    currentPassword = localStorage.getItem("currentPassword");
+
+    if (!currentUserName) {
+      createLoginWindow();
+    }
+     else {
+       startup();
+     }
+  }
+})();
+
+function startup() {
   document.onkeydown = keyboardInputHandler;
   document.getElementById('command_input').onkeypress = searchHandler;
   document.getElementById('edit.url').onkeypress = disableEnter;
   document.getElementById('edit.title').onkeypress = disableEnter;
   document.getElementById('edit.description').onkeypress = disableEnter;
   document.getElementById('edit.labels').onkeypress = disableEnter;
-
-  if (!currentUserName) {
-    createLoginWindow();
-  }
-})();
+}
