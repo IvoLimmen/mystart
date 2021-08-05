@@ -1,3 +1,5 @@
+import { User, Link, Label } from './models.js';
+
 let me: User;
 let currentUserName: string;
 let currentPassword: string;
@@ -11,6 +13,17 @@ var menuOpen: boolean = false;
 var editOpen: boolean = false;
 var labelMode: boolean = false;
 var selectedMenuItem: number = 0;
+
+function setLabelsFromString(link: Link, lbls: string) {
+  if (lbls.indexOf(",") !== -1) {
+    var lbl = lbls.split(',');
+    for (var i = 0; i < lbl.length; i++) {
+      link.labels.push(lbl[i]);
+    }
+  } else {
+    link.labels.push(lbls);
+  }
+}
 
 function createLoginWindow() {
   let mainDiv = document.createElement('div') as HTMLDivElement;
@@ -229,7 +242,7 @@ function keyboardInputHandler(keyEvent: KeyboardEvent) {
       if (selectedMenuItem === 0) {
         link.url = (<HTMLInputElement>document.getElementById('edit.url')).value;
         link.description = (<HTMLInputElement>document.getElementById('edit.description')).value;
-        link.setLabelsFromString((<HTMLInputElement>document.getElementById('edit.labels')).value);
+        setLabelsFromString(link, (<HTMLInputElement>document.getElementById('edit.labels')).value);
         link.title = (<HTMLInputElement>document.getElementById('edit.title')).value;
         fireUpdateLink(link);
         return;
