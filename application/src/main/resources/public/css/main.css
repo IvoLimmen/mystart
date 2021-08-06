@@ -18,7 +18,6 @@
 body {
   margin: 5px;
   padding: 0px;
-  width: 100%;
   background-color: var(--main-background-color);
   font-family: FiraCode;
 }

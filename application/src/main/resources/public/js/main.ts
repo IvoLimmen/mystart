@@ -25,11 +25,21 @@ function setLabelsFromString(link: Link, lbls: string) {
   }
 }
 
+function logout() {
+  localStorage.clear();
+  window.location.reload();
+}
+
 function createLoginWindow() {
   let mainDiv = document.createElement('div') as HTMLDivElement;
   mainDiv.id = "login";
   mainDiv.style.margin = "auto";
   mainDiv.style.width = "20%";
+  mainDiv.style.padding = "20px";
+  mainDiv.style.borderStyle = "solid";
+  mainDiv.style.top = "150px";
+  mainDiv.style.position = "relative";
+
 
   let titleDiv = document.createElement('div') as HTMLDivElement;
   let title = document.createElement('h1') as HTMLHeadingElement;
@@ -39,29 +49,34 @@ function createLoginWindow() {
 
   let formElement = document.createElement('form') as HTMLFormElement;
   let labelName = document.createElement('label') as HTMLLabelElement;
-  labelName.textContent = "Email";
+  labelName.textContent = "Email:";
   labelName.htmlFor = "email";
+  labelName.style.margin = "10px";
   formElement.appendChild(labelName);
   let inputName = document.createElement('input') as HTMLInputElement;
   inputName.type = "text";
   inputName.name = "email";
   inputName.placeholder = "Enter your email address...";
   inputName.size = 50;  
+  inputName.style.margin = "10px";
   formElement.appendChild(inputName);
 
   let labelPassword = document.createElement('label') as HTMLLabelElement;
-  labelPassword.textContent = "Password";
+  labelPassword.textContent = "Password:";
   labelPassword.htmlFor = "password";
+  labelPassword.style.margin = "10px";
   formElement.appendChild(labelPassword);
   let inputPassword = document.createElement('input') as HTMLInputElement;
   inputPassword.type = "password";
   inputPassword.name = "password";
   inputPassword.size = 50;  
+  inputPassword.style.margin = "10px";
   formElement.appendChild(inputPassword);
 
   let submitButton = document.createElement('button') as HTMLButtonElement;
   submitButton.type = "button";
   submitButton.name = "submit";
+  submitButton.style.margin = "10px";
   submitButton.textContent = "Submit";
 
   let loginOnEnter = (event: KeyboardEvent) => {
@@ -342,6 +357,8 @@ function keyboardInputHandler(keyEvent: KeyboardEvent) {
       return;
     } else if (keyEvent.key === '?') {
       // open help
+    } else if (keyEvent.key === 'q') {
+      logout();
     } else if (keyEvent.key === 'l') {
       fireGetLabels();
       return;
