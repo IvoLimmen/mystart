@@ -13,5 +13,4 @@ public class ViewController {
     public HttpResponse<?> index() {
         return HttpResponse.ok();
     }
-
 }

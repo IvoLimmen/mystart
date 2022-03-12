@@ -101,4 +101,3 @@ $ mvn exec:java
 
 * For emoji handling: https://github.com/kcthota/emoji4j
 * For icons: https://fontawesome.com/
-* For look and feel: https://github.com/ColorlibHQ/AdminLTE

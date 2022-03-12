@@ -14,24 +14,24 @@ import jakarta.inject.Inject;
 @Secured(SecurityRule.IS_AUTHENTICATED)
 public class UserController extends AbstractController {
 
-    private UserStorage userStorage;
+  private UserStorage userStorage;
 
-    @Inject
-    public UserController(DefaultSecurityService defaultSecurityService, UserStorage userStorage) {
-        super(defaultSecurityService);
-        this.userStorage = userStorage;
-    }
+  @Inject
+  public UserController(DefaultSecurityService defaultSecurityService, UserStorage userStorage) {
+    super(defaultSecurityService);
+    this.userStorage = userStorage;
+  }
 
-    @Get("/me")
-    public User getMyself() {
-        return userStorage.get(getUserId()).orElse(null);
-    }
+  @Get("/me")
+  public User getMyself() {
+    return userStorage.get(getUserId()).orElseThrow();
+  }
 
-    @Get("/{id}")
-    public User getUser(Long id) {
-        if (getUserId().equals(id)) {
-            return userStorage.get(id).orElse(null);
-        }
-        return null;
+  @Get("/{id}")
+  public User getUser(Long id) {
+    if (getUserId().equals(id)) {
+      return userStorage.get(id).orElseThrow();
     }
+    return null;
+  }
 }
