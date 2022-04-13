@@ -1,11 +1,7 @@
 package org.limmen.mystart.criteria;
 
-import java.util.List;
 import java.util.stream.Stream;
 
-import lombok.ToString;
-
-@ToString
 public class Or implements Criteria {
 
     private Criteria left;
@@ -25,5 +21,10 @@ public class Or implements Criteria {
     @Override
     public Stream<AbstractFieldCriteria> toArguments() {
         return Stream.concat(left.toArguments(), right.toArguments());
+    }
+
+    @Override
+    public String toString() {
+      return "Or [left=" + left + ", right=" + right + "]";
     }  
 }

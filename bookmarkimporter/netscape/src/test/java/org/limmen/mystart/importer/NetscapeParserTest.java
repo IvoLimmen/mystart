@@ -1,7 +1,5 @@
 package org.limmen.mystart.importer;
 
-import org.limmen.mystart.importer.NetscapeParser;
-import org.limmen.mystart.importer.ParseContext;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

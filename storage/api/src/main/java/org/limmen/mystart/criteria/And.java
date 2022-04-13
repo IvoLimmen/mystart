@@ -2,9 +2,6 @@ package org.limmen.mystart.criteria;
 
 import java.util.stream.Stream;
 
-import lombok.ToString;
-
-@ToString
 public class And implements Criteria {
     
     private Criteria left;

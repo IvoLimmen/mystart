@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.TreeMap;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.limmen.mystart.Link;
 import org.limmen.mystart.Storage;

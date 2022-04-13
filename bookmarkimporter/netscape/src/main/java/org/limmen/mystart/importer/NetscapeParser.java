@@ -1,7 +1,5 @@
 package org.limmen.mystart.importer;
 
-import org.limmen.mystart.importer.ParseContext;
-import org.limmen.mystart.importer.AbstractParser;
 import java.io.IOException;
 import java.util.Set;
 import org.jsoup.Jsoup;
