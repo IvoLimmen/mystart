@@ -38,8 +38,9 @@ public class XbelParser extends AbstractParser {
 
   @Override
   public Set<Link> parse(ParseContext context) throws IOException {
-    DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+    DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();    
     try {
+      dbFactory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
       DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
       Document doc = dBuilder.parse(new File(context.getFileName()));
 
