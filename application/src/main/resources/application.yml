@@ -10,6 +10,9 @@ micronaut:
   security:
     enabled: true
     intercept-url-map:
+      - pattern : /api/registration/**
+        access:
+          - isAnonymous()
       - pattern : /api/**
         access:
           - isAuthenticated()

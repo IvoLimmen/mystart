@@ -2,6 +2,7 @@ package org.limmen.mystart.controller;
 
 import org.limmen.mystart.User;
 import org.limmen.mystart.UserStorage;
+import org.limmen.mystart.dto.UserDto;
 
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
@@ -22,15 +23,28 @@ public class UserController extends AbstractController {
     this.userStorage = userStorage;
   }
 
+  private UserDto toUserDto(User user) {
+    var u = new UserDto();
+    u.setAutoStartLabel(user.getAutoStartLabel());
+    u.setOpenInNewTab(user.isOpenInNewTab());
+    u.setFullName(user.getFullName());
+    u.setEmail(user.getEmail());
+    return u;
+  }
+
   @Get("/me")
-  public User getMyself() {
-    return userStorage.get(getUserId()).orElseThrow();
+  public UserDto getMyself() {
+    return userStorage.get(getUserId())
+        .map(this::toUserDto)
+        .orElseThrow();
   }
 
   @Get("/{id}")
-  public User getUser(Long id) {
+  public UserDto getUser(Long id) {
     if (getUserId().equals(id)) {
-      return userStorage.get(id).orElseThrow();
+      return userStorage.get(id)
+          .map(this::toUserDto)
+          .orElseThrow();
     }
     return null;
   }

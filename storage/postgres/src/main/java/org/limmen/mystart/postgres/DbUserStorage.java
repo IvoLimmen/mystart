@@ -61,7 +61,7 @@ public class DbUserStorage extends DbAbstractStorage implements UserStorage {
   @Override
   public void store(User item) {
     if (item.getId() == null) {
-      executeSql("insert into users (email, password, full_name, avatar_filename, open_in_new_tab, auto_start_label, menu_labels) values (?, ?, ?, ?, ?, ?, ?)", stmt -> {
+      executeSql("insert into users (email, password, full_name, avatar_filename, open_in_new_tab, auto_start_label, menu_labels, reset_code, reset_code_valid) values (?, ?, ?, ?, ?, ?, ?, ?, ?)", stmt -> {
         stmt.setString(1, item.getEmail());
         stmt.setString(2, item.getPassword());
         stmt.setString(3, item.getFullName());
@@ -69,6 +69,8 @@ public class DbUserStorage extends DbAbstractStorage implements UserStorage {
         stmt.setBool(5, item.isOpenInNewTab());
         stmt.setString(6, item.getAutoStartLabel());
         stmt.setStringArray(7, item.getMenuLabels().toArray(new String[item.getMenuLabels().size()]));
+        stmt.setString(8, item.getResetCode());
+        stmt.setLocalDate(9, item.getResetCodeValid());
       });
 
     } else {

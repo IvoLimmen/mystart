@@ -29,7 +29,7 @@
       <artifactId>storage-postgres</artifactId>
       <version>${project.version}</version>
     </dependency>
-
+    
     <dependency>
       <groupId>io.projectreactor</groupId>
       <artifactId>reactor-core</artifactId>
@@ -72,6 +72,10 @@
       <groupId>io.micronaut.security</groupId>
       <artifactId>micronaut-security-session</artifactId>
       <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.simplejavamail</groupId>
+      <artifactId>simple-java-mail</artifactId>      
     </dependency>
     <dependency>
       <groupId>javax.annotation</groupId>

@@ -55,16 +55,18 @@ public class LinkController extends AbstractController {
         Criteria criteria = new Or(new Like("description", input, String.class),
                 new Or(new Like("title", input, String.class), new Like("url", input, String.class)));
 
-        return this.linkStorage.search(getUserId(), criteria).stream().map(this::toLinkDto)
-                .collect(Collectors.toList());
+        return this.linkStorage.search(getUserId(), criteria).stream()
+            .map(this::toLinkDto)
+            .collect(Collectors.toList());
     }
 
     @Get("/by_label/{label}")
     public List<LinkDto> byLabel(@PathVariable String label) {
 
         if (label != null && label.trim().length() > 0) {
-            return this.linkStorage.getAllByLabel(getUserId(), label).stream().map(this::toLinkDto)
-                    .collect(Collectors.toList());
+            return this.linkStorage.getAllByLabel(getUserId(), label).stream()
+                .map(this::toLinkDto)
+                .collect(Collectors.toList());
         } else {
             return Collections.emptyList();
         }
