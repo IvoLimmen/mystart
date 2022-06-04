@@ -8,6 +8,7 @@
   --selected-background-color: #fff;
   --menu-background-color: #000;
   --menuitem-background-color: #bbb;
+  --animation-speed: 100ms;
 }
 
 @font-face {
@@ -32,7 +33,7 @@ body {
 }
 
 .edit-glide-in {
-  animation: 'edit-glide-in' 500ms;
+  animation: 'edit-glide-in' var(--animation-speed);
   animation-fill-mode: forwards;
 }
 
@@ -50,7 +51,7 @@ body {
 }
 
 .edit-glide-out {
-  animation: 'edit-glide-out' 500ms;
+  animation: 'edit-glide-out' var(--animation-speed);
   animation-fill-mode: forwards;
 }
 
@@ -64,7 +65,7 @@ body {
 }
 
 .menu-glide-in {
-  animation: 'menu-glide-in' 500ms;
+  animation: 'menu-glide-in' var(--animation-speed);
   animation-fill-mode: forwards;
 }
 
@@ -82,7 +83,7 @@ body {
 }
 
 .menu-glide-out {
-  animation: 'menu-glide-out' 500ms;
+  animation: 'menu-glide-out' var(--animation-speed);
   animation-fill-mode: forwards;
 }
 
@@ -96,7 +97,7 @@ body {
 }
 
 .labelmenu-glide-in {
-  animation: 'labelmenu-glide-in' 500ms;
+  animation: 'labelmenu-glide-in' var(--animation-speed);
   animation-fill-mode: forwards;
 }
 
@@ -114,7 +115,7 @@ body {
 }
 
 .labelmenu-glide-out {
-  animation: 'labelmenu-glide-out' 500ms;
+  animation: 'labelmenu-glide-out' var(--animation-speed);
   animation-fill-mode: forwards;
 }
 
@@ -128,7 +129,7 @@ body {
 }
 
 .search-glide-in {
-  animation: 'search-glide-in' 500ms;
+  animation: 'search-glide-in' var(--animation-speed);
   animation-fill-mode: forwards;
 }
 
@@ -146,7 +147,7 @@ body {
 }
 
 .search-glide-out {
-  animation: 'search-glide-out' 500ms;
+  animation: 'search-glide-out' var(--animation-speed);
   animation-fill-mode: forwards;
 }
 
