@@ -83,9 +83,9 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
   }
 
   @Override
-  public Optional<Link> getByUrl(Long userId, Link url) {
+  public Optional<Link> getByUrl(Long userId, String url) {
 
-    String strippedUrl = url.getUrl();
+    String strippedUrl = Link.sanatizeUrl(url);
     log.debug("Searching for url: {}", strippedUrl);
 
     return executeSqlSingle("select * from links where user_id = ? and lower(url) = ?", args -> {
@@ -159,7 +159,7 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
     AtomicInteger created = new AtomicInteger(0);
     links.forEach(l -> {
       log.debug("Searching for URL: {}", l.getUrl());
-      Optional<Link> link = getByUrl(userId, l);
+      Optional<Link> link = getByUrl(userId, l.getUrl());
       if (link.isEmpty()) {
         log.info("Creating link {}", l.getUrl());
         create(userId, l);

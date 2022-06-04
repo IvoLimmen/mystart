@@ -452,7 +452,7 @@ function fireUpdateLink(link: Link) {
   data.labels = link.labels;
   data.title = link.title;
 
-  fetch("/api/link/update", { 
+  fetch("/api/link/", { 
     method: 'PUT',
     headers: {'Authorization': 'Basic ' + btoa(currentUserName + ':' + currentPassword), 'Content-Type': 'application/json;charset=UTF-8'},
     body: JSON.stringify(data)
@@ -467,7 +467,7 @@ function fireUpdateLink(link: Link) {
 }
 
 function fireDeleteLink(link: Link) {
-  fetch("/api/link/delete?id=" + link.id, { 
+  fetch("/api/link/" + link.id, { 
     headers: {'Authorization': 'Basic ' + btoa(currentUserName + ':' + currentPassword)},
     method: 'DELETE'
   })
@@ -483,7 +483,7 @@ function fireDeleteLink(link: Link) {
 }
 
 function fireGetByLabel(label: string) {
-  fetch("/api/link/by_label/" + label, {
+  fetch("/api/label/" + label, {
     headers: {'Authorization': 'Basic ' + btoa(currentUserName + ':' + currentPassword)},
     method: 'GET'
   })
@@ -505,7 +505,7 @@ function fireGetByLabel(label: string) {
 function fireGetLabels() {
   removeChildrenFromParent('content');
 
-  fetch("/api/label/all", {
+  fetch("/api/label/", {
     headers: {'Authorization': 'Basic ' + btoa(currentUserName + ':' + currentPassword)},
     method: 'GET'
   })
@@ -528,7 +528,7 @@ function searchHandler(keyEvent: KeyboardEvent) {
     keyEvent.preventDefault();
     removeChildrenFromParent('content');
 
-    fetch("/api/link/search?input=" + me.value, {
+    fetch("/api/link/?input=" + me.value, {
       headers: {'Authorization': 'Basic ' + btoa(currentUserName + ':' + currentPassword)},
       method: 'GET'
     })
