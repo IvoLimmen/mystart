@@ -6,7 +6,7 @@ micronaut:
       default:
         paths: "classpath:public"
         mapping: "/**/*"
-        enabled: true    
+        enabled: true
   security:
     enabled: true
     intercept-url-map:

@@ -55,10 +55,6 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>io.micronaut.views</groupId>
-      <artifactId>micronaut-views-thymeleaf</artifactId>
-    </dependency>
-    <dependency>
       <groupId>io.micronaut</groupId>
       <artifactId>micronaut-runtime</artifactId>
       <scope>compile</scope>
