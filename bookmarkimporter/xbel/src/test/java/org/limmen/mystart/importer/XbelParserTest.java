@@ -16,7 +16,7 @@ public class XbelParserTest {
   private final XbelParser fixture = new XbelParser();
 
   @Test
-  public void parse() throws FileNotFoundException, IOException {
+  public void parse() throws FileNotFoundException, IOException {    
     File path = new File(System.getProperty("user.dir"), "src");
     path = new File(path, "test");
     path = new File(path, "resources");
