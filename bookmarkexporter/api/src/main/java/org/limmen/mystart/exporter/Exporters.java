@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ServiceLoader;
 import java.util.stream.Collectors;
-import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
-@Getter
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Exporters {
 
+  private final static Logger log = LoggerFactory.getLogger(Exporters.class);
+  
   private final List<Exporter> exporters = new ArrayList<>();
 
   public Exporters() {

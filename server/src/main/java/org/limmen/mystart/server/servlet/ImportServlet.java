@@ -1,10 +1,5 @@
 package org.limmen.mystart.server.servlet;
 
-import jakarta.servlet.MultipartConfigElement;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Part;
 import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -13,16 +8,25 @@ import java.nio.file.Paths;
 import java.util.Properties;
 import java.util.Set;
 import java.util.UUID;
-import lombok.extern.slf4j.Slf4j;
+
 import org.apache.commons.io.IOUtils;
 import org.limmen.mystart.Link;
+import org.limmen.mystart.Storage;
 import org.limmen.mystart.importer.ParseContext;
 import org.limmen.mystart.importer.Parser;
-import org.limmen.mystart.Storage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-@Slf4j
+import jakarta.servlet.MultipartConfigElement;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+
 public class ImportServlet extends AbstractServlet {
 
+  private final static Logger log = LoggerFactory.getLogger(ImportServlet.class);
+  
   private static final long serialVersionUID = 1L;
 
   private final Parser parser;

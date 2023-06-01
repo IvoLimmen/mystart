@@ -1,6 +1,7 @@
 package org.limmen.mystart.server.support;
 
 import java.util.Properties;
+
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -9,17 +10,20 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import lombok.Builder;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class MailServiceImpl implements MailService {
+
+  private final static Logger log = LoggerFactory.getLogger(MailService.class);
 
   private static final String LINE_END = "\n";
 
   private final String from;
 
   private final String host;
+
   private final String password;
 
   private final int port;
@@ -30,14 +34,64 @@ public class MailServiceImpl implements MailService {
 
   private final String username;
 
-  @Builder
-  private MailServiceImpl(String from, String host, boolean startTls, int port, String username, String password) {
-    this.from = from;
-    this.host = host;
-    this.startTls = startTls;
-    this.port = port;
-    this.password = password;
-    this.username = username;
+  public static Builder builder() {
+    return new Builder();
+  }
+  
+  public static class Builder {
+
+    private String from;
+    private String host;
+    private String password;
+    private int port;
+    private boolean startTls;
+    private String username;
+
+    public Builder() {
+    }
+
+    public Builder from(String from) {
+      this.from = from;
+      return Builder.this;
+    }
+
+    public Builder host(String host) {
+      this.host = host;
+      return Builder.this;
+    }
+
+    public Builder password(String password) {
+      this.password = password;
+      return Builder.this;
+    }
+
+    public Builder port(int port) {
+      this.port = port;
+      return Builder.this;
+    }
+
+    public Builder startTls(boolean startTls) {
+      this.startTls = startTls;
+      return Builder.this;
+    }
+
+    public Builder username(String username) {
+      this.username = username;
+      return Builder.this;
+    }
+
+    public MailServiceImpl build() {
+      return new MailServiceImpl(this);
+    }
+  }
+
+  private MailServiceImpl(Builder builder) {
+    this.from = builder.from;
+    this.host = builder.host;
+    this.startTls = builder.startTls;
+    this.port = builder.port;
+    this.password = builder.password;
+    this.username = builder.username;
     createSession();
   }
 
@@ -75,11 +129,11 @@ public class MailServiceImpl implements MailService {
     properties.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 
     this.session = Session.getDefaultInstance(properties, new Authenticator() {
-                                            @Override
-                                            protected PasswordAuthentication getPasswordAuthentication() {
-                                              return new PasswordAuthentication(username, password);
-                                            }
-                                          });
+      @Override
+      protected PasswordAuthentication getPasswordAuthentication() {
+        return new PasswordAuthentication(username, password);
+      }
+    });
   }
 
   private void sendMessage(String subject, String to, String msg) {

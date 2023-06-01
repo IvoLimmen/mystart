@@ -1,5 +1,7 @@
 package org.limmen.mystart.importer;
 
+import static java.time.temporal.ChronoUnit.SECONDS;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -9,17 +11,20 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
-import static java.time.temporal.ChronoUnit.SECONDS;
 import java.util.Enumeration;
 import java.util.Optional;
+
 import javax.net.ssl.SSLContext;
-import lombok.extern.slf4j.Slf4j;
+
 import org.apache.commons.io.IOUtils;
 import org.limmen.mystart.util.SSLContextProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-@Slf4j
 public class GitLabPageLoader implements Enumeration<File> {
 
+  private final static Logger log = LoggerFactory.getLogger(GitLabPageLoader.class);
+  
   private final static SSLContext SSL_CONTEXT = SSLContextProvider.getSSLContext();
 
   private final static String USER_AGENT = "MyStart";

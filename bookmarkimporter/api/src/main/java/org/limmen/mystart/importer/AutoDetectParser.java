@@ -5,12 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ServiceLoader;
 import java.util.Set;
-import lombok.extern.slf4j.Slf4j;
-import org.limmen.mystart.Link;
 
-@Slf4j
+import org.limmen.mystart.Link;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class AutoDetectParser extends AbstractParser {
 
+  private final static Logger log = LoggerFactory.getLogger(AutoDetectParser.class);
+  
   private final List<Parser> parsers = new ArrayList<>();
 
   private Parser parser = null;

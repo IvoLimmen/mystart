@@ -4,13 +4,16 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
-import lombok.extern.slf4j.Slf4j;
+
 import org.limmen.mystart.Link;
 import org.limmen.mystart.LinkStorage;
 import org.limmen.mystart.criteria.Criteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-@Slf4j
 public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
+
+  private final static Logger log = LoggerFactory.getLogger(DbLinkStorage.class);
 
   private static final Function<Result, Link> LINK_MAPPER = (var res) -> {
     var link = new Link();
@@ -67,19 +70,20 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
     if (label == null || label.equals("")) {
       return executeSql("select * from links where user_id = ? and labels = '{}' order by title asc", args -> {
         args.setLong(1, userId);
-      }, LINK_MAPPER);  
+      }, LINK_MAPPER);
     }
     return executeSql("select * from links where user_id = ? and labels && array[?] order by title asc", args -> {
       args.setLong(1, userId);
-      args.setStringArray(2, new String[]{label});
+      args.setStringArray(2, new String[] { label });
     }, LINK_MAPPER);
   }
 
   @Override
   public Collection<String> getAllLabels(Long userId) {
-    return executeSqlStringCollection("select distinct unnest(labels) from links where user_id = ? order by 1", args -> {
-      args.setLong(1, userId);
-    });
+    return executeSqlStringCollection("select distinct unnest(labels) from links where user_id = ? order by 1",
+        args -> {
+          args.setLong(1, userId);
+        });
   }
 
   @Override
@@ -104,10 +108,11 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
 
   @Override
   public Collection<Link> getLastVisited(Long userId, int limit) {
-    return executeSql("select l.* from links l join visits v on l.id = v.link_id where user_id = ? order by v.visit desc", args -> {
-      args.setLong(1, userId);
-      args.setMaxRows(limit);
-    }, LINK_MAPPER);
+    return executeSql(
+        "select l.* from links l join visits v on l.id = v.link_id where user_id = ? order by v.visit desc", args -> {
+          args.setLong(1, userId);
+          args.setMaxRows(limit);
+        }, LINK_MAPPER);
   }
 
   @Override
@@ -151,7 +156,7 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
       args.setLong(1, userId);
       args.setString(2, strippedUrl);
     }, LINK_MAPPER);
-  }  
+  }
 
   @Override
   public void importCollection(Long userId, Collection<Link> links, boolean skipDuplicates) {
@@ -212,7 +217,7 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
 
     AtomicInteger index = new AtomicInteger(0);
     return executeSql(sql.toString(), args -> {
-      args.setLong(index.incrementAndGet(), userId);      
+      args.setLong(index.incrementAndGet(), userId);
       criteria.toArguments().forEach(c -> {
         if (c.getValueType().equals(String.class)) {
           args.setString(index.incrementAndGet(), "%" + c.getValue() + "%");

@@ -10,13 +10,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
-@Getter
-@Setter
-@ToString
 public class Link extends BaseObject implements Comparable<Link> {
 
   private static final String UNCATEGORIZED = "Uncategorized";
@@ -107,8 +101,8 @@ public class Link extends BaseObject implements Comparable<Link> {
 
   public String getFormattedCreationDate() {
     return DateTimeFormatter
-            .ofPattern("yyyy-MM-dd")
-            .format(this.getCreationDate());
+        .ofPattern("yyyy-MM-dd")
+        .format(this.getCreationDate());
   }
 
   public String getFormattedLastCheckDate() {
@@ -116,8 +110,8 @@ public class Link extends BaseObject implements Comparable<Link> {
       return null;
     }
     return DateTimeFormatter
-            .ofPattern("yyyy-MM-dd")
-            .format(this.getLastCheck());
+        .ofPattern("yyyy-MM-dd")
+        .format(this.getLastCheck());
   }
 
   public String getFormattedLastVisit() {
@@ -169,7 +163,8 @@ public class Link extends BaseObject implements Comparable<Link> {
   }
 
   /**
-   * Will return <code>true</code> when the provided keyword is found, ignoring case, within the:
+   * Will return <code>true</code> when the provided keyword is found, ignoring
+   * case, within the:
    * <ul>
    * <li>URL</li>
    * <li>Title</li>
@@ -183,13 +178,14 @@ public class Link extends BaseObject implements Comparable<Link> {
   public boolean hasKeyword(String keyword) {
     keyword = keyword.toLowerCase();
     return (getUrl() != null && getUrl().toLowerCase().contains(keyword))
-            || (getTitle() != null && getTitle().toLowerCase().contains(keyword))
-            || (getDescription() != null && getDescription().toLowerCase().contains(keyword))
-            || hasKeywordInLabel(keyword);
+        || (getTitle() != null && getTitle().toLowerCase().contains(keyword))
+        || (getDescription() != null && getDescription().toLowerCase().contains(keyword))
+        || hasKeywordInLabel(keyword);
   }
 
   /**
-   * Will return <code>true</code> when the provided keyword is found, ignoring case, the labels
+   * Will return <code>true</code> when the provided keyword is found, ignoring
+   * case, the labels
    *
    * @param keyword keyword to search for
    * @return <code>true</code> if found
@@ -225,5 +221,92 @@ public class Link extends BaseObject implements Comparable<Link> {
 
   public void visited() {
     this.lastVisit = LocalDateTime.now();
+  }
+
+  public String getCheckResult() {
+    return checkResult;
+  }
+
+  public void setCheckResult(String checkResult) {
+    this.checkResult = checkResult;
+  }
+
+  public LocalDateTime getCreationDate() {
+    return creationDate;
+  }
+
+  public void setCreationDate(LocalDateTime creationDate) {
+    this.creationDate = creationDate;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public Set<String> getLabels() {
+    return labels;
+  }
+
+  public LocalDateTime getLastCheck() {
+    return lastCheck;
+  }
+
+  public void setLastCheck(LocalDateTime lastCheck) {
+    this.lastCheck = lastCheck;
+  }
+
+  public LocalDateTime getLastVisit() {
+    return lastVisit;
+  }
+
+  public void setLastVisit(LocalDateTime lastVisit) {
+    this.lastVisit = lastVisit;
+  }
+
+  public boolean isPrivateNetwork() {
+    return privateNetwork;
+  }
+
+  public void setPrivateNetwork(boolean privateNetwork) {
+    this.privateNetwork = privateNetwork;
+  }
+
+  public String getSource() {
+    return source;
+  }
+
+  public void setSource(String source) {
+    this.source = source;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
+  public String getUrl() {
+    return url;
+  }
+
+  public void setUrl(String url) {
+    this.url = url;
+  }
+
+  @Override
+  public String toString() {
+    return "Link [" + (checkResult != null ? "checkResult=" + checkResult + ", " : "")
+        + (creationDate != null ? "creationDate=" + creationDate + ", " : "")
+        + (description != null ? "description=" + description + ", " : "")
+        + (labels != null ? "labels=" + labels + ", " : "") + (lastCheck != null ? "lastCheck=" + lastCheck + ", " : "")
+        + (lastVisit != null ? "lastVisit=" + lastVisit + ", " : "") + "privateNetwork=" + privateNetwork + ", "
+        + (source != null ? "source=" + source + ", " : "") + (title != null ? "title=" + title + ", " : "")
+        + (url != null ? "url=" + url : "") + "]";
   }
 }

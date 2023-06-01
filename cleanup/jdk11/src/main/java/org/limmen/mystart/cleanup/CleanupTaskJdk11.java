@@ -1,6 +1,7 @@
 package org.limmen.mystart.cleanup;
 
-import org.limmen.mystart.util.SSLContextProvider;
+import static java.time.temporal.ChronoUnit.SECONDS;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.NoRouteToHostException;
@@ -10,14 +11,18 @@ import java.net.http.HttpClient.Version;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
-import static java.time.temporal.ChronoUnit.SECONDS;
-import javax.net.ssl.SSLContext;
-import lombok.extern.slf4j.Slf4j;
-import org.limmen.mystart.Link;
 
-@Slf4j
+import javax.net.ssl.SSLContext;
+
+import org.limmen.mystart.Link;
+import org.limmen.mystart.util.SSLContextProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class CleanupTaskJdk11 extends AbstractCleanupTask {
 
+  private final static Logger log = LoggerFactory.getLogger(CleanupTaskJdk11.class);
+  
   private final static SSLContext SSL_CONTEXT = SSLContextProvider.getSSLContext();
 
   public CleanupTaskJdk11(final Link link, final CleanupContext context) {

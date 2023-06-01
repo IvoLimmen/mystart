@@ -1,15 +1,10 @@
 package org.limmen.mystart.server.servlet;
 
-import jakarta.servlet.MultipartConfigElement;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.file.Path;
 import java.util.Collection;
 import java.util.Properties;
-
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
@@ -18,12 +13,18 @@ import org.limmen.mystart.Link;
 import org.limmen.mystart.Storage;
 import org.limmen.mystart.cleanup.CleanupContext;
 import org.limmen.mystart.cleanup.CleanupTaskManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import lombok.extern.slf4j.Slf4j;
+import jakarta.servlet.MultipartConfigElement;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
-@Slf4j
 public class LinkServlet extends AbstractServlet {
 
+  private final static Logger log = LoggerFactory.getLogger(LinkServlet.class);
+    
   private static final long serialVersionUID = 1L;
 
   public LinkServlet(Storage storage,

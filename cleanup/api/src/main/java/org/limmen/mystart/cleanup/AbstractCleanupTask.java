@@ -4,11 +4,10 @@ import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.UnknownHostException;
-import lombok.Getter;
+
 import org.limmen.mystart.Link;
 import org.limmen.mystart.exception.StorageException;
 
-@Getter
 public abstract class AbstractCleanupTask implements CleanupTask {
 
   private final CleanupContext context;
@@ -19,6 +18,14 @@ public abstract class AbstractCleanupTask implements CleanupTask {
     this.context = context;
   }
 
+  public CleanupContext getContext() {
+    return context;
+  }
+
+  public Link getLink() {
+    return link;
+  }
+  
   protected CleanupResult determineResult(int statusCode, String movedUrl) {
     switch (statusCode) {
       case 200: // OK
