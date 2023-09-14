@@ -77,7 +77,7 @@
     <dependency>
       <groupId>org.eclipse.jetty</groupId>
       <artifactId>jetty-servlet</artifactId>
-    </dependency>
+    </dependency>      
     <dependency>
       <groupId>org.eclipse.jetty</groupId>
       <artifactId>apache-jsp</artifactId>
@@ -89,8 +89,8 @@
     <dependency>
       <groupId>org.eclipse.jetty</groupId>
       <artifactId>jetty-server</artifactId>
-    </dependency>
-    <dependency>
+    </dependency>    
+        <dependency>
       <groupId>com.kcthota</groupId>
       <artifactId>emoji4j</artifactId>
     </dependency>
