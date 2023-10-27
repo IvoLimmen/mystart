@@ -1,18 +1,12 @@
 package org.limmen.mystart.server.servlet;
 
-import emoji4j.EmojiManager;
-import emoji4j.EmojiUtils;
-import jakarta.servlet.MultipartConfigElement;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+
+import org.apache.commons.text.StringEscapeUtils;
 import org.eclipse.jetty.server.Request;
 import org.limmen.mystart.Link;
 import org.limmen.mystart.LinkStorage;
@@ -22,6 +16,15 @@ import org.limmen.mystart.User;
 import org.limmen.mystart.UserStorage;
 import org.limmen.mystart.VisitStorage;
 import org.limmen.mystart.server.support.PropertyHelper;
+
+import emoji4j.EmojiManager;
+import emoji4j.EmojiUtils;
+import jakarta.servlet.MultipartConfigElement;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class AbstractServlet extends HttpServlet {
 
@@ -79,7 +82,8 @@ public class AbstractServlet extends HttpServlet {
     if (link == null || link.getTitle() == null) {
       return null;
     }
-    return EmojiUtils.htmlify(link.getTitle());
+    
+    return StringEscapeUtils.escapeHtml4(EmojiUtils.htmlify(StringEscapeUtils.unescapeHtml4(link.getTitle())));    
   }
 
   
@@ -87,7 +91,7 @@ public class AbstractServlet extends HttpServlet {
     if (link == null || link.getDescription() == null) {
       return null;
     }
-    return EmojiUtils.htmlify(link.getDescription());
+    return StringEscapeUtils.escapeHtml4(EmojiUtils.htmlify(StringEscapeUtils.unescapeHtml4(link.getDescription())));    
   }
 
   public String getFlair(Link link) {

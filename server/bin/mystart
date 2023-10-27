@@ -38,6 +38,8 @@ if [ -n "$CLASSPATH_PREFIX" ] ; then
   CLASSPATH=$CLASSPATH_PREFIX:$CLASSPATH
 fi
 
+JAVA_OPTS="$JAVA_OPTS --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED"
+
 exec "$JAVACMD" $JAVA_OPTS -server \
   -classpath "$CLASSPATH" \
   -Dapp.name="mystart" \
