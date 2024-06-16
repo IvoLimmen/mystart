@@ -54,7 +54,7 @@ This application can import from the following sources:
 
 Do a checkout of this project. You need to following to build:
 
-* Minimal JDK 11 and up
+* Minimal JDK 21 and up
 * Maven 3.* and up
 
 Then execute the following command:
