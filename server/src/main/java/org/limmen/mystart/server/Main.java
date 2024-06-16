@@ -1,10 +1,5 @@
 package org.limmen.mystart.server;
 
-import ch.qos.logback.classic.ClassicConstants;
-import jakarta.servlet.MultipartConfigElement;
-import jakarta.servlet.ServletContext;
-import jakarta.servlet.SessionTrackingMode;
-import jakarta.servlet.http.HttpServlet;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.URI;
@@ -17,17 +12,17 @@ import java.nio.file.attribute.FileAttribute;
 import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
+
 import org.eclipse.jetty.http.HttpCookie;
 import org.eclipse.jetty.jsp.JettyJspServlet;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
-import org.limmen.mystart.importer.AutoDetectParser;
-import org.limmen.mystart.importer.Parser;
 import org.limmen.mystart.Storage;
 import org.limmen.mystart.StorageProvider;
-import org.limmen.mystart.exporter.Exporters;
+import org.limmen.mystart.importer.AutoDetectParser;
+import org.limmen.mystart.importer.Parser;
 import org.limmen.mystart.server.servlet.HomeServlet;
 import org.limmen.mystart.server.servlet.ImportServlet;
 import org.limmen.mystart.server.servlet.LinkServlet;
@@ -37,6 +32,12 @@ import org.limmen.mystart.server.servlet.UserServlet;
 import org.limmen.mystart.server.servlet.ajax.AjaxServlet;
 import org.limmen.mystart.server.support.MailService;
 import org.limmen.mystart.server.support.MailServiceImpl;
+
+import ch.qos.logback.classic.ClassicConstants;
+import jakarta.servlet.MultipartConfigElement;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.SessionTrackingMode;
+import jakarta.servlet.http.HttpServlet;
 
 public class Main {
 
@@ -98,7 +99,7 @@ public class Main {
     Storage storage = StorageProvider.getStorageByName(properties, properties.getProperty("server.storage"));
 
     Parser parser = new AutoDetectParser();
-    Exporters exporters = new Exporters();
+    // Exporters exporters = new Exporters();
 
     Path scratchDir = Files.createTempDirectory("embedded-jetty-jsp", new FileAttribute<?>[0]);
 

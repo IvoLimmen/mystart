@@ -12,6 +12,7 @@ RestartSec=20
 KillMode=process
 User=mystart
 Group=mystart
+Environment="JAVA_HOME=/opt/java-21"
 
 [Install]
 WantedBy=multi-user.target
