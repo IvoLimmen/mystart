@@ -232,16 +232,16 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
   @Override
   public void update(Long userId, Link link) {
     String sql = "update links "
-        + "set description = ?,"
-        + "title = ?,"
-        + "source = ?,"
-        + "url = ?,"
-        + "labels = ?,"
-        + "private_network = ?,"
-        + "check_result = ?,"
-        + "last_check = ?,"
-        + "last_visit = ?"
-        + "where id = ?"
+        + "set description = ?, "
+        + "title = ?, "
+        + "source = ?, "
+        + "url = ?, "
+        + "labels = ?, "
+        + "private_network = ?, "
+        + "check_result = ?, "
+        + "last_check = ?, "
+        + "last_visit = ? "
+        + "where id = ? "
         + "and user_id = ?";
     executeSql(sql, stmt -> {
       stmt.setString(1, link.getDescription());

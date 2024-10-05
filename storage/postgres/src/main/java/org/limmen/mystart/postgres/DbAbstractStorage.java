@@ -14,10 +14,12 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.function.Consumer;
 import java.util.function.Function;
+
 import org.limmen.mystart.exception.StorageException;
 
 public abstract class DbAbstractStorage {
 
+  
   private final String password;
   private final String url;
   private final String user;
