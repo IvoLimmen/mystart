@@ -13,12 +13,12 @@ import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
 
+import org.eclipse.jetty.ee10.jsp.JettyJspServlet;
+import org.eclipse.jetty.ee10.servlet.DefaultServlet;
+import org.eclipse.jetty.ee10.servlet.ServletContextHandler;
+import org.eclipse.jetty.ee10.servlet.ServletHolder;
 import org.eclipse.jetty.http.HttpCookie;
-import org.eclipse.jetty.jsp.JettyJspServlet;
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.servlet.DefaultServlet;
-import org.eclipse.jetty.servlet.ServletContextHandler;
-import org.eclipse.jetty.servlet.ServletHolder;
 import org.limmen.mystart.Storage;
 import org.limmen.mystart.StorageProvider;
 import org.limmen.mystart.importer.AutoDetectParser;
@@ -122,7 +122,8 @@ public class Main {
     servletContextHandler.getSessionHandler().setSecureRequestOnly(true);
     servletContextHandler.getSessionHandler().setSameSite(HttpCookie.SameSite.STRICT);
     servletContextHandler.setContextPath("/");
-    servletContextHandler.setResourceBase(baseUri.toASCIIString());
+    servletContextHandler.setBaseResourceAsString(baseUri.toASCIIString());
+
     ClassLoader jspClassLoader = new URLClassLoader(new URL[0], Main.class.getClassLoader());
 
     servletContextHandler.setAttribute(ServletContext.TEMPDIR, scratchDir.toFile());

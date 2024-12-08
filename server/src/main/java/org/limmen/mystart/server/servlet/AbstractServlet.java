@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.text.StringEscapeUtils;
-import org.eclipse.jetty.server.Request;
 import org.limmen.mystart.Link;
 import org.limmen.mystart.LinkStorage;
 import org.limmen.mystart.StatsStorage;
@@ -83,7 +82,7 @@ public class AbstractServlet extends HttpServlet {
       return null;
     }
     
-    return StringEscapeUtils.escapeHtml4(EmojiUtils.htmlify(StringEscapeUtils.unescapeHtml4(link.getTitle())));    
+    return EmojiUtils.htmlify(StringEscapeUtils.unescapeHtml4(link.getTitle()));
   }
 
   
@@ -91,7 +90,7 @@ public class AbstractServlet extends HttpServlet {
     if (link == null || link.getDescription() == null) {
       return null;
     }
-    return StringEscapeUtils.escapeHtml4(EmojiUtils.htmlify(StringEscapeUtils.unescapeHtml4(link.getDescription())));    
+    return EmojiUtils.htmlify(StringEscapeUtils.unescapeHtml4(link.getDescription()));    
   }
 
   public String getFlair(Link link) {
@@ -210,9 +209,6 @@ public class AbstractServlet extends HttpServlet {
       req.setAttribute("links", getLinkStorage().getAllByLabel(userId, user.getAutoStartLabel()));
       req.setAttribute("flair", FLAIR);
       req.setAttribute("util", this);      
-    }
-    if (req.getContentType() != null && req.getContentType().startsWith("multipart/form-data")) {
-      req.setAttribute(Request.__MULTIPART_CONFIG_ELEMENT, multipartConfigElement);
     }
   }
 

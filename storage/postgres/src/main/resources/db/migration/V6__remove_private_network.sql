@@ -1,0 +1,1 @@
+alter table links drop column private_network;

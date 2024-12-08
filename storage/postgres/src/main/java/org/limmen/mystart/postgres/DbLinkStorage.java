@@ -27,7 +27,6 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
     link.setLastVisit(res.localDateTime("last_visit"));
     link.setLastCheck(res.localDateTime("last_check"));
     link.setLabels(Arrays.asList(res.stringArray("labels")));
-    link.setPrivateNetwork(res.bool("private_network"));
     return link;
   };
 
@@ -237,7 +236,6 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
         + "source = ?, "
         + "url = ?, "
         + "labels = ?, "
-        + "private_network = ?, "
         + "check_result = ?, "
         + "last_check = ?, "
         + "last_visit = ? "
@@ -249,13 +247,12 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
       stmt.setString(3, link.getSource());
       stmt.setString(4, link.getUrl());
       stmt.setStringArray(5, link.getLabels().toArray(new String[link.getLabels().size()]));
-      stmt.setBool(6, link.isPrivateNetwork());
-      stmt.setString(7, link.getCheckResult());
-      stmt.setLocalDate(8, link.getLastCheck());
-      stmt.setLocalDate(9, link.getLastVisit());
+      stmt.setString(6, link.getCheckResult());
+      stmt.setLocalDate(7, link.getLastCheck());
+      stmt.setLocalDate(8, link.getLastVisit());
 
-      stmt.setLong(10, link.getId());
-      stmt.setLong(11, userId);
+      stmt.setLong(9, link.getId());
+      stmt.setLong(10, userId);
     });
   }
 }

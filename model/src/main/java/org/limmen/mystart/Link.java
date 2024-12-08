@@ -43,8 +43,6 @@ public class Link extends BaseObject implements Comparable<Link> {
 
   private LocalDateTime lastVisit;
 
-  private boolean privateNetwork;
-
   private String source;
 
   private String title;
@@ -267,14 +265,6 @@ public class Link extends BaseObject implements Comparable<Link> {
     this.lastVisit = lastVisit;
   }
 
-  public boolean isPrivateNetwork() {
-    return privateNetwork;
-  }
-
-  public void setPrivateNetwork(boolean privateNetwork) {
-    this.privateNetwork = privateNetwork;
-  }
-
   public String getSource() {
     return source;
   }
@@ -297,16 +287,5 @@ public class Link extends BaseObject implements Comparable<Link> {
 
   public void setUrl(String url) {
     this.url = url;
-  }
-
-  @Override
-  public String toString() {
-    return "Link [" + (checkResult != null ? "checkResult=" + checkResult + ", " : "")
-        + (creationDate != null ? "creationDate=" + creationDate + ", " : "")
-        + (description != null ? "description=" + description + ", " : "")
-        + (labels != null ? "labels=" + labels + ", " : "") + (lastCheck != null ? "lastCheck=" + lastCheck + ", " : "")
-        + (lastVisit != null ? "lastVisit=" + lastVisit + ", " : "") + "privateNetwork=" + privateNetwork + ", "
-        + (source != null ? "source=" + source + ", " : "") + (title != null ? "title=" + title + ", " : "")
-        + (url != null ? "url=" + url : "") + "]";
   }
 }
