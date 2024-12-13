@@ -13,7 +13,7 @@ import java.util.Set;
 
 public class Link extends BaseObject implements Comparable<Link> {
 
-  private static final String UNCATEGORIZED = "Uncategorized";
+  private static final String UNLABELLED = "Unlabelled";
 
   private static final long serialVersionUID = -1267285018252976552L;
 
@@ -31,15 +31,11 @@ public class Link extends BaseObject implements Comparable<Link> {
     return url;
   }
 
-  private String checkResult;
-
   private LocalDateTime creationDate;
 
   private String description;
 
   private final Set<String> labels = new HashSet<>();
-
-  private LocalDateTime lastCheck;
 
   private LocalDateTime lastVisit;
 
@@ -101,15 +97,6 @@ public class Link extends BaseObject implements Comparable<Link> {
     return DateTimeFormatter
         .ofPattern("yyyy-MM-dd")
         .format(this.getCreationDate());
-  }
-
-  public String getFormattedLastCheckDate() {
-    if (this.getLastCheck() == null) {
-      return null;
-    }
-    return DateTimeFormatter
-        .ofPattern("yyyy-MM-dd")
-        .format(this.getLastCheck());
   }
 
   public String getFormattedLastVisit() {
@@ -208,7 +195,7 @@ public class Link extends BaseObject implements Comparable<Link> {
     this.labels.remove(label);
 
     if (this.labels.isEmpty()) {
-      this.labels.add(UNCATEGORIZED);
+      this.labels.add(UNLABELLED);
     }
   }
 
@@ -219,14 +206,6 @@ public class Link extends BaseObject implements Comparable<Link> {
 
   public void visited() {
     this.lastVisit = LocalDateTime.now();
-  }
-
-  public String getCheckResult() {
-    return checkResult;
-  }
-
-  public void setCheckResult(String checkResult) {
-    this.checkResult = checkResult;
   }
 
   public LocalDateTime getCreationDate() {
@@ -247,14 +226,6 @@ public class Link extends BaseObject implements Comparable<Link> {
 
   public Set<String> getLabels() {
     return labels;
-  }
-
-  public LocalDateTime getLastCheck() {
-    return lastCheck;
-  }
-
-  public void setLastCheck(LocalDateTime lastCheck) {
-    this.lastCheck = lastCheck;
   }
 
   public LocalDateTime getLastVisit() {

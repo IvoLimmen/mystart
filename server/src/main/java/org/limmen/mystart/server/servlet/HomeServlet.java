@@ -1,9 +1,5 @@
 package org.limmen.mystart.server.servlet;
 
-import jakarta.servlet.MultipartConfigElement;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Collection;
@@ -12,6 +8,7 @@ import java.util.Properties;
 import java.util.TreeMap;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
+
 import org.limmen.mystart.Link;
 import org.limmen.mystart.Storage;
 import org.limmen.mystart.criteria.And;
@@ -19,16 +16,18 @@ import org.limmen.mystart.criteria.Criteria;
 import org.limmen.mystart.criteria.Like;
 import org.limmen.mystart.criteria.Or;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 public class HomeServlet extends AbstractServlet {
 
   private static final long serialVersionUID = 1L;
 
   public HomeServlet(Storage storage,
-                     MultipartConfigElement multipartConfigElement,
                      Path temporaryDirectory, 
                      Properties properties) {
     super(storage,
-          multipartConfigElement,
           temporaryDirectory,
           properties
     );

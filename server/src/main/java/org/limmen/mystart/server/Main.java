@@ -102,12 +102,7 @@ public class Main {
     // Exporters exporters = new Exporters();
 
     Path scratchDir = Files.createTempDirectory("embedded-jetty-jsp", new FileAttribute<?>[0]);
-
-    MultipartConfigElement multipartConfigElement = new MultipartConfigElement(
-            scratchDir.toString(),
-            41943040,
-            41943040,
-            4096);
+    MultipartConfigElement multipartConfig = new MultipartConfigElement(scratchDir.toString(), -1, 128_000, 500_000);
 
     Server server = new Server(port);
     URI baseUri = Paths.get(webappDir).toUri();
@@ -146,20 +141,20 @@ public class Main {
     servletContextHandler.addServlet(holderDefault, "/");
     server.setHandler(servletContextHandler);
 
-    addServlet(server, servletContextHandler, "homeServlet", "/home",
-            new HomeServlet(storage, multipartConfigElement, scratchDir, properties));
-    addServlet(server, servletContextHandler, "userServlet", "/user",
-            new UserServlet(storage, multipartConfigElement, scratchDir, avatarPath, properties));
-    addServlet(server, servletContextHandler, "loginServlet", "/login",
-            new LoginServlet(storage, multipartConfigElement, scratchDir, mailService, localUrl, properties));
-    addServlet(server, servletContextHandler, "importServlet", "/import",
-            new ImportServlet(parser, storage, multipartConfigElement, scratchDir, properties));
-    addServlet(server, servletContextHandler, "linkServlet", "/link",
-            new LinkServlet(storage, multipartConfigElement, scratchDir, properties));
-    addServlet(server, servletContextHandler, "navServlet", "/nav",
-            new NavServlet(storage, multipartConfigElement, scratchDir, properties));
-    addServlet(server, servletContextHandler, "ajaxServlet", "/ajax",
-            new AjaxServlet(storage, multipartConfigElement, scratchDir, properties));
+    addServlet(server, servletContextHandler, multipartConfig, "homeServlet", "/home",
+            new HomeServlet(storage, scratchDir, properties));
+    addServlet(server, servletContextHandler, multipartConfig, "userServlet", "/user",
+            new UserServlet(storage, scratchDir, avatarPath, properties));
+    addServlet(server, servletContextHandler, multipartConfig, "loginServlet", "/login",
+            new LoginServlet(storage, scratchDir, mailService, localUrl, properties));
+    addServlet(server, servletContextHandler, multipartConfig, "importServlet", "/import",
+            new ImportServlet(parser, storage, scratchDir, properties));
+    addServlet(server, servletContextHandler, multipartConfig, "linkServlet", "/link",
+            new LinkServlet(storage, scratchDir, properties));
+    addServlet(server, servletContextHandler, multipartConfig, "navServlet", "/nav",
+            new NavServlet(storage, scratchDir, properties));
+    addServlet(server, servletContextHandler, multipartConfig, "ajaxServlet", "/ajax",
+            new AjaxServlet(storage, scratchDir, properties));
 
     server.start();
     server.join();
@@ -167,12 +162,15 @@ public class Main {
 
   private static void addServlet(Server server,
                                  ServletContextHandler servletContextHandler,
+                                 MultipartConfigElement multipartConfig,
                                  String name,
                                  String url,
                                  HttpServlet servlet) {
     ServletHolder holderDefault = new ServletHolder(name, servlet);
-    servletContextHandler.addServlet(holderDefault, url);
-    server.setHandler(servletContextHandler);
+    holderDefault.getRegistration().setMultipartConfig(multipartConfig);
+    servletContextHandler.addServlet(holderDefault, url);    
+    servletContextHandler.setMaxFormContentSize(500_000);
+    server.setHandler(servletContextHandler);                                  
   }
 
   private static String createUrl(String serverName) {

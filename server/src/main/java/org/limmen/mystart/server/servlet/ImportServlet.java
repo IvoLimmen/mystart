@@ -17,7 +17,6 @@ import org.limmen.mystart.importer.Parser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import jakarta.servlet.MultipartConfigElement;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -33,10 +32,9 @@ public class ImportServlet extends AbstractServlet {
 
   public ImportServlet(Parser parser,
                        Storage storage,
-                       MultipartConfigElement multipartConfigElement,
                        Path temporaryDirectory, 
                        Properties properties) {
-    super(storage, multipartConfigElement, temporaryDirectory, properties);
+    super(storage, temporaryDirectory, properties);
     this.parser = parser;
   }
 

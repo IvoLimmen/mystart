@@ -32,9 +32,6 @@
                 <a href="/nav?page=import">Import links</a>
               </div>
               <div class="col-xs-4 text-center">
-                <a href="/nav?page=check">Check links</a>
-              </div>
-              <div class="col-xs-4 text-center">
                 <a href='${util.getBookmarkletUrl()}' title="Make it easier: use the bookmarklet!">Bookmarklet</a>
               </div>
             </div>

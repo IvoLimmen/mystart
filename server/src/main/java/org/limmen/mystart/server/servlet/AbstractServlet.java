@@ -18,7 +18,6 @@ import org.limmen.mystart.server.support.PropertyHelper;
 
 import emoji4j.EmojiManager;
 import emoji4j.EmojiUtils;
-import jakarta.servlet.MultipartConfigElement;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
@@ -55,42 +54,40 @@ public class AbstractServlet extends HttpServlet {
     EmojiManager.addStopWords("http://", "https://");
   }
 
-  private final MultipartConfigElement multipartConfigElement;
-
   private final Storage storage;
 
   private final Path temporaryDirectory;
 
   private final Properties properties;
-  
+
   public AbstractServlet(Storage storage,
-                         MultipartConfigElement multipartConfigElement,
-                         Path temporaryDirectory, Properties properties) {
+      Path temporaryDirectory,
+      Properties properties) {
     this.storage = storage;
-    this.multipartConfigElement = multipartConfigElement;
     this.temporaryDirectory = temporaryDirectory;
     this.properties = properties;
   }
 
   public String getBookmarkletUrl() {
     String serverName = PropertyHelper.getServerName(properties);
-    return String.format("javascript:(function(){var a=window,b=document,c=encodeURIComponent,d=a.open(\"https://%s/link?edit&url=\"+c(b.location)+\"&title=\"+c(b.title),\"popup\",\"left=\"+((a.screenX||a.screenLeft)+10)+\",top=\"+((a.screenY||a.screenTop)+10)+\",height=750px,width=600px,resizable=1,alwaysRaised=1\");a.setTimeout(function(){d.focus()},300)})();", serverName);
+    return String.format(
+        "javascript:(function(){var a=window,b=document,c=encodeURIComponent,d=a.open(\"https://%s/link?edit&url=\"+c(b.location)+\"&title=\"+c(b.title),\"popup\",\"left=\"+((a.screenX||a.screenLeft)+10)+\",top=\"+((a.screenY||a.screenTop)+10)+\",height=750px,width=600px,resizable=1,alwaysRaised=1\");a.setTimeout(function(){d.focus()},300)})();",
+        serverName);
   }
 
   public String getTitle(Link link) {
     if (link == null || link.getTitle() == null) {
       return null;
     }
-    
+
     return EmojiUtils.htmlify(StringEscapeUtils.unescapeHtml4(link.getTitle()));
   }
 
-  
   public String getDescription(Link link) {
     if (link == null || link.getDescription() == null) {
       return null;
     }
-    return EmojiUtils.htmlify(StringEscapeUtils.unescapeHtml4(link.getDescription()));    
+    return EmojiUtils.htmlify(StringEscapeUtils.unescapeHtml4(link.getDescription()));
   }
 
   public String getFlair(Link link) {
@@ -99,9 +96,9 @@ public class AbstractServlet extends HttpServlet {
     }
 
     return FLAIR.keySet().stream()
-            .filter(filter -> link.getHost().toLowerCase().contains(filter))
-            .findFirst()
-            .orElse(null);
+        .filter(filter -> link.getHost().toLowerCase().contains(filter))
+        .findFirst()
+        .orElse(null);
   }
 
   public LinkStorage getLinkStorage() {
@@ -213,6 +210,13 @@ public class AbstractServlet extends HttpServlet {
   }
 
   protected boolean exists(HttpServletRequest req, String parameter) {
+    if (req.getMethod().equalsIgnoreCase("post") && req.getContentType().contains("multipart/form-data")) {
+      try {
+        return req.getPart(parameter) != null;
+      } catch (IOException | ServletException e) {
+        e.printStackTrace();
+      }  
+    }
     return req.getParameter(parameter) != null;
   }
 

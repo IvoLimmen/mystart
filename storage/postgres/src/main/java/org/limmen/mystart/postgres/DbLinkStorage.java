@@ -22,10 +22,8 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
     link.setTitle(res.string("title"));
     link.setDescription(res.string("description"));
     link.setSource(res.string("source"));
-    link.setCheckResult(res.string("check_result"));
     link.setCreationDate(res.localDateTime("creation_date"));
     link.setLastVisit(res.localDateTime("last_visit"));
-    link.setLastCheck(res.localDateTime("last_check"));
     link.setLabels(Arrays.asList(res.stringArray("labels")));
     return link;
   };
@@ -236,8 +234,6 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
         + "source = ?, "
         + "url = ?, "
         + "labels = ?, "
-        + "check_result = ?, "
-        + "last_check = ?, "
         + "last_visit = ? "
         + "where id = ? "
         + "and user_id = ?";
@@ -247,12 +243,10 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
       stmt.setString(3, link.getSource());
       stmt.setString(4, link.getUrl());
       stmt.setStringArray(5, link.getLabels().toArray(new String[link.getLabels().size()]));
-      stmt.setString(6, link.getCheckResult());
-      stmt.setLocalDate(7, link.getLastCheck());
-      stmt.setLocalDate(8, link.getLastVisit());
+      stmt.setLocalDate(6, link.getLastVisit());
 
-      stmt.setLong(9, link.getId());
-      stmt.setLong(10, userId);
+      stmt.setLong(7, link.getId());
+      stmt.setLong(8, userId);
     });
   }
 }

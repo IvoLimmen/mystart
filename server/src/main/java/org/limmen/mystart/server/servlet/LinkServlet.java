@@ -16,7 +16,6 @@ import org.limmen.mystart.cleanup.CleanupTaskManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import jakarta.servlet.MultipartConfigElement;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -28,10 +27,9 @@ public class LinkServlet extends AbstractServlet {
   private static final long serialVersionUID = 1L;
 
   public LinkServlet(Storage storage,
-                     MultipartConfigElement multipartConfigElement,
                      Path temporaryDirectory, 
                      Properties properties) {
-    super(storage, multipartConfigElement, temporaryDirectory, properties);
+    super(storage, temporaryDirectory, properties);
   }
 
   private void scheduleCleanup(HttpServletRequest req, Long userId) {

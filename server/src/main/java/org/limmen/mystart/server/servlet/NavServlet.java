@@ -1,24 +1,24 @@
 package org.limmen.mystart.server.servlet;
 
-import jakarta.servlet.MultipartConfigElement;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Properties;
+
 import org.limmen.mystart.Storage;
 import org.limmen.mystart.User;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class NavServlet extends AbstractServlet {
 
   private static final long serialVersionUID = 1L;
 
   public NavServlet(Storage storage,
-                    MultipartConfigElement multipartConfigElement,
-                    Path temporaryDirectory, Properties properties) {
+                    Path temporaryDirectory, 
+                    Properties properties) {
     super(storage,
-          multipartConfigElement,
           temporaryDirectory, 
           properties);
   }

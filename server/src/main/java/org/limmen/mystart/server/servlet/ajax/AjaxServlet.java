@@ -1,9 +1,5 @@
 package org.limmen.mystart.server.servlet.ajax;
 
-import jakarta.servlet.MultipartConfigElement;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -11,21 +7,25 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.stream.Stream;
+
 import org.json.JSONException;
 import org.json.JSONWriter;
 import org.limmen.mystart.Storage;
 import org.limmen.mystart.server.servlet.AbstractServlet;
 import org.limmen.mystart.server.servlet.model.ChartData;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 public class AjaxServlet extends AbstractServlet {
 
   private static final long serialVersionUID = 1L;
 
   public AjaxServlet(Storage storage,
-                     MultipartConfigElement multipartConfigElement,
-                     Path temporaryDirectory, Properties properties) {
+                     Path temporaryDirectory, 
+                     Properties properties) {
     super(storage,
-          multipartConfigElement,
           temporaryDirectory, 
           properties);
   }

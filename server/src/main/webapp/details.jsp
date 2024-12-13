@@ -46,8 +46,6 @@
               <p class="description">Description: ${util.getDescription(link)}</p>
               <p class="created">Created: ${link.formattedCreationDate}</p>
               <p class="visited">Visited: ${link.formattedLastVisit}</p>     
-              <p class="checked">Checked: ${link.formattedLastCheckDate}</p>
-              <p class="checkresult">Check result: ${link.checkResult}</p>
               <p class="labels">Labels: 
                 <c:forEach items="${link.labels}" var="label" varStatus="status">
                   <c:url value="/home" var="url">

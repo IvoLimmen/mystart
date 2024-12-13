@@ -1,20 +1,21 @@
 package org.limmen.mystart.server.servlet;
 
-import jakarta.servlet.MultipartConfigElement;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Part;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Properties;
+
 import org.apache.commons.io.IOUtils;
 import org.limmen.mystart.DomainUtil;
 import org.limmen.mystart.Storage;
 import org.limmen.mystart.User;
 import org.limmen.mystart.server.support.PropertyHelper;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
 
 public class UserServlet extends AbstractServlet {
 
@@ -25,11 +26,10 @@ public class UserServlet extends AbstractServlet {
   private final String salt;
   
   public UserServlet(Storage storage,
-          MultipartConfigElement multipartConfigElement,
           Path temporaryDirectory,
           Path avatarDirectory,
           Properties properties) {
-    super(storage, multipartConfigElement, temporaryDirectory, properties);
+    super(storage, temporaryDirectory, properties);
     this.avatarDirectory = avatarDirectory;
     this.salt = PropertyHelper.getSalt(properties);
   }
