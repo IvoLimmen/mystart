@@ -15,12 +15,7 @@
       <aside class="main-sidebar">
     
         <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
-    
-          <!-- Sidebar Menu -->
-          <ul class="sidebar-menu" data-widget="tree">
-            <li class="header">Labels</li>           
-          </ul>
+        <section class="sidebar">    
           <!-- /.sidebar-menu -->
         </section>
         <!-- /.sidebar -->
