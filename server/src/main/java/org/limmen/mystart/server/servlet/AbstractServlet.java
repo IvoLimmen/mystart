@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.text.StringEscapeUtils;
+import org.eclipse.jetty.http.HttpCookie;
 import org.limmen.mystart.CategoryStorage;
 import org.limmen.mystart.Link;
 import org.limmen.mystart.LinkStorage;
@@ -152,6 +153,9 @@ public class AbstractServlet extends HttpServlet {
     cookie.setHttpOnly(true);
     cookie.setSecure(true);
     cookie.setPath("/");
+    cookie.setSecure(true);
+    cookie.setDomain("mystart");
+    cookie.setAttribute(HttpCookie.SAME_SITE_ATTRIBUTE, "STRICT");    
     res.addCookie(cookie);
   }
 
@@ -163,6 +167,9 @@ public class AbstractServlet extends HttpServlet {
           cookie.setValue("");
           cookie.setPath("/");
           cookie.setMaxAge(0);
+          cookie.setSecure(true);
+          cookie.setDomain("mystart");
+          cookie.setAttribute(HttpCookie.SAME_SITE_ATTRIBUTE, "STRICT");
           res.addCookie(cookie);
         }
       }
