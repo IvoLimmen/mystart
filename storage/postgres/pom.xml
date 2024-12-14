@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
   <modelVersion>4.0.0</modelVersion>
-    
+
   <parent>
     <groupId>org.limmen.mystart</groupId>
     <artifactId>storage-project</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
-        
-  <name>MyStart - Storage - Postgres</name>        
+
+  <name>MyStart - Storage - Postgres</name>
   <artifactId>storage-postgres</artifactId>
-  <packaging>jar</packaging>    
+  <packaging>jar</packaging>
 
   <dependencies>
     <dependency>
@@ -22,6 +23,10 @@
     <dependency>
       <groupId>org.flywaydb</groupId>
       <artifactId>flyway-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.flywaydb</groupId>
+      <artifactId>flyway-database-postgresql</artifactId>
     </dependency>
     <dependency>
       <groupId>org.postgresql</groupId>
