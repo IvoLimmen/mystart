@@ -22,7 +22,7 @@
             <div class="input-group">
               <input type="text" name="search" class="form-control" placeholder="Search...">
               <span class="input-group-btn">
-                  <button type="submit" name="searchButton" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                  <button type="submit" name="searchButton" id="search-btn" class="btn btn-flat"><i class="zmdi zmdi-search"></i>
                   </button>
                 </span>
             </div>
@@ -49,7 +49,7 @@
                     <h3 class="box-title">${util.getTitle(link)}</h3>
                     <c:if test="${link.host != null && util.getFlair(link) != null}">
                       <div class="flair">
-                        <i class="fa ${flair[util.getFlair(link)]}" aria-hidden="true"></i>
+                        <i class="zmdi ${flair[util.getFlair(link)]}" aria-hidden="true"></i>
                       </div>
                     </c:if>                    
                   </div>                  
@@ -65,9 +65,9 @@
                     </p>
                   </div>
                   <div class="box-footer">
-                    <a href="/link?details&id=${link.id}" class="small-box-footer">More info <i class="fa fa-info"></i></a>
-                    <a href="/link?edit&id=${link.id}" class="small-box-footer">Edit <i class="fa fa-edit"></i></a>
-                    <a href="/link?delete&id=${link.id}" class="small-box-footer">Delete <i class="fa fa-trash"></i></a>
+                    <a href="/link?details&id=${link.id}" class="small-box-footer">More info <i class="zmdi zmdi-info-outline"></i></a>
+                    <a href="/link?edit&id=${link.id}" class="small-box-footer">Edit <i class="zmdi zmdi-edit"></i></a>
+                    <a href="/link?delete&id=${link.id}" class="small-box-footer">Delete <i class="zmdi zmdi-delete"></i></a>
                   </div>
                 </div>
               </div>

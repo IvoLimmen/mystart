@@ -36,22 +36,17 @@ public class AbstractServlet extends HttpServlet {
 
   static {
     // common domains
-    FLAIR.put("github.com", "fa-github");
-    FLAIR.put("gitlab.com", "fa-gitlab");
-    FLAIR.put("bitbucket.org", "fa-bitbucket");
-    FLAIR.put("stackoverflow.com", "fa-stack-overflow");
-    FLAIR.put("bandcamp.com", "fa-bandcamp");
-    FLAIR.put("blogger.com", "fa-blogger");
-    FLAIR.put("last.fm", "fa-lastfm");
-    FLAIR.put("soundcloud.com", "fa-soundcloud");
-    FLAIR.put("youtube.com", "fa-youtube");
-    FLAIR.put("reddit.com", "fa-reddit");
-    FLAIR.put("yelp.com", "fa-yelp");
-    FLAIR.put("slack.com", "fa-slack");
-    FLAIR.put("amazon.com", "fa-amazon");
-    FLAIR.put("google.com", "fa-google");
-    FLAIR.put("medium.com", "fa-medium");
-    FLAIR.put("news.ycombinator.com", "fa-hacker-news");
+    FLAIR.put("github.com", "zmdi-github");
+    FLAIR.put("stackoverflow.com", "zdmi-stackoverflow");
+    FLAIR.put("blogger.com", "zmdi-blogger");
+    FLAIR.put("last.fm", "zmdi-lastfm");
+    FLAIR.put("soundcloud.com", "zdmi-soundcloud");
+    FLAIR.put("youtube.com", "zmdi-youtube");
+    FLAIR.put("reddit.com", "zmdi-reddit");
+    FLAIR.put("amazon.com", "zmdi-amazon");
+    FLAIR.put("primevideo.com", "zmdi-amazon");
+    FLAIR.put("google.com", "zmdi-google");
+    FLAIR.put("whatsapp.com", "zmdi-whatsapp");
 
     EmojiManager.addStopWords("http://", "https://");
   }

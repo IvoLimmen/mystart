@@ -9,7 +9,7 @@
         <c:param name="id" value="${link.id}" />
         <c:param name="returnUrl" value="${param.returnUrl}" />
       </c:url>
-      <li><a href="${link.url}">${link.title}</a>: ${link.description} ${link.labels} (<a href="/link?edit&id=${link.id}">Edit <i class="fa fa-edit"></i></a> <a href="${deleteUrl}">Delete <i class="fa fa-trash"></i></a>)</li>
+      <li><a href="${link.url}">${link.title}</a>: ${link.description} ${link.labels} (<a href="/link?edit&id=${link.id}">Edit <i class="zmdi zmdi-edit"></i></a> <a href="${deleteUrl}">Delete <i class="zmdi zmdi-delete"></i></a>)</li>
     </c:forEach>
     </ul>
   </div>

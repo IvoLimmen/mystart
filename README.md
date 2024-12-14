@@ -100,5 +100,5 @@ $ mvn exec:java
 # Credits
 
 * For emoji handling: https://github.com/kcthota/emoji4j
-* For icons: https://fontawesome.com/
+* For icons: https://zavoloklom.github.io/material-design-iconic-font/
 * For look and feel: https://github.com/ColorlibHQ/AdminLTE

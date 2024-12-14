@@ -22,7 +22,7 @@
             <div class="input-group">
               <input type="text" name="search" class="form-control" placeholder="Search...">
               <span class="input-group-btn">
-                  <button type="submit" name="searchButton" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                  <button type="submit" name="searchButton" id="search-btn" class="btn btn-flat"><i class="zmdi zmdi-search"></i>
                   </button>
                 </span>
             </div>
@@ -68,8 +68,8 @@
                 <jsp:param name="returnUrl" value="/link?details&id=${link.id}"/>
               </jsp:include>
               <div class="actions">
-                <a href="/link?edit&id=${link.id}">Edit <i class="fa fa-edit"></i></a>
-                <a href="/link?delete&id=${link.id}">Delete <i class="fa fa-trash"></i></a>
+                <a href="/link?edit&id=${link.id}">Edit <i class="zmdi zmdi-edit"></i></a>
+                <a href="/link?delete&id=${link.id}">Delete <i class="zmdi zmdi-delete"></i></a>
               </div>
             </div>  
           </div>

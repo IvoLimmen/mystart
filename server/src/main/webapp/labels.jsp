@@ -22,7 +22,7 @@
             <div class="input-group">
               <input type="text" name="search" class="form-control" placeholder="Search...">
               <span class="input-group-btn">
-                  <button type="submit" name="searchButton" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                  <button type="submit" name="searchButton" id="search-btn" class="btn btn-flat"><i class="zmdi zmdi-search"></i>
                   </button>
                 </span>
             </div>
@@ -55,12 +55,12 @@
                     <p>Links: ${stats[label]}</p>
                   </div>
                   <div class="box-footer">
-                    <a href="/link?move&lbl=${label}" class="small-box-footer">Move links <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="/link?move&lbl=${label}" class="small-box-footer">Move links <i class="zmdi zmdi-arrow-right"></i></a>
                     <c:url value="/link" var="delurl">
                       <c:param name="delete"/>
                       <c:param name="lbl" value="${label}"/>
                     </c:url>
-                    <a href="${delurl}" class="small-box-footer">Delete <i class="fa fa-trash"></i></a>
+                    <a href="${delurl}" class="small-box-footer">Delete <i class="zmdi zmdi-delete"></i></a>
                   </div>
                 </div>
               </div>
