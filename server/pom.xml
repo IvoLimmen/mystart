@@ -59,16 +59,6 @@
       <artifactId>storage-postgres</artifactId>
       <version>${project.version}</version>
     </dependency>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>cleanup-api</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>cleanup-jdk11</artifactId>
-      <version>${project.version}</version>
-    </dependency>
 
     <dependency>
       <groupId>com.sun.mail</groupId>

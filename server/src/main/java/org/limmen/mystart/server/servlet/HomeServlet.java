@@ -55,12 +55,14 @@ public class HomeServlet extends AbstractServlet {
           .collect(Collectors.toList());
 
       req.setAttribute("links", links);
+      req.setAttribute("categories", getCategoryStorage().getAll(userId));
       req.getRequestDispatcher("/home.jsp").include(req, res);
 
     } else if (exists(req, "label")) {
 
       Collection<Link> links = getLinkStorage().getAllByLabel(userId, req.getParameter("label"));
       req.setAttribute("links", links);
+      req.setAttribute("categories", getCategoryStorage().getAll(userId));
       req.getRequestDispatcher("/home.jsp").include(req, res);
 
     } else if (exists(req, "show")) {
@@ -82,12 +84,14 @@ public class HomeServlet extends AbstractServlet {
 
         Collection<Link> links = getLinkStorage().getLastVisited(userId, 20);
         req.setAttribute("links", links);
+        req.setAttribute("categories", getCategoryStorage().getAll(userId));
         req.getRequestDispatcher("/home.jsp").include(req, res);
 
       } else if ("lastcreated".equals(req.getParameter("show"))) {
 
         Collection<Link> links = getLinkStorage().getLastCreated(userId, 20);
         req.setAttribute("links", links);
+        req.setAttribute("categories", getCategoryStorage().getAll(userId));
         req.getRequestDispatcher("/home.jsp").include(req, res);
       }
     } else {

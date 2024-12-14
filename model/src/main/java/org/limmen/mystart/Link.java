@@ -45,6 +45,8 @@ public class Link extends BaseObject implements Comparable<Link> {
 
   private String url;
 
+  private Category category;
+
   public Link() {
     this.creationDate = LocalDateTime.now();
     this.source = "MyStart";
@@ -91,6 +93,13 @@ public class Link extends BaseObject implements Comparable<Link> {
       return false;
     }
     return true;
+  }
+
+  public String getFormattedCategory() {
+    if (getCategory() != null) {
+      return getCategory().getName();
+    }
+    return "None";
   }
 
   public String getFormattedCreationDate() {
@@ -258,5 +267,17 @@ public class Link extends BaseObject implements Comparable<Link> {
 
   public void setUrl(String url) {
     this.url = url;
+  }
+
+  public Category getCategory() {
+    return category;
+  }
+
+  public void setCategory(Category category) {
+    this.category = category;
+  }
+
+  public Long getCategoryId() {
+    return getCategory() != null ? getCategory().getId() : null;
   }
 }

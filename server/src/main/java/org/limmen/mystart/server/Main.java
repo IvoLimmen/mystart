@@ -23,6 +23,7 @@ import org.limmen.mystart.Storage;
 import org.limmen.mystart.StorageProvider;
 import org.limmen.mystart.importer.AutoDetectParser;
 import org.limmen.mystart.importer.Parser;
+import org.limmen.mystart.server.servlet.CategoryServlet;
 import org.limmen.mystart.server.servlet.HomeServlet;
 import org.limmen.mystart.server.servlet.ImportServlet;
 import org.limmen.mystart.server.servlet.LinkServlet;
@@ -153,6 +154,8 @@ public class Main {
             new LinkServlet(storage, scratchDir, properties));
     addServlet(server, servletContextHandler, multipartConfig, "navServlet", "/nav",
             new NavServlet(storage, scratchDir, properties));
+    addServlet(server, servletContextHandler, multipartConfig, "categoryServlet", "/categories",
+            new CategoryServlet(storage, scratchDir, properties));
     addServlet(server, servletContextHandler, multipartConfig, "ajaxServlet", "/ajax",
             new AjaxServlet(storage, scratchDir, properties));
 

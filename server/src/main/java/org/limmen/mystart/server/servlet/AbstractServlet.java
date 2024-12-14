@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.text.StringEscapeUtils;
+import org.limmen.mystart.CategoryStorage;
 import org.limmen.mystart.Link;
 import org.limmen.mystart.LinkStorage;
 import org.limmen.mystart.StatsStorage;
@@ -90,6 +91,22 @@ public class AbstractServlet extends HttpServlet {
     return EmojiUtils.htmlify(StringEscapeUtils.unescapeHtml4(link.getDescription()));
   }
 
+  public String getBoxStyle(Link link) {
+    if (link.getCategory() == null) {
+      return "border-width: 1px; border-style: solid; border-color: #d2d6de;";
+    } else {
+      return "border-width: 1px; border-style: solid; border-color: " + link.getCategory().getColor() + ";";
+    }
+  }
+
+  public String getBoxHeaderStyle(Link link) {
+    if (link.getCategory() == null) {
+      return "background-color: #d2d6de;";
+    } else {
+      return "background-color: " + link.getCategory().getColor() + ";";
+    }
+  }
+  
   public String getFlair(Link link) {
     if (link.getHost() == null) {
       return null;
@@ -103,6 +120,10 @@ public class AbstractServlet extends HttpServlet {
 
   public LinkStorage getLinkStorage() {
     return this.storage.getLinkStorage();
+  }
+
+  public CategoryStorage getCategoryStorage() {
+    return this.storage.getCategoryStorage();
   }
 
   public StatsStorage getStatsStorage() {

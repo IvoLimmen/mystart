@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 
+import org.limmen.mystart.Category;
 import org.limmen.mystart.Link;
 import org.limmen.mystart.LinkStorage;
 import org.limmen.mystart.criteria.Criteria;
@@ -25,6 +26,15 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
     link.setCreationDate(res.localDateTime("creation_date"));
     link.setLastVisit(res.localDateTime("last_visit"));
     link.setLabels(Arrays.asList(res.stringArray("labels")));
+
+    if (res.string("cat_name") != null) {
+      var category = new Category();
+      category.setName(res.string("cat_name"));
+      category.setColor(res.string("cat_color"));
+      category.setId(res.lng("cat_id"));
+      link.setCategory(category);
+    }
+
     return link;
   };
 
@@ -34,8 +44,8 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
 
   @Override
   public void create(Long userId, Link link) {
-    String sql = "insert into links (user_id, description, source, title, url, labels, creation_date) "
-        + "values (?, ?, ?, ?, ?, ?, ?)";
+    String sql = "insert into links (user_id, description, source, title, url, labels, creation_date, category_id) "
+        + "values (?, ?, ?, ?, ?, ?, ?, ?)";
     executeSql(sql, stmt -> {
       stmt.setLong(1, userId);
       stmt.setString(2, link.getDescription());
@@ -44,12 +54,18 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
       stmt.setString(5, link.getUrl());
       stmt.setStringArray(6, link.getLabels().toArray(new String[link.getLabels().size()]));
       stmt.setLocalDate(7, link.getCreationDate());
+      if (link.getCategory() != null) {
+        stmt.setLong(8, link.getCategory().getId());
+      } else {
+        stmt.setLongNull(8);
+      }
+      
     });
   }
 
   @Override
   public Link get(Long userId, Long id) {
-    return executeSqlSingle("select * from links where user_id = ? and id = ?", args -> {
+    return executeSqlSingle("select l.*, c.name as cat_name, c.color as cat_color, c.id as cat_id from links l left outer join category c on c.id = l.category_id where l.user_id = ? and l.id = ?", args -> {
       args.setLong(1, userId);
       args.setLong(2, id);
     }, LINK_MAPPER);
@@ -57,7 +73,7 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
 
   @Override
   public Collection<Link> getAll(Long userId) {
-    return executeSql("select * from links where user_id = ? order by title asc", args -> {
+    return executeSql("select l.*, c.name as cat_name, c.color as cat_color, c.id as cat_id from links l left outer join category c on c.id = l.category_id where l.user_id = ? order by l.title asc", args -> {
       args.setLong(1, userId);
     }, LINK_MAPPER);
   }
@@ -65,11 +81,11 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
   @Override
   public Collection<Link> getAllByLabel(Long userId, String label) {
     if (label == null || label.equals("")) {
-      return executeSql("select * from links where user_id = ? and labels = '{}' order by title asc", args -> {
+      return executeSql("select l.*, c.name as cat_name, c.color as cat_color, c.id as cat_id from links l left outer join category c on c.id = l.category_id where l.user_id = ? and l.labels = '{}' order by l.title asc", args -> {
         args.setLong(1, userId);
       }, LINK_MAPPER);
     }
-    return executeSql("select * from links where user_id = ? and labels && array[?] order by title asc", args -> {
+    return executeSql("select l.*, c.name as cat_name, c.color as cat_color, c.id as cat_id from links l left outer join category c on c.id = l.category_id where l.user_id = ? and l.labels && array[?] order by l.title asc", args -> {
       args.setLong(1, userId);
       args.setStringArray(2, new String[] { label });
     }, LINK_MAPPER);
@@ -89,7 +105,7 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
     String strippedUrl = url.getUrl();
     log.debug("Searching for url: {}", strippedUrl);
 
-    return executeSqlSingle("select * from links where user_id = ? and lower(url) = ?", args -> {
+    return executeSqlSingle("select l.*, c.name as cat_name, c.color as cat_color, c.id as cat_id from links l left outer join category c on c.id = l.category_id where l.user_id = ? and lower(l.url) = ?", args -> {
       args.setLong(1, userId);
       args.setString(2, strippedUrl);
     }, LINK_MAPPER);
@@ -97,7 +113,7 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
 
   @Override
   public Collection<Link> getLastCreated(Long userId, int limit) {
-    return executeSql("select * from links where user_id = ? order by creation_date desc", args -> {
+    return executeSql("select l.*, c.name as cat_name, c.color as cat_color, c.id as cat_id from links l left outer join category c on c.id = l.category_id where l.user_id = ? order by l.creation_date desc", args -> {
       args.setLong(1, userId);
       args.setMaxRows(limit);
     }, LINK_MAPPER);
@@ -106,7 +122,7 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
   @Override
   public Collection<Link> getLastVisited(Long userId, int limit) {
     return executeSql(
-        "select l.* from links l join visits v on l.id = v.link_id where user_id = ? order by v.visit desc", args -> {
+        "select l.*, c.name as cat_name, c.color as cat_color, c.id as cat_id from links l join visits v on l.id = v.link_id left outer join category c on c.id = l.category_id where l.user_id = ? order by v.visit desc", args -> {
           args.setLong(1, userId);
           args.setMaxRows(limit);
         }, LINK_MAPPER);
@@ -128,7 +144,7 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
     String strippedUrl = "%" + url + "%";
     log.debug("Searching for url: {}", strippedUrl);
 
-    return executeSql("select * from links where user_id = ? and url ilike ? and id != ?", args -> {
+    return executeSql("select l.*, c.name as cat_name, c.color as cat_color, c.id as cat_id from links l left outer join category c on c.id = l.category_id where l.user_id = ? and l.url ilike ? and l.id != ?", args -> {
       args.setLong(1, userId);
       args.setString(2, strippedUrl);
       args.setLong(3, link.getId());
@@ -149,7 +165,7 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
     String strippedUrl = "%" + url + "%";
     log.debug("Searching for url: {}", strippedUrl);
 
-    return executeSql("select * from links where user_id = ? and url ilike ?", args -> {
+    return executeSql("select l.*, c.name as cat_name, c.color as cat_color, c.id as cat_id from links l left outer join category c on c.id = l.category_id where l.user_id = ? and l.url ilike ?", args -> {
       args.setLong(1, userId);
       args.setString(2, strippedUrl);
     }, LINK_MAPPER);
@@ -182,9 +198,10 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
 
   @Override
   public Collection<Link> last20Visits(Long userId) {
-    String sql = "select l.* "
+    String sql = "select l.*, c.name as cat_name, c.color as cat_color, c.id as cat_id "
         + "from links l "
         + "join visits v ON v.link_id = l.id "
+        + "left outer join category c on c.id = l.category_id "
         + "where l.user_id = ? "
         + "order by v.visit desc limit 20";
 
@@ -208,7 +225,7 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
     }
 
     StringBuilder sql = new StringBuilder();
-    sql.append("select l.* from links l where l.user_id = ? and (");
+    sql.append("select l.*, c.name as cat_name, c.color as cat_color, c.id as cat_id from links l left outer join category c on c.id = l.category_id where l.user_id = ? and (");
     sql.append(criteria.toSQL());
     sql.append(") order by l.title asc");
 
@@ -234,7 +251,8 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
         + "source = ?, "
         + "url = ?, "
         + "labels = ?, "
-        + "last_visit = ? "
+        + "last_visit = ?, "
+        + "category_id = ? "
         + "where id = ? "
         + "and user_id = ?";
     executeSql(sql, stmt -> {
@@ -244,9 +262,14 @@ public class DbLinkStorage extends DbAbstractStorage implements LinkStorage {
       stmt.setString(4, link.getUrl());
       stmt.setStringArray(5, link.getLabels().toArray(new String[link.getLabels().size()]));
       stmt.setLocalDate(6, link.getLastVisit());
+      if (link.getCategory() != null) {
+        stmt.setLong(7, link.getCategory().getId());
+      } else {
+        stmt.setLongNull(7);
+      }      
 
-      stmt.setLong(7, link.getId());
-      stmt.setLong(8, userId);
+      stmt.setLong(8, link.getId());
+      stmt.setLong(9, userId);
     });
   }
 }

@@ -11,10 +11,6 @@ import org.apache.commons.text.StringEscapeUtils;
 import org.limmen.mystart.DomainUtil;
 import org.limmen.mystart.Link;
 import org.limmen.mystart.Storage;
-import org.limmen.mystart.cleanup.CleanupContext;
-import org.limmen.mystart.cleanup.CleanupTaskManager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,30 +18,13 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class LinkServlet extends AbstractServlet {
 
-  private final static Logger log = LoggerFactory.getLogger(LinkServlet.class);
-    
   private static final long serialVersionUID = 1L;
 
-  public LinkServlet(Storage storage,
-                     Path temporaryDirectory, 
-                     Properties properties) {
+  public LinkServlet(
+      Storage storage,
+      Path temporaryDirectory,
+      Properties properties) {
     super(storage, temporaryDirectory, properties);
-  }
-
-  private void scheduleCleanup(HttpServletRequest req, Long userId) {
-
-    log.info("Starting a new thread for checking...");
-
-    new Thread(new CleanupTaskManager(
-        getLinkStorage(),
-        userId,
-        CleanupContext.builder()
-            .assumeHttps(getBool(req, "assumeHttps"))
-            .markAsPrivateNetworkOnDomainError(getBool(req, "markAsPrivateNetworkOnDomainError"))
-            .maximumTimeoutInSeconds(getInt(req, "maximumTimeoutInSeconds"))
-            .userId(userId)
-            .build())
-    ).start();
   }
 
   @Override
@@ -75,7 +54,7 @@ public class LinkServlet extends AbstractServlet {
         Long id = Long.parseLong(req.getParameter("id"));
         link = getLinkStorage().get(userId, id);
       } else if (req.getParameter("url") != null && req.getParameter("url").length() > 0) {
-        // new (or edit) by url        
+        // new (or edit) by url
         type = "popup";
         String url = Link.sanatizeUrl(req.getParameter("url"));
         link = getLinkStorage().getByUrl(userId, new Link(url));
@@ -101,6 +80,7 @@ public class LinkServlet extends AbstractServlet {
         }
       }
 
+      req.setAttribute("categories", getCategoryStorage().getAll(userId));
       req.setAttribute("labels", getLinkStorage().getAllLabels(userId));
       req.setAttribute("referer", getOrignalParameters(req));
       req.setAttribute("link", link);
@@ -120,6 +100,7 @@ public class LinkServlet extends AbstractServlet {
 
       Long id = Long.parseLong(req.getParameter("id"));
       Link link = getLinkStorage().get(userId, id);
+      req.setAttribute("categories", getCategoryStorage().getAll(userId));
       req.setAttribute("link", link);
       req.setAttribute("similar", getLinkStorage().getSimilarByLink(userId, link));
       req.setAttribute("visits", getVisitStorage().getLast20Visists(id));
@@ -189,13 +170,7 @@ public class LinkServlet extends AbstractServlet {
       return;
     }
 
-    if (exists(req, "checkButton")) {
-
-      scheduleCleanup(req, userId);
-
-      res.sendRedirect("/home");
-
-    } else if (exists(req, "moveButton")) {
+    if (exists(req, "moveButton")) {
 
       String oldLabel = req.getParameter("old-label");
       String labels = req.getParameter("labels");
@@ -225,6 +200,15 @@ public class LinkServlet extends AbstractServlet {
       if (hasValue(req, "labels")) {
         String label = StringEscapeUtils.escapeHtml4(req.getParameter("labels"));
         link.setLabels(DomainUtil.parseLabels(label));
+      }
+
+      if (hasValue(req, "category")) {
+        Long categoryId = Long.parseLong(req.getParameter("category"));
+        if (categoryId > 0) {
+          link.setCategory(getCategoryStorage().get(userId, categoryId));
+        } else {
+          link.setCategory(null);
+        }
       }
 
       if (link.getId() == null) {

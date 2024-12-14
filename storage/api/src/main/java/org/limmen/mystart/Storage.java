@@ -14,5 +14,7 @@ public interface Storage {
 
   VisitStorage getVisitStorage();
 
+  CategoryStorage getCategoryStorage();
+  
   void initialize(Properties properties);
 }

@@ -4,6 +4,7 @@ import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.time.LocalDateTime;
 
 import org.limmen.mystart.exception.StorageException;
@@ -62,6 +63,14 @@ public class StatementBuilder {
     try {
       Array obj = connection.createArrayOf("text", array);
       this.preparedStatement.setArray(index, obj);
+    } catch (SQLException ex) {
+      throw new StorageException(ex);
+    }
+  }
+
+  public void setLongNull(int index) {
+    try {
+      this.preparedStatement.setNull(index, Types.BIGINT);
     } catch (SQLException ex) {
       throw new StorageException(ex);
     }

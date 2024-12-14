@@ -1,7 +1,9 @@
 package org.limmen.mystart.postgres;
 
 import java.util.Properties;
+
 import org.flywaydb.core.Flyway;
+import org.limmen.mystart.CategoryStorage;
 import org.limmen.mystart.LinkStorage;
 import org.limmen.mystart.StatsStorage;
 import org.limmen.mystart.Storage;
@@ -10,11 +12,13 @@ import org.limmen.mystart.VisitStorage;
 
 public class DbStorage implements Storage {
 
-  private LinkStorage linkStorage;
-  private String password;
-  private StatsStorage statsStorage;
   private String url;
   private String user;
+  private String password;
+
+  private LinkStorage linkStorage;
+  private CategoryStorage categoryStorage;
+  private StatsStorage statsStorage;
   private UserStorage userStorage;
   private VisitStorage visitStorage;
 
@@ -46,6 +50,11 @@ public class DbStorage implements Storage {
   }
 
   @Override
+  public CategoryStorage getCategoryStorage() {
+    return this.categoryStorage;
+  }
+
+  @Override
   public void initialize(Properties properties) {
 
     this.url = properties.getProperty("server.db.jdbcUrl");
@@ -61,5 +70,6 @@ public class DbStorage implements Storage {
     this.userStorage = new DbUserStorage(user, password, url);
     this.visitStorage = new DbVisitStorage(user, password, url);
     this.statsStorage = new DbStatsStorage(user, password, url);
+    this.categoryStorage = new DbCategoryStorage(user, password, url);
   }
 }

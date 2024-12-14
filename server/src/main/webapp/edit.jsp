@@ -49,6 +49,15 @@
                   <input type="text" class="form-control" name="url" size="80" value="${link.url}"/>
                 </div>
                 <div class="form-group">      
+                  <label for="category">Category</label><br/>
+                  <select id="category" name="category">
+                    <option value="0">None</option>
+                    <c:forEach items="${categories}" var="cat">                      
+                      <option value="${cat.id}" ${cat.id == link.getCategoryId() ? 'selected' : ''}>${cat.name}</option>
+                    </c:forEach>
+                  </select>                  
+                </div>
+                <div class="form-group">      
                   <label for="description">Description</label><br/>
                   <textarea rows="10" cols="40" name="description">${link.description}</textarea>        
                 </div>

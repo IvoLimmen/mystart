@@ -7,6 +7,7 @@
   <li><a href="/link?delall">Delete current selection</a></li>
   <li><a href="/nav?page=stats">Statistics</a></li>  
   <li><a href="/home?show=labels">Labels</a></li>
+  <li><a href="/categories">Categories</a></li>  
   <li><a href="/home?label=">Unlabeled</a></li>
   <li><a href="/home?show=lastcreated">Last created</a></li>
   <li><a href="/home?show=lastvisit">Last visited</a></li>
