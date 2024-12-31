@@ -143,22 +143,24 @@ public class AbstractServlet extends HttpServlet {
   }
 
   protected void addCookie(HttpServletResponse res, String key, String value) {
+    String serverName = PropertyHelper.getServerName(properties);
     Cookie cookie = new Cookie(key, value);
     cookie.setMaxAge(60 * 60 * 24 * 7); // week
     cookie.setHttpOnly(true);
     cookie.setSecure(true);
     cookie.setPath("/");
     cookie.setSecure(true);
-    cookie.setDomain("mystart");
+    cookie.setDomain(serverName);
     cookie.setAttribute(HttpCookie.SAME_SITE_ATTRIBUTE, "STRICT");    
     res.addCookie(cookie);
   }
 
   protected void clearCookies(HttpServletRequest req, HttpServletResponse res) {
+    String serverName = PropertyHelper.getServerName(properties);
     Cookie[] cookies = req.getCookies();
     if (cookies != null) {
       for (Cookie cookie : cookies) {
-        if (cookie.getName().startsWith("mystart")) {
+        if (cookie.getName().startsWith(serverName)) {
           cookie.setValue("");
           cookie.setPath("/");
           cookie.setMaxAge(0);
@@ -176,12 +178,13 @@ public class AbstractServlet extends HttpServlet {
   protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
     if (req.getSession().getAttribute(USER_ID) == null) {
       // check cookies
+      String serverName = PropertyHelper.getServerName(properties);
       Cookie[] cookies = req.getCookies();
       if (cookies != null) {
         String email = null;
         String password = null;
         for (Cookie cookie : cookies) {
-          if (cookie.getName().equals("mystart")) {
+          if (cookie.getName().equals(serverName)) {
             String[] value = cookie.getValue().split("\\|");
             email = value[0];
             password = value[1];

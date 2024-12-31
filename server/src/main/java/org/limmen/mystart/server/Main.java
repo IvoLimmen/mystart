@@ -17,8 +17,12 @@ import org.eclipse.jetty.ee10.jsp.JettyJspServlet;
 import org.eclipse.jetty.ee10.servlet.DefaultServlet;
 import org.eclipse.jetty.ee10.servlet.ServletContextHandler;
 import org.eclipse.jetty.ee10.servlet.ServletHolder;
+import org.eclipse.jetty.http.CookieCompliance;
 import org.eclipse.jetty.http.HttpCookie;
+import org.eclipse.jetty.server.HttpConfiguration;
+import org.eclipse.jetty.server.HttpConnectionFactory;
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.ServerConnector;
 import org.limmen.mystart.Storage;
 import org.limmen.mystart.StorageProvider;
 import org.limmen.mystart.importer.AutoDetectParser;
@@ -80,8 +84,7 @@ public class Main {
     parseArguments(args);
 
     System.setProperty(ClassicConstants.CONFIG_FILE_PROPERTY, Paths.get(configDir, getFileName("logback.xml")).toString());
-    System.setProperty("jetty.httpConfig.cookieCompliance", "RFC6265");
-
+    
     Properties properties = new Properties();
     try (InputStream inputStream = new FileInputStream(Paths.get(configDir, getFileName("application.properties")).toFile())) {
       properties.load(inputStream);
@@ -110,6 +113,12 @@ public class Main {
     URI baseUri = Paths.get(webappDir).toUri();
     Path avatarPath = Paths.get(webappDir, "avatar");
     Files.createDirectories(avatarPath);
+
+    HttpConfiguration httpsConfig = new HttpConfiguration();
+    httpsConfig.setRequestCookieCompliance(CookieCompliance.RFC6265);
+    HttpConnectionFactory h1 = new HttpConnectionFactory(httpsConfig);
+    ServerConnector connector = new ServerConnector(server, h1);
+    server.addConnector(connector);
 
     ServletContextHandler servletContextHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
     Set<SessionTrackingMode> trackingModes = new HashSet<>();
@@ -162,7 +171,7 @@ public class Main {
             new CategoryServlet(storage, scratchDir, properties));
     addServlet(server, servletContextHandler, multipartConfig, "ajaxServlet", "/ajax",
             new AjaxServlet(storage, scratchDir, properties));
-
+    
     server.start();
     server.join();
   }
