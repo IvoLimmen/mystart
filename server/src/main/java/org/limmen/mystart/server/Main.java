@@ -80,6 +80,7 @@ public class Main {
     parseArguments(args);
 
     System.setProperty(ClassicConstants.CONFIG_FILE_PROPERTY, Paths.get(configDir, getFileName("logback.xml")).toString());
+    System.setProperty("jetty.httpConfig.cookieCompliance", "RFC6265");
 
     Properties properties = new Properties();
     try (InputStream inputStream = new FileInputStream(Paths.get(configDir, getFileName("application.properties")).toFile())) {
