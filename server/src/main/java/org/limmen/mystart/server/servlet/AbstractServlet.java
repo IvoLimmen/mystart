@@ -151,7 +151,7 @@ public class AbstractServlet extends HttpServlet {
     cookie.setPath("/");
     cookie.setSecure(true);
     cookie.setDomain(serverName);
-    cookie.setAttribute(HttpCookie.SAME_SITE_ATTRIBUTE, "STRICT");    
+    cookie.setAttribute(HttpCookie.SAME_SITE_ATTRIBUTE, "LAX");    
     res.addCookie(cookie);
   }
 
@@ -165,8 +165,8 @@ public class AbstractServlet extends HttpServlet {
           cookie.setPath("/");
           cookie.setMaxAge(0);
           cookie.setSecure(true);
-          cookie.setDomain("mystart");
-          cookie.setAttribute(HttpCookie.SAME_SITE_ATTRIBUTE, "STRICT");
+          cookie.setDomain(serverName);
+          cookie.setAttribute(HttpCookie.SAME_SITE_ATTRIBUTE, "LAX");
           res.addCookie(cookie);
         }
       }
