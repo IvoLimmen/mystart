@@ -64,10 +64,13 @@
                       </c:forEach>
                     </p>
                   </div>
-                  <div class="box-footer">
+                  <div class="box-footer">                        
                     <a href="/link?details&id=${link.id}" class="small-box-footer">More info <i class="zmdi zmdi-info-outline"></i></a>
                     <a href="/link?edit&id=${link.id}" class="small-box-footer">Edit <i class="zmdi zmdi-edit"></i></a>
                     <a href="/link?delete&id=${link.id}" class="small-box-footer">Delete <i class="zmdi zmdi-delete"></i></a>
+                    <c:if test="${link.getCategoryName() != null}">                        
+                        <div class="category">${link.getCategoryName()}</div>                        
+                    </c:if>
                   </div>
                 </div>
               </div>

@@ -280,4 +280,8 @@ public class Link extends BaseObject implements Comparable<Link> {
   public Long getCategoryId() {
     return getCategory() != null ? getCategory().getId() : null;
   }
+
+  public String getCategoryName() {
+    return getCategory() != null ? getCategory().getName() : null;    
+  }
 }

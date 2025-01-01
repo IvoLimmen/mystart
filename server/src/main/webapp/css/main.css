@@ -2,6 +2,12 @@
   float: right;
 }
 
+.category {
+  float: right;
+  font-size: smaller;
+  font-style: italic;
+}
+
 #clickme {
   cursor: pointer;
 }
