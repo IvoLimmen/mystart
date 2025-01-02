@@ -69,7 +69,7 @@
                     <a href="/link?edit&id=${link.id}" class="small-box-footer">Edit <i class="zmdi zmdi-edit"></i></a>
                     <a href="/link?delete&id=${link.id}" class="small-box-footer">Delete <i class="zmdi zmdi-delete"></i></a>
                     <c:if test="${link.getCategoryName() != null}">                        
-                        <div class="category">${link.getCategoryName()}</div>                        
+                        <div class="category-box">${link.getCategoryName()}</div>                        
                     </c:if>
                   </div>
                 </div>

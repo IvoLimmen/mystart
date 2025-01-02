@@ -1,7 +1,8 @@
 package org.limmen.mystart.postgres;
 
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.List;
+
 import org.limmen.mystart.VisitStorage;
 
 public class DbVisitStorage extends DbAbstractStorage implements VisitStorage {
@@ -11,8 +12,8 @@ public class DbVisitStorage extends DbAbstractStorage implements VisitStorage {
   }
 
   @Override
-  public Set<LocalDateTime> getLast20Visists(Long linkId) {
-    String sql = "select visit from visits where link_id = ? order by visit";
+  public List<LocalDateTime> getLast20Visists(Long linkId) {
+    String sql = "select visit from visits where link_id = ? order by visit desc limit 20";
     return executeSqlTimestampCollection(sql, args -> {
                                        args.setLong(1, linkId);
                                      });

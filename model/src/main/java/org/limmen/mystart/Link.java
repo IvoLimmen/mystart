@@ -114,21 +114,19 @@ public class Link extends BaseObject implements Comparable<Link> {
     } else {
       Period visit = Period.between(getLastVisit().toLocalDate(), LocalDate.now());
 
-      if (visit.getYears() > 1) {
+      if (visit.getYears() >= 1) {
         return visit.getYears() + " years ago";
-      } else if (visit.getYears() == 1 && visit.getMonths() > 0) {
-        return (visit.getMonths() + 12) + " months ago";
-      } else if (visit.getYears() == 0 && visit.getMonths() > 0) {
+      } else if (visit.getMonths() > 1) {
         return visit.getMonths() + " months ago";
-      } else if (visit.getYears() == 0 && visit.getMonths() == 1) {
+      } else if (visit.getMonths() == 1) {
         return "last month";
-      } else if (visit.getYears() == 0 && visit.getMonths() == 0 && visit.getDays() > 14) {
+      } else if (visit.getDays() > 14) {
         return "more than 2 weeks ago";
-      } else if (visit.getYears() == 0 && visit.getMonths() == 0 && visit.getDays() > 7) {
+      } else if (visit.getDays() > 7) {
         return "more than a week ago";
-      } else if (visit.getYears() == 0 && visit.getMonths() == 0 && visit.getDays() > 2) {
+      } else if (visit.getDays() > 2) {
         return "last week";
-      } else if (visit.getYears() == 0 && visit.getMonths() == 0 && visit.getDays() > 0) {
+      } else if (visit.getDays() == 1) {
         return "yesterday";
       } else {
         return "today";

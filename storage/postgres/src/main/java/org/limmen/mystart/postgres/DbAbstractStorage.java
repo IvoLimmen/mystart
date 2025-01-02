@@ -9,9 +9,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
-import java.util.TreeSet;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -95,8 +93,8 @@ public abstract class DbAbstractStorage {
     return results;
   }
 
-  protected Set<LocalDateTime> executeSqlTimestampCollection(String sql, Consumer<StatementBuilder> arguments) {
-    Set<LocalDateTime> results = new TreeSet<>();
+  protected List<LocalDateTime> executeSqlTimestampCollection(String sql, Consumer<StatementBuilder> arguments) {
+    List<LocalDateTime> results = new ArrayList<>();
     try (Connection connection = connection()) {
       try (PreparedStatement statement = connection.prepareStatement(sql)) {
         arguments.accept(new StatementBuilder(connection, statement));
