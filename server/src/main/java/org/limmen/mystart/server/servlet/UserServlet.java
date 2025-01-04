@@ -44,7 +44,7 @@ public class UserServlet extends AbstractServlet {
       return;
     }
 
-    User user = getUserStorage().get(userId);
+    User user = getUserStorage().get(userId).get();
     req.setAttribute("user", user);
     req.setAttribute("labels", getLinkStorage().getAllLabels(userId));
     req.setAttribute("editmenulabels", DomainUtil.formatLabels(user.getMenuLabels()));
@@ -61,7 +61,7 @@ public class UserServlet extends AbstractServlet {
     if (exists(req, "saveButton")) {
 
       Long id = getLong(req, "id");
-      User user = getUserStorage().get(id);
+      User user = getUserStorage().get(id).get();
       String password2 = req.getParameter("password2");
       String fullName = req.getParameter("fullname");
       Part filePart = req.getPart("avatar");

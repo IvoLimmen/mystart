@@ -127,7 +127,7 @@ public class Main {
     servletContextHandler.getSessionHandler().setHttpOnly(true);
     servletContextHandler.getSessionHandler().setSecureRequestOnly(true);
     servletContextHandler.getSessionHandler().setSecureCookies(true);
-    servletContextHandler.getSessionHandler().setSameSite(HttpCookie.SameSite.LAX);
+    servletContextHandler.getSessionHandler().setSameSite(HttpCookie.SameSite.NONE);
     servletContextHandler.getSessionHandler().setUsingCookies(true);
     servletContextHandler.setContextPath("/");
     servletContextHandler.setBaseResourceAsString(baseUri.toASCIIString());

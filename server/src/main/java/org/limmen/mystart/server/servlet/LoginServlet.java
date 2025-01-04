@@ -56,7 +56,7 @@ public class LoginServlet extends AbstractServlet {
       res.sendRedirect("/home");
     } else if (exists(req, "resetcode")) {
       
-      User user = getUserStorage().getByResetCode(req.getParameter("resetcode"));
+      User user = getUserStorage().getByResetCode(req.getParameter("resetcode")).get();
       
       if (user != null && user.getResetCodeValid().isAfter(LocalDateTime.now())) {
         req.setAttribute("resetcode", req.getParameter("resetcode"));
@@ -79,7 +79,7 @@ public class LoginServlet extends AbstractServlet {
       res.sendRedirect("/home");
 
     } else if (exists(req, "resetButton")) {
-      User user = getUserStorage().getByEmail(email);
+      User user = getUserStorage().getByEmail(email).get();
       if (user != null) {
         user.setResetCode(UUID.randomUUID().toString());
         user.setResetCodeValid(LocalDateTime.now().plusDays(2));
@@ -93,7 +93,7 @@ public class LoginServlet extends AbstractServlet {
 
     } else if (exists(req, "resetConfirmButton")) {
       String resetcode = req.getParameter("resetcode");
-      User user = getUserStorage().getByResetCode(resetcode);
+      User user = getUserStorage().getByResetCode(resetcode).get();
       if (user != null) {
         user.setResetCode(null);
         user.setResetCodeValid(null);
@@ -105,7 +105,7 @@ public class LoginServlet extends AbstractServlet {
 
     } else if (exists(req, "loginButton")) {
 
-      User user = getUserStorage().getByEmail(email);
+      User user = getUserStorage().getByEmail(email).get();
 
       if (user == null || !user.check(salt, password)) {
         res.sendRedirect("/login.jsp?error=1");

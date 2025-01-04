@@ -56,6 +56,7 @@ Do a checkout of this project. You need to following to build:
 
 * Minimal JDK 21 and up
 * Maven 3.* and up
+* Podman (for the database)
 
 Then execute the following command:
 
@@ -63,11 +64,25 @@ Then execute the following command:
 
 # Database
 
-Create a new database (postgres) by executing:
+## Creating the database
 
-    createdb mystart    
+For the database I use PostgreSQL 17.2 and these scripts require the use of Podman (the docker alternative)
 
-(On start the application will create the tables)
+```sh
+$ ./createdb.sh
+```
+
+## Starting the database
+
+```sh
+$ ./startdb.sh
+```
+
+## Stopping the database
+
+```sh
+$ ./stopdb.sh
+```
 
 # Configuration
 
@@ -85,8 +100,7 @@ And customize accordingly. When you deploy it you should also have a `production
 ## For development tests
 
 ```sh
-$ cd server
-$ mvn exec:java
+$ mvn -pl server exec:java
 ```
 
 ## For release

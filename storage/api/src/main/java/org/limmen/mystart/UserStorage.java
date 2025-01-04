@@ -1,12 +1,14 @@
 package org.limmen.mystart;
 
+import java.util.Optional;
+
 public interface UserStorage {
 
-  User get(Long id);
+  Optional<User> get(Long id);
 
-  User getByEmail(String email);
+  Optional<User> getByEmail(String email);
 
-  User getByResetCode(String resetCode);
+  Optional<User> getByResetCode(String resetCode);
 
   void remove(Long id);
 

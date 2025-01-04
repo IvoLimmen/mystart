@@ -33,7 +33,7 @@ public class NavServlet extends AbstractServlet {
       return;
     }
 
-    User user = getUserStorage().get(userId);
+    User user = getUserStorage().get(userId).get();
     req.setAttribute("user", user);
 
     if (exists(req, "page")) {

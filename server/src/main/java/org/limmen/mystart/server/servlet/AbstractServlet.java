@@ -151,7 +151,7 @@ public class AbstractServlet extends HttpServlet {
     cookie.setPath("/");
     cookie.setSecure(true);
     cookie.setDomain(serverName);
-    cookie.setAttribute(HttpCookie.SAME_SITE_ATTRIBUTE, "LAX");    
+    cookie.setAttribute(HttpCookie.SAME_SITE_ATTRIBUTE, "NONE");
     res.addCookie(cookie);
   }
 
@@ -166,7 +166,7 @@ public class AbstractServlet extends HttpServlet {
           cookie.setMaxAge(0);
           cookie.setSecure(true);
           cookie.setDomain(serverName);
-          cookie.setAttribute(HttpCookie.SAME_SITE_ATTRIBUTE, "LAX");
+          cookie.setAttribute(HttpCookie.SAME_SITE_ATTRIBUTE, "NONE");
           res.addCookie(cookie);
         }
       }
@@ -192,7 +192,7 @@ public class AbstractServlet extends HttpServlet {
         }
         // check cookie data
         if (password != null & email != null) {
-          User user = getUserStorage().getByEmail(email);
+          User user = getUserStorage().getByEmail(email).get();
           if (user != null && user.getPassword().equals(password)) {
             req.getSession().setAttribute(USER_ID, user.getId());
           } else {
@@ -208,7 +208,7 @@ public class AbstractServlet extends HttpServlet {
 
     if (req.getSession().getAttribute(USER_ID) != null) {
       Long userId = (Long) req.getSession().getAttribute(USER_ID);
-      User user = getUserStorage().get(userId);
+      User user = getUserStorage().get(userId).get();
       req.setAttribute(USER_ID, userId);
       req.setAttribute(USER, user);
       req.setAttribute("menulabels", user.getMenuLabels());
@@ -225,7 +225,7 @@ public class AbstractServlet extends HttpServlet {
       return;
     } else {
       Long userId = (Long) req.getSession().getAttribute(USER_ID);
-      User user = getUserStorage().get(userId);
+      User user = getUserStorage().get(userId).get();
       req.setAttribute(USER_ID, userId);
       req.setAttribute(USER, user);
       req.setAttribute("menulabels", user.getMenuLabels());
