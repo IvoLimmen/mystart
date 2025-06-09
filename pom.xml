@@ -30,14 +30,14 @@
       <dependency>
         <groupId>org.eclipse.jetty</groupId>
         <artifactId>jetty-bom</artifactId>
-        <version>12.0.20</version>
+        <version>12.0.21</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>org.eclipse.jetty.ee10</groupId>
         <artifactId>jetty-ee10-bom</artifactId>
-        <version>12.0.20</version>
+        <version>12.0.21</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -95,7 +95,7 @@
       <dependency>
         <groupId>org.json</groupId>
         <artifactId>json</artifactId>
-        <version>20250107</version>
+        <version>20250517</version>
       </dependency>
       <dependency>
         <groupId>org.jsoup</groupId>
@@ -106,17 +106,17 @@
       <dependency>
         <groupId>org.flywaydb</groupId>
         <artifactId>flyway-core</artifactId>
-        <version>11.8.0</version>
+        <version>11.8.2</version>
       </dependency>
       <dependency>
         <groupId>org.flywaydb</groupId>
         <artifactId>flyway-database-postgresql</artifactId>
-        <version>11.8.0</version>
+        <version>11.8.2</version>
       </dependency>
       <dependency>
         <groupId>org.postgresql</groupId>
         <artifactId>postgresql</artifactId>
-        <version>42.7.5</version>
+        <version>42.7.6</version>
         <scope>runtime</scope>
       </dependency>
 
@@ -149,7 +149,7 @@
       <dependency>
         <groupId>org.junit.jupiter</groupId>
         <artifactId>junit-jupiter</artifactId>
-        <version>5.12.2</version>
+        <version>5.13.0</version>
         <scope>test</scope>
       </dependency>
     </dependencies>
