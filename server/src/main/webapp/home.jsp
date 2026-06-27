@@ -45,7 +45,7 @@
             <c:forEach items="${links}" var="link" varStatus="ls">
               <div class="col-lg-3 col-xs-6">
                 <div class="box box-solid box-default" style="${util.getBoxStyle(link)}">
-                  <div id="clickme" title="${link.url}" class="box-header" style="${util.getBoxHeaderStyle(link)}" onclick="javascript:openLink(${user.isOpenInNewTab()}, '/link?reg=${link.id}')">
+                  <div title="${link.url}" class="box-header" style="${util.getBoxHeaderStyle(link)}" onclick="javascript:openLink(${user.isOpenInNewTab()}, '/link?reg=${link.id}')">
                     <h3 class="box-title">${util.getTitle(link)}</h3>
                     <c:if test="${link.host != null && util.getFlair(link) != null}">
                       <div class="flair">
