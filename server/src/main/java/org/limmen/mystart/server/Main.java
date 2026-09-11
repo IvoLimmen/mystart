@@ -149,7 +149,7 @@ public class Main {
     servletContextHandler.addServlet(holderJsp, "*.jsp");
 
     ServletHolder holderDefault = new ServletHolder("default", DefaultServlet.class);
-    holderDefault.setInitParameter("resourceBase", baseUri.toASCIIString());
+    holderDefault.setInitParameter("baseResource", baseUri.toASCIIString());
     holderDefault.setInitParameter("dirAllowed", "true");
     servletContextHandler.addServlet(holderDefault, "/");
     server.setHandler(servletContextHandler);

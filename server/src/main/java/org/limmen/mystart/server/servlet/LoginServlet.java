@@ -3,6 +3,7 @@ package org.limmen.mystart.server.servlet;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.Properties;
 import java.util.UUID;
 
@@ -105,13 +106,13 @@ public class LoginServlet extends AbstractServlet {
 
     } else if (exists(req, "loginButton")) {
 
-      User user = getUserStorage().getByEmail(email).get();
+      Optional<User> user = getUserStorage().getByEmail(email);
 
-      if (user == null || !user.check(salt, password)) {
+      if (user.isEmpty() || !user.get().check(salt, password)) {
         res.sendRedirect("/login.jsp?error=1");
       } else {
-        req.getSession().setAttribute(USER_ID, user.getId());
-        addCookie(res, "mystart", email + "|" + user.getPassword());
+        req.getSession().setAttribute(USER_ID, user.get().getId());
+        addCookie(res, "mystart", email + "|" + user.get().getPassword());
         res.sendRedirect("/home");
       }
 
