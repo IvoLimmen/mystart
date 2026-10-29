@@ -126,26 +126,21 @@
           maintainAspectRatio  : true
         };        
 
-        $.ajax({url: '/ajax?stats=source', dataType: 'json', type: 'GET'}).done(function(result) {
-            var pieChartCanvas = $('#source').get(0).getContext('2d');
-            var pieChart       = new Chart(pieChartCanvas);
-            pieChart.Doughnut(result, pieOptions);
-        });
-        $.ajax({url: '/ajax?stats=visits', dataType: 'json', type: 'GET'}).done(function(result) {
-            var pieChartCanvas = $('#visits').get(0).getContext('2d');
-            var pieChart       = new Chart(pieChartCanvas);
-            pieChart.Doughnut(result, pieOptions);
-        });
-        $.ajax({url: '/ajax?stats=protocol', dataType: 'json', type: 'GET'}).done(function(result) {
-            var pieChartCanvas = $('#protocol').get(0).getContext('2d');
-            var pieChart       = new Chart(pieChartCanvas);
-            pieChart.Doughnut(result, pieOptions);
-        });
-        $.ajax({url: '/ajax?stats=create_year', dataType: 'json', type: 'GET'}).done(function(result) {
-            var pieChartCanvas = $('#creation').get(0).getContext('2d');
-            var pieChart       = new Chart(pieChartCanvas);
-            pieChart.Doughnut(result, pieOptions);
-        });
+        async function showGraph(url, id) {
+          const response = await fetch(url, {
+            method: "GET",
+          });
+          
+          var data           = await response.json();
+          var pieChartCanvas = document.getElementById(id).getContext('2d');
+          var pieChart       = new Chart(pieChartCanvas);
+          pieChart.Doughnut(data, pieOptions);
+        }
+
+        showGraph("/ajax?stats=source", "source");
+        showGraph("/ajax?stats=protocol", "protocol");
+        showGraph("/ajax?stats=visits", "visits");
+        showGraph("/ajax?stats=create_year", "creation");
       });
     </script>
   </body>
