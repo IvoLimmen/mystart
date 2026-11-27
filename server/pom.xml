@@ -31,11 +31,6 @@
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>bookmarkimport-googlebookmarks</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
       <artifactId>bookmarkimport-googlechrome</artifactId>
       <version>${project.version}</version>
     </dependency>

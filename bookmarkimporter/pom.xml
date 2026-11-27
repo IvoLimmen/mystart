@@ -18,7 +18,6 @@
     <module>firefox</module>
     <module>github</module>
     <module>gitlab</module>
-    <module>googlebookmarks</module>
     <module>googlechrome</module>
     <module>netscape</module>
     <module>xbel</module>
