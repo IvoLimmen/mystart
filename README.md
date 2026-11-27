@@ -53,8 +53,8 @@ This application can import from the following sources:
 
 Do a checkout of this project. You need to following to build:
 
-* Minimal JDK 21 and up
-* Maven 3.* and up
+* Minimal JDK 25 and up
+* Maven 4.0.0-rc-7 and up
 * Podman (for the database)
 
 Then execute the following command:
@@ -65,7 +65,7 @@ Then execute the following command:
 
 ## Creating the database
 
-For the database I use PostgreSQL 17.2 and these scripts require the use of Podman (the docker alternative)
+For the database I use PostgreSQL 17.2 and these scripts require the use of Podman
 
 ```sh
 $ ./createdb.sh
