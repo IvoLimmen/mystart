@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.1.0 https://maven.apache.org/xsd/maven-4.1.0.xsd">
+  
+  <modelVersion>4.1.0</modelVersion>
 
   <groupId>org.limmen.mystart</groupId>
   <artifactId>mystart-project</artifactId>
@@ -10,14 +10,14 @@
   <packaging>pom</packaging>
   <name>MyStart - Project</name>
 
-  <modules>
-    <module>model</module>
-    <module>bookmarkimporter</module>
-    <module>bookmarkexporter</module>
-    <module>storage</module>
-    <module>server</module>
-    <module>util</module>
-  </modules>
+  <subprojects>
+    <subproject>model</subproject>
+    <subproject>bookmarkimporter</subproject>
+    <subproject>bookmarkexporter</subproject>
+    <subproject>storage</subproject>
+    <subproject>server</subproject>
+    <subproject>util</subproject>
+  </subprojects>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -157,6 +157,11 @@
     <pluginManagement>
       <plugins>
         <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>3.7.0</version>
+        </plugin>
+        <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.16.0</version>
         </plugin>
@@ -169,7 +174,42 @@
           <artifactId>exec-maven-plugin</artifactId>
           <version>3.7.0</version>
         </plugin>
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.5.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>3.6.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.5.1</version>
+        </plugin>
       </plugins>
     </pluginManagement>
+    <plugins>
+      <plugin>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>enforce-maven</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <requireMavenVersion>
+                  <version>4.0.0-rc-7</version>
+                </requireMavenVersion>
+                <requireJavaVersion>
+                  <version>17</version>
+                </requireJavaVersion>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
   </build>
 </project>
